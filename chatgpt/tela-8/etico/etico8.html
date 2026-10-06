@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitrio — Excluir conta e dados pessoais</title>
+
+  <style>
+    :root {
+      --blue: #2457d6;
+      --blue-dark: #1742ad;
+      --text: #202124;
+      --muted: #62666d;
+      --border: #d9dce1;
+      --background: #f5f6f8;
+      --surface: #ffffff;
+      --danger: #b3261e;
+      --danger-dark: #8f1e18;
+      --danger-bg: #fff5f4;
+      --success: #176b3a;
+      --success-bg: #eaf7ef;
+      --focus: rgba(36, 87, 214, .35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.45;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    a:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: underline;
+    }
+
+    /* Cabeçalho */
+
+    .topbar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header {
+      width: 1120px;
+      max-width: calc(100% - 48px);
+      min-height: 76px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -.8px;
+      color: var(--blue);
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--text);
+    }
+
+    .search {
+      height: 42px;
+      flex: 1;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      background: #fafafa;
+    }
+
+    .search input {
+      width: 100%;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      font-size: 14px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 20px;
+      white-space: nowrap;
+      font-size: 14px;
+    }
+
+    .nav a {
+      color: var(--text);
+    }
+
+    /* Conteúdo */
+
+    main {
+      width: 960px;
+      max-width: calc(100% - 48px);
+      margin: 30px auto 70px;
+    }
+
+    .breadcrumb {
+      margin-bottom: 22px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .breadcrumb a {
+      color: var(--muted);
+    }
+
+    .page-heading {
+      margin-bottom: 26px;
+    }
+
+    h1 {
+      margin: 0 0 7px;
+      font-size: 30px;
+      line-height: 1.2;
+      letter-spacing: -.4px;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 760px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 310px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 18px;
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 20px 22px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card-header h2 {
+      margin: 0 0 4px;
+      font-size: 18px;
+    }
+
+    .card-header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .card-body {
+      padding: 20px 22px;
+    }
+
+    /* Conta */
+
+    .account-summary {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .avatar {
+      width: 56px;
+      height: 56px;
+      flex: 0 0 56px;
+      border-radius: 50%;
+      background: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #555;
+      font-weight: 700;
+      font-size: 17px;
+    }
+
+    .account-summary h2 {
+      margin: 0 0 4px;
+      font-size: 19px;
+    }
+
+    .account-summary p {
+      margin: 3px 0;
+      font-size: 14px;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    /* Alertas */
+
+    .notice {
+      padding: 15px;
+      border-radius: 7px;
+      background: #f5f7fb;
+      border: 1px solid #e1e5ee;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .notice strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .warning {
+      background: var(--danger-bg);
+      border-color: #edc5c1;
+    }
+
+    .warning strong {
+      color: var(--danger);
+    }
+
+    /* Lista de consequências */
+
+    .consequence-list {
+      padding-left: 21px;
+      margin: 10px 0 0;
+    }
+
+    .consequence-list li {
+      margin: 8px 0;
+      font-size: 14px;
+    }
+
+    /* Opções */
+
+    .question {
+      margin-bottom: 22px;
+    }
+
+    .question:last-child {
+      margin-bottom: 0;
+    }
+
+    .question-title {
+      font-weight: 700;
+      margin: 0 0 9px;
+      font-size: 14px;
+    }
+
+    .option {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .option:hover {
+      background: #fafafa;
+    }
+
+    .option input {
+      margin-top: 3px;
+      accent-color: var(--blue);
+    }
+
+    /* Caixa de confirmação */
+
+    .checkbox-row {
+      display: flex;
+      gap: 11px;
+      align-items: flex-start;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: #fafafa;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .checkbox-row input {
+      margin-top: 3px;
+      accent-color: var(--blue);
+    }
+
+    /* Painel lateral */
+
+    .summary {
+      position: sticky;
+      top: 18px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 13px;
+      font-size: 14px;
+    }
+
+    .status {
+      display: inline-block;
+      border-radius: 20px;
+      padding: 5px 10px;
+      background: var(--success-bg);
+      color: var(--success);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 17px;
+    }
+
+    .divider {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 18px 0;
+    }
+
+    .button {
+      width: 100%;
+      min-height: 44px;
+      border-radius: 7px;
+      padding: 10px 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .button-danger {
+      color: #fff;
+      background: var(--danger);
+      border: 1px solid var(--danger);
+    }
+
+    .button-danger:hover:not(:disabled) {
+      background: var(--danger-dark);
+    }
+
+    .button-secondary {
+      background: #fff;
+      color: var(--text);
+      border: 1px solid #8d9299;
+    }
+
+    .button-secondary:hover {
+      background: #f4f5f6;
+    }
+
+    .button:disabled {
+      opacity: .48;
+      cursor: not-allowed;
+    }
+
+    .summary .button {
+      margin-bottom: 10px;
+    }
+
+    .small-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 10px 0 0;
+    }
+
+    /* Privacidade */
+
+    .privacy-box {
+      background: #fafafa;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 13px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* Rodapé */
+
+    .footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 25px 0;
+    }
+
+    .footer-inner {
+      width: 1120px;
+      max-width: calc(100% - 48px);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+    }
+
+    /* Modais */
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .48);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 20;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal {
+      width: 560px;
+      max-width: 100%;
+      max-height: 90vh;
+      overflow: auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, .25);
+    }
+
+    .modal-header {
+      padding: 20px 22px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      font-size: 19px;
+    }
+
+    .close {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font-size: 25px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .modal-body {
+      padding: 20px 22px;
+    }
+
+    .modal-footer {
+      padding: 16px 22px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .modal-footer .button {
+      width: auto;
+      min-width: 125px;
+    }
+
+    .final-warning {
+      background: var(--danger-bg);
+      border: 1px solid #edc5c1;
+      border-radius: 7px;
+      padding: 14px;
+      font-size: 13px;
+    }
+
+    .final-warning strong {
+      color: var(--danger);
+    }
+
+    /* Sucesso */
+
+    .success {
+      text-align: center;
+    }
+
+    .success-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: var(--success-bg);
+      color: var(--success);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      font-size: 29px;
+      font-weight: 700;
+    }
+
+    .success h2 {
+      margin: 0 0 8px;
+    }
+
+    .success p {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 6px 0;
+    }
+
+    /* Responsivo */
+
+    @media (max-width: 820px) {
+      .header {
+        min-height: 76px;
+        padding: 16px 0;
+        flex-wrap: wrap;
+      }
+
+      .search {
+        order: 3;
+        flex-basis: 100%;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .summary {
+        position: static;
+      }
+    }
+
+    @media (max-width: 560px) {
+      main,
+      .header,
+      .footer-inner {
+        max-width: calc(100% - 28px);
+      }
+
+      h1 {
+        font-size: 25px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div class="header">
+      <div class="logo" aria-label="Vitrio">
+        Vitrio<span>.</span>
+      </div>
+
+      <div class="search" role="search">
+        <input
+          id="searchInput"
+          type="search"
+          aria-label="Buscar produtos"
+          placeholder="Buscar produtos, marcas e categorias">
+      </div>
+
+      <nav class="nav" aria-label="Navegação principal">
+        <a href="#" id="ordersLink">Meus pedidos</a>
+        <a href="#" id="accountLink">Minha conta</a>
+        <a href="#" id="cartLink">Carrinho (0)</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <div class="breadcrumb">
+      <a href="#" id="accountBreadcrumb">Minha conta</a>
+      <span aria-hidden="true"> / </span>
+      Dados pessoais
+      <span aria-hidden="true"> / </span>
+      Excluir conta
+    </div>
+
+    <div class="page-heading">
+      <h1>Excluir conta e dados pessoais</h1>
+
+      <p class="subtitle">
+        Você pode solicitar a exclusão da sua conta Vitrio e dos seus dados pessoais.
+        Antes de confirmar, veja exatamente o que será excluído e quais informações
+        poderão precisar ser mantidas por obrigação legal.
+      </p>
+    </div>
+
+    <div class="layout">
+
+      <section>
+
+        <!-- Identificação da conta -->
+        <article class="card">
+          <div class="card-header">
+            <h2>Sua conta</h2>
+            <p>Confira a conta que será excluída.</p>
+          </div>
+
+          <div class="card-body">
+            <div class="account-summary">
+
+              <div class="avatar" aria-hidden="true">MC</div>
+
+              <div>
+                <h2>Marina Costa</h2>
+                <p class="muted">marina.costa@email.com</p>
+                <p class="muted">
+                  Conta criada em 14 de março de 2023
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </article>
+
+        <!-- Consequências -->
+        <article class="card">
+
+          <div class="card-header">
+            <h2>O que acontece quando você excluir sua conta</h2>
+            <p>Leia estas informações antes de solicitar a exclusão.</p>
+          </div>
+
+          <div class="card-body">
+
+            <div class="notice warning">
+              <strong>Esta ação não pode ser desfeita depois de concluída.</strong>
+              A exclusão da conta remove o acesso aos serviços associados à sua conta
+              e aos dados pessoais que não precisem ser mantidos por obrigação legal.
+            </div>
+
+            <ul class="consequence-list">
+              <li>
+                Você perderá o acesso à sua conta Vitrio e não poderá entrar nela novamente.
+              </li>
+
+              <li>
+                Dados pessoais armazenados para funcionamento da conta serão excluídos
+                ou anonimizados, quando aplicável.
+              </li>
+
+              <li>
+                O histórico de pedidos poderá deixar de aparecer na sua conta.
+              </li>
+
+              <li>
+                Listas, preferências, endereços salvos e outras informações pessoais
+                associadas à conta serão removidos quando não houver obrigação legal
+                de conservação.
+              </li>
+
+              <li>
+                A exclusão da conta não cancela automaticamente uma compra já realizada,
+                uma entrega em andamento ou outra obrigação contratual existente.
+              </li>
+
+              <li>
+                Determinadas informações poderão ser conservadas pelo período exigido
+                por leis, normas fiscais, obrigações contratuais ou para exercício
+                regular de direitos.
+              </li>
+
+              <li>
+                Os dados que precisarem ser conservados serão mantidos somente pelo
+                período e para as finalidades necessárias à respectiva obrigação.
+              </li>
+            </ul>
+
+            <p style="font-size:13px;color:var(--muted);margin:18px 0 0;">
+              Consulte a
+              <a href="#" id="privacyLink">Política de Privacidade</a>
+              para conhecer os critérios de retenção e os seus direitos relacionados
+              aos dados pessoais.
+            </p>
+
+          </div>
+        </article>
+
+        <!-- Pendências -->
+        <article class="card">
+
+          <div class="card-header">
+            <h2>Antes de excluir</h2>
+            <p>Estas informações ajudam a evitar consequências inesperadas.</p>
+          </div>
+
+          <div class="card-body">
+
+            <div class="notice">
+              <strong>Pedidos em andamento</strong>
+              Se houver um pedido ainda não concluído, a exclusão da conta não cancela
+              automaticamente a compra ou a entrega. Algumas informações poderão
+              precisar ser mantidas para concluir ou documentar a operação.
+            </div>
+
+            <div class="notice">
+              <strong>Valores pagos ou reembolsos</strong>
+              Se existir uma devolução, estorno ou reembolso pendente, recomendamos
+              aguardar sua conclusão. A exclusão da conta não elimina direitos
+              relacionados a uma compra já realizada.
+            </div>
+
+            <div class="notice" style="margin-bottom:0;">
+              <strong>Não é necessário fornecer uma justificativa</strong>
+              Você não precisa explicar por que deseja excluir sua conta.
+              Nenhum comentário ou motivo é obrigatório para fazer a solicitação.
+            </div>
+
+          </div>
+        </article>
+
+        <!-- Motivo opcional -->
+        <article class="card">
+
+          <div class="card-header">
+            <h2>Motivo da exclusão</h2>
+            <p>
+              Opcional. Sua resposta não é necessária para concluir a solicitação.
+            </p>
+          </div>
+
+          <div class="card-body">
+
+            <div class="question">
+
+              <p class="question-title">
+                Se quiser informar:
+              </p>
+
+              <label class="option">
+                <input type="radio" name="reason" value="nao-uso">
+                <span>Não uso mais a Vitrio.</span>
+              </label>
+
+              <label class="option">
+                <input type="radio" name="reason" value="privacidade">
+                <span>Quero reduzir meus dados pessoais armazenados.</span>
+              </label>
+
+              <label class="option">
+                <input type="radio" name="reason" value="experiencia">
+                <span>Minha experiência com a loja não atendeu às minhas expectativas.</span>
+              </label>
+
+              <label class="option">
+                <input type="radio" name="reason" value="outro">
+                <span>Outro motivo.</span>
+              </label>
+
+              <label class="option">
+                <input type="radio" name="reason" value="nao-informar">
+                <span>Prefiro não informar.</span>
+              </label>
+
+            </div>
+
+          </div>
+        </article>
+
+        <!-- Privacidade -->
+        <article class="card">
+
+          <div class="card-header">
+            <h2>Como trataremos sua solicitação</h2>
+          </div>
+
+          <div class="card-body">
+
+            <div class="privacy-box">
+              Sua solicitação será registrada para verificar a identidade do titular,
+              executar a exclusão e cumprir obrigações legais. A Vitrio poderá conservar
+              informações estritamente necessárias quando existir uma base legal que
+              exija ou permita essa conservação. Essas informações não serão mantidas
+              simplesmente para impedir a exclusão da conta.
+              <br><br>
+              Saiba mais na
+              <a href="#" id="privacyLink2">Política de Privacidade</a>.
+            </div>
+
+          </div>
+        </article>
+
+        <!-- Confirmação explícita -->
+        <article class="card">
+
+          <div class="card-header">
+            <h2>Confirmação</h2>
+            <p>
+              A confirmação abaixo é necessária para enviar sua solicitação.
+            </p>
+          </div>
+
+          <div class="card-body">
+
+            <label class="checkbox-row">
+              <input
+                type="checkbox"
+                id="acknowledge">
+
+              <span>
+                Li as informações acima e entendo que a exclusão da conta é uma
+                ação que não poderá ser desfeita depois de concluída, e que alguns
+                dados poderão ser mantidos quando houver obrigação legal.
+              </span>
+            </label>
+
+          </div>
+
+        </article>
+
+      </section>
+
+      <!-- Resumo -->
+      <aside class="summary">
+
+        <article class="card">
+
+          <div class="card-body">
+
+            <span class="status">
+              Conta ativa
+            </span>
+
+            <div class="summary-row">
+              <span>Conta</span>
+              <strong>Vitrio</strong>
+            </div>
+
+            <div class="summary-row">
+              <span>Pedidos</span>
+              <strong>12</strong>
+            </div>
+
+            <div class="summary-row">
+              <span>Assinaturas</span>
+              <strong>0 ativas</strong>
+            </div>
+
+            <hr class="divider">
+
+            <p style="font-size:14px;margin:0 0 16px;">
+              A solicitação de exclusão será enviada para processamento
+              somente depois da sua confirmação.
+            </p>
+
+            <button
+              class="button button-danger"
+              id="deleteButton"
+              type="button"
+              disabled>
+              Solicitar exclusão da conta
+            </button>
+
+            <button
+              class="button button-secondary"
+              id="keepButton"
+              type="button">
+              Manter minha conta
+            </button>
+
+            <p class="small-note">
+              Não é necessário entrar em contato com o atendimento para cancelar
+              esta solicitação antes de sua conclusão.
+            </p>
+
+          </div>
+
+        </article>
+
+      </aside>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+
+    <div class="footer-inner">
+
+      <div>
+        © 2026 Vitrio. Todos os direitos reservados.
+      </div>
+
+      <div class="footer-links">
+        <a href="#" id="footerTerms">Termos</a>
+        <a href="#" id="footerPrivacy">Privacidade</a>
+        <a href="#" id="helpLink">Central de ajuda</a>
+      </div>
+
+    </div>
+
+  </footer>
+
+  <!-- Modal de confirmação final -->
+  <div
+    class="modal-backdrop"
+    id="confirmModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="confirmTitle">
+
+    <div class="modal">
+
+      <div class="modal-header">
+
+        <h2 id="confirmTitle">
+          Confirmar solicitação de exclusão
+        </h2>
+
+        <button
+          class="close"
+          type="button"
+          aria-label="Fechar"
+          data-close="confirmModal">
+          ×
+        </button>
+
+      </div>
+
+      <div class="modal-body">
+
+        <div class="final-warning">
+
+          <strong>Confira antes de confirmar.</strong>
+
+          <p>
+            Você está solicitando a exclusão da sua conta Vitrio e dos dados
+            pessoais que puderem ser excluídos.
+          </p>
+
+          <p style="margin-bottom:0;">
+            Depois que a exclusão for concluída, o acesso à conta não poderá
+            ser recuperado. Dados que precisarem ser mantidos por obrigação
+            legal continuarão armazenados somente pelo período necessário.
+          </p>
+
+        </div>
+
+        <p>
+          Não haverá cobrança pela solicitação de exclusão.
+        </p>
+
+        <p>
+          Caso existam pedidos, reembolsos ou outras obrigações em andamento,
+          eles não serão anulados apenas porque a conta foi excluída.
+        </p>
+
+        <p style="font-size:13px;color:var(--muted);margin-bottom:0;">
+          Você pode voltar atrás agora selecionando “Voltar”.
+        </p>
+
+      </div>
+
+      <div class="modal-footer">
+
+        <button
+          class="button button-secondary"
+          type="button"
+          data-close="confirmModal">
+          Voltar
+        </button>
+
+        <button
+          class="button button-danger"
+          type="button"
+          id="confirmDelete">
+          Confirmar solicitação
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Modal de informações -->
+  <div
+    class="modal-backdrop"
+    id="infoModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="infoTitle">
+
+    <div class="modal">
+
+      <div class="modal-header">
+
+        <h2 id="infoTitle">
+          Informações
+        </h2>
+
+        <button
+          class="close"
+          type="button"
+          aria-label="Fechar"
+          data-close="infoModal">
+          ×
+        </button>
+
+      </div>
+
+      <div
+        class="modal-body"
+        id="infoBody">
+      </div>
+
+      <div class="modal-footer">
+
+        <button
+          class="button button-secondary"
+          type="button"
+          data-close="infoModal">
+          Fechar
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Modal de sucesso -->
+  <div
+    class="modal-backdrop"
+    id="successModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="successTitle">
+
+    <div class="modal">
+
+      <div class="modal-body success">
+
+        <div
+          class="success-icon"
+          aria-hidden="true">
+          ✓
+        </div>
+
+        <h2 id="successTitle">
+          Solicitação recebida
+        </h2>
+
+        <p>
+          Sua solicitação de exclusão foi registrada.
+        </p>
+
+        <p>
+          A Vitrio fará as verificações necessárias e processará a exclusão
+          dos dados que puderem ser removidos.
+        </p>
+
+        <p>
+          Algumas informações poderão ser mantidas quando houver obrigação
+          legal ou outra base legal aplicável.
+        </p>
+
+        <p>
+          Número da solicitação:
+          <strong id="requestNumber">LGPD-583214</strong>
+        </p>
+
+        <p style="font-size:12px;">
+          Guarde esse número caso precise consultar o andamento da solicitação.
+        </p>
+
+        <div style="margin-top:20px;">
+
+          <button
+            class="button button-secondary"
+            id="finishButton"
+            type="button">
+            Voltar para minha conta
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const deleteButton = document.getElementById("deleteButton");
+      const acknowledge = document.getElementById("acknowledge");
+
+      /*
+       * A ação destrutiva só fica disponível depois de o usuário
+       * demonstrar que leu e compreendeu as consequências.
+       */
+      acknowledge.addEventListener("change", function () {
+        deleteButton.disabled = !acknowledge.checked;
+      });
+
+      function openModal(id) {
+        const modal = document.getElementById(id);
+
+        if (!modal) {
+          return;
+        }
+
+        modal.classList.add("open");
+        document.body.style.overflow = "hidden";
+
+        const focusable = modal.querySelector(
+          "button, input, a"
+        );
+
+        if (focusable) {
+          setTimeout(function () {
+            focusable.focus();
+          }, 50);
+        }
+      }
+
+      function closeModal(id) {
+        const modal = document.getElementById(id);
+
+        if (!modal) {
+          return;
+        }
+
+        modal.classList.remove("open");
+
+        if (!document.querySelector(".modal-backdrop.open")) {
+          document.body.style.overflow = "";
+        }
+      }
+
+      document.querySelectorAll("[data-close]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          closeModal(button.dataset.close);
+        });
+      });
+
+      document.querySelectorAll(".modal-backdrop").forEach(function (backdrop) {
+        backdrop.addEventListener("click", function (event) {
+          if (event.target === backdrop) {
+            closeModal(backdrop.id);
+          }
+        });
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          const opened = document.querySelector(".modal-backdrop.open");
+
+          if (opened) {
+            closeModal(opened.id);
+          }
+        }
+      });
+
+      /*
+       * Inicia o fluxo final de exclusão.
+       */
+      deleteButton.addEventListener("click", function () {
+        if (deleteButton.disabled) {
+          return;
+        }
+
+        openModal("confirmModal");
+      });
+
+      /*
+       * Confirmação definitiva.
+       */
+      document.getElementById("confirmDelete").addEventListener("click", function () {
+        closeModal("confirmModal");
+
+        /*
+         * Simula o envio da solicitação ao backend.
+         * Em uma aplicação real, este ponto faria uma requisição
+         * autenticada ao servidor.
+         */
+        setTimeout(function () {
+          openModal("successModal");
+        }, 150);
+      });
+
+      /*
+       * Manter a conta encerra o fluxo sem exigir confirmação adicional.
+       */
+      document.getElementById("keepButton").addEventListener("click", function () {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+
+        const heading = document.querySelector("h1");
+        const subtitle = document.querySelector(".subtitle");
+
+        heading.textContent = "Sua conta continua ativa";
+        subtitle.textContent =
+          "Nenhuma solicitação de exclusão foi enviada. Você pode continuar usando sua conta normalmente.";
+
+        setTimeout(function () {
+          heading.textContent = "Excluir conta e dados pessoais";
+
+          subtitle.textContent =
+            "Você pode solicitar a exclusão da sua conta Vitrio e dos seus dados pessoais. Antes de confirmar, veja exatamente o que será excluído e quais informações poderão precisar ser mantidas por obrigação legal.";
+        }, 4000);
+      });
+
+      /*
+       * Conteúdo informativo.
+       */
+      const privacyHTML = `
+        <p><strong>Tratamento dos dados pessoais</strong></p>
+
+        <p>
+          A Vitrio utiliza dados pessoais necessários para fornecer produtos,
+          processar pedidos, manter a segurança da plataforma e cumprir
+          obrigações legais.
+        </p>
+
+        <p>
+          Quando você solicita a exclusão da conta, os dados que não precisarem
+          ser mantidos por uma obrigação legal ou outra base legal aplicável
+          serão excluídos ou anonimizados, conforme o caso.
+        </p>
+
+        <p>
+          Informações que precisarem ser conservadas serão mantidas pelo período
+          necessário à finalidade correspondente e não serão conservadas
+          indefinidamente apenas porque a conta foi excluída.
+        </p>
+
+        <p>
+          Você pode exercer os direitos previstos na legislação de proteção
+          de dados por meio dos canais indicados na Política de Privacidade.
+        </p>
+      `;
+
+      const termsHTML = `
+        <p><strong>Termos da conta Vitrio</strong></p>
+
+        <p>
+          A exclusão da conta encerra o acesso aos serviços vinculados ao
+          cadastro. Ela não desfaz automaticamente compras já realizadas,
+          contratos em andamento, obrigações financeiras ou direitos de
+          consumidores.
+        </p>
+
+        <p>
+          Dados necessários para cumprir obrigações legais, fiscais,
+          regulatórias ou para exercício regular de direitos poderão ser
+          conservados pelo prazo aplicável.
+        </p>
+
+        <p>
+          A exclusão da conta não gera cobrança ou taxa.
+        </p>
+      `;
+
+      const helpHTML = `
+        <p><strong>Exclusão de conta</strong></p>
+
+        <p>
+          Você pode solicitar a exclusão diretamente nesta página. Não é
+          necessário justificar o pedido.
+        </p>
+
+        <p>
+          Se existir um pedido em andamento, a exclusão da conta não cancela
+          automaticamente a compra ou a entrega.
+        </p>
+
+        <p>
+          Se precisar consultar o andamento da solicitação depois de enviá-la,
+          utilize o número de protocolo apresentado na confirmação.
+        </p>
+      `;
+
+      function showInfo(title, content) {
+        document.getElementById("infoTitle").textContent = title;
+        document.getElementById("infoBody").innerHTML = content;
+        openModal("infoModal");
+      }
+
+      /*
+       * Links institucionais.
+       */
+      document.getElementById("privacyLink").addEventListener("click", function (event) {
+        event.preventDefault();
+        showInfo("Política de Privacidade", privacyHTML);
+      });
+
+      document.getElementById("privacyLink2").addEventListener("click", function (event) {
+        event.preventDefault();
+        showInfo("Política de Privacidade", privacyHTML);
+      });
+
+      document.getElementById("footerPrivacy").addEventListener("click", function (event) {
+        event.preventDefault();
+        showInfo("Política de Privacidade", privacyHTML);
+      });
+
+      document.getElementById("footerTerms").addEventListener("click", function (event) {
+        event.preventDefault();
+        showInfo("Termos da conta Vitrio", termsHTML);
+      });
+
+      document.getElementById("helpLink").addEventListener("click", function (event) {
+        event.preventDefault();
+        showInfo("Central de ajuda", helpHTML);
+      });
+
+      /*
+       * Navegação.
+       */
+      document.getElementById("accountBreadcrumb").addEventListener("click", function (event) {
+        event.preventDefault();
+
+        showInfo(
+          "Minha conta",
+          `
+            <p>
+              Você está na área de gerenciamento dos seus dados pessoais.
+            </p>
+
+            <p>
+              Escolher “Manter minha conta” permite sair desta página sem
+              enviar uma solicitação de exclusão.
+            </p>
+          `
+        );
+      });
+
+      document.getElementById("accountLink").addEventListener("click", function (event) {
+        event.preventDefault();
+
+        showInfo(
+          "Minha conta",
+          `
+            <p>
+              Sua conta permanece ativa enquanto nenhuma solicitação de exclusão
+              for concluída.
+            </p>
+          `
+        );
+      });
+
+      document.getElementById("ordersLink").addEventListener("click", function (event) {
+        event.preventDefault();
+
+        showInfo(
+          "Meus pedidos",
+          `
+            <p>
+              O histórico de pedidos está associado à sua conta. A exclusão
+              poderá remover o acesso ao histórico, mas informações que precisem
+              ser mantidas por obrigação legal poderão continuar armazenadas.
+            </p>
+          `
+        );
+      });
+
+      document.getElementById("cartLink").addEventListener("click", function (event) {
+        event.preventDefault();
+
+        showInfo(
+          "Carrinho",
+          `
+            <p>
+              Seu carrinho está vazio no momento.
+            </p>
+          `
+        );
+      });
+
+      /*
+       * Busca.
+       */
+      document.getElementById("searchInput").addEventListener("keydown", function (event) {
+        if (event.key !== "Enter") {
+          return;
+        }
+
+        const value = this.value.trim();
+
+        if (!value) {
+          this.focus();
+          return;
+        }
+
+        showInfo(
+          "Busca",
+          `
+            <p>
+              Busca realizada por <strong>${escapeHTML(value)}</strong>.
+            </p>
+
+            <p>
+              O gerenciamento da sua conta continua disponível nesta página.
+            </p>
+          `
+        );
+      });
+
+      /*
+       * Tela de sucesso.
+       */
+      document.getElementById("finishButton").addEventListener("click", function () {
+        closeModal("successModal");
+
+        document.querySelector("h1").textContent =
+          "Solicitação de exclusão registrada";
+
+        document.querySelector(".subtitle").textContent =
+          "Sua solicitação foi enviada. Guarde o número de protocolo apresentado na confirmação.";
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      });
+
+      /*
+       * Evita inserir texto digitado pelo usuário diretamente no HTML.
+       */
+      function escapeHTML(value) {
+        return value.replace(/[&<>"']/g, function (character) {
+          const entities = {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#039;"
+          };
+
+          return entities[character];
+        });
+      }
+    })();
+  </script>
+
+</body>
+</html>
