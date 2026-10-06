@@ -1,0 +1,11 @@
+1. Como a seção "Economia Garantida" e a comparação de valor influenciam a decisão de conversão?
+
+A seção "Economia Garantida" fornece números concretos e tangíveis (R$ 60 em frete + R$ 100 em descontos = R$ 1.920 por ano) que justificam o investimento mensal de R$ 19,90. Clientes hesitam em comprar assinatura sem ROI claro. Ao mostrar que a assinatura "se paga no primeiro mês", removemos a barreira psicológica. A tabela de comparação reforça visualmente cada vantagem frente ao cliente regular, usando checkmarks verdes e cruzes cinzas para criar diferenciação imediata. Dados objetivos são 3x mais convincentes que promessas genéricas.
+
+2. Por que o plano anual é destacado como "MAIS POPULAR" com visual maior (scale 1.05) em vez de apenas mostrar o menor preço?
+
+A técnica de "featured pricing card" explora viés de conformidade social (viés do rebanho): quando vemos que a maioria escolhe algo, confiamos mais nessa escolha. O destaque visual com border laranja, escala maior e "MAIS POPULAR" sinaliza que outros clientes validam esse plano. Economicamente, é verdade (17% de economia + benefícios extras), mas o destaque visual cria uma hierarquia cognitiva que orienta a decisão. No desktop, o hover diferenciado (scale 1.05 se movendo menos) mantém a proeminência sem ser agressivo.
+
+3. Como a estrutura de "7 dias grátis" + "teste antes de pagar" reduz fricção e medo de rejeição?
+
+O "trial gratuito" remove o risco percebido: usuário não gasta dinheiro na primeira experiência. Cognitivamente, após 7 dias de usar benefícios, há "endowment effect" (tendência a valorizar mais o que já usamos). O CTA "Sem cartão de crédito necessário para o teste" elimina outra barreira. Repetir "Cancele quando quiser" em 4 lugares diferentes (hero, pricing, FAQ, final CTA) normaliza a saída sem culpa. Isso inverte o medo: converter em assinante pago é psicologicamente menor que decidir "cancelar algo que está funcionando bem".

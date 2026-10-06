@@ -1,0 +1,29 @@
+Análise de Design - Exclusão de Conta
+
+1. Como a ética foi aplicada nesta tela?
+
+A tela implementa proteção máxima ao consumidor através de múltiplas mecanismos de segurança e transparência:
+
+Consentimento Informado: Antes de qualquer ação, o usuário recebe alertas visuais em vermelho (cor crítica) sobre a irreversibilidade. Todos os dados que serão deletados estão listados claramente, assim como o que permanecerá por lei.
+Autonomia e Reversibilidade: Menciona explicitamente o direito de arrependimento de 30 dias (Lei nº 8.078/1990), preservando a autonomia do consumidor mesmo após a exclusão. Oferece download dos dados antes da deletação, evitando perda irreversível.
+Sem Exploração Cognitiva: A verificação de identidade (email + digitar "EXCLUIR") força atenção genuína e não é automatizável. Não há countdown, urgência simulada ou apelos emocionais ("você será sentido falta"). O botão "Voltar" tem peso visual igual ao "Excluir".
+Transparência Legal: Explica LGPD com 5 direitos específicos, mantém dados legalmente obrigatórios (5 anos de transações), e fornece contato do DPO.
+
+2. Quais padrões anti-dark-patterns foram usados?
+
+Nenhuma pré-seleção de campos ou opções padrão
+Email e confirmação de texto devem ser digitados corretamente (não é checkbox apenas)
+Botão "Excluir" desativado até todos os requisitos serem atendidos
+Aviso crítico em caixa vermelha de 2px (peso visual máximo)
+Cores iguais para "Voltar" e "Excluir" (ambos têm peso)
+Modais de confirmação dupla, não uma única
+Alternativas claras listadas (download, suporte, dúvidas frequentes)
+
+3. Como a tela respeita o direito ao arrependimento?
+
+A Lei nº 8.078/1990 (CDC) oferece 30 dias de direito ao arrependimento. A tela:
+
+Menciona este direito na confirmação final
+Fornece email de suporte para exercê-lo
+Explica que a recuperação é possível neste período
+Nota que dados legais (5 anos de transações) serão mantidos, facilitando rastreamento se necessário

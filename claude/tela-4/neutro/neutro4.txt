@@ -1,0 +1,11 @@
+1. Como o indicador de força de senha melhora a experiência do usuário durante o processo de registro?
+
+O indicador de força de senha fornece feedback visual em tempo real, permitindo que o usuário ajuste sua senha para atender aos requisitos de segurança antes de enviar o formulário. Isso reduz a frustração de criação de conta, evita erros de validação pós-submissão e educa o usuário sobre práticas de segurança de senha. As cores (vermelho para fraca, amarelo para média, verde para forte) seguem convenções universais de UX, tornando a informação intuitiva.
+
+2. Por que a validação em tempo real (blur events) foi escolhida em vez de apenas validar no envio?
+
+A validação em tempo real melhora a usabilidade ao fornecer feedback imediato sobre erros de campo (nome, email, CEP, telefone). Isso permite que o usuário corrija problemas conforme digita, em vez de descobrir múltiplos erros após tentar enviar. Focamos no evento blur (quando o usuário sai do campo) para não sobrecarregar com mensagens de erro enquanto o usuário ainda está digitando, mantendo uma experiência menos intrusiva.
+
+3. Como a estrutura de formulário e campos opcionais/obrigatórios impactam a taxa de conversão de cadastro?
+
+Mantemos apenas campos essenciais como obrigatórios (*): nome, email, senha, endereço, cidade, estado, CEP e termos. A data de nascimento é opcional, reduzindo o atrito. A segmentação visual (duas colunas em desktop, uma em mobile) torna o formulário menos intimidante. O checkbox de newsletter pré-desmarcado (opt-in) respeita privacidade. A progressão lógica (dados pessoais → endereço → segurança) segue padrões mentais naturais, aumentando a probabilidade de conclusão do cadastro.

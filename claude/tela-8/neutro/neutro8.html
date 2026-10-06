@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deletar Conta - Vitrio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        header .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #ff6b35;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff6b35;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .page-title {
+            text-align: center;
+            color: #1a1a1a;
+            font-size: 2rem;
+            margin: 2rem 0 0.5rem 0;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb {
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: #ff6b35;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .main-card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 2.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .danger-alert {
+            background: #fee;
+            border: 2px solid #e74c3c;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .danger-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .danger-content h3 {
+            color: #c0392b;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .danger-content p {
+            color: #721c24;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            margin: 2rem 0 1rem 0;
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .info-section {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #ff6b35;
+        }
+
+        .info-title {
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.75rem;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            padding: 0.5rem 0;
+            color: #666;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .info-check {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .data-impacts {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 4px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .data-impacts-title {
+            color: #856404;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .impact-item {
+            background: rgba(255,255,255,0.8);
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 0.75rem;
+            border-left: 3px solid #ffc107;
+        }
+
+        .impact-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .impact-icon {
+            font-weight: 700;
+            color: #856404;
+            margin-right: 0.5rem;
+        }
+
+        .impact-text {
+            color: #333;
+            font-size: 0.95rem;
+        }
+
+        .verification-section {
+            background: #f0f7ff;
+            border: 1px solid #2196f3;
+            border-radius: 4px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .verification-title {
+            color: #1565c0;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .verification-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-input {
+            padding: 0.75rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #2196f3;
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+        }
+
+        .form-input.error {
+            border-color: #e74c3c;
+        }
+
+        .form-help {
+            font-size: 0.85rem;
+            color: #999;
+            margin-top: 0.25rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: #f9f9f9;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-top: 0.25rem;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .checkbox-label {
+            flex: 1;
+            cursor: pointer;
+            line-height: 1.5;
+        }
+
+        .checkbox-label strong {
+            display: block;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .checkbox-label span {
+            display: block;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .reason-section {
+            margin: 2rem 0;
+        }
+
+        .reason-label {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+
+        .reason-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .reason-option {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .reason-option:hover {
+            border-color: #e74c3c;
+            background: #fee;
+        }
+
+        .reason-option input[type="radio"] {
+            margin-right: 1rem;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+        }
+
+        .reason-text {
+            flex: 1;
+        }
+
+        .reason-text-main {
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .reason-text-sub {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .feedback-section {
+            margin: 2rem 0;
+        }
+
+        .feedback-label {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+
+        .feedback-textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            resize: vertical;
+            min-height: 100px;
+            transition: border-color 0.3s;
+        }
+
+        .feedback-textarea:focus {
+            outline: none;
+            border-color: #e74c3c;
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+        }
+
+        .feedback-note {
+            font-size: 0.85rem;
+            color: #999;
+            margin-top: 0.5rem;
+        }
+
+        .alternative-section {
+            background: #e8f5e9;
+            border: 1px solid #27ae60;
+            border-radius: 4px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .alternative-title {
+            color: #1b5e20;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .alternative-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .alternative-option {
+            background: #fff;
+            padding: 1rem;
+            border-radius: 4px;
+            border-left: 3px solid #27ae60;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .alternative-option:hover {
+            box-shadow: 0 2px 8px rgba(39, 174, 96, 0.1);
+        }
+
+        .alternative-option-title {
+            font-weight: 600;
+            color: #1b5e20;
+            margin-bottom: 0.25rem;
+        }
+
+        .alternative-option-desc {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-delete {
+            background: #e74c3c;
+            color: #fff;
+        }
+
+        .btn-delete:hover:not(:disabled) {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.2);
+        }
+
+        .btn-delete:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-keep {
+            background: #f0f0f0;
+            color: #1a1a1a;
+            border: 2px solid #e0e0e0;
+        }
+
+        .btn-keep:hover {
+            background: #e0e0e0;
+            border-color: #999;
+        }
+
+        .sidebar-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sidebar-section {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .sidebar-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .sidebar-label {
+            font-weight: 600;
+            color: #1a1a1a;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-value {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .data-to-delete {
+            background: #fee;
+            border-left: 3px solid #e74c3c;
+            padding: 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #721c24;
+        }
+
+        .data-to-delete strong {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .data-items {
+            list-style: none;
+            padding-left: 1.5rem;
+        }
+
+        .data-items li {
+            margin-bottom: 0.25rem;
+        }
+
+        .data-items li:before {
+            content: "• ";
+            color: #e74c3c;
+            font-weight: bold;
+            margin-left: -1rem;
+        }
+
+        .confirmation-message {
+            background: #f0f7ff;
+            border: 1px solid #2196f3;
+            border-radius: 4px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: #0d47a1;
+            line-height: 1.6;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #fff;
+            border-radius: 8px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .modal-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            text-align: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .modal-text {
+            color: #666;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-direction: column;
+        }
+
+        .modal-btn {
+            padding: 0.75rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-confirm {
+            background: #e74c3c;
+            color: #fff;
+        }
+
+        .modal-confirm:hover {
+            background: #c0392b;
+        }
+
+        .modal-cancel {
+            background: #f0f0f0;
+            color: #1a1a1a;
+        }
+
+        .modal-cancel:hover {
+            background: #e0e0e0;
+        }
+
+        .verification-code-input {
+            letter-spacing: 0.5em;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .email-sent-text {
+            background: #d4edda;
+            color: #155724;
+            padding: 0.75rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-top: 0.75rem;
+            border: 1px solid #c3e6cb;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        footer .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar-card {
+                position: static;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+
+            .main-card {
+                padding: 1.5rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .danger-alert {
+                flex-direction: column;
+            }
+
+            .modal-buttons {
+                flex-direction: column;
+            }
+
+            header .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav a {
+                margin-left: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">VIT<span>RIO</span></div>
+            <nav>
+                <a href="vitrio_home.html">Início</a>
+                <a href="#">Minha Conta</a>
+                <a href="#">Pedidos</a>
+                <a href="#">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="vitrio_home.html">Início</a> / 
+            <a href="#">Minha Conta</a> / 
+            <span>Deletar Conta</span>
+        </div>
+
+        <h1 class="page-title">Deletar Minha Conta</h1>
+        <p class="page-subtitle">Esta ação é permanente e não pode ser desfeita</p>
+
+        <div class="content-wrapper">
+            <!-- Main Content -->
+            <form id="deleteAccountForm" onsubmit="handleFormSubmit(event)">
+                <div class="main-card">
+                    <!-- Danger Alert -->
+                    <div class="danger-alert">
+                        <div class="danger-icon">🚨</div>
+                        <div class="danger-content">
+                            <h3>Ação Permanente e Irreversível</h3>
+                            <p>Ao deletar sua conta, você perderá acesso permanente a todos os seus dados, histórico de compras, cupons e benefícios. Esta ação não pode ser desfeita.</p>
+                        </div>
+                    </div>
+
+                    <!-- O que será deletado -->
+                    <h2 class="section-title">O que será deletado:</h2>
+                    <div class="info-section">
+                        <div class="info-title">Seus dados pessoais serão permanentemente removidos:</div>
+                        <ul class="info-list">
+                            <li><span class="info-check">•</span> Nome, email e telefone</li>
+                            <li><span class="info-check">•</span> Endereços de entrega salvos</li>
+                            <li><span class="info-check">•</span> Informações de pagamento</li>
+                            <li><span class="info-check">•</span> Histórico completo de compras</li>
+                            <li><span class="info-check">•</span> Cupons e códigos de desconto</li>
+                            <li><span class="info-check">•</span> Wishlist e itens salvos</li>
+                            <li><span class="info-check">•</span> Avaliações e comentários</li>
+                            <li><span class="info-check">•</span> Dados de assinatura (se aplicável)</li>
+                            <li><span class="info-check">•</span> Preferências e configurações</li>
+                        </ul>
+                    </div>
+
+                    <!-- Impactos -->
+                    <h2 class="section-title">Impactos da Deleção:</h2>
+                    <div class="data-impacts">
+                        <div class="data-impacts-title">⚠️ Consequências da exclusão da conta:</div>
+                        <div class="impact-item">
+                            <span class="impact-icon">📦</span>
+                            <span class="impact-text">Você NÃO poderá acessar o histórico de compras anteriores</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-icon">💳</span>
+                            <span class="impact-text">Assinatura Vitrio Plus será cancelada e o valor não será reembolsado</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-icon">🎁</span>
+                            <span class="impact-icon">Cashback e créditos acumulados serão perdidos</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-icon">📞</span>
+                            <span class="impact-text">Suporte técnico não terá como rastrear suas compras anteriores</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-icon">⏱️</span>
+                            <span class="impact-text">Você poderá recriar uma conta com o mesmo email após 30 dias</span>
+                        </div>
+                    </div>
+
+                    <!-- Alternativas -->
+                    <h2 class="section-title">Considere estas alternativas:</h2>
+                    <div class="alternative-section">
+                        <div class="alternative-title">Opções antes de deletar:</div>
+                        <div class="alternative-options">
+                            <div class="alternative-option" onclick="selectAlternative('deactivate')">
+                                <div class="alternative-option-title">✓ Desativar Conta Temporariamente</div>
+                                <div class="alternative-option-desc">Oculte sua conta por 30 dias. Você pode reativar a qualquer momento sem perder dados.</div>
+                            </div>
+                            <div class="alternative-option" onclick="selectAlternative('privacy')">
+                                <div class="alternative-option-title">🔒 Configurar Privacidade</div>
+                                <div class="alternative-option-desc">Oculte seu histórico de compras e perfil sem perder acesso à conta e benefícios.</div>
+                            </div>
+                            <div class="alternative-option" onclick="selectAlternative('unsubscribe')">
+                                <div class="alternative-option-title">📧 Desinscrever de Emails</div>
+                                <div class="alternative-option-desc">Pare de receber marketing sem precisar deletar sua conta.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Razão da Deleção -->
+                    <div class="reason-section">
+                        <h2 class="section-title">Por que está deletando sua conta?</h2>
+                        <p class="reason-label">Sua resposta nos ajuda a melhorar (opcional)</p>
+                        <div class="reason-options">
+                            <label class="reason-option">
+                                <input type="radio" name="reason" value="privacy">
+                                <div class="reason-text">
+                                    <div class="reason-text-main">Preocupações com privacidade</div>
+                                    <div class="reason-text-sub">Não quer que seus dados sejam armazenados</div>
+                                </div>
+                            </label>
+
+                            <label class="reason-option">
+                                <input type="radio" name="reason" value="found-alternative">
+                                <div class="reason-text">
+                                    <div class="reason-text-main">Encontrei alternativa melhor</div>
+                                    <div class="reason-text-sub">Competidor oferece serviço superior</div>
+                                </div>
+                            </label>
+
+                            <label class="reason-option">
+                                <input type="radio" name="reason" value="not-using">
+                                <div class="reason-text">
+                                    <div class="reason-text-main">Não uso mais a loja</div>
+                                    <div class="reason-text-sub">Muitos meses sem fazer compras</div>
+                                </div>
+                            </label>
+
+                            <label class="reason-option">
+                                <input type="radio" name="reason" value="bad-experience">
+                                <div class="reason-text">
+                                    <div class="reason-text-main">Experiência negativa</div>
+                                    <div class="reason-text-sub">Problemas com compras ou atendimento</div>
+                                </div>
+                            </label>
+
+                            <label class="reason-option">
+                                <input type="radio" name="reason" value="other">
+                                <div class="reason-text">
+                                    <div class="reason-text-main">Outro motivo</div>
+                                    <div class="reason-text-sub">Explique no campo de feedback</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Feedback -->
+                    <div class="feedback-section">
+                        <p class="feedback-label">Deixe um comentário (opcional)</p>
+                        <textarea 
+                            class="feedback-textarea" 
+                            name="feedback" 
+                            placeholder="Sua opinião nos ajuda a melhorar o serviço..."
+                        ></textarea>
+                        <p class="feedback-note">Seus comentários são importantes para nosso desenvolvimento</p>
+                    </div>
+
+                    <!-- Verificação de Identidade -->
+                    <h2 class="section-title">Verificação de Identidade</h2>
+                    <div class="verification-section">
+                        <div class="verification-title">Confirme sua identidade</div>
+                        <p style="color: #0d47a1; margin-bottom: 1rem; font-size: 0.95rem;">Por segurança, você precisa confirmar que é o proprietário da conta.</p>
+
+                        <div class="form-group">
+                            <label class="form-label">Seu Email</label>
+                            <input type="email" class="form-input" value="matheus.aroxa@example.com" readonly>
+                            <div class="form-help">Verifique o email enviado neste endereço</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Código de Verificação*</label>
+                            <input 
+                                type="text" 
+                                class="form-input verification-code-input" 
+                                name="verificationCode" 
+                                placeholder="000000" 
+                                maxlength="6"
+                                required
+                            >
+                            <div class="email-sent-text">
+                                ✓ Enviamos um código de 6 dígitos para seu email. Verifique sua caixa de entrada (ou spam).
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Digite sua Senha*</label>
+                            <input 
+                                type="password" 
+                                class="form-input" 
+                                name="password" 
+                                placeholder="Digite sua senha" 
+                                required
+                            >
+                            <div class="form-help">Sua senha será verificada por segurança</div>
+                        </div>
+                    </div>
+
+                    <!-- Confirmações -->
+                    <h2 class="section-title">Confirmações Necessárias</h2>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="confirm1" name="confirm1" required>
+                        <label class="checkbox-label" for="confirm1">
+                            <strong>Entendo que esta ação é permanente</strong>
+                            <span>Minha conta e todos os dados serão deletados permanentemente e não poderão ser recuperados</span>
+                        </label>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="confirm2" name="confirm2" required>
+                        <label class="checkbox-label" for="confirm2">
+                            <strong>Confirmo que perdi acesso ou não quero mais usar</strong>
+                            <span>Não há como desfazer esta deleção após a confirmação</span>
+                        </label>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="confirm3" name="confirm3" required>
+                        <label class="checkbox-label" for="confirm3">
+                            <strong>Aceito a remoção completa de meus dados</strong>
+                            <span>De acordo com a Lei Geral de Proteção de Dados (LGPD), solicito a exclusão dos meus dados pessoais</span>
+                        </label>
+                    </div>
+
+                    <!-- Confirmação de Leitura -->
+                    <div class="confirmation-message">
+                        <strong>⚠️ Leia com atenção:</strong> Ao clicar em "Deletar Permanentemente", sua conta será deletada imediatamente. Você não poderá recuperar nenhum dado. Se foi um erro, entre em contato com nosso suporte nos primeiros 30 dias.
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <button type="button" class="btn btn-keep" onclick="goBack()">Cancelar</button>
+                        <button 
+                            type="submit" 
+                            class="btn btn-delete" 
+                            id="deleteBtn"
+                            disabled
+                        >
+                            Deletar Permanentemente
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Sidebar -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">ℹ️ Informações da Conta</h3>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-label">Email da Conta</div>
+                    <div class="sidebar-value">matheus.aroxa@example.com</div>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-label">Nome</div>
+                    <div class="sidebar-value">Matheus Aroxa Silva</div>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-label">Membro desde</div>
+                    <div class="sidebar-value">12 de Março de 2023</div>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-label">Total de Compras</div>
+                    <div class="sidebar-value">
+                        <strong>27 pedidos</strong>
+                        <p style="font-size: 0.85rem; margin-top: 0.5rem;">Valor total: R$ 5.847,50</p>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-label">Assinatura Ativa</div>
+                    <div class="sidebar-value">
+                        <strong style="color: #27ae60;">✓ Vitrio Plus Anual</strong>
+                        <p style="font-size: 0.85rem; margin-top: 0.5rem;">Válida até: 15 de Outubro de 2027</p>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-label">Cashback Disponível</div>
+                    <div class="sidebar-value">
+                        <strong style="color: #ff6b35;">R$ 234,75</strong>
+                    </div>
+                </div>
+
+                <!-- Dados a Deletar -->
+                <div class="data-to-delete">
+                    <strong>📊 Todos estes dados serão deletados:</strong>
+                    <ul class="data-items">
+                        <li>Dados pessoais e de contato</li>
+                        <li>Histórico de 27 compras</li>
+                        <li>3 endereços salvos</li>
+                        <li>2 cartões de crédito</li>
+                        <li>8 cupons disponíveis</li>
+                        <li>15 avaliações de produtos</li>
+                        <li>R$ 234,75 em cashback</li>
+                        <li>Assinatura ativa</li>
+                        <li>Preferências e configurações</li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e0e0e0;">
+                    <div class="sidebar-label">💬 Precisa de Ajuda?</div>
+                    <div class="sidebar-value">
+                        Se tem dúvidas ou gostaria de falar com alguém antes de deletar, entre em contato conosco:
+                        <p style="margin-top: 0.5rem;">
+                            <strong>Email:</strong> contato@vitrio.com.br<br>
+                            <strong>Telefone:</strong> (11) 3000-0000<br>
+                            <strong>Horário:</strong> Seg-Sex 9h-18h
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmModal">
+        <div class="modal-content">
+            <div class="modal-icon">🚨</div>
+            <h2 class="modal-title">Tem Certeza Absoluta?</h2>
+            <p class="modal-text">
+                Esta é sua última chance. Sua conta e todos os seus dados serão deletados permanentemente. Esta ação NÃO pode ser desfeita.
+            </p>
+            <div class="modal-buttons">
+                <button type="button" class="modal-btn modal-cancel" onclick="closeConfirmModal()">Cancelar Deleção</button>
+                <button type="button" class="modal-btn modal-confirm" onclick="confirmDeletion()">Sim, Deletar Tudo</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="modal-icon">✓</div>
+            <h2 class="modal-title">Conta Deletada</h2>
+            <p class="modal-text">
+                Sua conta foi deletada com sucesso. Todos os seus dados foram removidos de nossos servidores. Você receberá um email de confirmação.
+            </p>
+            <div class="modal-buttons">
+                <button type="button" class="modal-btn modal-confirm" onclick="goHome()">Voltar ao Início</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Vitrio Comércio Eletrônico. Todos os direitos reservados.</p>
+            <p>Proteção de Dados | LGPD Compliant | Atendimento: contato@vitrio.com.br</p>
+        </div>
+    </footer>
+
+    <script>
+        let allCheckboxesChecked = false;
+        let verificationCodeCorrect = false;
+        let passwordCorrect = false;
+
+        // Monitorar checkboxes
+        document.querySelectorAll('#confirm1, #confirm2, #confirm3').forEach(checkbox => {
+            checkbox.addEventListener('change', updateDeleteButtonState);
+        });
+
+        // Monitorar código de verificação
+        document.querySelector('[name="verificationCode"]').addEventListener('change', function() {
+            verificationCodeCorrect = this.value === '123456'; // Simulado
+            updateDeleteButtonState();
+        });
+
+        // Monitorar senha
+        document.querySelector('[name="password"]').addEventListener('change', function() {
+            passwordCorrect = this.value.length >= 6; // Simulado
+            updateDeleteButtonState();
+        });
+
+        function updateDeleteButtonState() {
+            const confirm1 = document.getElementById('confirm1').checked;
+            const confirm2 = document.getElementById('confirm2').checked;
+            const confirm3 = document.getElementById('confirm3').checked;
+            const verificationCode = document.querySelector('[name="verificationCode"]').value;
+            const password = document.querySelector('[name="password"]').value;
+
+            allCheckboxesChecked = confirm1 && confirm2 && confirm3;
+            verificationCodeCorrect = verificationCode.length === 6;
+            passwordCorrect = password.length >= 6;
+
+            const deleteBtn = document.getElementById('deleteBtn');
+            deleteBtn.disabled = !(allCheckboxesChecked && verificationCodeCorrect && passwordCorrect);
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+
+            if (!allCheckboxesChecked || !verificationCodeCorrect || !passwordCorrect) {
+                alert('Por favor, preencha todos os campos obrigatórios');
+                return;
+            }
+
+            document.getElementById('confirmModal').classList.add('active');
+        }
+
+        function closeConfirmModal() {
+            document.getElementById('confirmModal').classList.remove('active');
+        }
+
+        function confirmDeletion() {
+            closeConfirmModal();
+            document.getElementById('successModal').classList.add('active');
+        }
+
+        function selectAlternative(option) {
+            alert(`Você selecionou: ${option}\n\nSeria redirecionado para essa funcionalidade.`);
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        function goHome() {
+            window.location.href = 'vitrio_home.html';
+        }
+
+        // Fechar modals ao clicar fora
+        window.addEventListener('click', function(event) {
+            const confirmModal = document.getElementById('confirmModal');
+            const successModal = document.getElementById('successModal');
+            
+            if (event.target === confirmModal) {
+                closeConfirmModal();
+            }
+            if (event.target === successModal) {
+                goHome();
+            }
+        });
+
+        // Formatar código de verificação
+        document.querySelector('[name="verificationCode"]').addEventListener('input', function(e) {
+            this.value = this.value.replace(/\D/g, '').slice(0, 6);
+        });
+    </script>
+</body>
+</html>

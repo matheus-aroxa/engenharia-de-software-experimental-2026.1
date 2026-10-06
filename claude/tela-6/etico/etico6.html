@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clube Vitrio - Assinatura com Benefícios</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: #fff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 16px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .header-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .header-nav a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .header-nav a:hover {
+            color: #1a1a1a;
+        }
+
+        /* Hero section */
+        .hero {
+            background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+            color: #fff;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        /* Main container */
+        .main-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* Benefits section */
+        .benefits-section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 48px;
+            color: #1a1a1a;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .benefit-card {
+            background-color: #fff;
+            padding: 24px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .benefit-icon {
+            width: 56px;
+            height: 56px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+
+        .benefit-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+
+        .benefit-description {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Pricing section */
+        .pricing-section {
+            background-color: #fff;
+            padding: 60px 20px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            margin-bottom: 60px;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .pricing-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+        }
+
+        .pricing-subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 24px;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background-color: #f9f9f9;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 32px 24px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card.popular {
+            border-color: #1a1a1a;
+            background-color: #fff;
+            transform: scale(1.05);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .pricing-plan-name {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+
+        .pricing-plan-description {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 20px;
+        }
+
+        .pricing-amount {
+            font-size: 14px;
+            margin-bottom: 4px;
+            color: #666;
+        }
+
+        .pricing-price {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .pricing-period {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+
+        .pricing-features li {
+            font-size: 13px;
+            color: #333;
+            margin-bottom: 12px;
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: #4caf50;
+            font-weight: bold;
+            min-width: 16px;
+        }
+
+        /* Comparison table */
+        .comparison-section {
+            margin-bottom: 60px;
+        }
+
+        .comparison-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 32px;
+            color: #1a1a1a;
+        }
+
+        .comparison-table {
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th {
+            background-color: #f5f5f5;
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 13px;
+            color: #1a1a1a;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .comparison-table td {
+            padding: 16px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .comparison-table td.feature {
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+
+        .comparison-table td.check {
+            text-align: center;
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Terms and conditions */
+        .terms-section {
+            background-color: #f9f9f9;
+            padding: 24px;
+            border-radius: 8px;
+            border-left: 4px solid #2196f3;
+            margin-bottom: 40px;
+        }
+
+        .terms-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .terms-list {
+            list-style: none;
+            font-size: 12px;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .terms-list li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .terms-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #2196f3;
+            font-weight: bold;
+        }
+
+        /* Action section */
+        .action-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .action-subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 24px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .btn {
+            padding: 12px 32px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background-color: #1a1a1a;
+            color: #fff;
+            min-width: 200px;
+        }
+
+        .btn-primary:hover {
+            background-color: #333;
+        }
+
+        .btn-primary:active {
+            background-color: #1a1a1a;
+            transform: scale(0.98);
+        }
+
+        .btn-secondary {
+            background-color: #f5f5f5;
+            color: #1a1a1a;
+            border: 1px solid #e0e0e0;
+        }
+
+        .btn-secondary:hover {
+            background-color: #efefef;
+        }
+
+        .btn-link {
+            background-color: transparent;
+            color: #2196f3;
+            text-decoration: underline;
+            padding: 0;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .btn-link:hover {
+            color: #1976d2;
+        }
+
+        /* FAQ section */
+        .faq-section {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            margin-bottom: 60px;
+        }
+
+        .faq-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 32px;
+            color: #1a1a1a;
+            text-align: center;
+        }
+
+        .faq-items {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 16px;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 13px;
+            color: #1a1a1a;
+            transition: background-color 0.2s ease;
+        }
+
+        .faq-question:hover {
+            background-color: #efefef;
+        }
+
+        .faq-toggle {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.open .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 16px;
+            background-color: #fff;
+            font-size: 13px;
+            color: #666;
+            line-height: 1.8;
+            display: none;
+        }
+
+        .faq-item.open .faq-answer {
+            display: block;
+        }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 32px;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            color: #1a1a1a;
+        }
+
+        .modal-body {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .modal-body strong {
+            color: #1a1a1a;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #1a1a1a;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #1a1a1a;
+            box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.1);
+        }
+
+        /* Success state */
+        .success-container {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background-color: #4caf50;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 24px;
+        }
+
+        .success-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .success-text {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .pricing-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.popular {
+                transform: scale(1);
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .comparison-table {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <a href="#" class="logo">Vitrio</a>
+            <nav class="header-nav">
+                <a href="#home">Início</a>
+                <a href="#products">Produtos</a>
+                <a href="#help">Ajuda</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero section -->
+    <div class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">✨ BENEFÍCIOS EXCLUSIVOS</div>
+            <h1>Clube Vitrio</h1>
+            <p>Frete grátis, descontos exclusivos e acesso prioritário a novos produtos — tudo por apenas R$ 12,90 por mês.</p>
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="main-container">
+        <!-- Benefits section -->
+        <section class="benefits-section">
+            <h2 class="section-title">Por que aderir?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🚚</div>
+                    <div class="benefit-title">Frete Grátis</div>
+                    <div class="benefit-description">Em todas as compras, sem valor mínimo. Válido para entregas dentro do Brasil.</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💰</div>
+                    <div class="benefit-title">Descontos Exclusivos</div>
+                    <div class="benefit-description">Até 15% de desconto em produtos selecionados todos os meses.</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">⭐</div>
+                    <div class="benefit-title">Acesso Prioritário</div>
+                    <div class="benefit-description">Seja o primeiro a acessar novos produtos e promoções especiais.</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📦</div>
+                    <div class="benefit-title">Entregas Rápidas</div>
+                    <div class="benefit-description">Processamento prioritário — seus pedidos são preparados em primeiro lugar.</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">👥</div>
+                    <div class="benefit-title">Suporte Premium</div>
+                    <div class="benefit-description">Atendimento prioritário com tempo de resposta de até 2 horas.</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎁</div>
+                    <div class="benefit-title">Pontos Bônus</div>
+                    <div class="benefit-description">Acumule 2x mais pontos a cada compra e resgate em descontos futuros.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing section -->
+        <section class="pricing-section">
+            <div class="pricing-header">
+                <h2 class="pricing-title">Escolha seu plano</h2>
+                <p class="pricing-subtitle">Todos os planos podem ser cancelados a qualquer momento, sem penalidades.</p>
+            </div>
+
+            <div class="pricing-cards">
+                <!-- Plan: Sem assinatura -->
+                <div class="pricing-card">
+                    <div class="pricing-plan-name">Sem Assinatura</div>
+                    <div class="pricing-plan-description">Compre quando quiser</div>
+                    <div class="pricing-amount">Custo por compra</div>
+                    <div class="pricing-price">R$ 0,00</div>
+                    <div class="pricing-period">Pague apenas quando comprar</div>
+                    <ul class="pricing-features">
+                        <li>Acesso a todos os produtos</li>
+                        <li>Frete: a partir de R$ 15,90</li>
+                        <li>Desconto padrão de 5%</li>
+                        <li>Suporte padrão (24-48h)</li>
+                        <li>1x pontos em cada compra</li>
+                    </ul>
+                    <button class="btn btn-secondary" onclick="alert('Você já está navegando sem assinatura')">Plano Atual</button>
+                </div>
+
+                <!-- Plan: Mensal (popular) -->
+                <div class="pricing-card popular">
+                    <div class="pricing-badge">Mais Popular</div>
+                    <div class="pricing-plan-name">Clube Mensal</div>
+                    <div class="pricing-plan-description">Renovação automática todo mês</div>
+                    <div class="pricing-amount">Custo por mês</div>
+                    <div class="pricing-price">R$ 12,90</div>
+                    <div class="pricing-period">Cobrado todo dia 15 — Cancele quando quiser</div>
+                    <ul class="pricing-features">
+                        <li>✓ Frete grátis em todas as compras</li>
+                        <li>✓ Descontos de até 15%</li>
+                        <li>✓ Acesso prioritário a novidades</li>
+                        <li>✓ Processamento em 1° lugar</li>
+                        <li>✓ Suporte prioritário (até 2h)</li>
+                        <li>✓ 2x pontos em cada compra</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="openModal('subscription-modal')">Aderir Agora</button>
+                </div>
+
+                <!-- Plan: Anual -->
+                <div class="pricing-card">
+                    <div class="pricing-plan-name">Clube Anual</div>
+                    <div class="pricing-plan-description">Economize 17% com pagamento anual</div>
+                    <div class="pricing-amount">Custo por ano</div>
+                    <div class="pricing-price">R$ 129,00</div>
+                    <div class="pricing-period">Cobrado uma vez ao ano — Cancele a qualquer momento</div>
+                    <ul class="pricing-features">
+                        <li>✓ Frete grátis em todas as compras</li>
+                        <li>✓ Descontos de até 15%</li>
+                        <li>✓ Acesso prioritário a novidades</li>
+                        <li>✓ Processamento em 1° lugar</li>
+                        <li>✓ Suporte prioritário (até 2h)</li>
+                        <li>✓ 2x pontos em cada compra</li>
+                    </ul>
+                    <button class="btn btn-secondary" onclick="openModal('subscription-modal')">Aderir Agora</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison table -->
+        <section class="comparison-section">
+            <h2 class="comparison-title">Comparação de benefícios</h2>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Recurso</th>
+                            <th style="text-align: center;">Sem Assinatura</th>
+                            <th style="text-align: center;">Clube Vitrio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature">Frete</td>
+                            <td>A partir de R$ 15,90</td>
+                            <td class="check">Grátis</td>
+                        </tr>
+                        <tr>
+                            <td class="feature">Desconto em Produtos</td>
+                            <td>5%</td>
+                            <td class="check">Até 15%</td>
+                        </tr>
+                        <tr>
+                            <td class="feature">Acesso a Novidades</td>
+                            <td>—</td>
+                            <td class="check">Prioritário</td>
+                        </tr>
+                        <tr>
+                            <td class="feature">Atendimento ao Cliente</td>
+                            <td>24-48 horas</td>
+                            <td class="check">Até 2 horas</td>
+                        </tr>
+                        <tr>
+                            <td class="feature">Processamento de Pedido</td>
+                            <td>Normal (3-5 dias)</td>
+                            <td class="check">Prioritário (1-2 dias)</td>
+                        </tr>
+                        <tr>
+                            <td class="feature">Pontos por Compra</td>
+                            <td>1x</td>
+                            <td class="check">2x</td>
+                        </tr>
+                        <tr>
+                            <td class="feature">Eventos e Promoções Exclusivas</td>
+                            <td>—</td>
+                            <td class="check">Sim</td>
+                        </tr>
+                        <tr>
+                            <td class="feature">Devolução Grátis</td>
+                            <td>Paga</td>
+                            <td class="check">Grátis</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Terms and conditions -->
+        <section class="terms-section">
+            <div class="terms-title">Informações Importantes Sobre Sua Assinatura</div>
+            <ul class="terms-list">
+                <li><strong>Renovação automática:</strong> Sua assinatura será renovada automaticamente no mesmo dia de cada mês (ou ano, se for plano anual). Você receberá um email de confirmação antes de cada cobrança.</li>
+                <li><strong>Cancelamento sem penalidade:</strong> Cancele sua assinatura a qualquer momento sem custos adicionais. O cancelamento é imediato e você mantém os benefícios até o fim do período pago.</li>
+                <li><strong>Segurança:</strong> Seus dados de pagamento são protegidos por criptografia. A Vitrio nunca armazena dados completos de cartão.</li>
+                <li><strong>Política de Devolução:</strong> Como membro do Clube Vitrio, você tem 7 dias para devolver produtos e 10 dias para solicitar reembolso. Devoluções são grátis para membros.</li>
+                <li><strong>Suporte:</strong> Em caso de dúvidas sobre sua assinatura, entre em contato com nosso suporte prioritário por email ou chat.</li>
+                <li><strong>Direitos do Consumidor:</strong> Todos os direitos do consumidor brasileiro (Lei 8.078/1990) se aplicam. Você tem o direito de desistir de sua compra em até 7 dias.</li>
+            </ul>
+        </section>
+
+        <!-- Action section -->
+        <section class="action-section">
+            <p class="action-subtitle">Pronto para começar? Todos os planos de assinatura podem ser cancelados a qualquer momento.</p>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="openModal('subscription-modal')">Aderir ao Clube Vitrio</button>
+                <button class="btn btn-secondary" onclick="openModal('faq-modal')">Tenho Dúvidas</button>
+            </div>
+        </section>
+
+        <!-- FAQ section -->
+        <section class="faq-section">
+            <h2 class="faq-title">Perguntas Frequentes</h2>
+            <div class="faq-items">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Como funciona a renovação automática?</span>
+                        <div class="faq-toggle">▼</div>
+                    </div>
+                    <div class="faq-answer">
+                        Sua assinatura é renovada automaticamente no mesmo dia de cada mês (ou ano). Você receberá um email de confirmação 3 dias antes da cobrança. Se desejar cancelar, basta acessar sua conta e clicar em "Gerenciar Assinatura" → "Cancelar". O cancelamento é imediato.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Posso cancelar a qualquer momento?</span>
+                        <div class="faq-toggle">▼</div>
+                    </div>
+                    <div class="faq-answer">
+                        Sim! Não há contrato de longo prazo nem penalidades por cancelamento. Você pode cancelar sua assinatura a qualquer momento acessando sua conta. O cancelamento é imediato e você mantém os benefícios até o fim do período pago.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Quando serei cobrado?</span>
+                        <div class="faq-toggle">▼</div>
+                    </div>
+                    <div class="faq-answer">
+                        <strong>Plano Mensal:</strong> Cobrado todo dia 15 de cada mês, começando no dia em que você aderir. <strong>Plano Anual:</strong> Cobrado uma vez ao ano, no aniversário da sua assinatura. Você recebe um email de confirmação 3 dias antes de cada cobrança.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>O frete grátis tem restrições?</span>
+                        <div class="faq-toggle">▼</div>
+                    </div>
+                    <div class="faq-answer">
+                        Não! O frete é grátis em todas as compras, sem valor mínimo, para entregas dentro do Brasil. Inclui também devoluções de produtos — você não paga para devolver um item defeituoso ou que não gostou.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Quais produtos têm desconto?</span>
+                        <div class="faq-toggle">▼</div>
+                    </div>
+                    <div class="faq-answer">
+                        Membros do Clube Vitrio ganham até 15% de desconto em produtos selecionados. Os descontos variam mensalmente. Você verá um distintivo "Clube" na página do produto indicando que tem desconto. Descontos são aplicados automaticamente no carrinho.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Posso pausar minha assinatura?</span>
+                        <div class="faq-toggle">▼</div>
+                    </div>
+                    <div class="faq-answer">
+                        No momento, não oferecemos pausa temporária. Mas você pode cancelar a qualquer momento e reativar sua assinatura depois sem perder benefícios acumulados. Entre em contato conosco se tiver uma situação especial — queremos ajudar!
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Vale a pena o Clube Vitrio para mim?</span>
+                        <div class="faq-toggle">▼</div>
+                    </div>
+                    <div class="faq-answer">
+                        Se você compra regularmente na Vitrio, geralmente vale! Por exemplo: se você faz apenas uma compra por mês de R$ 200, economiza R$ 15,90 em frete (ou mais com descontos). A partir da segunda compra por mês, o Clube Vitrio já se paga. Use nossa calculadora na aba "Benefícios" para ver seus ganhos.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Subscription Modal -->
+    <div id="subscription-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>Aderir ao Clube Vitrio</span>
+                <button class="modal-close" onclick="closeModal('subscription-modal')">×</button>
+            </div>
+
+            <div class="modal-body">
+                <p>Escolha a melhor opção para você. Você pode cancelar a qualquer momento, sem penalidades.</p>
+            </div>
+
+            <div style="display: grid; gap: 12px; margin-bottom: 20px;">
+                <label style="display: flex; gap: 12px; padding: 12px; border: 2px solid #e0e0e0; border-radius: 4px; cursor: pointer; transition: all 0.2s ease;" id="plan-monthly" onclick="selectPlan('monthly')">
+                    <input type="radio" name="subscription-plan" value="monthly" checked>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: #1a1a1a;">Clube Mensal</div>
+                        <div style="font-size: 12px; color: #666;">R$ 12,90/mês — Cancele quando quiser</div>
+                    </div>
+                </label>
+
+                <label style="display: flex; gap: 12px; padding: 12px; border: 2px solid #e0e0e0; border-radius: 4px; cursor: pointer; transition: all 0.2s ease;" id="plan-annual" onclick="selectPlan('annual')">
+                    <input type="radio" name="subscription-plan" value="annual">
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: #1a1a1a;">Clube Anual</div>
+                        <div style="font-size: 12px; color: #666;">R$ 129,00/ano — Economize 17%</div>
+                    </div>
+                </label>
+            </div>
+
+            <div style="background-color: #f9f9f9; padding: 12px; border-radius: 4px; margin-bottom: 20px; font-size: 12px; color: #666;">
+                <strong style="color: #1a1a1a;">O que vai acontecer:</strong><br>
+                1. Você escolherá o método de pagamento<br>
+                2. Receberá confirmação por email<br>
+                3. Seus benefícios começam imediatamente<br>
+                4. Para cancelar: acesse "Minha Conta" → "Gerenciar Assinatura"
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="terms-agree" required> Concordo com os <button class="btn-link" onclick="openModal('terms-modal')">Termos de Assinatura</button>, <button class="btn-link" onclick="openModal('cancel-modal')">Política de Cancelamento</button> e <button class="btn-link" onclick="openModal('privacy-modal')">Política de Privacidade</button>.
+                </label>
+            </div>
+
+            <button class="btn btn-primary" style="width: 100%; margin-bottom: 12px;" onclick="proceedToPayment()">Continuar para Pagamento</button>
+            <button class="btn btn-secondary" style="width: 100%;" onclick="closeModal('subscription-modal')">Ainda não tenho certeza</button>
+        </div>
+    </div>
+
+    <!-- Terms Modal -->
+    <div id="terms-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>Termos de Assinatura</span>
+                <button class="modal-close" onclick="closeModal('terms-modal')">×</button>
+            </div>
+            <div class="modal-body">
+                <p><strong>1. Renovação Automática</strong><br>
+                Sua assinatura será renovada automaticamente no mesmo dia de cada mês ou ano. Você receberá um email de confirmação 3 dias antes de cada cobrança.</p>
+
+                <p><strong>2. Cancelamento</strong><br>
+                Você pode cancelar sua assinatura a qualquer momento acessando sua conta. O cancelamento é imediato e você mantém os benefícios até o fim do período pago. Não há penalidades.</p>
+
+                <p><strong>3. Mudança de Plano</strong><br>
+                Você pode mudar entre planos mensal e anual a qualquer momento. Mudanças de plano são processadas imediatamente.</p>
+
+                <p><strong>4. Modificações de Preço</strong><br>
+                A Vitrio pode alterar os preços da assinatura com 30 dias de aviso prévio por email. Você pode cancelar sem penalidades se discordar da nova tarifa.</p>
+            </div>
+            <button class="btn btn-primary" style="width: 100%;" onclick="closeModal('terms-modal')">Entendi</button>
+        </div>
+    </div>
+
+    <!-- Cancellation Policy Modal -->
+    <div id="cancel-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>Política de Cancelamento</span>
+                <button class="modal-close" onclick="closeModal('cancel-modal')">×</button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Direito de Cancelamento</strong><br>
+                Você tem o direito de cancelar sua assinatura a qualquer momento, sem necessidade de justificativa e sem penalidades. Todos os direitos do consumidor brasileiro se aplicam.</p>
+
+                <p><strong>Como Cancelar</strong><br>
+                1. Acesse sua conta em "Minha Conta"<br>
+                2. Clique em "Gerenciar Assinatura"<br>
+                3. Selecione "Cancelar Assinatura"<br>
+                4. Confirme a ação</p>
+
+                <p><strong>Quando o Cancelamento Entra em Vigor</strong><br>
+                O cancelamento é imediato. Você não será mais cobrado. Mantém os benefícios até o fim do período pago (por ex: se você cancelar no meio do mês, tem benefícios até o fim do mês).</p>
+
+                <p><strong>Reativação</strong><br>
+                Você pode reativar sua assinatura a qualquer momento sem perder pontos ou histórico acumulado.</p>
+            </div>
+            <button class="btn btn-primary" style="width: 100%;" onclick="closeModal('cancel-modal')">Entendi</button>
+        </div>
+    </div>
+
+    <!-- Privacy Modal -->
+    <div id="privacy-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>Política de Privacidade</span>
+                <button class="modal-close" onclick="closeModal('privacy-modal')">×</button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Coleta de Dados</strong><br>
+                Coletamos apenas as informações necessárias para processar sua assinatura e comunicação: nome, email, endereço e dados de pagamento.</p>
+
+                <p><strong>Proteção de Dados</strong><br>
+                Seus dados são protegidos por criptografia SSL. A Vitrio nunca armazena dados completos de cartão — o pagamento é processado por processadores certificados.</p>
+
+                <p><strong>Compartilhamento</strong><br>
+                Seus dados nunca são compartilhados com terceiros sem seu consentimento, exceto quando necessário para processar sua assinatura (ex: processador de pagamentos).</p>
+
+                <p><strong>Seus Direitos</strong><br>
+                Você pode solicitar acesso, correção ou exclusão de seus dados pessoais a qualquer momento entrando em contato conosco.</p>
+            </div>
+            <button class="btn btn-primary" style="width: 100%;" onclick="closeModal('privacy-modal')">Entendi</button>
+        </div>
+    </div>
+
+    <!-- FAQ Modal -->
+    <div id="faq-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>Não Tenho Certeza? Veja Isso</span>
+                <button class="modal-close" onclick="closeModal('faq-modal')">×</button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Será que o Clube Vitrio vale para mim?</strong></p>
+
+                <p><strong>Cenário 1: Compra 1x por mês (R$ 200)</strong><br>
+                • Sem Clube: R$ 200 + R$ 15,90 frete = R$ 215,90<br>
+                • Com Clube: R$ 200 - 10% desconto + R$ 0 frete = R$ 180<br>
+                • Economia: R$ 35,90 por mês (já pagou o Clube!)</p>
+
+                <p><strong>Cenário 2: Compra 2x por mês (R$ 150 cada)</strong><br>
+                • Sem Clube: (R$ 150 × 2) + (R$ 15,90 × 2) = R$ 331,80<br>
+                • Com Clube: (R$ 150 × 2 - 10% desconto) + R$ 0 = R$ 270<br>
+                • Economia: R$ 61,80 por mês (5x mais que o preço do Clube)</p>
+
+                <p><strong>Você também ganha:</strong><br>
+                • Acesso prioritário a novos produtos<br>
+                • Suporte mais rápido (até 2 horas)<br>
+                • 2x pontos em cada compra<br>
+                • Devoluções grátis</p>
+
+                <p><strong>Pode Cancelar Quando Quiser</strong><br>
+                Nenhum comprometimento. Se não gostar, cancele em 5 minutos na sua conta.</p>
+            </div>
+            <button class="btn btn-primary" style="width: 100%; margin-bottom: 12px;" onclick="closeModal('faq-modal'); openModal('subscription-modal')">Entendi, Quero Aderir</button>
+            <button class="btn btn-secondary" style="width: 100%;" onclick="closeModal('faq-modal')">Voltar</button>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content">
+            <div class="success-container">
+                <div class="success-icon">✓</div>
+                <div class="success-title">Bem-vindo ao Clube Vitrio!</div>
+                <div class="success-text">
+                    Sua assinatura foi ativada com sucesso. Todos os seus benefícios começam agora!<br><br>
+                    <strong>Plano:</strong> Clube Mensal (R$ 12,90/mês)<br>
+                    <strong>Próxima cobrança:</strong> 15 de novembro de 2026<br>
+                    <strong>Confirmação enviada para:</strong> seu@email.com
+                </div>
+                <button class="btn btn-primary" style="width: 100%;" onclick="goHome()">Ir para a Loja</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle FAQ
+        function toggleFAQ(element) {
+            const parent = element.parentElement;
+            parent.classList.toggle('open');
+        }
+
+        // Select plan
+        function selectPlan(plan) {
+            document.querySelectorAll('#plan-monthly, #plan-annual').forEach(el => {
+                el.style.borderColor = '#e0e0e0';
+            });
+
+            if (plan === 'monthly') {
+                document.getElementById('plan-monthly').style.borderColor = '#1a1a1a';
+            } else {
+                document.getElementById('plan-annual').style.borderColor = '#1a1a1a';
+            }
+        }
+
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Close modals on outside click
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                }
+            });
+        });
+
+        // Proceed to payment
+        function proceedToPayment() {
+            const termsAgree = document.getElementById('terms-agree').checked;
+
+            if (!termsAgree) {
+                alert('Você deve concordar com os termos para continuar.');
+                return;
+            }
+
+            closeModal('subscription-modal');
+            // Simulate payment processing
+            setTimeout(() => {
+                openModal('success-modal');
+            }, 500);
+        }
+
+        // Navigation
+        function goHome() {
+            window.location.href = '/';
+        }
+    </script>
+</body>
+</html>

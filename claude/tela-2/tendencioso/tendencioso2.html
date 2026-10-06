@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notebook Gamer Ultraleve 15" - Vitrio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FF6B35;
+            --secondary: #004E89;
+            --accent: #F7931E;
+            --success: #06A77D;
+            --danger: #E63946;
+            --warning: #FFC107;
+            --light-bg: #F5F5F5;
+            --dark-text: #1A1A1A;
+            --medium-text: #555555;
+            --light-text: #888888;
+            --border-color: #E0E0E0;
+        }
+
+        html, body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark-text);
+            background-color: #FFFFFF;
+            line-height: 1.6;
+        }
+
+        /* ========== HEADER ========== */
+        header {
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .header-top {
+            background: var(--secondary);
+            color: white;
+            padding: 8px 0;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .header-main {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 400px;
+            display: flex;
+            background: var(--light-bg);
+            border-radius: 24px;
+            padding: 10px 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .search-bar input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 14px;
+            color: var(--dark-text);
+        }
+
+        .search-bar button {
+            background: none;
+            border: none;
+            color: var(--light-text);
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header-actions a, .header-actions button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+            color: var(--dark-text);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            transition: color 0.3s;
+        }
+
+        .header-actions a:hover, .header-actions button:hover {
+            color: var(--primary);
+        }
+
+        .header-actions i {
+            font-size: 20px;
+        }
+
+        .cart-badge {
+            background: var(--danger);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            position: absolute;
+            top: -8px;
+            right: -8px;
+        }
+
+        .cart-link {
+            position: relative;
+        }
+
+        /* ========== BREADCRUMB ========== */
+        .breadcrumb {
+            background: var(--light-bg);
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 13px;
+        }
+
+        .breadcrumb-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb-inner a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb-inner a:hover {
+            color: var(--primary);
+        }
+
+        .breadcrumb-inner span {
+            color: var(--light-text);
+            margin: 0 8px;
+        }
+
+        /* ========== CONTAINER ========== */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .product-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        /* ========== PRODUCT GALLERY ========== */
+        .product-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .main-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background: var(--light-bg);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 96px;
+            color: #CCCCCC;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-image.discount-badge::after {
+            content: '-30%';
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: var(--danger);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .thumbnail-list {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            border-radius: 6px;
+            background: var(--light-bg);
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: #CCCCCC;
+        }
+
+        .thumbnail:hover,
+        .thumbnail.active {
+            border-color: var(--primary);
+        }
+
+        /* ========== PRODUCT INFO ========== */
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .product-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 24px;
+        }
+
+        .product-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .product-sku {
+            font-size: 13px;
+            color: var(--light-text);
+            margin-bottom: 16px;
+        }
+
+        .rating-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .stars {
+            display: flex;
+            gap: 2px;
+        }
+
+        .star {
+            color: var(--warning);
+            font-size: 16px;
+        }
+
+        .rating-text {
+            font-size: 14px;
+            color: var(--dark-text);
+            font-weight: 500;
+        }
+
+        .review-count {
+            font-size: 13px;
+            color: var(--light-text);
+            cursor: pointer;
+            text-decoration: underline;
+            transition: color 0.3s;
+        }
+
+        .review-count:hover {
+            color: var(--primary);
+        }
+
+        .badge-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--light-bg);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--dark-text);
+        }
+
+        .badge.highlight {
+            background: #E8F5E9;
+            color: var(--success);
+        }
+
+        /* ========== PRICING SECTION ========== */
+        .pricing-section {
+            background: var(--light-bg);
+            padding: 24px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .price-box {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .price-original {
+            font-size: 16px;
+            color: var(--light-text);
+            text-decoration: line-through;
+        }
+
+        .price-current {
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .price-installments {
+            font-size: 14px;
+            color: var(--medium-text);
+            margin-bottom: 16px;
+        }
+
+        .discount-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--success);
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .availability {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .availability.in-stock {
+            color: var(--success);
+        }
+
+        .availability.low-stock {
+            color: var(--warning);
+        }
+
+        /* ========== OPTIONS SECTION ========== */
+        .options-section {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 24px;
+        }
+
+        .option-group {
+            margin-bottom: 20px;
+        }
+
+        .option-label {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .color-options,
+        .size-options {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+
+        .color-option.active {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px white, 0 0 0 4px var(--primary);
+        }
+
+        .size-option {
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .size-option:hover {
+            border-color: var(--primary);
+        }
+
+        .size-option.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* ========== QUANTITY & ACTIONS ========== */
+        .quantity-section {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .quantity-input {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background: white;
+        }
+
+        .quantity-input button {
+            background: none;
+            border: none;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .quantity-input button:hover {
+            background: var(--light-bg);
+        }
+
+        .quantity-input input {
+            width: 60px;
+            border: none;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            outline: none;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-primary {
+            flex: 1;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 16px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            background: #E55A2B;
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            width: 50px;
+            height: 50px;
+            border: 1px solid var(--border-color);
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 20px;
+            color: var(--medium-text);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-secondary.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* ========== SHIPPING & PAYMENT ========== */
+        .shipping-section {
+            background: var(--light-bg);
+            padding: 16px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .shipping-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+
+        .shipping-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .shipping-icon {
+            color: var(--success);
+            font-size: 16px;
+        }
+
+        .installment-info {
+            background: var(--light-bg);
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        /* ========== DESCRIPTION SECTION ========== */
+        .description-section {
+            background: var(--light-bg);
+            padding: 24px;
+            border-radius: 8px;
+            margin: 40px 0;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .description-tabs {
+            display: flex;
+            gap: 16px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 24px;
+        }
+
+        .tab-btn {
+            padding: 12px 0;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--medium-text);
+            transition: all 0.3s;
+        }
+
+        .tab-btn:hover {
+            color: var(--dark-text);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .specs-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .spec-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .spec-label {
+            font-size: 12px;
+            color: var(--light-text);
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .spec-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        .description-text {
+            line-height: 1.8;
+            color: var(--medium-text);
+            margin-bottom: 12px;
+        }
+
+        .features-list {
+            list-style: none;
+        }
+
+        .features-list li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--medium-text);
+        }
+
+        .features-list i {
+            color: var(--success);
+            font-size: 16px;
+        }
+
+        /* ========== REVIEWS SECTION ========== */
+        .reviews-section {
+            margin: 40px 0;
+            background: var(--light-bg);
+            padding: 24px;
+            border-radius: 8px;
+        }
+
+        .reviews-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .review-summary {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .average-rating {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .average-score {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--dark-text);
+        }
+
+        .average-stars {
+            display: flex;
+            gap: 2px;
+        }
+
+        .rating-distribution {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .rating-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+        }
+
+        .rating-bar-value {
+            width: 150px;
+            height: 8px;
+            background: var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .rating-bar-fill {
+            height: 100%;
+            background: var(--warning);
+            transition: width 0.3s;
+        }
+
+        .review-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .review-item {
+            background: white;
+            padding: 16px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .reviewer-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--dark-text);
+        }
+
+        .review-date {
+            font-size: 12px;
+            color: var(--light-text);
+        }
+
+        .review-rating {
+            display: flex;
+            gap: 2px;
+            margin-bottom: 8px;
+        }
+
+        .review-text {
+            font-size: 14px;
+            color: var(--medium-text);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .review-helpful {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 12px;
+        }
+
+        .helpful-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .helpful-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .load-more-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .load-more-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: var(--dark-text);
+            color: white;
+            padding: 50px 20px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h4 {
+            font-size: 16px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: #CCCCCC;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #444;
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: #999;
+        }
+
+        /* ========== MODAL ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .modal-close {
+            color: var(--light-text);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            background: none;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: var(--dark-text);
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            clear: both;
+        }
+
+        .modal-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .modal-form button {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        .modal-form button:hover {
+            background: #E55A2B;
+        }
+
+        .rating-stars-input {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .star-input {
+            font-size: 32px;
+            cursor: pointer;
+            color: var(--light-text);
+            transition: color 0.2s;
+        }
+
+        .star-input:hover,
+        .star-input.active {
+            color: var(--warning);
+        }
+
+        /* ========== TOAST ========== */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 2000;
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .product-layout {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .product-title {
+                font-size: 24px;
+            }
+
+            .price-current {
+                font-size: 32px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn-secondary {
+                width: 100%;
+            }
+
+            .specs-list {
+                grid-template-columns: 1fr;
+            }
+
+            .reviews-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .rating-bar {
+                flex-wrap: wrap;
+            }
+
+            .rating-bar-value {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-top">
+            <p><i class="fas fa-truck"></i> Frete grátis em compras acima de R$ 150 | Use o código VITRIO10 para 10% de desconto</p>
+        </div>
+        <div class="header-main">
+            <a href="#" class="logo">Vitrio</a>
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar produtos, marcas...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="header-actions">
+                <button>
+                    <i class="fas fa-user"></i>
+                    <span>Minha Conta</span>
+                </button>
+                <a href="#">
+                    <i class="fas fa-heart"></i>
+                    <span>Favoritos</span>
+                </a>
+                <a href="#" class="cart-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Carrinho</span>
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb">
+        <div class="breadcrumb-inner">
+            <a href="#">Vitrio</a>
+            <span>/</span>
+            <a href="#">Eletrônicos</a>
+            <span>/</span>
+            <a href="#">Notebooks</a>
+            <span>/</span>
+            <span>Notebook Gamer Ultraleve 15"</span>
+        </div>
+    </div>
+
+    <!-- PRODUCT DETAIL -->
+    <div class="container">
+        <div class="product-layout">
+            <!-- LEFT: GALLERY -->
+            <div class="product-gallery">
+                <div class="main-image discount-badge">
+                    <i class="fas fa-laptop"></i>
+                </div>
+                <div class="thumbnail-list">
+                    <div class="thumbnail active" onclick="changeImage(this)"><i class="fas fa-image"></i></div>
+                    <div class="thumbnail" onclick="changeImage(this)"><i class="fas fa-laptop"></i></div>
+                    <div class="thumbnail" onclick="changeImage(this)"><i class="fas fa-keyboard"></i></div>
+                    <div class="thumbnail" onclick="changeImage(this)"><i class="fas fa-fan"></i></div>
+                </div>
+            </div>
+
+            <!-- RIGHT: INFO -->
+            <div class="product-info">
+                <div class="product-header">
+                    <h1 class="product-title">Notebook Gamer Ultraleve 15"</h1>
+                    <div class="product-sku">SKU: NB-GAMER-15-2024</div>
+
+                    <div class="rating-section">
+                        <div class="stars">
+                            <i class="star fas fa-star"></i>
+                            <i class="star fas fa-star"></i>
+                            <i class="star fas fa-star"></i>
+                            <i class="star fas fa-star"></i>
+                            <i class="star fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="rating-text">4,8</span>
+                        <span class="review-count" onclick="scrollToReviews()">324 avaliações</span>
+                    </div>
+
+                    <div class="badge-group">
+                        <span class="badge">Entrega Rápida</span>
+                        <span class="badge highlight">Em Estoque</span>
+                        <span class="badge">Garantia de 2 anos</span>
+                    </div>
+                </div>
+
+                <!-- PRICING -->
+                <div class="pricing-section">
+                    <div class="price-box">
+                        <span class="price-original">R$ 4.999,00</span>
+                        <span class="price-current">R$ 3.499,90</span>
+                    </div>
+                    <div class="discount-info">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Economize R$ 1.499,10 (30% de desconto)</span>
+                    </div>
+                    <div class="price-installments">
+                        <strong>ou 12x de R$ 291,66</strong> sem juros no cartão de crédito
+                    </div>
+                    <div class="availability in-stock">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Disponível em estoque (3 unidades)</span>
+                    </div>
+                </div>
+
+                <!-- OPTIONS -->
+                <div class="options-section">
+                    <div class="option-group">
+                        <label class="option-label"><i class="fas fa-palette"></i> Cor</label>
+                        <div class="color-options">
+                            <div class="color-option active" style="background: #2C3E50;" onclick="selectColor(this)" title="Cinza Escuro"></div>
+                            <div class="color-option" style="background: #ECF0F1;" onclick="selectColor(this)" title="Prata"></div>
+                            <div class="color-option" style="background: #34495E;" onclick="selectColor(this)" title="Preto"></div>
+                            <div class="color-option" style="background: #E74C3C;" onclick="selectColor(this)" title="Vermelho"></div>
+                        </div>
+                    </div>
+
+                    <div class="option-group">
+                        <label class="option-label"><i class="fas fa-memory"></i> Memória RAM</label>
+                        <div class="size-options">
+                            <button class="size-option" onclick="selectSize(this)">8GB</button>
+                            <button class="size-option active" onclick="selectSize(this)">16GB</button>
+                            <button class="size-option" onclick="selectSize(this)">32GB</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- QUANTITY & ACTIONS -->
+                <div class="quantity-section">
+                    <div class="quantity-input">
+                        <button onclick="decreaseQuantity()">−</button>
+                        <input type="number" id="quantity" value="1" min="1" max="10">
+                        <button onclick="increaseQuantity()">+</button>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn-primary" onclick="addToCart()">
+                        <i class="fas fa-shopping-cart"></i>
+                        Adicionar ao Carrinho
+                    </button>
+                    <button class="btn-secondary" id="favoriteBtn" onclick="toggleFavorite()" title="Adicionar aos favoritos">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+
+                <!-- SHIPPING -->
+                <div class="shipping-section">
+                    <div class="shipping-item">
+                        <i class="shipping-icon fas fa-check-circle"></i>
+                        <span><strong>Frete Grátis</strong> para todo o Brasil em compras acima de R$ 150</span>
+                    </div>
+                    <div class="shipping-item">
+                        <i class="shipping-icon fas fa-truck"></i>
+                        <span><strong>Entrega em 3-5 dias úteis</strong> nas regiões Sul e Sudeste</span>
+                    </div>
+                    <div class="shipping-item">
+                        <i class="shipping-icon fas fa-shield-alt"></i>
+                        <span><strong>Garantia do Fabricante:</strong> 2 anos contra defeitos de fabrica</span>
+                    </div>
+                </div>
+
+                <div class="installment-info">
+                    💳 <strong>Parcelado:</strong> 12x sem juros de R$ 291,66 no cartão de crédito Vitrio Mastercard. Outras operadoras podem ter juros.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DESCRIPTION SECTION -->
+    <div class="description-section container">
+        <h2 class="section-title">Informações do Produto</h2>
+
+        <div class="description-tabs">
+            <button class="tab-btn active" onclick="switchTab(this, 'description')">Descrição</button>
+            <button class="tab-btn" onclick="switchTab(this, 'specs')">Especificações</button>
+            <button class="tab-btn" onclick="switchTab(this, 'warranty')">Garantia</button>
+        </div>
+
+        <!-- DESCRIPTION TAB -->
+        <div class="tab-content active" id="description">
+            <p class="description-text">
+                O Notebook Gamer Ultraleve 15" combina potência e portabilidade em um único dispositivo. Com processador Intel Core i7 de última geração e placa gráfica NVIDIA GeForce RTX 4050, este notebook é perfeito para gamers e profissionais que demandam desempenho elevado. Sua tela IPS de 15,6" com taxa de atualização de 165Hz oferece uma experiência visual imersiva e responsiva.
+            </p>
+            <p class="description-text">
+                Pesando apenas 1,8kg, o notebook é ideal para profissionais em movimento. A bateria de longa duração permite até 8 horas de uso contínuo, mantendo um equilíbrio perfeito entre desempenho e autonomia. O sistema de resfriamento avançado garante que o dispositivo permaneça fresco mesmo durante sessões intensas de jogo ou trabalho.
+            </p>
+            <h4 style="margin-top: 16px; margin-bottom: 8px; font-weight: 600;">Principais características:</h4>
+            <ul class="features-list">
+                <li><i class="fas fa-check"></i> Processador Intel Core i7-13700H (16 núcleos)</li>
+                <li><i class="fas fa-check"></i> Placa gráfica NVIDIA GeForce RTX 4050 (6GB GDDR6)</li>
+                <li><i class="fas fa-check"></i> 16GB de memória RAM DDR5 (expansível até 48GB)</li>
+                <li><i class="fas fa-check"></i> SSD NVMe de 512GB (expandível até 2TB)</li>
+                <li><i class="fas fa-check"></i> Tela IPS 15,6" 1080p 165Hz</li>
+                <li><i class="fas fa-check"></i> Bateria de 90Wh com até 8 horas de autonomia</li>
+                <li><i class="fas fa-check"></i> Porta Thunderbolt 4 e USB-C 3.2</li>
+                <li><i class="fas fa-check"></i> Peso: apenas 1,8kg</li>
+            </ul>
+        </div>
+
+        <!-- SPECIFICATIONS TAB -->
+        <div class="tab-content" id="specs">
+            <div class="specs-list">
+                <div class="spec-item">
+                    <span class="spec-label">Processador</span>
+                    <span class="spec-value">Intel Core i7-13700H</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Placa Gráfica</span>
+                    <span class="spec-value">NVIDIA GeForce RTX 4050</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Memória RAM</span>
+                    <span class="spec-value">16GB DDR5 (Expansível)</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Armazenamento</span>
+                    <span class="spec-value">SSD NVMe 512GB</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Tela</span>
+                    <span class="spec-value">15,6" IPS FHD 165Hz</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Bateria</span>
+                    <span class="spec-value">90Wh (até 8 horas)</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Sistema Operacional</span>
+                    <span class="spec-value">Windows 11 Home</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Peso</span>
+                    <span class="spec-value">1,8kg</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Dimensões</span>
+                    <span class="spec-value">35,8 x 25,4 x 1,99cm</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Conectividade</span>
+                    <span class="spec-value">WiFi 6E, Bluetooth 5.3</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Portas</span>
+                    <span class="spec-value">Thunderbolt 4, USB-C 3.2, USB-A 3.2</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Áudio</span>
+                    <span class="spec-value">Stereo Dual Speaker 2W</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- WARRANTY TAB -->
+        <div class="tab-content" id="warranty">
+            <p class="description-text">
+                <strong>Garantia Fabricante: 2 Anos</strong>
+            </p>
+            <p class="description-text">
+                Este notebook está coberto pela garantia do fabricante que protege contra defeitos de fabricação e mau funcionamento por um período de 2 anos a partir da data de compra.
+            </p>
+            <h4 style="margin-top: 16px; margin-bottom: 8px; font-weight: 600;">A garantia cobre:</h4>
+            <ul class="features-list">
+                <li><i class="fas fa-check"></i> Defeitos de fabricação em componentes eletrônicos</li>
+                <li><i class="fas fa-check"></i> Mau funcionamento do processador e placa gráfica</li>
+                <li><i class="fas fa-check"></i> Problemas na tela e bateria</li>
+                <li><i class="fas fa-check"></i> Falhas no armazenamento e memória</li>
+            </ul>
+            <h4 style="margin-top: 16px; margin-bottom: 8px; font-weight: 600;">A garantia não cobre:</h4>
+            <ul class="features-list" style="opacity: 0.7;">
+                <li><i class="fas fa-times" style="color: var(--danger);"></i> Danos causados por acidentes ou queda</li>
+                <li><i class="fas fa-times" style="color: var(--danger);"></i> Danos por líquidos ou umidade excessiva</li>
+                <li><i class="fas fa-times" style="color: var(--danger);"></i> Desgaste natural de componentes</li>
+                <li><i class="fas fa-times" style="color: var(--danger);"></i> Modificações ou aberturas não autorizadas</li>
+            </ul>
+            <p class="description-text" style="margin-top: 16px; padding: 12px; background: var(--light-bg); border-radius: 6px;">
+                💡 <strong>Dica:</strong> Considere adquirir o Plano de Proteção Estendida da Vitrio para cobertura até 5 anos e proteção contra acidentes.
+            </p>
+        </div>
+    </div>
+
+    <!-- REVIEWS SECTION -->
+    <div class="reviews-section container" id="reviews">
+        <div class="reviews-header">
+            <div class="review-summary">
+                <div class="average-rating">
+                    <div class="average-score">4,8</div>
+                    <div class="average-stars">
+                        <i class="star fas fa-star"></i>
+                        <i class="star fas fa-star"></i>
+                        <i class="star fas fa-star"></i>
+                        <i class="star fas fa-star"></i>
+                        <i class="star fas fa-star-half-alt"></i>
+                    </div>
+                    <div style="font-size: 12px; color: var(--light-text);">324 avaliações</div>
+                </div>
+                <div class="rating-distribution">
+                    <div class="rating-bar">
+                        <span>5 <i class="fas fa-star" style="color: var(--warning); font-size: 12px;"></i></span>
+                        <div class="rating-bar-value"><div class="rating-bar-fill" style="width: 78%;"></div></div>
+                        <span style="width: 40px;">253</span>
+                    </div>
+                    <div class="rating-bar">
+                        <span>4 <i class="fas fa-star" style="color: var(--warning); font-size: 12px;"></i></span>
+                        <div class="rating-bar-value"><div class="rating-bar-fill" style="width: 18%;"></div></div>
+                        <span style="width: 40px;">58</span>
+                    </div>
+                    <div class="rating-bar">
+                        <span>3 <i class="fas fa-star" style="color: var(--warning); font-size: 12px;"></i></span>
+                        <div class="rating-bar-value"><div class="rating-bar-fill" style="width: 3%;"></div></div>
+                        <span style="width: 40px;">10</span>
+                    </div>
+                    <div class="rating-bar">
+                        <span>2 <i class="fas fa-star" style="color: var(--warning); font-size: 12px;"></i></span>
+                        <div class="rating-bar-value"><div class="rating-bar-fill" style="width: 1%;"></div></div>
+                        <span style="width: 40px;">2</span>
+                    </div>
+                    <div class="rating-bar">
+                        <span>1 <i class="fas fa-star" style="color: var(--warning); font-size: 12px;"></i></span>
+                        <div class="rating-bar-value"><div class="rating-bar-fill" style="width: 0%;"></div></div>
+                        <span style="width: 40px;">0</span>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-primary" style="flex: 0 0 auto;" onclick="toggleReviewModal()">
+                <i class="fas fa-pen-fancy"></i>
+                Avaliar Produto
+            </button>
+        </div>
+
+        <h3 class="section-title" style="margin-top: 24px; margin-bottom: 20px;">Avaliações de Clientes</h3>
+
+        <div class="review-list">
+            <div class="review-item">
+                <div class="review-header">
+                    <div>
+                        <div class="reviewer-name">João Silva</div>
+                        <div class="review-date">Comprado há 10 dias</div>
+                    </div>
+                </div>
+                <div class="review-rating">
+                    <i class="star fas fa-star"></i>
+                    <i class="star fas fa-star"></i>
+                    <i class="star fas fa-star"></i>
+                    <i class="star fas fa-star"></i>
+                    <i class="star fas fa-star"></i>
+                </div>
+                <div class="review-text">
+                    <strong>Excelente qualidade!</strong> O notebook é muito leve e poderoso. Estou muito satisfeito com a compra. Já rodei vários games pesados e a performance é impecável. Entrega rápida e bem embalado!
+                </div>
+                <div class="review-helpful">
+                    <span>Útil?</span>
+                    <button class="helpful-btn" onclick="markHelpful(this)"><i class="fas fa-thumbs-up"></i> Sim (45)</button>
+                    <button class="helpful-btn" onclick="markUnhelpful(this)"><i class="fas fa-thumbs-down"></i> Não (2)</button>
+                </div>
+            </div>
+
+            <div class="review-item">
+                <div class="review-header">
+                    <div>
+                        <div class="reviewer-name">Maria Santos</div>
+                        <div class="review-date">Comprado há 25 dias</div>
+                    </div>
+                </div>
+                <div class="review-rating">
+                    <i class="star fas fa-star"></i>
+                    <i class="star fas fa-star"></i>
+                    <i class="star fas fa-star"></i>
+                    <i class="star fas fa-star"></i>
+                    <i class="star fas fa-star-half-alt"></i>
+                </div>
+                <div class="review-text">
+                    <strong>Muito bom custo-benefício!</strong> A máquina entregou tudo que promete. Uso para edição de vídeo e games. Única coisa é que aquece um pouco durante uso intenso, mas nada fora do normal para notebooks gamer.
+                </div>
+                <div class="review-helpful">
+                    <span>Útil?</span>
+                    <button class="helpful-btn" onclick="markHelpful(this)"><i class="fas fa-thumbs-up"></i> Sim (28)</button>
+                    <button class="helpful-btn" onclick="markUnhelpful(this)"><i class="fas fa-thumbs-down"></i> Não (1)</button>
+                </div>
+            </div>
+
+            <div class="review-item">
+                <div class="review-header">
+                    <div>
+                        <div class="reviewer-name">Carlos Oliveira</div>
+                        <div class="review-date">Comprado há 1 mês</div>
+                    </div>
+                </div>
+                <div class="review-rating">
+                    <i class="star fas fa-star"></i>
+                    <i class="star fas fa-star"></i>
+                    <i class="star fas fa-star"></i>
+                    <i class="star fas fa-star"></i>
+                    <i class="star fas fa-star"></i>
+                </div>
+                <div class="review-text">
+                    <strong>Perfeito para profissionais!</strong> Uso o notebook para trabalhar com programação e desenvolvimento. O desempenho é excelente e a portabilidade é um grande diferencial. Bateria dura bastante e o design é premium.
+                </div>
+                <div class="review-helpful">
+                    <span>Útil?</span>
+                    <button class="helpful-btn" onclick="markHelpful(this)"><i class="fas fa-thumbs-up"></i> Sim (62)</button>
+                    <button class="helpful-btn" onclick="markUnhelpful(this)"><i class="fas fa-thumbs-down"></i> Não (0)</button>
+                </div>
+            </div>
+        </div>
+
+        <button class="load-more-btn" onclick="loadMoreReviews()">Carregar mais avaliações</button>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>Sobre Vitrio</h4>
+                <ul>
+                    <li><a href="#">Quem Somos</a></li>
+                    <li><a href="#">Nossa História</a></li>
+                    <li><a href="#">Carreiras</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Compre Conosco</h4>
+                <ul>
+                    <li><a href="#">Como Comprar</a></li>
+                    <li><a href="#">Métodos de Pagamento</a></li>
+                    <li><a href="#">Frete e Entregas</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Atendimento</h4>
+                <ul>
+                    <li><a href="#">Contato</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Chat ao Vivo</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Vitrio. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- REVIEW MODAL -->
+    <div id="reviewModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="toggleReviewModal()">&times;</button>
+            <div class="modal-title">Avaliar Produto</div>
+            <form class="modal-form" onsubmit="submitReview(event)">
+                <label style="display: block; margin-bottom: 16px; font-weight: 600;">Sua avaliação:</label>
+                <div class="rating-stars-input" id="ratingInput">
+                    <span class="star-input" data-value="1" onclick="selectRating(1)"><i class="fas fa-star"></i></span>
+                    <span class="star-input" data-value="2" onclick="selectRating(2)"><i class="fas fa-star"></i></span>
+                    <span class="star-input" data-value="3" onclick="selectRating(3)"><i class="fas fa-star"></i></span>
+                    <span class="star-input" data-value="4" onclick="selectRating(4)"><i class="fas fa-star"></i></span>
+                    <span class="star-input" data-value="5" onclick="selectRating(5)"><i class="fas fa-star"></i></span>
+                </div>
+                <input type="hidden" id="selectedRating" value="0">
+                <textarea placeholder="Conte aos outros clientes sobre sua experiência com este produto..." required></textarea>
+                <button type="submit">Enviar Avaliação</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let cartCount = 0;
+        let quantity = 1;
+
+        function changeImage(element) {
+            document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function selectColor(element) {
+            document.querySelectorAll('.color-option').forEach(c => c.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function selectSize(element) {
+            document.querySelectorAll('.size-option').forEach(s => s.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function increaseQuantity() {
+            quantity = Math.min(quantity + 1, 10);
+            document.getElementById('quantity').value = quantity;
+        }
+
+        function decreaseQuantity() {
+            quantity = Math.max(quantity - 1, 1);
+            document.getElementById('quantity').value = quantity;
+        }
+
+        function addToCart() {
+            const selectedRam = document.querySelector('.size-option.active')?.textContent || '16GB';
+            cartCount += quantity;
+            document.getElementById('cartBadge').textContent = cartCount;
+            showToast(`Produto adicionado ao carrinho! (${quantity}x ${selectedRam})`);
+            quantity = 1;
+            document.getElementById('quantity').value = 1;
+        }
+
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            btn.classList.toggle('active');
+            showToast(btn.classList.contains('active') ? '❤️ Adicionado aos favoritos!' : '💔 Removido dos favoritos');
+        }
+
+        function switchTab(btn, tabId) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        function scrollToReviews() {
+            document.getElementById('reviews').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function toggleReviewModal() {
+            const modal = document.getElementById('reviewModal');
+            modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+            document.getElementById('selectedRating').value = 0;
+            document.querySelectorAll('.star-input').forEach(s => s.classList.remove('active'));
+        }
+
+        function selectRating(value) {
+            document.querySelectorAll('.star-input').forEach((star, index) => {
+                star.classList.toggle('active', index < value);
+            });
+            document.getElementById('selectedRating').value = value;
+        }
+
+        function submitReview(event) {
+            event.preventDefault();
+            const rating = document.getElementById('selectedRating').value;
+            if (rating == 0) {
+                showToast('Por favor, selecione uma classificação de estrelas');
+                return;
+            }
+            toggleReviewModal();
+            showToast('Obrigado! Sua avaliação foi enviada com sucesso!');
+            event.target.reset();
+        }
+
+        function markHelpful(btn) {
+            btn.style.color = 'var(--primary)';
+            showToast('Obrigado pela avaliação!');
+        }
+
+        function markUnhelpful(btn) {
+            btn.style.color = 'var(--danger)';
+        }
+
+        function loadMoreReviews() {
+            showToast('Carregando mais avaliações...');
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('reviewModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

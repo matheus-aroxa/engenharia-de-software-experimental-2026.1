@@ -1,0 +1,11 @@
+1. Como a seção "O que você perderá" e a exibição de economias específicas (R$ 1.920/ano) funcionam como mecanismo de retenção?
+
+A estratégia de "perda aversão" (loss aversion bias) é mais poderosa que ganho equivalente. Listar explicitamente cada benefício que será perdido (✕ Frete grátis ilimitado, ✕ Desconto de 15%, etc.) força o cliente a revisar mentalmente o valor recebido. Combinado com "Economia Anual: R$ 1.920" no sidebar, o cliente percebe o custo real da desistência em termos tangíveis, não abstratos. Psicologicamente, "você vai perder R$ 1.920 em economias" pesa 2x mais que "ganhe R$ 1.920 assinando". Isso cria hesitação crítica antes do cancelamento.
+
+2. Por que a "oferta de retenção" (50% de desconto + R$ 50 em crédito) aparece no sidebar em vez de ser um pop-up agressivo?
+
+Um pop-up agressivo tira autonomia e cria ressentimento ("me forçaram"). Colocar a oferta no sidebar permite que o cliente a veja, considere e tome a decisão com sensação de controle. O botão "Aproveitar Oferta" vs "Continuar" oferece escolha real, não manipulação. A oferta é contextual (aparece onde o cliente já está olhando) e não interrompe o fluxo. Psicologicamente, o cliente se sente respeitado, aumentando chances de aceitar. Se recusa, é uma recusa legítima, não uma fuga de um pop-up.
+
+3. Como a opção "Pausar por 3 meses" reduz churn permanente e muda o contexto psicológico de "cancelar" para "pausar temporariamente"?
+
+"Pausar" é semanticamente diferente de "cancelar": pausa soa reversível, cancelamento soa final. Neurocognitivamente, reduz a barreira emocional (cliente não sente que está "abandonando"). Operacionalmente, durante 3 meses, o cliente pode mudar de ideia (re-engagement chance), circunstâncias podem mudar (promoção, bonus), ou hábitos de compra podem retornar. A retomada automática captura clientes que "simplesmente se esquecerão" ou terão mudança de contexto. Estatisticamente, 40% das pausas viram renovações. Checkbox na seção "Razão do Cancelamento" sugere pausa quando cliente marca "Pausa Temporária", redirigindo para fluxo diferente.

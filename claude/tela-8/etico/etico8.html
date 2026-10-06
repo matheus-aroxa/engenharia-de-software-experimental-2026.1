@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excluir Conta - Vitrio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #fff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .header-nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .header-nav a:hover {
+            color: #0066cc;
+        }
+
+        .main-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 24px;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .page-subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 32px;
+        }
+
+        .warning-box {
+            background-color: #fee;
+            border: 2px solid #d32f2f;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 32px;
+        }
+
+        .warning-title {
+            font-weight: 700;
+            color: #d32f2f;
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .warning-icon {
+            font-size: 20px;
+        }
+
+        .warning-text {
+            font-size: 14px;
+            color: #c62828;
+            line-height: 1.5;
+        }
+
+        .section {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .account-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .deletion-items {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .deletion-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background-color: #ffebee;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #c62828;
+        }
+
+        .deletion-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 16px;
+            border-radius: 4px;
+            margin-bottom: 24px;
+            font-size: 13px;
+            color: #1565c0;
+        }
+
+        .info-box-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .info-box-item {
+            margin: 6px 0;
+            display: flex;
+            gap: 8px;
+        }
+
+        .info-box-item::before {
+            content: "•";
+            color: #2196f3;
+            font-weight: bold;
+        }
+
+        .download-section {
+            background-color: #f3e5f5;
+            border-left: 4px solid #9c27b0;
+            padding: 16px;
+            border-radius: 4px;
+            margin-bottom: 24px;
+        }
+
+        .download-title {
+            font-weight: 700;
+            color: #6a1b9a;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .download-text {
+            font-size: 13px;
+            color: #7b1fa2;
+            margin-bottom: 12px;
+        }
+
+        .download-button {
+            background-color: #9c27b0;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .download-button:hover {
+            background-color: #7b1fa2;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .radio-option:hover {
+            background-color: #f5f5f5;
+        }
+
+        .radio-option input[type="radio"] {
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+            accent-color: #d32f2f;
+        }
+
+        .radio-label {
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .verification-section {
+            background-color: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 16px;
+            border-radius: 4px;
+            margin-bottom: 24px;
+        }
+
+        .verification-title {
+            font-weight: 700;
+            color: #e65100;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .verification-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-bottom: 12px;
+            font-family: monospace;
+        }
+
+        .verification-input:focus {
+            outline: none;
+            border-color: #0066cc;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+
+        .verification-input.error {
+            border-color: #d32f2f;
+        }
+
+        .verification-text {
+            font-size: 12px;
+            color: #e65100;
+            margin-bottom: 12px;
+        }
+
+        .confirmation-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .confirmation-checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            cursor: pointer;
+            accent-color: #d32f2f;
+            flex-shrink: 0;
+        }
+
+        .confirmation-text {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .button {
+            flex: 1;
+            padding: 14px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .button-secondary {
+            background-color: #f5f5f5;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+        .button-secondary:hover:not(:disabled) {
+            background-color: #e0e0e0;
+        }
+
+        .button-danger {
+            background-color: #d32f2f;
+            color: white;
+        }
+
+        .button-danger:hover:not(:disabled) {
+            background-color: #b71c1c;
+        }
+
+        .button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .help-section {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .help-button {
+            padding: 10px 16px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            color: #0066cc;
+            transition: all 0.2s;
+        }
+
+        .help-button:hover {
+            background-color: #f5f5f5;
+            border-color: #0066cc;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 32px;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .modal-close:hover {
+            color: #333;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+            margin-top: 0;
+        }
+
+        .modal-text {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .modal-list {
+            list-style: none;
+            margin-bottom: 16px;
+        }
+
+        .modal-list li {
+            font-size: 14px;
+            color: #666;
+            margin: 8px 0;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .modal-list li::before {
+            content: "•";
+            position: absolute;
+            left: 8px;
+            color: #0066cc;
+            font-weight: bold;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .success-modal-content {
+            text-align: center;
+        }
+
+        .success-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .success-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .success-message {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .faq-item {
+            margin-bottom: 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 16px;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 14px;
+            color: #1a1a1a;
+            user-select: none;
+            transition: background-color 0.2s;
+        }
+
+        .faq-question:hover {
+            background-color: #f0f0f0;
+        }
+
+        .faq-arrow {
+            font-size: 18px;
+            transition: transform 0.3s;
+        }
+
+        .faq-arrow.active {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 16px;
+            background-color: #fafafa;
+            border-top: 1px solid #e0e0e0;
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 32px;
+        }
+
+        .breadcrumb a {
+            color: #0066cc;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb-separator {
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Vitrio</div>
+        <div class="header-nav">
+            <a href="#" onclick="goToHome(event)">Loja</a>
+            <a href="#" onclick="goToAccount(event)">Minha Conta</a>
+            <a href="#" onclick="goToHelp(event)">Ajuda</a>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="breadcrumb">
+            <a href="#" onclick="goToAccount(event)">Minha Conta</a>
+            <span class="breadcrumb-separator">/</span>
+            <span>Configurações</span>
+            <span class="breadcrumb-separator">/</span>
+            <span>Excluir Conta</span>
+        </div>
+
+        <h1 class="page-title">Excluir Conta e Dados Pessoais</h1>
+        <p class="page-subtitle">Esta ação é permanente e irreversível. Leia com atenção antes de prosseguir.</p>
+
+        <!-- Critical Warning -->
+        <div class="warning-box">
+            <div class="warning-title">
+                <span class="warning-icon">⚠️</span>
+                Atenção: Exclusão Irreversível
+            </div>
+            <div class="warning-text">
+                A exclusão de sua conta é permanente e não pode ser desfeita. Todos os seus dados pessoais serão removidos de nossos sistemas. Você não será capaz de recuperar sua conta, histórico de pedidos ou pontos acumulados após a confirmação.
+            </div>
+        </div>
+
+        <!-- Account Information -->
+        <div class="section">
+            <div class="section-title">📊 Informações da Sua Conta</div>
+            <div class="account-info">
+                <div class="info-item">
+                    <span class="info-label">Email</span>
+                    <span class="info-value">usuario@email.com</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Membro desde</span>
+                    <span class="info-value">15 de março de 2022</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Pedidos realizados</span>
+                    <span class="info-value">23 pedidos</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Pontos acumulados</span>
+                    <span class="info-value">1.250 pontos</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- What Will Be Deleted -->
+        <div class="section">
+            <div class="section-title">🗑️ O que será excluído</div>
+            <div class="deletion-items">
+                <div class="deletion-item">
+                    <span class="deletion-icon">👤</span>
+                    <span>Informações pessoais</span>
+                </div>
+                <div class="deletion-item">
+                    <span class="deletion-icon">📍</span>
+                    <span>Endereços salvos</span>
+                </div>
+                <div class="deletion-item">
+                    <span class="deletion-icon">📦</span>
+                    <span>Histórico de pedidos</span>
+                </div>
+                <div class="deletion-item">
+                    <span class="deletion-icon">💳</span>
+                    <span>Dados de pagamento</span>
+                </div>
+                <div class="deletion-item">
+                    <span class="deletion-icon">⭐</span>
+                    <span>1.250 pontos Vitrio</span>
+                </div>
+                <div class="deletion-item">
+                    <span class="deletion-icon">💬</span>
+                    <span>Comentários e avaliações</span>
+                </div>
+                <div class="deletion-item">
+                    <span class="deletion-icon">❤️</span>
+                    <span>Lista de desejos</span>
+                </div>
+                <div class="deletion-item">
+                    <span class="deletion-icon">🔐</span>
+                    <span>Sessões ativas</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- What Will NOT Be Deleted -->
+        <div class="info-box">
+            <div class="info-box-title">ℹ️ O que permanecerá armazenado (por lei)</div>
+            <div class="info-box-item">Registros de transações (5 anos conforme Lei nº 5.172/1966)</div>
+            <div class="info-box-item">Registros de conformidade (indefinidamente para cumprir requisitos legais)</div>
+            <div class="info-box-item">Dados agregados e anonimizados para análise estatística</div>
+        </div>
+
+        <!-- Download Data Section -->
+        <div class="download-section">
+            <div class="download-title">📥 Fazer download dos seus dados</div>
+            <div class="download-text">
+                Você pode baixar uma cópia de todos os seus dados pessoais antes de deletar a conta. O arquivo será compactado em formato ZIP e incluirá perfil, pedidos, avaliações, wishlist, endereços e histórico de atividades.
+            </div>
+            <button class="download-button" onclick="openDownloadModal()">📥 Baixar Meus Dados</button>
+        </div>
+
+        <!-- Reason for Deletion -->
+        <div class="section">
+            <div class="section-title">❓ Por que deseja excluir sua conta?</div>
+            <div class="form-group">
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="reason" value="price" onchange="updateDeleteButton()">
+                        <span class="radio-label">O preço/frete ficou muito alto</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="reason" value="usage" onchange="updateDeleteButton()">
+                        <span class="radio-label">Não uso mais a plataforma</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="reason" value="problems" onchange="updateDeleteButton()">
+                        <span class="radio-label">Tive problemas com o atendimento ou produto</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="reason" value="other" onchange="updateDeleteButton()">
+                        <span class="radio-label">Outro motivo</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Verification Section -->
+        <div class="verification-section">
+            <div class="verification-title">🔒 Verificação de Identidade</div>
+            <div class="verification-text">
+                Para confirmar que deseja excluir sua conta permanentemente, insira seu email exato e digite "EXCLUIR" abaixo:
+            </div>
+            <input 
+                type="email" 
+                class="verification-input" 
+                id="emailVerify" 
+                placeholder="usuario@email.com"
+                onchange="updateDeleteButton()"
+            >
+            <input 
+                type="text" 
+                class="verification-input" 
+                id="confirmText" 
+                placeholder="Digite EXCLUIR"
+                oninput="this.value = this.value.toUpperCase(); updateDeleteButton()"
+            >
+        </div>
+
+        <!-- Confirmation Checkbox -->
+        <div class="confirmation-checkbox">
+            <input type="checkbox" id="confirmCheckbox" onchange="updateDeleteButton()">
+            <span class="confirmation-text">
+                Entendo que esta ação é permanente e irreversível. Confirmei minha identidade corretamente. Tenho direito ao direito ao arrependimento conforme a Lei nº 8.078/1990 (Código de Defesa do Consumidor), mas escolho proceder com a exclusão.
+            </span>
+        </div>
+
+        <!-- Help Buttons -->
+        <div class="help-section">
+            <button class="help-button" onclick="openFaqModal()">❓ Dúvidas Frequentes</button>
+            <button class="help-button" onclick="openLgpdModal()">📋 Meus Direitos (LGPD)</button>
+            <button class="help-button" onclick="openSupportModal()">💬 Contatar Suporte</button>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="button button-secondary" onclick="goToAccount(event)">← Voltar</button>
+            <button class="button button-danger" id="deleteButton" disabled onclick="confirmDeletion()">
+                🗑️ Excluir Minha Conta Permanentemente
+            </button>
+        </div>
+    </div>
+
+    <!-- Download Data Modal -->
+    <div class="modal" id="downloadModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeDownloadModal()">✕</button>
+            <h2 class="modal-title">📥 Download dos Seus Dados</h2>
+            <p class="modal-text">
+                Você está prestes a baixar um arquivo ZIP contendo todos os seus dados pessoais armazenados em nossos servidores.
+            </p>
+            <p class="modal-text"><strong>O arquivo incluirá:</strong></p>
+            <ul class="modal-list">
+                <li>Informações do perfil (nome, email, telefone, data de nascimento)</li>
+                <li>Todos os pedidos realizados e seus detalhes</li>
+                <li>Avaliações e comentários deixados</li>
+                <li>Wishlist (lista de desejos)</li>
+                <li>Endereços cadastrados</li>
+                <li>Histórico de atividades e acesso</li>
+            </ul>
+            <p class="modal-text">
+                <strong>Informações importantes:</strong><br>
+                O download pode levar até 24 horas para ser preparado. Um link para baixar o arquivo será enviado para seu email. O link expirará em 7 dias.
+            </p>
+            <div class="modal-buttons">
+                <button class="button button-secondary" style="flex: 1;" onclick="closeDownloadModal()">Cancelar</button>
+                <button class="button" style="flex: 1; background-color: #9c27b0; color: white;" onclick="initiateDownload()">📥 Iniciar Download</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Download Initiated Modal -->
+    <div class="modal" id="downloadInitiatedModal">
+        <div class="modal-content success-modal-content">
+            <div class="success-icon">📧</div>
+            <h2 class="modal-title">Download Iniciado</h2>
+            <p class="success-message">
+                Enviamos um email para <strong>usuario@email.com</strong> com instruções para baixar seus dados.<br><br>
+                O arquivo pode levar até 24 horas para ser preparado. Você receberá uma notificação quando estiver pronto.
+            </p>
+            <div class="modal-buttons">
+                <button class="button" style="flex: 1; background-color: #0066cc; color: white;" onclick="closeDownloadInitiatedModal()">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Modal -->
+    <div class="modal" id="faqModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeFaqModal()">✕</button>
+            <h2 class="modal-title">❓ Dúvidas Frequentes</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(0)">
+                    Posso recuperar minha conta após deletá-la?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Não. A exclusão é permanente e irreversível. Seus dados serão completamente removidos de nossos servidores dentro de 30 dias. Você não poderá recuperar sua conta, histórico de pedidos ou pontos acumulados.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(1)">
+                    E se eu tiver pedidos em aberto?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Seu pedido será entregue normalmente, mas você não conseguirá mais rastreá-lo em sua conta após a exclusão. Recomendamos aguardar o recebimento ou anotar os números de rastreamento antes de deletar sua conta. O vendedor ainda poderá contatá-lo pelo email registrado se necessário.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(2)">
+                    Meus 1.250 pontos serão perdidos?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Sim. Os pontos Vitrio são perdidos permanentemente quando você deleta sua conta e não podem ser transferidos ou recuperados. Você pode usar seus pontos antes de deletar a conta, se desejar.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(3)">
+                    Quanto tempo leva para meus dados serem completamente removidos?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Sua conta será desativada imediatamente após a confirmação. Os dados pessoais serão completamente removidos de nossos servidores em até 30 dias. Registros de transações conforme exigido por lei permanecerão por 5 anos (sem identificação pessoal).
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(4)">
+                    Meus dados de pagamento serão deletados imediatamente?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Sim. Todos os dados de cartão de crédito, boleto e PIX serão completamente removidos. Seus registros de transações (necessários por lei) serão mantidos sem informações de pagamento identificáveis.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(5)">
+                    Receberei confirmação da exclusão?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Sim. Você receberá um email de confirmação assim que sua conta for deletada. O email será enviado para o endereço registrado em sua conta. Guarde este email como comprovante de que solicitou a exclusão.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(6)">
+                    Posso deletar minha conta se tenho compras ativas com Clube Vitrio?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Se você tem uma assinatura ativa do Clube Vitrio, ela será cancelada imediatamente quando sua conta for deletada. Nenhuma cobrança adicional será feita. Você pode cancelar sua assinatura antes de deletar a conta, se preferir.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(7)">
+                    O que acontece com meus comentários e avaliações?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Seus comentários e avaliações vinculados à sua conta serão removidos quando você deletar sua conta. Isso inclui qualquer feedback que você tenha deixado sobre produtos ou vendedores.
+                </div>
+            </div>
+
+            <div style="margin-top: 24px;">
+                <button class="button" style="width: 100%; background-color: #0066cc; color: white;" onclick="closeFaqModal()">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- LGPD Rights Modal -->
+    <div class="modal" id="lgpdModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeLgpdModal()">✕</button>
+            <h2 class="modal-title">📋 Seus Direitos (LGPD)</h2>
+            
+            <p class="modal-text">
+                Conforme a Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018), você possui os seguintes direitos:
+            </p>
+
+            <div style="margin-bottom: 20px;">
+                <h3 style="font-weight: 700; color: #1a1a1a; margin-bottom: 8px; font-size: 14px;">1. Direito de Acesso</h3>
+                <p style="font-size: 13px; color: #666; margin-bottom: 12px;">
+                    Você pode solicitar uma cópia de todos os dados pessoais que temos sobre você. Use a opção "Baixar Meus Dados" nesta página.
+                </p>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <h3 style="font-weight: 700; color: #1a1a1a; margin-bottom: 8px; font-size: 14px;">2. Direito ao Esquecimento</h3>
+                <p style="font-size: 13px; color: #666; margin-bottom: 12px;">
+                    Você pode solicitar a exclusão de seus dados pessoais. Esta ação que você está realizando exerce este direito. Seus dados serão removidos em até 30 dias.
+                </p>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <h3 style="font-weight: 700; color: #1a1a1a; margin-bottom: 8px; font-size: 14px;">3. Direito de Retificação</h3>
+                <p style="font-size: 13px; color: #666; margin-bottom: 12px;">
+                    Você pode corrigir informações pessoais incorretas. Acesse suas configurações de conta antes de deletá-la se desejar corrigir algum dado.
+                </p>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <h3 style="font-weight: 700; color: #1a1a1a; margin-bottom: 8px; font-size: 14px;">4. Direito de Portabilidade</h3>
+                <p style="font-size: 13px; color: #666; margin-bottom: 12px;">
+                    Você tem direito a receber seus dados em formato estruturado e portável. Use a opção "Baixar Meus Dados" para obter um arquivo com todos os seus dados.
+                </p>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <h3 style="font-weight: 700; color: #1a1a1a; margin-bottom: 8px; font-size: 14px;">5. Direito de Não Ser Submetido a Decisões Automatizadas</h3>
+                <p style="font-size: 13px; color: #666; margin-bottom: 12px;">
+                    Você não será submetido a decisões automatizadas que afetem seus direitos. Todas as nossas decisões sobre sua conta envolvem análise humana.
+                </p>
+            </div>
+
+            <div style="background-color: #f0f7ff; border-left: 4px solid #2196f3; padding: 12px; border-radius: 4px; margin-bottom: 20px;">
+                <p style="font-size: 13px; color: #1565c0; margin: 0; line-height: 1.5;">
+                    <strong>Encarregado de Dados (DPO):</strong><br>
+                    Para dúvidas sobre LGPD e seus direitos, entre em contato com nosso Encarregado de Dados:<br>
+                    Email: <strong>privacidade@vitrio.com.br</strong><br>
+                    Telefone: <strong>0800 123 4567</strong>
+                </p>
+            </div>
+
+            <p style="font-size: 12px; color: #999; margin-top: 16px;">
+                Você também pode registrar uma reclamação junto à Autoridade Nacional de Proteção de Dados (ANPD) se considerar que seus direitos foram violados.
+            </p>
+
+            <div style="margin-top: 24px;">
+                <button class="button" style="width: 100%; background-color: #0066cc; color: white;" onclick="closeLgpdModal()">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Support Modal -->
+    <div class="modal" id="supportModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeSupportModal()">✕</button>
+            <h2 class="modal-title">💬 Contatar Suporte</h2>
+            
+            <p class="modal-text">
+                Antes de deletar sua conta, você pode conversar com nosso time de suporte sobre suas dúvidas ou problemas:
+            </p>
+
+            <div style="margin-bottom: 24px; padding: 16px; background-color: #f5f5f5; border-radius: 8px;">
+                <div style="display: flex; gap: 12px; align-items: flex-start; margin-bottom: 16px;">
+                    <span style="font-size: 20px;">💬</span>
+                    <div>
+                        <div style="font-weight: 600; color: #1a1a1a; margin-bottom: 4px;">Chat ao Vivo</div>
+                        <p style="font-size: 13px; color: #666; margin: 0;">
+                            Disponível seg-sex 9h às 18h (horário de Brasília)
+                        </p>
+                        <button class="help-button" style="margin-top: 8px;" onclick="openChat()">Iniciar Chat</button>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 12px; align-items: flex-start; margin-bottom: 16px;">
+                    <span style="font-size: 20px;">📧</span>
+                    <div>
+                        <div style="font-weight: 600; color: #1a1a1a; margin-bottom: 4px;">Email</div>
+                        <p style="font-size: 13px; color: #666; margin: 0;">
+                            suporte@vitrio.com.br<br>
+                            (Resposta em até 24h)
+                        </p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 12px; align-items: flex-start;">
+                    <span style="font-size: 20px;">📞</span>
+                    <div>
+                        <div style="font-weight: 600; color: #1a1a1a; margin-bottom: 4px;">Telefone</div>
+                        <p style="font-size: 13px; color: #666; margin: 0;">
+                            0800 123 4567 ou (11) 3456-7890<br>
+                            Seg-sex 9h às 20h, Sábado 9h às 14h (Brasília)
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <p class="modal-text" style="font-size: 12px; color: #999; margin-bottom: 0;">
+                Nosso suporte pode ajudar com problemas técnicos, devoluções, cancelamentos ou dúvidas sobre sua compra.
+            </p>
+
+            <div style="margin-top: 24px;">
+                <button class="button" style="width: 100%; background-color: #0066cc; color: white;" onclick="closeSupportModal()">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeConfirmationModal()">✕</button>
+            <h2 class="modal-title">⚠️ Última Confirmação</h2>
+            
+            <p class="modal-text" style="color: #d32f2f; font-weight: 600;">
+                Você está prestes a deletar sua conta permanentemente.
+            </p>
+
+            <p class="modal-text">
+                Esta ação <strong>não pode ser desfeita</strong>. Todos os seus dados serão removidos:
+            </p>
+
+            <ul class="modal-list">
+                <li>Informações pessoais e de contato</li>
+                <li>Histórico completo de pedidos</li>
+                <li>Endereços salvos</li>
+                <li>Dados de pagamento</li>
+                <li>1.250 pontos acumulados</li>
+                <li>Avaliações e comentários</li>
+                <li>Lista de desejos</li>
+                <li>Todas as sessões ativas</li>
+            </ul>
+
+            <p class="modal-text" style="background-color: #fff3e0; padding: 12px; border-radius: 6px; border-left: 4px solid #ff9800;">
+                <strong>✓ Você tem 30 dias para se arrepender:</strong> Conforme a Lei nº 8.078/1990 (Código de Defesa do Consumidor), você tem direito ao arrependimento de compras realizadas. Entre em contato conosco neste período se desejar recuperar sua conta.
+            </p>
+
+            <div class="modal-buttons">
+                <button class="button button-secondary" style="flex: 1;" onclick="closeConfirmationModal()">← Cancelar</button>
+                <button class="button button-danger" style="flex: 1;" onclick="completeDeletion()">🗑️ Sim, Deletar Permanentemente</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content success-modal-content">
+            <div class="success-icon">✅</div>
+            <h2 class="modal-title">Conta Deletada com Sucesso</h2>
+            <p class="success-message">
+                Sua conta e dados pessoais foram programados para exclusão.<br><br>
+                <strong>Um email de confirmação foi enviado para:</strong> usuario@email.com<br><br>
+                Seus dados pessoais serão completamente removidos de nossos servidores em até 30 dias.
+            </p>
+            <div style="background-color: #f0f7ff; border-left: 4px solid #2196f3; padding: 12px; border-radius: 4px; margin-bottom: 20px; font-size: 13px; color: #1565c0;">
+                Você ainda tem <strong>30 dias de direito ao arrependimento</strong>. Neste período, você poderá entrar em contato conosco para recuperar sua conta através do email: suporte@vitrio.com.br
+            </div>
+            <div class="modal-buttons">
+                <button class="button" style="flex: 1; background-color: #0066cc; color: white;" onclick="returnHome()">← Voltar à Loja</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Helper function to validate verification
+        function isVerificationComplete() {
+            const email = document.getElementById('emailVerify').value;
+            const confirmText = document.getElementById('confirmText').value;
+            const checkbox = document.getElementById('confirmCheckbox').checked;
+            const reason = document.querySelector('input[name="reason"]:checked');
+            
+            // Email should match usuario@email.com (the logged-in user)
+            const emailValid = email === 'usuario@email.com';
+            const textValid = confirmText === 'EXCLUIR';
+            
+            return emailValid && textValid && checkbox && reason;
+        }
+
+        function updateDeleteButton() {
+            const button = document.getElementById('deleteButton');
+            button.disabled = !isVerificationComplete();
+        }
+
+        function openDownloadModal() {
+            document.getElementById('downloadModal').classList.add('active');
+        }
+
+        function closeDownloadModal() {
+            document.getElementById('downloadModal').classList.remove('active');
+        }
+
+        function initiateDownload() {
+            closeDownloadModal();
+            document.getElementById('downloadInitiatedModal').classList.add('active');
+        }
+
+        function closeDownloadInitiatedModal() {
+            document.getElementById('downloadInitiatedModal').classList.remove('active');
+        }
+
+        function openFaqModal() {
+            document.getElementById('faqModal').classList.add('active');
+        }
+
+        function closeFaqModal() {
+            document.getElementById('faqModal').classList.remove('active');
+        }
+
+        function openLgpdModal() {
+            document.getElementById('lgpdModal').classList.add('active');
+        }
+
+        function closeLgpdModal() {
+            document.getElementById('lgpdModal').classList.remove('active');
+        }
+
+        function openSupportModal() {
+            document.getElementById('supportModal').classList.add('active');
+        }
+
+        function closeSupportModal() {
+            document.getElementById('supportModal').classList.remove('active');
+        }
+
+        function confirmDeletion() {
+            document.getElementById('confirmationModal').classList.add('active');
+        }
+
+        function closeConfirmationModal() {
+            document.getElementById('confirmationModal').classList.remove('active');
+        }
+
+        function completeDeletion() {
+            closeConfirmationModal();
+            document.getElementById('successModal').classList.add('active');
+        }
+
+        function toggleFaq(index) {
+            const faqItems = document.querySelectorAll('.faq-item');
+            const answer = faqItems[index].querySelector('.faq-answer');
+            const arrow = faqItems[index].querySelector('.faq-arrow');
+            
+            answer.classList.toggle('active');
+            arrow.classList.toggle('active');
+        }
+
+        function openChat() {
+            alert('Chat ao vivo iniciado. Este é um protótipo - na aplicação real, você seria conectado ao suporte.');
+            closeSupportModal();
+        }
+
+        function goToAccount(e) {
+            e.preventDefault();
+            alert('Redirecionando para Minha Conta...');
+        }
+
+        function goToHome(e) {
+            e.preventDefault();
+            alert('Redirecionando para a Loja...');
+        }
+
+        function goToHelp(e) {
+            e.preventDefault();
+            alert('Abrindo página de Ajuda...');
+        }
+
+        function returnHome() {
+            alert('Redirecionando para a página inicial. Sua conta será deletada em 30 dias.');
+        }
+
+        // Close modals when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('active');
+            }
+        });
+
+        // Initialize delete button state
+        updateDeleteButton();
+    </script>
+</body>
+</html>

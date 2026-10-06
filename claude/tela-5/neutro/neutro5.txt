@@ -1,0 +1,12 @@
+1. Como a barra de progresso melhora a experiência do usuário no processo de checkout?
+
+A barra de progresso visual fornece orientação clara sobre onde o usuário está no fluxo de compra (Carrinho → Endereço → Pagamento → Confirmação), reduzindo a ansiedade sobre quantas etapas faltam. O indicador de conclusão (✓) para o Carrinho reforça que a etapa anterior foi concluída com sucesso. O destaque em laranja (
+#ff6b35) na etapa ativa mantém o foco, enquanto em desktop sticky positioning permite que o usuário sempre saiba sua posição no processo sem rolar para cima.
+
+2. Por que os métodos de pagamento e frete são apresentados como cartões selecionáveis em vez de um simples dropdown?
+
+O design de cartões selecionáveis torna cada opção visível e comparável imediatamente (Padrão grátis vs. Expressa R$ 49,90 vs. Urgente R$ 99,90). Isso permite decisão informada sem navegação extra. O feedback visual (border laranja + background claro) ao passar o mouse melhora a interatividade. A revelação condicional de campos (cartão aparece ao selecionar crédito, PIX info ao selecionar PIX) mantém a interface limpa e contextual, evitando sobrecarga de informações.
+
+3. Como o resumo sticky do pedido no sidebar contribui para o abandono reduzido do checkout?
+
+Manter o resumo do pedido visível em tempo real (subtotal, frete, total, cupom) reduz a incerteza sobre o custo final enquanto o usuário preenche o formulário. A atualização dinâmica de valores (frete muda quando seleciona entrega expressa) cria transparência imediata. No mobile, o resumo colapsado em posição fixa na tela garante acesso rápido. Isso evita que o usuário chegue ao final sem ter visto o total, uma causa comum de abandono em e-commerce.

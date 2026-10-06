@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Vitrio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: #fff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 16px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .header-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .header-nav a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .header-nav a:hover {
+            color: #1a1a1a;
+        }
+
+        /* Progress bar */
+        .progress-container {
+            background-color: #fff;
+            padding: 20px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .progress-wrapper {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #e0e0e0;
+            z-index: 0;
+            transform: translateY(-50%);
+        }
+
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+        }
+
+        .progress-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #fff;
+            border: 2px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #999;
+            margin-bottom: 8px;
+        }
+
+        .progress-step.active .progress-circle {
+            background-color: #1a1a1a;
+            color: #fff;
+            border-color: #1a1a1a;
+        }
+
+        .progress-step.completed .progress-circle {
+            background-color: #4caf50;
+            color: #fff;
+            border-color: #4caf50;
+        }
+
+        .progress-step.completed .progress-circle::after {
+            content: '✓';
+            font-weight: bold;
+        }
+
+        .progress-step.completed .progress-circle {
+            font-size: 0;
+        }
+
+        .progress-label {
+            font-size: 12px;
+            color: #999;
+            font-weight: 500;
+        }
+
+        .progress-step.active .progress-label {
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+
+        /* Main layout */
+        .main-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .checkout-layout {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 40px;
+        }
+
+        .checkout-section {
+            background-color: #fff;
+            padding: 24px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background-color: #1a1a1a;
+            border-radius: 2px;
+        }
+
+        /* Form styles */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #1a1a1a;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #1a1a1a;
+            box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 16px;
+        }
+
+        .form-row.three {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        /* Address section */
+        .address-section {
+            margin-bottom: 24px;
+        }
+
+        .address-option {
+            display: flex;
+            gap: 12px;
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .address-option:hover {
+            background-color: #fafafa;
+        }
+
+        .address-option input[type="radio"] {
+            width: auto;
+            margin-top: 4px;
+        }
+
+        .address-option-content {
+            flex: 1;
+        }
+
+        .address-option-label {
+            font-weight: 600;
+            font-size: 14px;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .address-option-text {
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Shipping options */
+        .shipping-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .shipping-option {
+            display: flex;
+            gap: 12px;
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .shipping-option:hover {
+            background-color: #fafafa;
+        }
+
+        .shipping-option input[type="radio"] {
+            width: auto;
+            margin-top: 4px;
+        }
+
+        .shipping-option-content {
+            flex: 1;
+        }
+
+        .shipping-option-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .shipping-option-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: #1a1a1a;
+        }
+
+        .shipping-option-price {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .shipping-option-text {
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Payment section */
+        .payment-methods {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .payment-method-btn {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            background-color: #fff;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #1a1a1a;
+        }
+
+        .payment-method-btn:hover {
+            border-color: #999;
+            background-color: #fafafa;
+        }
+
+        .payment-method-btn.active {
+            border-color: #1a1a1a;
+            background-color: #1a1a1a;
+            color: #fff;
+        }
+
+        .payment-form {
+            display: none;
+        }
+
+        .payment-form.active {
+            display: block;
+        }
+
+        /* Order summary sidebar */
+        .order-summary {
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .summary-item-info {
+            flex: 1;
+        }
+
+        .summary-item-name {
+            font-size: 13px;
+            color: #1a1a1a;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .summary-item-qty {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .summary-item-price {
+            font-weight: 600;
+            color: #1a1a1a;
+            text-align: right;
+            min-width: 60px;
+        }
+
+        .summary-divider {
+            height: 1px;
+            background-color: #e0e0e0;
+            margin: 16px 0;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .summary-row.subtotal {
+            color: #666;
+        }
+
+        .summary-row.shipping {
+            color: #666;
+        }
+
+        .summary-row.taxes {
+            color: #666;
+        }
+
+        .summary-row.total {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-top: 12px;
+        }
+
+        .info-badge {
+            background-color: #e3f2fd;
+            border-left: 3px solid #2196f3;
+            padding: 12px;
+            margin: 16px 0;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #1565c0;
+            line-height: 1.5;
+        }
+
+        /* Buttons */
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background-color: #1a1a1a;
+            color: #fff;
+            flex: 1;
+        }
+
+        .btn-primary:hover {
+            background-color: #333;
+        }
+
+        .btn-primary:active {
+            background-color: #1a1a1a;
+            transform: scale(0.98);
+        }
+
+        .btn-secondary {
+            background-color: #f5f5f5;
+            color: #1a1a1a;
+            border: 1px solid #e0e0e0;
+            flex: 1;
+        }
+
+        .btn-secondary:hover {
+            background-color: #efefef;
+        }
+
+        .btn-link {
+            background-color: transparent;
+            color: #2196f3;
+            text-decoration: underline;
+            padding: 0;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .btn-link:hover {
+            color: #1976d2;
+        }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 24px;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            color: #1a1a1a;
+        }
+
+        /* Success state */
+        .success-container {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background-color: #4caf50;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 24px;
+        }
+
+        .success-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .success-text {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 24px;
+        }
+
+        /* Tooltip */
+        .tooltip-icon {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background-color: #e0e0e0;
+            color: #666;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 16px;
+            font-size: 12px;
+            cursor: help;
+            position: relative;
+        }
+
+        .tooltip-icon:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            z-index: 10;
+            font-weight: normal;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .checkout-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .order-summary {
+                position: static;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-methods {
+                flex-direction: column;
+            }
+
+            .payment-method-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <a href="#" class="logo">Vitrio</a>
+            <nav class="header-nav">
+                <a href="#voltar">← Voltar ao carrinho</a>
+                <a href="#ajuda">Ajuda</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Progress bar -->
+    <div class="progress-container">
+        <div class="progress-wrapper">
+            <div class="progress-bar">
+                <div class="progress-step completed">
+                    <div class="progress-circle">1</div>
+                    <div class="progress-label">Carrinho</div>
+                </div>
+                <div class="progress-step active">
+                    <div class="progress-circle">2</div>
+                    <div class="progress-label">Pagamento</div>
+                </div>
+                <div class="progress-step">
+                    <div class="progress-circle">3</div>
+                    <div class="progress-label">Confirmação</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="main-container">
+        <div class="checkout-layout">
+            <!-- Left column: Forms -->
+            <div class="checkout-forms">
+                <!-- Address section -->
+                <div class="checkout-section">
+                    <div class="section-title">Endereço de entrega</div>
+
+                    <div class="address-section">
+                        <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 12px; color: #999;">ENDEREÇOS SALVOS</label>
+                        <div class="address-option">
+                            <input type="radio" name="address" value="saved" id="address-saved" checked>
+                            <div class="address-option-content">
+                                <div class="address-option-label">Casa</div>
+                                <div class="address-option-text">Rua Principal, 123 — Recife, PE 52000-000</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn-link" onclick="toggleNewAddress()" style="margin-bottom: 20px;">+ Usar novo endereço</button>
+
+                    <div id="new-address-form" style="display: none; border-top: 1px solid #e0e0e0; padding-top: 20px;">
+                        <div class="form-group">
+                            <label for="cep">CEP</label>
+                            <div style="display: flex; gap: 8px;">
+                                <input type="text" id="cep" placeholder="12345-678" style="flex: 1;">
+                                <button class="btn btn-secondary" style="flex: 0; width: 100px;" onclick="searchCEP()">Buscar</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="street">Rua</label>
+                            <input type="text" id="street" placeholder="Rua Principal">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="number">Número</label>
+                                <input type="text" id="number" placeholder="123">
+                            </div>
+                            <div class="form-group">
+                                <label for="complement">Complemento (opcional)</label>
+                                <input type="text" id="complement" placeholder="Apto 456">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="neighborhood">Bairro</label>
+                            <input type="text" id="neighborhood" placeholder="Boa Vista">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">Cidade</label>
+                                <input type="text" id="city" placeholder="Recife">
+                            </div>
+                            <div class="form-group">
+                                <label for="state">Estado</label>
+                                <select id="state">
+                                    <option value="">Selecione</option>
+                                    <option value="PE">PE</option>
+                                    <option value="SP">SP</option>
+                                    <option value="RJ">RJ</option>
+                                    <option value="MG">MG</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="save-address"> Salvar este endereço para próximas compras
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shipping section -->
+                <div class="checkout-section">
+                    <div class="section-title">Opções de frete</div>
+
+                    <div class="info-badge">
+                        ℹ️ Os prazos são contados a partir do processamento do seu pedido (1-2 dias úteis).
+                    </div>
+
+                    <div class="shipping-options">
+                        <label class="shipping-option">
+                            <input type="radio" name="shipping" value="standard" checked>
+                            <div class="shipping-option-content">
+                                <div class="shipping-option-header">
+                                    <div class="shipping-option-name">Entrega padrão</div>
+                                    <div class="shipping-option-price">R$ 15,90</div>
+                                </div>
+                                <div class="shipping-option-text">Entrega em 7-10 dias úteis</div>
+                            </div>
+                        </label>
+
+                        <label class="shipping-option">
+                            <input type="radio" name="shipping" value="express">
+                            <div class="shipping-option-content">
+                                <div class="shipping-option-header">
+                                    <div class="shipping-option-name">Entrega expressa</div>
+                                    <div class="shipping-option-price">R$ 49,90</div>
+                                </div>
+                                <div class="shipping-option-text">Entrega em 3-5 dias úteis</div>
+                            </div>
+                        </label>
+
+                        <label class="shipping-option">
+                            <input type="radio" name="shipping" value="fast">
+                            <div class="shipping-option-content">
+                                <div class="shipping-option-header">
+                                    <div class="shipping-option-name">Entrega rápida</div>
+                                    <div class="shipping-option-price">R$ 89,90</div>
+                                </div>
+                                <div class="shipping-option-text">Entrega em 1-2 dias úteis</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Payment section -->
+                <div class="checkout-section">
+                    <div class="section-title">Forma de pagamento</div>
+
+                    <div class="info-badge">
+                        ℹ️ Seus dados de pagamento são protegidos por criptografia. A Vitrio nunca armazena dados de cartão.
+                    </div>
+
+                    <div class="payment-methods">
+                        <button class="payment-method-btn active" onclick="switchPaymentMethod('card')">Cartão</button>
+                        <button class="payment-method-btn" onclick="switchPaymentMethod('pix')">PIX</button>
+                        <button class="payment-method-btn" onclick="switchPaymentMethod('boleto')">Boleto</button>
+                    </div>
+
+                    <!-- Credit card form -->
+                    <div id="card-form" class="payment-form active">
+                        <div class="form-group">
+                            <label for="card-name">Nome do titular</label>
+                            <input type="text" id="card-name" placeholder="Seu nome completo">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="card-number">Número do cartão</label>
+                            <input type="text" id="card-number" placeholder="0000 0000 0000 0000" maxlength="19">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="card-expiry">Vencimento</label>
+                                <input type="text" id="card-expiry" placeholder="MM/AA" maxlength="5">
+                            </div>
+                            <div class="form-group">
+                                <label for="card-cvc">CVV <span class="tooltip-icon" data-tooltip="3 dígitos no verso">?</span></label>
+                                <input type="text" id="card-cvc" placeholder="000" maxlength="3">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="installments">Parcelar em</label>
+                            <select id="installments">
+                                <option value="1">1x de R$ 1.234,56 (sem juros)</option>
+                                <option value="2">2x de R$ 617,28 (sem juros)</option>
+                                <option value="3">3x de R$ 411,52 (sem juros)</option>
+                                <option value="4">4x de R$ 319,08 + 2,49% de juros</option>
+                                <option value="6">6x de R$ 212,88 + 2,49% de juros</option>
+                                <option value="12">12x de R$ 110,38 + 2,49% de juros</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="billing-same"> O endereço de cobrança é o mesmo da entrega
+                            </label>
+                        </div>
+
+                        <div id="billing-address" style="display: none; border-top: 1px solid #e0e0e0; padding-top: 20px; margin-top: 20px;">
+                            <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 12px; color: #999;">ENDEREÇO DE COBRANÇA</label>
+
+                            <div class="form-group">
+                                <label for="billing-cep">CEP</label>
+                                <input type="text" id="billing-cep" placeholder="12345-678">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="billing-street">Rua</label>
+                                <input type="text" id="billing-street" placeholder="Rua Principal">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="billing-number">Número</label>
+                                    <input type="text" id="billing-number" placeholder="123">
+                                </div>
+                                <div class="form-group">
+                                    <label for="billing-complement">Complemento (opcional)</label>
+                                    <input type="text" id="billing-complement" placeholder="Apto 456">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="billing-neighborhood">Bairro</label>
+                                <input type="text" id="billing-neighborhood" placeholder="Boa Vista">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="billing-city">Cidade</label>
+                                    <input type="text" id="billing-city" placeholder="Recife">
+                                </div>
+                                <div class="form-group">
+                                    <label for="billing-state">Estado</label>
+                                    <select id="billing-state">
+                                        <option value="">Selecione</option>
+                                        <option value="PE">PE</option>
+                                        <option value="SP">SP</option>
+                                        <option value="RJ">RJ</option>
+                                        <option value="MG">MG</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PIX form -->
+                    <div id="pix-form" class="payment-form">
+                        <div class="info-badge">
+                            ℹ️ Você receberá um QR code para pagar via PIX. O pedido será confirmado após a comprovação do pagamento.
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pix-key">Chave PIX (opcional)</label>
+                            <input type="text" id="pix-key" placeholder="email@exemplo.com, CPF ou telefone">
+                        </div>
+
+                        <div style="background-color: #f5f5f5; padding: 16px; border-radius: 4px; text-align: center; margin-top: 20px;">
+                            <div style="font-size: 12px; color: #666; margin-bottom: 12px;">Após confirmar, você verá o QR code para escanear</div>
+                            <div style="width: 120px; height: 120px; background-color: #E0E0E0; margin: 0 auto; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #999; font-size: 12px;">QR Code</div>
+                        </div>
+                    </div>
+
+                    <!-- Boleto form -->
+                    <div id="boleto-form" class="payment-form">
+                        <div class="info-badge">
+                            ℹ️ Você receberá um boleto por email. O pedido será confirmado após o pagamento ser processado (até 3 dias úteis).
+                        </div>
+
+                        <div class="form-group">
+                            <label for="boleto-email">Email para envio do boleto</label>
+                            <input type="email" id="boleto-email" placeholder="seu@email.com">
+                        </div>
+
+                        <div style="background-color: #fef3cd; border-left: 3px solid #ffc107; padding: 12px; border-radius: 4px; margin-top: 16px; font-size: 12px; color: #856404;">
+                            ⚠️ Boletos têm um prazo de 3 dias úteis para processamento. Fique atento ao vencimento para não perder o prazo.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terms and options -->
+                <div class="checkout-section">
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="terms" required> Li e concordo com os <button class="btn-link" onclick="openModal('terms-modal')">Termos de Compra</button>, <button class="btn-link" onclick="openModal('privacy-modal')">Política de Privacidade</button> e <button class="btn-link" onclick="openModal('return-modal')">Política de Devolução</button>.
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="newsletter"> Desejo receber ofertas e atualizações por email (posso desinscrever a qualquer momento)
+                        </label>
+                    </div>
+
+                    <div style="margin-top: 24px;">
+                        <p style="font-size: 12px; color: #999; line-height: 1.6;">
+                            <strong>Direito de desistência:</strong> Você tem até 7 dias após receber seu produto para devolvê-lo e receber reembolso total, sem necessidade de justificativa. <button class="btn-link" onclick="openModal('return-modal')">Saiba mais</button>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Action buttons -->
+                <div class="button-group">
+                    <button class="btn btn-secondary" onclick="goBack()">Voltar</button>
+                    <button class="btn btn-primary" onclick="submitCheckout()">Confirmar pedido</button>
+                </div>
+            </div>
+
+            <!-- Right column: Order summary -->
+            <div class="order-summary">
+                <div class="checkout-section">
+                    <div class="section-title" style="margin-bottom: 16px;">Resumo do pedido</div>
+
+                    <div class="summary-item">
+                        <div class="summary-item-info">
+                            <div class="summary-item-name">Smart TV 55" 4K</div>
+                            <div class="summary-item-qty">Qtd: 1</div>
+                        </div>
+                        <div class="summary-item-price">R$ 1.899,00</div>
+                    </div>
+
+                    <div class="summary-item">
+                        <div class="summary-item-info">
+                            <div class="summary-item-name">Soundbar Bluetooth</div>
+                            <div class="summary-item-qty">Qtd: 1</div>
+                        </div>
+                        <div class="summary-item-price">R$ 299,00</div>
+                    </div>
+
+                    <div class="summary-item">
+                        <div class="summary-item-info">
+                            <div class="summary-item-name">Protetor de surto (4 tomadas)</div>
+                            <div class="summary-item-qty">Qtd: 2</div>
+                        </div>
+                        <div class="summary-item-price">R$ 63,90</div>
+                    </div>
+
+                    <div class="summary-divider"></div>
+
+                    <div class="summary-row subtotal">
+                        <span>Subtotal (3 produtos)</span>
+                        <span>R$ 2.261,90</span>
+                    </div>
+
+                    <div class="summary-row shipping">
+                        <span>Frete</span>
+                        <span id="shipping-cost">R$ 15,90</span>
+                    </div>
+
+                    <div class="summary-row taxes">
+                        <span>Impostos <span class="tooltip-icon" data-tooltip="ICMS e outras taxas">?</span></span>
+                        <span>R$ -0,00</span>
+                    </div>
+
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span id="total-price">R$ 2.277,80</span>
+                    </div>
+
+                    <div class="info-badge" style="margin-top: 16px;">
+                        ✓ Frete grátis em compras acima de R$ 300
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="terms-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>Termos de Compra</span>
+                <button class="modal-close" onclick="closeModal('terms-modal')">×</button>
+            </div>
+            <p style="font-size: 13px; color: #666; line-height: 1.8; margin-bottom: 16px;">
+                <strong>1. Aceitação dos Termos</strong><br>
+                Ao fazer uma compra na Vitrio, você concorda com estes termos de compra.
+            </p>
+            <p style="font-size: 13px; color: #666; line-height: 1.8; margin-bottom: 16px;">
+                <strong>2. Pedidos e Confirmação</strong><br>
+                Após a confirmação do pagamento, você receberá um email de confirmação com o número do pedido e detalhes da entrega.
+            </p>
+            <p style="font-size: 13px; color: #666; line-height: 1.8; margin-bottom: 16px;">
+                <strong>3. Disponibilidade</strong><br>
+                Os preços e a disponibilidade dos produtos estão sujeitos a alterações. Reservamo-nos o direito de recusar ou cancelar pedidos.
+            </p>
+            <p style="font-size: 13px; color: #666; line-height: 1.8;">
+                <strong>4. Responsabilidade</strong><br>
+                A Vitrio não é responsável por danos causados durante o transporte que estejam fora do nosso controle.
+            </p>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 16px;" onclick="closeModal('terms-modal')">Entendi</button>
+        </div>
+    </div>
+
+    <div id="privacy-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>Política de Privacidade</span>
+                <button class="modal-close" onclick="closeModal('privacy-modal')">×</button>
+            </div>
+            <p style="font-size: 13px; color: #666; line-height: 1.8; margin-bottom: 16px;">
+                <strong>1. Coleta de Dados</strong><br>
+                Coletamos apenas as informações necessárias para processar sua compra e comunicação.
+            </p>
+            <p style="font-size: 13px; color: #666; line-height: 1.8; margin-bottom: 16px;">
+                <strong>2. Proteção de Dados</strong><br>
+                Seus dados são protegidos por criptografia SSL e nunca são compartilhados com terceiros sem seu consentimento.
+            </p>
+            <p style="font-size: 13px; color: #666; line-height: 1.8; margin-bottom: 16px;">
+                <strong>3. Dados de Pagamento</strong><br>
+                A Vitrio nunca armazena dados completos de cartão. Seu pagamento é processado por processadores certificados.
+            </p>
+            <p style="font-size: 13px; color: #666; line-height: 1.8;">
+                <strong>4. Seus Direitos</strong><br>
+                Você pode solicitar acesso, correção ou exclusão de seus dados pessoais a qualquer momento entrando em contato conosco.
+            </p>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 16px;" onclick="closeModal('privacy-modal')">Entendi</button>
+        </div>
+    </div>
+
+    <div id="return-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>Política de Devolução</span>
+                <button class="modal-close" onclick="closeModal('return-modal')">×</button>
+            </div>
+            <p style="font-size: 13px; color: #666; line-height: 1.8; margin-bottom: 16px;">
+                <strong>1. Direito de Desistência</strong><br>
+                Você tem até 7 dias corridos após receber seu produto para solicitar devolução, sem necessidade de justificativa.
+            </p>
+            <p style="font-size: 13px; color: #666; line-height: 1.8; margin-bottom: 16px;">
+                <strong>2. Condições</strong><br>
+                O produto deve estar íntegro, sem uso, com todas as etiquetas e embalagem original. Produtos com defeito de fabricação são recebidos em qualquer estado.
+            </p>
+            <p style="font-size: 13px; color: #666; line-height: 1.8; margin-bottom: 16px;">
+                <strong>3. Processo de Devolução</strong><br>
+                Acesse sua conta, selecione o pedido e clique em "Solicitar devolução". Você receberá um rótulo para impressão. Envie por correios e aguarde o reembolso.
+            </p>
+            <p style="font-size: 13px; color: #666; line-height: 1.8;">
+                <strong>4. Reembolso</strong><br>
+                O reembolso é processado em até 10 dias úteis após recebermos o produto de volta. O frete de devolução é gratuito para defeitos de fabricação.
+            </p>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 16px;" onclick="closeModal('return-modal')">Entendi</button>
+        </div>
+    </div>
+
+    <div id="success-modal" class="modal">
+        <div class="modal-content">
+            <div class="success-container">
+                <div class="success-icon">✓</div>
+                <div class="success-title">Pedido confirmado!</div>
+                <div class="success-text">Seu pedido foi recebido com sucesso. Você receberá um email de confirmação em breve.</div>
+                <p style="font-size: 12px; color: #666; margin-bottom: 20px;">
+                    <strong>Número do pedido:</strong><br>
+                    <span style="font-family: monospace; font-weight: 600; color: #1a1a1a;">VTR-2026-10-06-12345</span>
+                </p>
+                <p style="font-size: 12px; color: #666; margin-bottom: 24px;">
+                    Você pode acompanhar seu pedido a qualquer momento na seção "Meus Pedidos" da sua conta.
+                </p>
+                <button class="btn btn-primary" style="width: 100%;" onclick="goHome()">Voltar à loja</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Payment method switching
+        function switchPaymentMethod(method) {
+            document.querySelectorAll('.payment-method-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelectorAll('.payment-form').forEach(form => {
+                form.classList.remove('active');
+            });
+
+            event.target.classList.add('active');
+            document.getElementById(method + '-form').classList.add('active');
+        }
+
+        // Billing address toggle
+        document.getElementById('billing-same').addEventListener('change', function() {
+            const billingSection = document.getElementById('billing-address');
+            billingSection.style.display = this.checked ? 'none' : 'block';
+        });
+
+        // Toggle new address form
+        function toggleNewAddress() {
+            const form = document.getElementById('new-address-form');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+
+            const radio = document.getElementById('address-saved');
+            if (form.style.display === 'block') {
+                radio.checked = false;
+            } else {
+                radio.checked = true;
+            }
+        }
+
+        // Search CEP (mock)
+        function searchCEP() {
+            alert('Busca de CEP integrada com API de endereços seria executada aqui.');
+        }
+
+        // Shipping cost update
+        document.querySelectorAll('input[name="shipping"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const costs = {
+                    'standard': 'R$ 15,90',
+                    'express': 'R$ 49,90',
+                    'fast': 'R$ 89,90'
+                };
+                const subtotal = 2261.90;
+                const shipping = {
+                    'standard': 15.90,
+                    'express': 49.90,
+                    'fast': 89.90
+                };
+
+                document.getElementById('shipping-cost').textContent = costs[this.value];
+                const total = (subtotal + shipping[this.value]).toFixed(2);
+                document.getElementById('total-price').textContent = 'R$ ' + total.replace('.', ',');
+            });
+        });
+
+        // Card number formatting
+        document.getElementById('card-number').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '');
+            let formattedValue = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formattedValue += ' ';
+                }
+                formattedValue += value[i];
+            }
+            e.target.value = formattedValue;
+        });
+
+        // Expiry date formatting
+        document.getElementById('card-expiry').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        // Modal functions
+        function openModal(modalId) {
+            event.preventDefault();
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Close modals on outside click
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                }
+            });
+        });
+
+        // Form submission
+        function submitCheckout() {
+            const terms = document.getElementById('terms').checked;
+
+            if (!terms) {
+                alert('Você deve concordar com os Termos de Compra.');
+                return;
+            }
+
+            // Simulate form validation
+            const paymentMethod = document.querySelector('.payment-method-btn.active').textContent.trim();
+
+            if (paymentMethod === 'Cartão') {
+                const cardNumber = document.getElementById('card-number').value.replace(/\s/g, '');
+                if (cardNumber.length < 16) {
+                    alert('Número do cartão inválido.');
+                    return;
+                }
+            }
+
+            // Show success modal
+            document.getElementById('success-modal').classList.add('active');
+        }
+
+        // Navigation
+        function goBack() {
+            window.history.back();
+        }
+
+        function goHome() {
+            window.location.href = '/';
+        }
+
+        // Prevent actual form submission
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+            });
+        });
+    </script>
+</body>
+</html>

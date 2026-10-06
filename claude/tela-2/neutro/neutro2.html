@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Produto - Vitrio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            cursor: pointer;
+        }
+
+        .logo span {
+            color: #ff6b35;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .search-bar input::placeholder {
+            color: #999;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-action-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 6px 12px;
+            transition: color 0.2s;
+        }
+
+        .header-action-btn:hover {
+            color: #ff6b35;
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #ff6b35;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 16px 20px;
+            background-color: white;
+            font-size: 13px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .breadcrumb a {
+            color: #ff6b35;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .product-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Galeria de Imagens */
+        .product-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 400px;
+            background-color: #E0E0E0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+            margin-bottom: 16px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .thumbnails {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .thumbnail {
+            width: 100%;
+            height: 80px;
+            background-color: #E0E0E0;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            transition: all 0.3s;
+        }
+
+        .thumbnail:hover {
+            border-color: #ff6b35;
+        }
+
+        .thumbnail.active {
+            border-color: #ff6b35;
+            background-color: #f5f5f5;
+        }
+
+        /* Informações do Produto */
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .product-category {
+            font-size: 12px;
+            color: #ff6b35;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a1a1a;
+            line-height: 1.3;
+        }
+
+        .rating-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .stars {
+            font-size: 14px;
+            color: #ff9800;
+        }
+
+        .review-count {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .review-link {
+            color: #ff6b35;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .review-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Preço */
+        .price-section {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .original-price {
+            font-size: 14px;
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        .current-price {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .discount-badge {
+            background-color: #e74c3c;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Disponibilidade */
+        .availability {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+        }
+
+        .availability.in-stock {
+            color: #27ae60;
+        }
+
+        .availability.out-of-stock {
+            color: #e74c3c;
+        }
+
+        .availability-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: currentColor;
+        }
+
+        /* Seletor de Variações */
+        .variations {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding: 20px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .variation-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .variation-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .variation-options {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .option-button {
+            padding: 10px 16px;
+            border: 2px solid #e0e0e0;
+            background-color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .option-button:hover {
+            border-color: #ff6b35;
+        }
+
+        .option-button.selected {
+            background-color: #ff6b35;
+            color: white;
+            border-color: #ff6b35;
+        }
+
+        /* Quantidade */
+        .quantity-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .quantity-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            width: fit-content;
+        }
+
+        .quantity-btn {
+            background: none;
+            border: none;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a1a1a;
+            transition: background-color 0.2s;
+        }
+
+        .quantity-btn:hover {
+            background-color: #f0f0f0;
+        }
+
+        .quantity-input {
+            width: 50px;
+            border: none;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            background: none;
+        }
+
+        .quantity-input::-webkit-outer-spin-button,
+        .quantity-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            padding-top: 20px;
+        }
+
+        .buy-button {
+            flex: 1;
+            background-color: #ff6b35;
+            color: white;
+            border: none;
+            padding: 16px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .buy-button:hover {
+            background-color: #e55a24;
+            transform: translateY(-2px);
+        }
+
+        .buy-button:active {
+            transform: translateY(0);
+        }
+
+        .wishlist-button {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #e0e0e0;
+            background-color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .wishlist-button:hover {
+            border-color: #ff6b35;
+            color: #ff6b35;
+        }
+
+        .wishlist-button.favorited {
+            background-color: #ff6b35;
+            border-color: #ff6b35;
+            color: white;
+        }
+
+        /* Informações adicionais */
+        .additional-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding: 20px 0;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        /* Descrição e Especificações */
+        .product-details {
+            margin-top: 40px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 30px;
+            border-bottom: 2px solid #e0e0e0;
+            margin-bottom: 30px;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 16px 0;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            color: #999;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.3s;
+        }
+
+        .tab-button:hover {
+            color: #ff6b35;
+        }
+
+        .tab-button.active {
+            color: #1a1a1a;
+            border-bottom-color: #ff6b35;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .description-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 16px;
+        }
+
+        .specifications {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .spec-label {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .spec-value {
+            color: #666;
+        }
+
+        /* Avaliações */
+        .reviews-section {
+            margin-top: 30px;
+        }
+
+        .review-item {
+            padding: 20px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .review-item:last-child {
+            border-bottom: none;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 12px;
+        }
+
+        .reviewer-name {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .review-rating {
+            color: #ff9800;
+            font-size: 13px;
+        }
+
+        .review-date {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .review-text {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .review-helpful {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+            font-size: 12px;
+        }
+
+        .helpful-btn {
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .helpful-btn:hover {
+            color: #ff6b35;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .modal-close {
+            float: right;
+            font-size: 24px;
+            font-weight: bold;
+            color: #999;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .modal-close:hover {
+            color: #1a1a1a;
+        }
+
+        .modal-header {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            clear: both;
+        }
+
+        .rating-input {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            font-size: 24px;
+        }
+
+        .star-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #ddd;
+            transition: color 0.2s;
+        }
+
+        .star-btn:hover,
+        .star-btn.active {
+            color: #ff9800;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #1a1a1a;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ff6b35;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .modal-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .modal-btn.primary {
+            background-color: #ff6b35;
+            color: white;
+        }
+
+        .modal-btn.primary:hover {
+            background-color: #e55a24;
+        }
+
+        .modal-btn.secondary {
+            background-color: #f0f0f0;
+            color: #1a1a1a;
+        }
+
+        .modal-btn.secondary:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #27ae60;
+            color: white;
+            padding: 16px 24px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            font-size: 14px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 40px 20px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: #ff6b35;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .product-layout {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .main-image {
+                height: 300px;
+            }
+
+            .product-title {
+                font-size: 24px;
+            }
+
+            .current-price {
+                font-size: 28px;
+            }
+
+            .specifications {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .wishlist-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo" onclick="goHome()">Vit<span>rio</span></div>
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar produtos..." id="searchInput">
+            </div>
+            <div class="header-actions">
+                <button class="header-action-btn" id="accountBtn">Minha Conta</button>
+                <button class="header-action-btn cart-icon" id="cartBtn">
+                    🛒 Carrinho
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a onclick="goHome()">Vitrio</a> > 
+        <a onclick="goCategory('Eletrônicos')">Eletrônicos</a> > 
+        <a onclick="goCategory('Smartphones')">Smartphones</a> > 
+        <span>Smartphone XR Pro 256GB</span>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Produto -->
+        <div class="product-layout">
+            <!-- Galeria de Imagens -->
+            <div class="product-gallery">
+                <div class="main-image" id="mainImage">📱</div>
+                <div class="thumbnails">
+                    <div class="thumbnail active" onclick="changeImage(this)">📱</div>
+                    <div class="thumbnail" onclick="changeImage(this)">📱</div>
+                    <div class="thumbnail" onclick="changeImage(this)">📱</div>
+                    <div class="thumbnail" onclick="changeImage(this)">📱</div>
+                </div>
+            </div>
+
+            <!-- Informações do Produto -->
+            <div class="product-info">
+                <div class="product-category">Eletrônicos / Smartphones</div>
+                <h1 class="product-title">Smartphone XR Pro 256GB</h1>
+
+                <div class="rating-section">
+                    <div class="stars">★★★★★</div>
+                    <div class="review-count">(1.234 avaliações)</div>
+                    <a class="review-link" onclick="scrollToReviews()">Ver avaliações</a>
+                </div>
+
+                <!-- Preço -->
+                <div class="price-section">
+                    <span class="original-price">R$ 4.299,99</span>
+                    <span class="current-price">R$ 3.499,99</span>
+                    <span class="discount-badge">18% OFF</span>
+                </div>
+
+                <!-- Disponibilidade -->
+                <div class="availability in-stock">
+                    <span class="availability-dot"></span>
+                    <span>Em estoque (47 unidades disponíveis)</span>
+                </div>
+
+                <!-- Variações -->
+                <div class="variations">
+                    <div class="variation-group">
+                        <label class="variation-label">Cor</label>
+                        <div class="variation-options">
+                            <button class="option-button selected" onclick="selectOption(this)">Preto Fosco</button>
+                            <button class="option-button" onclick="selectOption(this)">Prata</button>
+                            <button class="option-button" onclick="selectOption(this)">Azul Profundo</button>
+                            <button class="option-button" onclick="selectOption(this)">Dourado</button>
+                        </div>
+                    </div>
+
+                    <div class="variation-group">
+                        <label class="variation-label">Armazenamento</label>
+                        <div class="variation-options">
+                            <button class="option-button" onclick="selectOption(this)">128GB</button>
+                            <button class="option-button selected" onclick="selectOption(this)">256GB</button>
+                            <button class="option-button" onclick="selectOption(this)">512GB</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quantidade -->
+                <div class="quantity-section">
+                    <label class="quantity-label">Quantidade</label>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn" onclick="decreaseQuantity()">−</button>
+                        <input type="number" class="quantity-input" id="quantityInput" value="1" min="1" max="10">
+                        <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                    </div>
+                </div>
+
+                <!-- Botões de Ação -->
+                <div class="action-buttons">
+                    <button class="buy-button" onclick="addToCart()">Comprar Agora</button>
+                    <button class="wishlist-button" id="wishlistBtn" onclick="toggleWishlist()" title="Adicionar aos favoritos">♡</button>
+                </div>
+
+                <!-- Informações Adicionais -->
+                <div class="additional-info">
+                    <div class="info-item">
+                        <span class="info-label">Entrega</span>
+                        <span class="info-value">Frete Grátis</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Prazo</span>
+                        <span class="info-value">7-10 dias úteis</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Garantia</span>
+                        <span class="info-value">12 meses</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Descrição e Especificações -->
+        <div class="product-details">
+            <div class="tabs">
+                <button class="tab-button active" onclick="switchTab(event, 'description')">Descrição</button>
+                <button class="tab-button" onclick="switchTab(event, 'specifications')">Especificações</button>
+                <button class="tab-button" onclick="switchTab(event, 'reviews')">Avaliações</button>
+            </div>
+
+            <!-- Descrição -->
+            <div id="description" class="tab-content active">
+                <p class="description-text">
+                    O Smartphone XR Pro é o topo da linha em tecnologia e design. Com um processador de última geração, câmera de 48MP com IA integrada e tela AMOLED de 6,7 polegadas com taxa de atualização de 120Hz, oferece uma experiência visual incomparável.
+                </p>
+                <p class="description-text">
+                    A bateria de 5000mAh garante o funcionamento o dia todo, mesmo com uso intenso. O carregamento rápido de 65W permite atingir 80% de bateria em apenas 30 minutos. Resistência à água IPX7 protege seu dispositivo em situações do dia a dia.
+                </p>
+                <p class="description-text">
+                    Ideal para profissionais, criadores de conteúdo e entusiastas de tecnologia que buscam o máximo desempenho em um smartphone.
+                </p>
+            </div>
+
+            <!-- Especificações -->
+            <div id="specifications" class="tab-content">
+                <div class="specifications">
+                    <div class="spec-item">
+                        <span class="spec-label">Tela</span>
+                        <span class="spec-value">6,7" AMOLED, 2400x1080</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Taxa de Atualização</span>
+                        <span class="spec-value">120Hz</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Processador</span>
+                        <span class="spec-value">Snapdragon 8 Gen 3</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">RAM</span>
+                        <span class="spec-value">12GB</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Armazenamento</span>
+                        <span class="spec-value">256GB (UFS 4.0)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Câmera Traseira</span>
+                        <span class="spec-value">48MP (f/1.6) + 12MP (ultrawide) + 10MP (tele 3x)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Câmera Frontal</span>
+                        <span class="spec-value">16MP (f/2.2)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Bateria</span>
+                        <span class="spec-value">5000mAh, carregamento 65W</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Sistema Operacional</span>
+                        <span class="spec-value">Android 15</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Resistência</span>
+                        <span class="spec-value">IPX7 (até 1m, 30 min)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Peso</span>
+                        <span class="spec-value">183g</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Garantia</span>
+                        <span class="spec-value">12 meses do fabricante</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Avaliações -->
+            <div id="reviews" class="tab-content">
+                <div style="margin-bottom: 24px;">
+                    <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 16px; color: #1a1a1a;">Avaliações dos Clientes</h3>
+                    <button class="buy-button" onclick="openReviewModal()" style="width: 200px; margin-bottom: 24px;">Escrever Avaliação</button>
+                </div>
+
+                <div class="reviews-section">
+                    <div class="review-item">
+                        <div class="review-header">
+                            <div>
+                                <div class="reviewer-name">João Silva</div>
+                                <div class="review-rating">★★★★★ 5 estrelas</div>
+                            </div>
+                            <div class="review-date">2 dias atrás</div>
+                        </div>
+                        <div class="review-text">
+                            Excelente smartphone! Câmera de qualidade profissional, tela linda e muito responsivo. Vale cada real investido. Recomendo muito!
+                        </div>
+                        <div class="review-helpful">
+                            <button class="helpful-btn" onclick="markHelpful(this)">👍 Útil (24)</button>
+                            <button class="helpful-btn" onclick="markUnhelpful(this)">👎 Não útil (2)</button>
+                        </div>
+                    </div>
+
+                    <div class="review-item">
+                        <div class="review-header">
+                            <div>
+                                <div class="reviewer-name">Maria Santos</div>
+                                <div class="review-rating">★★★★☆ 4 estrelas</div>
+                            </div>
+                            <div class="review-date">5 dias atrás</div>
+                        </div>
+                        <div class="review-text">
+                            Ótimo celular, muito bom mesmo. A bateria dura bastante e o carregamento rápido é prático. Única crítica é que fica um pouco quente em jogos pesados.
+                        </div>
+                        <div class="review-helpful">
+                            <button class="helpful-btn" onclick="markHelpful(this)">👍 Útil (18)</button>
+                            <button class="helpful-btn" onclick="markUnhelpful(this)">👎 Não útil (1)</button>
+                        </div>
+                    </div>
+
+                    <div class="review-item">
+                        <div class="review-header">
+                            <div>
+                                <div class="reviewer-name">Carlos Mendes</div>
+                                <div class="review-rating">★★★★★ 5 estrelas</div>
+                            </div>
+                            <div class="review-date">1 semana atrás</div>
+                        </div>
+                        <div class="review-text">
+                            Melhor compra que já fiz. Design premium, desempenho impecável, câmera profissional. Superou minhas expectativas totalmente!
+                        </div>
+                        <div class="review-helpful">
+                            <button class="helpful-btn" onclick="markHelpful(this)">👍 Útil (45)</button>
+                            <button class="helpful-btn" onclick="markUnhelpful(this)">👎 Não útil (3)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Avaliação -->
+    <div id="reviewModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeReviewModal()">&times;</span>
+            <div class="modal-header">Adicione uma Avaliação</div>
+
+            <div class="form-group">
+                <label>Classificação</label>
+                <div class="rating-input" id="ratingInput">
+                    <button class="star-btn" onclick="selectRating(1)">★</button>
+                    <button class="star-btn" onclick="selectRating(2)">★</button>
+                    <button class="star-btn" onclick="selectRating(3)">★</button>
+                    <button class="star-btn" onclick="selectRating(4)">★</button>
+                    <button class="star-btn" onclick="selectRating(5)">★</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="reviewTitle">Título</label>
+                <input type="text" id="reviewTitle" placeholder="Resumo da sua avaliação">
+            </div>
+
+            <div class="form-group">
+                <label for="reviewText">Sua Avaliação</label>
+                <textarea id="reviewText" placeholder="Compartilhe sua experiência com este produto..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="reviewName">Seu Nome</label>
+                <input type="text" id="reviewName" placeholder="Como você gostaria de aparecer?">
+            </div>
+
+            <div class="modal-buttons">
+                <button class="modal-btn secondary" onclick="closeReviewModal()">Cancelar</button>
+                <button class="modal-btn primary" onclick="submitReview()">Enviar Avaliação</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Sobre Vitrio</h3>
+                <ul>
+                    <li><a href="#" onclick="handleFooterLink(event)">Quem Somos</a></li>
+                    <li><a href="#" onclick="handleFooterLink(event)">Carreiras</a></li>
+                    <li><a href="#" onclick="handleFooterLink(event)">Imprensa</a></li>
+                    <li><a href="#" onclick="handleFooterLink(event)">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Suporte</h3>
+                <ul>
+                    <li><a href="#" onclick="handleFooterLink(event)">Central de Ajuda</a></li>
+                    <li><a href="#" onclick="handleFooterLink(event)">Fale Conosco</a></li>
+                    <li><a href="#" onclick="handleFooterLink(event)">Rastrear Pedido</a></li>
+                    <li><a href="#" onclick="handleFooterLink(event)">Devoluções</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Políticas</h3>
+                <ul>
+                    <li><a href="#" onclick="handleFooterLink(event)">Política de Privacidade</a></li>
+                    <li><a href="#" onclick="handleFooterLink(event)">Termos de Uso</a></li>
+                    <li><a href="#" onclick="handleFooterLink(event)">Política de Cookies</a></li>
+                    <li><a href="#" onclick="handleFooterLink(event)">Segurança</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Redes Sociais</h3>
+                <ul>
+                    <li><a href="#" onclick="handleFooterLink(event)">Facebook</a></li>
+                    <li><a href="#" onclick="handleFooterLink(event)">Instagram</a></li>
+                    <li><a href="#" onclick="handleFooterLink(event)">Twitter</a></li>
+                    <li><a href="#" onclick="handleFooterLink(event)">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Vitrio. Todos os direitos reservados. | CNPJ: 12.345.678/0001-90</p>
+        </div>
+    </footer>
+
+    <script>
+        let cart = [];
+        let selectedRating = 0;
+
+        // Navegação
+        function goHome() {
+            showToast('Voltando para a home...');
+        }
+
+        function goCategory(category) {
+            showToast(`Filtrando por: ${category}`);
+        }
+
+        // Galeria de Imagens
+        function changeImage(element) {
+            document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        // Seleção de Opções
+        function selectOption(button) {
+            const parent = button.parentElement;
+            parent.querySelectorAll('.option-button').forEach(btn => btn.classList.remove('selected'));
+            button.classList.add('selected');
+        }
+
+        // Quantidade
+        function increaseQuantity() {
+            const input = document.getElementById('quantityInput');
+            input.value = Math.min(10, parseInt(input.value) + 1);
+        }
+
+        function decreaseQuantity() {
+            const input = document.getElementById('quantityInput');
+            input.value = Math.max(1, parseInt(input.value) - 1);
+        }
+
+        // Adicionar ao Carrinho
+        function addToCart() {
+            const quantity = parseInt(document.getElementById('quantityInput').value);
+            const color = document.querySelector('.variation-options:nth-of-type(1) .selected').textContent;
+            const storage = document.querySelector('.variation-options:nth-of-type(2) .selected').textContent;
+
+            cart.push({
+                name: 'Smartphone XR Pro 256GB',
+                color: color,
+                storage: storage,
+                price: 3499.99,
+                quantity: quantity
+            });
+
+            updateCartCount();
+            showToast(`${quantity} unidade(s) adicionada(s) ao carrinho! (${color}, ${storage})`);
+            document.getElementById('quantityInput').value = 1;
+        }
+
+        function updateCartCount() {
+            document.getElementById('cartCount').textContent = cart.length;
+        }
+
+        // Lista de Desejos
+        function toggleWishlist() {
+            const btn = document.getElementById('wishlistBtn');
+            btn.classList.toggle('favorited');
+            const isFavorited = btn.classList.contains('favorited');
+            showToast(isFavorited ? 'Adicionado aos favoritos!' : 'Removido dos favoritos');
+        }
+
+        // Abas
+        function switchTab(event, tabName) {
+            event.preventDefault();
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        // Avaliações
+        function scrollToReviews() {
+            document.getElementById('reviews').scrollIntoView({ behavior: 'smooth' });
+            document.querySelectorAll('.tab-button')[2].click();
+        }
+
+        function openReviewModal() {
+            document.getElementById('reviewModal').classList.add('show');
+        }
+
+        function closeReviewModal() {
+            document.getElementById('reviewModal').classList.remove('show');
+            selectedRating = 0;
+            document.getElementById('reviewTitle').value = '';
+            document.getElementById('reviewText').value = '';
+            document.getElementById('reviewName').value = '';
+            document.querySelectorAll('.star-btn').forEach(btn => btn.classList.remove('active'));
+        }
+
+        function selectRating(rating) {
+            selectedRating = rating;
+            document.querySelectorAll('.star-btn').forEach((btn, index) => {
+                btn.classList.toggle('active', index < rating);
+            });
+        }
+
+        function submitReview() {
+            const title = document.getElementById('reviewTitle').value.trim();
+            const text = document.getElementById('reviewText').value.trim();
+            const name = document.getElementById('reviewName').value.trim();
+
+            if (!selectedRating) {
+                showToast('Selecione uma classificação');
+                return;
+            }
+            if (!title) {
+                showToast('Digite um título');
+                return;
+            }
+            if (!text) {
+                showToast('Escreva sua avaliação');
+                return;
+            }
+            if (!name) {
+                showToast('Digite seu nome');
+                return;
+            }
+
+            showToast(`Avaliação enviada com sucesso! Obrigado, ${name}!`);
+            closeReviewModal();
+        }
+
+        function markHelpful(button) {
+            button.style.color = '#ff6b35';
+        }
+
+        function markUnhelpful(button) {
+            button.style.color = '#ff6b35';
+        }
+
+        // Handlers
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        document.getElementById('cartBtn').addEventListener('click', function() {
+            if (cart.length === 0) {
+                showToast('Seu carrinho está vazio');
+            } else {
+                const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+                showToast(`Carrinho com ${cart.length} produto(s) - Total: R$ ${total.toFixed(2).replace('.', ',')}`);
+            }
+        });
+
+        document.getElementById('accountBtn').addEventListener('click', function() {
+            showToast('Redirecionando para Minha Conta...');
+        });
+
+        document.getElementById('searchInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter' && this.value.trim()) {
+                showToast(`Buscando: "${this.value}"`);
+            }
+        });
+
+        function handleFooterLink(event) {
+            event.preventDefault();
+            const linkText = event.target.textContent;
+            showToast(`Navegando para: ${linkText}`);
+        }
+    </script>
+
+</body>
+</html>

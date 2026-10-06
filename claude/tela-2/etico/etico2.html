@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart TV 55" 4K Ultra HD - Vitrio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #fafafa;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        header {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .header-top {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            color: #0066cc;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 40px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: #0066cc;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header-icons button, .header-icons a {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            color: #1a1a1a;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .header-icons button:hover, .header-icons a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #e74c3c;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .breadcrumb {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 12px 20px;
+            font-size: 13px;
+            color: #666;
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .breadcrumb a {
+            color: #0066cc;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .product-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .product-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 500px;
+            background: #E0E0E0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #888;
+            position: relative;
+        }
+
+        .product-badge-primary {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: #e74c3c;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .product-badge-secondary {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: #27ae60;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .thumbnail-gallery {
+            display: flex;
+            gap: 12px;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            background: #E0E0E0;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #888;
+        }
+
+        .thumbnail:hover, .thumbnail.active {
+            border-color: #0066cc;
+        }
+
+        .product-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .rating-stars {
+            font-size: 14px;
+            color: #ffa500;
+            letter-spacing: 2px;
+        }
+
+        .rating-count {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .rating-link {
+            color: #0066cc;
+            text-decoration: none;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .rating-link:hover {
+            text-decoration: underline;
+        }
+
+        .price-section {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .price-original {
+            font-size: 13px;
+            color: #888;
+            text-decoration: line-through;
+            margin-bottom: 8px;
+        }
+
+        .price-current {
+            font-size: 36px;
+            font-weight: 600;
+            color: #0066cc;
+            margin-bottom: 12px;
+        }
+
+        .price-discount {
+            font-size: 13px;
+            color: #27ae60;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .price-installment {
+            font-size: 14px;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .price-installment-value {
+            font-weight: 600;
+            color: #0066cc;
+        }
+
+        .price-note {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .shipping-info {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .shipping-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
+
+        .shipping-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .shipping-option:last-child {
+            border-bottom: none;
+        }
+
+        .shipping-option input[type="radio"] {
+            cursor: pointer;
+        }
+
+        .shipping-details {
+            flex: 1;
+        }
+
+        .shipping-type {
+            font-size: 14px;
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+
+        .shipping-time {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .shipping-cost {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .quantity-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .quantity-control button {
+            background: #f5f5f5;
+            border: none;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.2s;
+        }
+
+        .quantity-control button:hover {
+            background: #e0e0e0;
+        }
+
+        .quantity-control input {
+            width: 60px;
+            height: 40px;
+            border: none;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .buy-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .btn-add-cart {
+            flex: 1;
+            padding: 14px 24px;
+            background: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-add-cart:hover {
+            background: #0052a3;
+        }
+
+        .btn-favorite {
+            width: 50px;
+            height: 50px;
+            padding: 0;
+            background: white;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-favorite:hover {
+            border-color: #e74c3c;
+            background: #fff5f5;
+        }
+
+        .btn-favorite.favorited {
+            background: #ffebee;
+            border-color: #e74c3c;
+            color: #e74c3c;
+        }
+
+        .buy-now-section {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .btn-buy-now {
+            width: 100%;
+            padding: 14px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-buy-now:hover {
+            background: #229954;
+        }
+
+        .additional-info {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-icon {
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .info-text {
+            color: #666;
+        }
+
+        .product-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .details-section {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 30px;
+        }
+
+        .details-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .details-title:hover {
+            color: #0066cc;
+        }
+
+        .details-toggle {
+            font-size: 16px;
+            transition: transform 0.3s;
+        }
+
+        .details-toggle.open {
+            transform: rotate(180deg);
+        }
+
+        .details-content {
+            display: none;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .details-content.open {
+            display: block;
+        }
+
+        .specs-list {
+            list-style: none;
+        }
+
+        .specs-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .specs-list li:last-child {
+            border-bottom: none;
+        }
+
+        .spec-name {
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+
+        .spec-value {
+            color: #666;
+        }
+
+        .reviews-section {
+            margin-bottom: 60px;
+        }
+
+        .reviews-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .reviews-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .reviews-sort {
+            display: flex;
+            gap: 12px;
+        }
+
+        .reviews-sort select {
+            padding: 8px 12px;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            font-size: 13px;
+            cursor: pointer;
+            background: white;
+        }
+
+        .reviews-summary {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 40px;
+        }
+
+        .rating-summary {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .rating-big {
+            font-size: 48px;
+            font-weight: 600;
+            color: #0066cc;
+            margin-bottom: 8px;
+        }
+
+        .rating-stars-big {
+            font-size: 16px;
+            color: #ffa500;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+        }
+
+        .rating-total {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .rating-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .rating-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .rating-bar-label {
+            font-size: 13px;
+            color: #666;
+            width: 40px;
+            text-align: right;
+        }
+
+        .rating-bar-fill {
+            flex: 1;
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .rating-bar-progress {
+            height: 100%;
+            background: #ffa500;
+            border-radius: 3px;
+        }
+
+        .rating-bar-count {
+            font-size: 12px;
+            color: #666;
+            width: 50px;
+            text-align: right;
+        }
+
+        .review-item {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .reviewer-name {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .review-date {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .review-rating {
+            font-size: 13px;
+            color: #ffa500;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .review-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .review-text {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .review-helpful {
+            display: flex;
+            gap: 16px;
+            font-size: 12px;
+        }
+
+        .review-helpful button {
+            background: none;
+            border: none;
+            color: #0066cc;
+            cursor: pointer;
+            padding: 0;
+            transition: opacity 0.2s;
+        }
+
+        .review-helpful button:hover {
+            opacity: 0.7;
+        }
+
+        .related-products {
+            margin-bottom: 60px;
+        }
+
+        .related-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: #1a1a1a;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .product-card-small {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: box-shadow 0.2s;
+        }
+
+        .product-card-small:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .product-card-image {
+            width: 100%;
+            height: 150px;
+            background: #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #888;
+        }
+
+        .product-card-info {
+            padding: 12px;
+        }
+
+        .product-card-name {
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #1a1a1a;
+            min-height: 32px;
+            line-height: 1.3;
+        }
+
+        .product-card-price {
+            font-size: 15px;
+            font-weight: 600;
+            color: #0066cc;
+            margin-bottom: 8px;
+        }
+
+        .product-card-button {
+            width: 100%;
+            padding: 8px;
+            background: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .product-card-button:hover {
+            background: #0052a3;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .footer-section a {
+            display: block;
+            font-size: 13px;
+            color: #ccc;
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: color 0.2s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .modal-close:hover {
+            background: #f0f0f0;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            padding-right: 30px;
+        }
+
+        .modal-message {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .modal-button {
+            padding: 10px 24px;
+            border: 1px solid #d0d0d0;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .modal-button.primary {
+            background: #0066cc;
+            color: white;
+            border-color: #0066cc;
+        }
+
+        .modal-button:hover {
+            background: #f0f0f0;
+        }
+
+        .modal-button.primary:hover {
+            background: #0052a3;
+        }
+
+        .success-message {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #27ae60;
+            color: white;
+            padding: 16px 24px;
+            border-radius: 4px;
+            z-index: 2000;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .product-container {
+                grid-template-columns: 1fr;
+            }
+            .product-details {
+                grid-template-columns: 1fr;
+            }
+            .reviews-summary {
+                grid-template-columns: 1fr;
+            }
+            .related-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .related-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            .product-details {
+                grid-template-columns: 1fr;
+            }
+            .main-image {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <a href="#" class="logo" onclick="goHome(); return false;">Vitrio</a>
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar eletrônicos, móveis, casa..." id="searchInput">
+            </div>
+            <div class="header-icons">
+                <button id="favoriteBtn" title="Favoritos">♡ Favoritos</button>
+                <button id="accountBtn" title="Minha conta">👤 Conta</button>
+                <button id="cartBtn" class="cart-icon" title="Carrinho de compras">
+                    🛒 Carrinho
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="breadcrumb">
+        <a href="#" onclick="goHome(); return false;">Vitrio</a> / <a href="#" onclick="filterCategory('eletrônicos'); return false;">Eletrônicos</a> / <a href="#" onclick="filterCategory('eletrônicos'); return false;">TVs</a> / <span>Smart TV 55" 4K Ultra HD</span>
+    </div>
+
+    <main>
+        <div class="product-container">
+            <div class="product-gallery">
+                <div class="main-image" id="mainImage">
+                    Imagem principal do produto
+                    <span class="product-badge-primary">-28%</span>
+                    <span class="product-badge-secondary">Promoção</span>
+                </div>
+                <div class="thumbnail-gallery">
+                    <div class="thumbnail active" onclick="changeImage(0)">Foto 1</div>
+                    <div class="thumbnail" onclick="changeImage(1)">Foto 2</div>
+                    <div class="thumbnail" onclick="changeImage(2)">Foto 3</div>
+                    <div class="thumbnail" onclick="changeImage(3)">Foto 4</div>
+                    <div class="thumbnail" onclick="changeImage(4)">Foto 5</div>
+                </div>
+            </div>
+
+            <div class="product-info">
+                <h1 class="product-title">Smart TV 55" 4K Ultra HD com Android TV</h1>
+
+                <div class="product-rating">
+                    <span class="rating-stars">★★★★★</span>
+                    <span class="rating-count">(1.247 avaliações)</span>
+                    <a href="#reviews" class="rating-link" onclick="scrollToReviews(); return false;">Ver todas as avaliações</a>
+                </div>
+
+                <div class="price-section">
+                    <div class="price-original">R$ 3.499,90</div>
+                    <div class="price-current">R$ 2.499,90</div>
+                    <div class="price-discount">Economize R$ 1.000,00 (28% de desconto)</div>
+                    <div class="price-installment">
+                        ou em <span class="price-installment-value">12x de R$ 208,33</span>
+                    </div>
+                    <div class="price-note">sem juros no cartão de crédito</div>
+                </div>
+
+                <div class="shipping-info">
+                    <div class="shipping-title">Opções de entrega:</div>
+                    <div class="shipping-option">
+                        <input type="radio" id="shipping1" name="shipping" checked>
+                        <div class="shipping-details">
+                            <div class="shipping-type">Entrega padrão</div>
+                            <div class="shipping-time">Receba em 5 a 7 dias úteis</div>
+                        </div>
+                        <div class="shipping-cost">Grátis</div>
+                    </div>
+                    <div class="shipping-option">
+                        <input type="radio" id="shipping2" name="shipping">
+                        <div class="shipping-details">
+                            <div class="shipping-type">Entrega expressa</div>
+                            <div class="shipping-time">Receba em 2 a 3 dias úteis</div>
+                        </div>
+                        <div class="shipping-cost">R$ 59,90</div>
+                    </div>
+                    <div class="shipping-option">
+                        <input type="radio" id="shipping3" name="shipping">
+                        <div class="shipping-details">
+                            <div class="shipping-type">Entrega no mesmo dia</div>
+                            <div class="shipping-time">Receba ainda hoje (até 18h)</div>
+                        </div>
+                        <div class="shipping-cost">R$ 129,90</div>
+                    </div>
+                </div>
+
+                <div class="quantity-selector">
+                    <label class="quantity-label">Quantidade:</label>
+                    <div class="quantity-control">
+                        <button onclick="decreaseQuantity()">−</button>
+                        <input type="number" id="quantity" value="1" min="1" readonly>
+                        <button onclick="increaseQuantity()">+</button>
+                    </div>
+                </div>
+
+                <div class="buy-buttons">
+                    <button class="btn-add-cart" onclick="addToCart()">Adicionar ao carrinho</button>
+                    <button class="btn-favorite" id="favoriteToggle" title="Adicionar aos favoritos" onclick="toggleFavorite()">♡</button>
+                </div>
+
+                <div class="buy-now-section">
+                    <button class="btn-buy-now" onclick="buyNow()">Comprar agora</button>
+                </div>
+
+                <div class="additional-info">
+                    <div class="info-item">
+                        <span class="info-icon">🔒</span>
+                        <span class="info-text"><strong>Compra segura:</strong> Transações protegidas com criptografia SSL</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">↩️</span>
+                        <span class="info-text"><strong>Devolução garantida:</strong> 30 dias sem perguntas, sem custos adicionais</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">🎁</span>
+                        <span class="info-text"><strong>Garantia do fabricante:</strong> 2 anos de cobertura completa</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-details">
+            <div class="details-section">
+                <div class="details-title" onclick="toggleDetails(0)">
+                    <span class="details-toggle">▼</span>
+                    Especificações técnicas
+                </div>
+                <div class="details-content open">
+                    <ul class="specs-list">
+                        <li>
+                            <span class="spec-name">Tamanho da tela</span>
+                            <span class="spec-value">55 polegadas</span>
+                        </li>
+                        <li>
+                            <span class="spec-name">Resolução</span>
+                            <span class="spec-value">4K Ultra HD (3840x2160)</span>
+                        </li>
+                        <li>
+                            <span class="spec-name">Tecnologia</span>
+                            <span class="spec-value">LED</span>
+                        </li>
+                        <li>
+                            <span class="spec-name">Taxa de atualização</span>
+                            <span class="spec-value">60Hz</span>
+                        </li>
+                        <li>
+                            <span class="spec-name">Sistema operacional</span>
+                            <span class="spec-value">Android TV 11</span>
+                        </li>
+                        <li>
+                            <span class="spec-name">Conectividade</span>
+                            <span class="spec-value">Wi-Fi 5 GHz, Bluetooth 5.0, 3x HDMI 2.1, 2x USB 3.0</span>
+                        </li>
+                        <li>
+                            <span class="spec-name">Aplicativos</span>
+                            <span class="spec-value">Netflix, Amazon Prime Video, Disney+, YouTube, Globoplay</span>
+                        </li>
+                        <li>
+                            <span class="spec-name">Contraste dinâmico</span>
+                            <span class="spec-value">5000:1</span>
+                        </li>
+                        <li>
+                            <span class="spec-name">Consumo de energia</span>
+                            <span class="spec-value">120W (operação normal)</span>
+                        </li>
+                        <li>
+                            <span class="spec-name">Dimensões</span>
+                            <span class="spec-value">1.232 x 710 x 80 mm (com suporte)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="details-section">
+                <div class="details-title" onclick="toggleDetails(1)">
+                    <span class="details-toggle">▼</span>
+                    Descrição do produto
+                </div>
+                <div class="details-content open">
+                    <p>A Smart TV 55" 4K Ultra HD combina tecnologia de ponta com design elegante para trazer a melhor experiência de entretenimento para sua sala. Com resolução 4K nativa, cada detalhe é exibido com clareza impressionante, enquanto a tecnologia de upscaling automático melhora a qualidade até de conteúdos em Full HD.</p>
+                    <p style="margin-top: 12px;">O Android TV integrado oferece acesso instantâneo a milhares de aplicativos de streaming, jogos e ferramentas, incluindo Netflix, Amazon Prime Video, Disney+ e Globoplay. Com controle remoto inteligente com busca por voz, você controla tudo com facilidade.</p>
+                    <p style="margin-top: 12px;">A tecnologia HDR (High Dynamic Range) proporciona cores mais vibrantes e contraste superior, enquanto o sistema de som estéreo integrado oferece áudio imersivo. Conecte facilmente com sua soundbar, videogame ou outros dispositivos através das 3 portas HDMI 2.1 de alta velocidade.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="reviews-section" id="reviews">
+            <div class="reviews-header">
+                <h2 class="reviews-title">Avaliações dos clientes</h2>
+                <div class="reviews-sort">
+                    <select onchange="sortReviews(this.value)">
+                        <option value="helpful">Mais úteis</option>
+                        <option value="recent">Mais recentes</option>
+                        <option value="highest">Maior classificação</option>
+                        <option value="lowest">Menor classificação</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="reviews-summary">
+                <div class="rating-summary">
+                    <div class="rating-big">4.8</div>
+                    <div class="rating-stars-big">★★★★★</div>
+                    <div class="rating-total">baseado em 1.247 avaliações</div>
+                </div>
+                <div class="rating-bars">
+                    <div class="rating-bar">
+                        <span class="rating-bar-label">5★</span>
+                        <div class="rating-bar-fill"><div class="rating-bar-progress" style="width: 78%;"></div></div>
+                        <span class="rating-bar-count">978</span>
+                    </div>
+                    <div class="rating-bar">
+                        <span class="rating-bar-label">4★</span>
+                        <div class="rating-bar-fill"><div class="rating-bar-progress" style="width: 14%;"></div></div>
+                        <span class="rating-bar-count">174</span>
+                    </div>
+                    <div class="rating-bar">
+                        <span class="rating-bar-label">3★</span>
+                        <div class="rating-bar-fill"><div class="rating-bar-progress" style="width: 5%;"></div></div>
+                        <span class="rating-bar-count">62</span>
+                    </div>
+                    <div class="rating-bar">
+                        <span class="rating-bar-label">2★</span>
+                        <div class="rating-bar-fill"><div class="rating-bar-progress" style="width: 2%;"></div></div>
+                        <span class="rating-bar-count">25</span>
+                    </div>
+                    <div class="rating-bar">
+                        <span class="rating-bar-label">1★</span>
+                        <div class="rating-bar-fill"><div class="rating-bar-progress" style="width: 1%;"></div></div>
+                        <span class="rating-bar-count">8</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="review-item">
+                <div class="review-header">
+                    <div>
+                        <div class="reviewer-name">Carlos Silva</div>
+                        <div class="review-date">Compra verificada - há 15 dias</div>
+                    </div>
+                </div>
+                <div class="review-rating">★★★★★</div>
+                <div class="review-title">Excelente qualidade de imagem e entrega rápida</div>
+                <div class="review-text">A TV chegou bem embalada e em perfeito estado. A qualidade da imagem é realmente impressionante, especialmente em conteúdo 4K. O Android TV funciona perfeitamente e os aplicativos carregam muito rápido. Atendimento Vitrio foi excelente do início ao fim. Recomendo!</div>
+                <div class="review-helpful">
+                    <button onclick="markHelpful(1)">👍 Útil (156)</button>
+                    <button onclick="markUnhelpful(1)">👎 Não útil (12)</button>
+                </div>
+            </div>
+
+            <div class="review-item">
+                <div class="review-header">
+                    <div>
+                        <div class="reviewer-name">Mariana Costa</div>
+                        <div class="review-date">Compra verificada - há 32 dias</div>
+                    </div>
+                </div>
+                <div class="review-rating">★★★★★</div>
+                <div class="review-title">Superou minhas expectativas</div>
+                <div class="review-text">Estava em dúvida se valia a pena investir em uma TV 4K, mas agora tenho certeza. A diferença na qualidade de imagem é notável, principalmente ao assistir séries na Netflix e Disney+. O controle remoto com comando de voz funciona muito bem. Montagem foi fácil. Ótimo custo-benefício!</div>
+                <div class="review-helpful">
+                    <button onclick="markHelpful(2)">👍 Útil (98)</button>
+                    <button onclick="markUnhelpful(2)">👎 Não útil (5)</button>
+                </div>
+            </div>
+
+            <div class="review-item">
+                <div class="review-header">
+                    <div>
+                        <div class="reviewer-name">Roberto Mendes</div>
+                        <div class="review-date">Compra verificada - há 45 dias</div>
+                    </div>
+                </div>
+                <div class="review-rating">★★★★☆</div>
+                <div class="review-title">Bom produto, pequeno problema com som</div>
+                <div class="review-text">A TV é realmente de boa qualidade e a entrega foi pontual. O único ponto negativo é que o som integrado é um pouco fraco para meu gosto, mas isso é facilmente resolvido com uma soundbar. Mesmo assim, diante do preço, é uma ótima compra.</div>
+                <div class="review-helpful">
+                    <button onclick="markHelpful(3)">👍 Útil (67)</button>
+                    <button onclick="markUnhelpful(3)">👎 Não útil (8)</button>
+                </div>
+            </div>
+
+            <div class="review-item">
+                <div class="review-header">
+                    <div>
+                        <div class="reviewer-name">Fernanda Lima</div>
+                        <div class="review-date">Compra verificada - há 60 dias</div>
+                    </div>
+                </div>
+                <div class="review-rating">★★★★★</div>
+                <div class="review-title">Instalação incluída foi um diferencial</div>
+                <div class="review-text">Aproveitei o serviço de instalação incluído e os técnicos foram muito profissionais. Garantem que a TV foi montada corretamente na parede e ajustaram todas as configurações. Estou muito satisfeito com a compra e o serviço. Voltaria a comprar na Vitrio com certeza.</div>
+                <div class="review-helpful">
+                    <button onclick="markHelpful(4)">👍 Útil (142)</button>
+                    <button onclick="markUnhelpful(4)">👎 Não útil (3)</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="related-products">
+            <h2 class="related-title">Produtos relacionados</h2>
+            <div class="related-grid">
+                <div class="product-card-small">
+                    <div class="product-card-image">Imagem do produto</div>
+                    <div class="product-card-info">
+                        <div class="product-card-name">Smart TV 50" 4K</div>
+                        <div class="product-card-price">R$ 1.999,90</div>
+                        <button class="product-card-button" onclick="addRelatedToCart('Smart TV 50 4K', 1999.90)">Adicionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card-small">
+                    <div class="product-card-image">Imagem do produto</div>
+                    <div class="product-card-info">
+                        <div class="product-card-name">Soundbar 2.1 Premium</div>
+                        <div class="product-card-price">R$ 799,90</div>
+                        <button class="product-card-button" onclick="addRelatedToCart('Soundbar 2.1 Premium', 799.90)">Adicionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card-small">
+                    <div class="product-card-image">Imagem do produto</div>
+                    <div class="product-card-info">
+                        <div class="product-card-name">Suporte de parede articulado</div>
+                        <div class="product-card-price">R$ 199,90</div>
+                        <button class="product-card-button" onclick="addRelatedToCart('Suporte parede articulado', 199.90)">Adicionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card-small">
+                    <div class="product-card-image">Imagem do produto</div>
+                    <div class="product-card-info">
+                        <div class="product-card-name">Controle remoto universal</div>
+                        <div class="product-card-price">R$ 89,90</div>
+                        <button class="product-card-button" onclick="addRelatedToCart('Controle remoto universal', 89.90)">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Sobre Vitrio</h3>
+                <a href="#" onclick="showModal('about'); return false;">Quem somos</a>
+                <a href="#" onclick="showModal('careers'); return false;">Carreiras</a>
+                <a href="#" onclick="showModal('sustainability'); return false;">Sustentabilidade</a>
+            </div>
+            <div class="footer-section">
+                <h3>Atendimento ao cliente</h3>
+                <a href="#" onclick="showModal('faq'); return false;">Perguntas frequentes</a>
+                <a href="#" onclick="showModal('contact'); return false;">Entre em contato</a>
+                <a href="#" onclick="showModal('returns'); return false;">Devoluções e trocas</a>
+            </div>
+            <div class="footer-section">
+                <h3>Informações legais</h3>
+                <a href="#" onclick="showModal('terms'); return false;">Termos de serviço</a>
+                <a href="#" onclick="showModal('privacy'); return false;">Política de privacidade</a>
+                <a href="#" onclick="showModal('security'); return false;">Segurança</a>
+            </div>
+            <div class="footer-section">
+                <h3>Redes sociais</h3>
+                <a href="#" onclick="showModal('social'); return false;">Facebook</a>
+                <a href="#" onclick="showModal('social'); return false;">Instagram</a>
+                <a href="#" onclick="showModal('social'); return false;">Twitter</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Vitrio - Loja Virtual de Eletrônicos e Itens para Casa. Todos os direitos reservados. CNPJ: 12.345.678/0001-00</p>
+        </div>
+    </footer>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h2 class="modal-title" id="modalTitle">Título</h2>
+            <p class="modal-message" id="modalMessage">Mensagem</p>
+            <div class="modal-buttons">
+                <button class="modal-button" onclick="closeModal()">Fechar</button>
+                <button class="modal-button primary" id="modalAction" onclick="handleModalAction()">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="success-message" id="successMessage">
+        Operação realizada com sucesso!
+    </div>
+
+    <script>
+        let cart = [];
+        let isFavorited = false;
+        let quantity = 1;
+
+        const product = {
+            id: 1,
+            name: "Smart TV 55\" 4K Ultra HD com Android TV",
+            price: 2499.90,
+            originalPrice: 3499.90
+        };
+
+        function changeImage(index) {
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            thumbnails.forEach(t => t.classList.remove('active'));
+            thumbnails[index].classList.add('active');
+            showSuccessMessage(`Exibindo foto ${index + 1} do produto`);
+        }
+
+        function increaseQuantity() {
+            quantity++;
+            document.getElementById('quantity').value = quantity;
+        }
+
+        function decreaseQuantity() {
+            if (quantity > 1) {
+                quantity--;
+                document.getElementById('quantity').value = quantity;
+            }
+        }
+
+        function toggleFavorite() {
+            isFavorited = !isFavorited;
+            const btn = document.getElementById('favoriteToggle');
+            if (isFavorited) {
+                btn.classList.add('favorited');
+                btn.textContent = '❤';
+                showSuccessMessage('Produto adicionado aos favoritos');
+            } else {
+                btn.classList.remove('favorited');
+                btn.textContent = '♡';
+                showSuccessMessage('Produto removido dos favoritos');
+            }
+        }
+
+        function addToCart() {
+            const cartItem = {
+                productId: product.id,
+                productName: product.name,
+                price: product.price,
+                quantity: quantity
+            };
+
+            const existingItem = cart.find(item => item.productId === product.id);
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push(cartItem);
+            }
+
+            updateCartCount();
+            showSuccessMessage(`${quantity} unidade(s) de "${product.name}" adicionada(s) ao carrinho`);
+            quantity = 1;
+            document.getElementById('quantity').value = 1;
+        }
+
+        function addRelatedToCart(productName, price) {
+            const cartItem = {
+                productId: Math.random(),
+                productName: productName,
+                price: price,
+                quantity: 1
+            };
+            cart.push(cartItem);
+            updateCartCount();
+            showSuccessMessage(`${productName} adicionado ao carrinho`);
+        }
+
+        function buyNow() {
+            addToCart();
+            setTimeout(() => {
+                showModal('checkout');
+            }, 500);
+        }
+
+        function updateCartCount() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartCount').textContent = totalItems;
+        }
+
+        function toggleDetails(index) {
+            const titles = document.querySelectorAll('.details-title');
+            const contents = document.querySelectorAll('.details-content');
+            const toggles = document.querySelectorAll('.details-toggle');
+
+            titles[index].classList.toggle('active');
+            contents[index].classList.toggle('open');
+            toggles[index].classList.toggle('open');
+        }
+
+        function scrollToReviews() {
+            document.getElementById('reviews').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function sortReviews(value) {
+            showSuccessMessage(`Avaliações ordenadas por: ${value}`);
+        }
+
+        function markHelpful(reviewId) {
+            showSuccessMessage('Obrigado por marcar como útil!');
+        }
+
+        function markUnhelpful(reviewId) {
+            showSuccessMessage('Seu feedback foi registrado.');
+        }
+
+        function showModal(action) {
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalMessage = document.getElementById('modalMessage');
+
+            const modalConfig = {
+                checkout: {
+                    title: 'Checkout',
+                    message: 'Você será redirecionado para a página de pagamento. Aqui você poderá revisar seu pedido, escolher a forma de entrega e pagamento, e concluir sua compra de forma segura.'
+                },
+                about: {
+                    title: 'Quem somos',
+                    message: 'Vitrio é uma loja virtual especializada em eletrônicos e itens para casa, com mais de 10 anos de experiência. Nosso compromisso é oferecer produtos de qualidade com o melhor atendimento.'
+                },
+                faq: {
+                    title: 'Perguntas frequentes',
+                    message: 'Acesse nossa central de ajuda para encontrar respostas sobre rastreamento, devolução, garantia e muito mais.'
+                },
+                contact: {
+                    title: 'Entre em contato',
+                    message: 'E-mail: contato@vitrio.com.br | Telefone: (81) 3000-0000 | Atendimento de seg-sex, 8h-18h'
+                },
+                returns: {
+                    title: 'Devoluções e trocas',
+                    message: 'Você tem 30 dias após o recebimento para devolver qualquer produto, sem perguntas e sem custos adicionais.'
+                },
+                terms: {
+                    title: 'Termos de serviço',
+                    message: 'Ao usar a plataforma Vitrio, você concorda com nossos termos e condições de uso. Leia atentamente antes de fazer sua compra.'
+                },
+                privacy: {
+                    title: 'Política de privacidade',
+                    message: 'Seus dados pessoais são tratados com rigor e nunca serão compartilhados com terceiros sem consentimento explícito.'
+                },
+                security: {
+                    title: 'Segurança',
+                    message: 'Toda a comunicação é criptografada com SSL/TLS. Utilizamos os mais altos padrões de segurança para proteger seus dados de pagamento.'
+                },
+                careers: {
+                    title: 'Carreiras',
+                    message: 'Junte-se ao time Vitrio! Estamos sempre procurando por talentos. Envie seu currículo para jobs@vitrio.com.br'
+                },
+                sustainability: {
+                    title: 'Sustentabilidade',
+                    message: 'Na Vitrio, nos comprometemos com práticas sustentáveis. Utilizamos embalagens recicláveis e compensamos nossas emissões de carbono.'
+                },
+                social: {
+                    title: 'Siga-nos nas redes sociais',
+                    message: 'Acompanhe nossas promoções, novidades e dicas exclusivas no Facebook, Instagram e Twitter. @vitrioecommerce'
+                }
+            };
+
+            const config = modalConfig[action] || { title: 'Informação', message: 'Conteúdo indisponível' };
+
+            modalTitle.textContent = config.title;
+            modalMessage.textContent = config.message;
+
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        function handleModalAction() {
+            closeModal();
+        }
+
+        function showSuccessMessage(text) {
+            const message = document.getElementById('successMessage');
+            message.textContent = text;
+            message.classList.add('show');
+
+            setTimeout(() => {
+                message.classList.remove('show');
+            }, 3000);
+        }
+
+        function goHome() {
+            showSuccessMessage('Redirecionando para página inicial...');
+            setTimeout(() => {
+                window.location.href = '#home';
+            }, 1000);
+        }
+
+        function filterCategory(category) {
+            showSuccessMessage(`Filtrando por: ${category}`);
+        }
+
+        document.getElementById('cartBtn').addEventListener('click', function() {
+            if (cart.length === 0) {
+                showSuccessMessage('Seu carrinho está vazio');
+            } else {
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                showSuccessMessage(`Carrinho com ${cart.length} produto(s) - Total: R$ ${total.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`);
+            }
+        });
+
+        document.getElementById('accountBtn').addEventListener('click', function() {
+            showModal('about');
+        });
+
+        document.getElementById('favoriteBtn').addEventListener('click', function() {
+            showSuccessMessage('Você não possui produtos favoritos ainda');
+        });
+
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                showSuccessMessage('Busca por: ' + this.value);
+            }
+        });
+    </script>
+</body>
+</html>

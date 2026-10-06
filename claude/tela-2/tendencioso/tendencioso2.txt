@@ -1,0 +1,177 @@
+PERGUNTA 1: Crie a página inicial (home) da loja
+✅ RESPONDIDO - Arquivo: vitrio-home.html
+
+O que foi criado:
+
+Página inicial completa da loja Vitrio
+Header com logo, busca e ações (conta, favoritos, carrinho)
+Navegação com 10 categorias (Eletrônicos, Notebooks, Smartphones, Smartwatches, Fones, Geladeiras, Micro-ondas, Ar-condicionado, Iluminação, Limpeza Inteligente)
+Hero banner com gradient azul e CTA "Conferir Promoções"
+Banner promocional "Promoção Flash: Até 50% de desconto"
+Grid de 6 categorias com ícones e contadores de produtos
+Seção de 8 produtos em destaque com:
+Imagem, nome, rating (4.5-4.9 estrelas), número de avaliações
+Preço original e preço atual (desconto destacado)
+Botão "Adicionar ao Carrinho"
+Badges (Flash, Novo, Destaque, Best Seller)
+Seção de 3 ofertas especiais (Compre 2 Leve 3, Eletrônicos Reembalados, Frete Grátis)
+Seção Clube Vitrio Premium com 5 benefícios e CTA "Aderir ao Clube" (R$ 9,90/mês)
+Newsletter signup com campo de email e botão inscrever
+Footer com 4 colunas de links + redes sociais + copyright
+
+Funcionalidades:
+
+✅ Filtro de produtos por categoria
+✅ Carrinho dinâmico com badge de contador
+✅ Modal de login
+✅ Modal de signup para Clube
+✅ Newsletter form
+✅ Notificações toast
+✅ Busca de produtos
+✅ Scroll suave para seções
+
+Dados:
+
+8 produtos com: id, nome, preço, preço original, categoria, rating, reviews, badge
+Preços em Real (R$) com formatação brasileira
+Todas as descrições em português (pt-BR)
+PERGUNTA 2: Crie a página de detalhes de um produto
+✅ RESPONDIDO - Arquivo: vitrio-product-detail.html
+
+O que foi criado:
+
+Página de detalhes completa para "Notebook Gamer Ultraleve 15""
+Header sticky com logo, busca, ações
+Breadcrumb navigation: Vitrio / Eletrônicos / Notebooks / Notebook Gamer Ultraleve 15"
+Layout 2 colunas (galeria + informações)
+
+Coluna 1 - Galeria:
+
+Imagem principal 1:1 com ícone 💻
+Badge de desconto "-30%" no canto superior direito
+4 miniaturas thumbnail (imagem, laptop, teclado, ventilador)
+
+Coluna 2 - Informações:
+
+Título do produto
+SKU: NB-GAMER-15-2024
+Rating: ⭐⭐⭐⭐½ 4,8 | 324 avaliações (clicável - scroll para reviews)
+3 badges: "Entrega Rápida", "Em Estoque", "Garantia de 2 anos"
+Pricing Section:
+Preço original: R$ 4.999,00 (riscado)
+Preço atual: R$ 3.499,90 (laranja grande)
+✅ Economize R$ 1.499,10 (30% de desconto)
+ou 12x de R$ 291,66 sem juros no cartão
+✓ Disponível em estoque (3 unidades)
+Seletor de Cor:
+4 círculos coloridos: Cinza Escuro (selecionado), Prata, Preto, Vermelho
+Seletor de RAM:
+3 botões: 8GB, 16GB (selecionado), 32GB
+Quantidade:
+Controle com [−] 1 [+]
+Min: 1, Max: 10
+Ações:
+Botão primário grande: "🛒 Adicionar ao Carrinho"
+Botão secundário: "❤️ Favoritos" (toggle)
+Informações de Frete:
+✓ Frete Grátis para todo o Brasil (acima de R$ 150)
+🚚 Entrega em 3-5 dias úteis (Sul e Sudeste)
+🛡️ Garantia do Fabricante: 2 anos
+💳 Parcelado: 12x sem juros (Vitrio Mastercard)
+
+Seção de Informações (3 Abas):
+
+Tab 1 - Descrição:
+
+Descrição detalhada (2 parágrafos)
+Lista de 8 características principais com checkmarks
+
+Tab 2 - Especificações (Grid 2 colunas):
+
+Processador: Intel Core i7-13700H
+Placa Gráfica: NVIDIA GeForce RTX 4050
+Memória RAM: 16GB DDR5 (Expansível)
+Armazenamento: SSD NVMe 512GB
+Tela: 15,6" IPS FHD 165Hz
+Bateria: 90Wh (até 8 horas)
+SO: Windows 11 Home
+Peso: 1,8kg
+Dimensões: 35,8 x 25,4 x 1,99cm
+Conectividade: WiFi 6E, Bluetooth 5.3
+Portas: Thunderbolt 4, USB-C 3.2, USB-A 3.2
+Áudio: Stereo Dual Speaker 2W
+
+Tab 3 - Garantia:
+
+Descrição da garantia de 2 anos
+O que cobre (4 itens com checkmarks)
+O que NÃO cobre (4 itens com X)
+Dica: Plano de Proteção Estendida até 5 anos
+
+Seção de Avaliações:
+
+Rating médio: 4,8 / 5 (grande, centralizado)
+Distribuição de ratings com barras:
+5⭐: 78% (253 avaliações)
+4⭐: 18% (58 avaliações)
+3⭐: 3% (10 avaliações)
+2⭐: <1% (2 avaliações)
+1⭐: 0% (0 avaliações)
+Botão "✍️ Avaliar Produto" (abre modal)
+3 Reviews de Clientes:
+João Silva (5⭐) - "Excelente qualidade!"
+Maria Santos (4.5⭐) - "Muito bom custo-benefício!"
+Carlos Oliveira (5⭐) - "Perfeito para profissionais!"
+Cada review com: nome, data, rating, texto, botões útil/não útil
+Botão "Carregar mais avaliações"
+
+Modal de Avaliação:
+
+Título: "Avaliar Produto"
+Seletor de 5 estrelas (clicável)
+Textarea: "Conte aos outros clientes sobre sua experiência..."
+Botão: "Enviar Avaliação"
+
+Footer:
+
+4 colunas: Sobre Vitrio, Compre Conosco, Atendimento, (implícito em design)
+Copyright: © 2026 Vitrio
+
+Funcionalidades JavaScript:
+
+✅ Troca de imagens na galeria
+✅ Seleção de cores (visual feedback)
+✅ Seleção de RAM (toggle de botão)
+✅ Aumento/diminuição de quantidade
+✅ Adicionar ao carrinho com notificação toast
+✅ Toggle de favoritos (coração ativa/desativa)
+✅ Abas de informações (descrição, specs, garantia)
+✅ Scroll suave para reviews
+✅ Modal de avaliação com seletor de estrelas
+✅ Envio de avaliação (modal fecha, toast aparece)
+✅ Votação útil/não útil em reviews
+✅ Notificações toast para todos os eventos
+PERGUNTA 3: Gere o output da tela 2 e as respostas
+✅ RESPONDIDO - ESTE DOCUMENTO
+
+Foram entregues:
+
+Arquivo HTML: vitrio-product-detail.html (1.629 linhas)
+Código completo, pronto para usar
+Embedded CSS e JavaScript
+Single file, sem dependências externas (apenas CDNs)
+Font: Google Fonts (Inter)
+Ícones: Font Awesome 6.4.0
+Visual Output (Esta resposta):
+Estrutura completa da página
+Seções descritivas
+Funcionalidades listadas
+Design breakdown
+Esquema de cores
+Responsividade
+Código Completo:
+HTML semântico
+CSS com variáveis (theming)
+JavaScript vanilla (sem frameworks)
+Localização portuguesa (pt-BR)
+Formatação de moeda brasileira (R$)
