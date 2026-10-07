@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho de Compras - Vitrio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1e40af;
+            --secondary-color: #0f766e;
+            --accent-color: #dc2626;
+            --success-color: #16a34a;
+            --warning-color: #ea580c;
+            --light-bg: #f8fafc;
+            --border-color: #e2e8f0;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-muted: #9ca3af;
+            --white: #ffffff;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* HEADER */
+        header {
+            background-color: var(--white);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .search-bar {
+            flex: 1;
+            margin: 0 32px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 16px 10px 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+            background-color: var(--light-bg);
+            transition: border-color 0.2s;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background-color: var(--white);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: var(--text-primary);
+            position: relative;
+            transition: color 0.2s;
+            padding: 8px;
+        }
+
+        .header-btn:hover {
+            color: var(--primary-color);
+        }
+
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--accent-color);
+            color: var(--white);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* PAGE TITLE */
+        .page-header {
+            padding: 24px 0;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* MAIN CONTENT */
+        .cart-container {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 32px;
+            margin: 32px 0;
+        }
+
+        /* CART ITEMS */
+        .cart-items {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .cart-item {
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s;
+        }
+
+        .cart-item:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-color);
+        }
+
+        .item-image {
+            width: 120px;
+            height: 120px;
+            background-color: #E0E0E0;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .item-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .item-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .item-category {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .item-info {
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .item-info-badge {
+            background-color: var(--light-bg);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .item-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--light-bg);
+            padding: 6px 8px;
+            border-radius: 4px;
+        }
+
+        .qty-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            transition: all 0.2s;
+        }
+
+        .qty-btn:hover {
+            color: var(--primary-color);
+        }
+
+        .qty-value {
+            min-width: 30px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .item-price {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 4px;
+        }
+
+        .item-unit-price {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .item-total-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .btn-remove {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--accent-color);
+            font-size: 14px;
+            font-weight: 600;
+            transition: color 0.2s;
+            padding: 4px 8px;
+        }
+
+        .btn-remove:hover {
+            color: #b91c1c;
+        }
+
+        .btn-wishlist-item {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 600;
+            transition: color 0.2s;
+            padding: 4px 8px;
+        }
+
+        .btn-wishlist-item:hover {
+            color: var(--accent-color);
+        }
+
+        /* EMPTY CART */
+        .empty-cart {
+            background-color: var(--white);
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .empty-cart-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .empty-cart h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .empty-cart p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .btn-continue-shopping {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 12px 32px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-continue-shopping:hover {
+            background-color: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        /* SUMMARY SIDEBAR */
+        .order-summary {
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: var(--shadow-md);
+            height: fit-content;
+            position: sticky;
+            top: 80px;
+        }
+
+        .summary-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .summary-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .summary-row.subtotal {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 16px;
+            margin-bottom: 16px;
+        }
+
+        .summary-row.total {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+            padding: 16px 0;
+            border-top: 2px solid var(--border-color);
+            border-bottom: 2px solid var(--border-color);
+            margin: 16px 0;
+        }
+
+        .summary-row.shipping {
+            color: var(--success-color);
+        }
+
+        .summary-discount-info {
+            background-color: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 6px;
+            padding: 12px;
+            margin: 16px 0;
+            font-size: 13px;
+            color: var(--accent-color);
+        }
+
+        .coupon-section {
+            margin: 20px 0;
+            padding: 16px 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .coupon-input-group {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .coupon-input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .coupon-btn {
+            background-color: var(--light-bg);
+            border: 1px solid var(--border-color);
+            padding: 10px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .coupon-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+
+        .btn-checkout {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 16px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 16px;
+        }
+
+        .btn-checkout:hover {
+            background-color: #1e3a8a;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-continue-shopping-sidebar {
+            width: 100%;
+            background-color: var(--light-bg);
+            border: 1px solid var(--border-color);
+            padding: 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 12px;
+        }
+
+        .btn-continue-shopping-sidebar:hover {
+            background-color: var(--border-color);
+        }
+
+        /* BENEFITS */
+        .benefits-section {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .benefit {
+            display: flex;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .benefit-icon {
+            color: var(--success-color);
+            font-weight: 700;
+        }
+
+        /* RELATED PRODUCTS */
+        .related-products-section {
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 2px solid var(--border-color);
+        }
+
+        .related-products-section h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .product-card {
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.2s;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .product-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+            border-color: var(--primary-color);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 160px;
+            background-color: #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .product-info {
+            padding: 16px;
+        }
+
+        .product-name {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .product-price {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 12px;
+        }
+
+        .product-add-btn {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .product-add-btn:hover {
+            background-color: #1e3a8a;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--text-primary);
+            color: var(--white);
+            padding: 40px 0;
+            margin-top: 48px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+
+        .footer-column h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 32px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+
+        .modal-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .modal-text {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .modal-btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 12px 32px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .modal-btn:hover {
+            background-color: #1e3a8a;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .cart-container {
+                grid-template-columns: 1fr;
+            }
+
+            .order-summary {
+                position: static;
+            }
+
+            .cart-item {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .item-image {
+                width: 100%;
+                height: 200px;
+            }
+
+            .item-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .item-price {
+                align-items: flex-start;
+                width: 100%;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .page-header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo" onclick="location.href='/'">Vitrio</div>
+                <div class="search-bar">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" placeholder="O que você procura?">
+                </div>
+                <div class="header-actions">
+                    <button class="header-btn" onclick="alert('Acessar conta')">👤</button>
+                    <button class="header-btn">
+                        🛒
+                        <span class="badge" id="cartCount">5</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- PAGE HEADER -->
+        <div class="page-header">
+            <h1>🛒 Seu Carrinho de Compras</h1>
+            <p>Você tem 5 itens no carrinho</p>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="cart-container">
+            <!-- LEFT: CART ITEMS -->
+            <div class="cart-items" id="cartItems">
+                <!-- ITEM 1 -->
+                <div class="cart-item">
+                    <div class="item-image">Imagem</div>
+                    <div class="item-content">
+                        <div class="item-category">TV e Áudio</div>
+                        <div class="item-name">Smart TV 55" 4K Ultra HD com Bluetooth</div>
+                        <div class="item-info">
+                            <span class="item-info-badge">Cor: Preto</span>
+                            <span class="item-info-badge">Entrega: 3-5 dias</span>
+                        </div>
+                        <div class="item-footer">
+                            <div class="quantity-selector">
+                                <button class="qty-btn" onclick="updateQty(this, -1)">−</button>
+                                <div class="qty-value" data-item-id="1">1</div>
+                                <button class="qty-btn" onclick="updateQty(this, 1)">+</button>
+                            </div>
+                            <div class="item-price">
+                                <div class="item-unit-price">R$ 2.499,99 cada</div>
+                                <div class="item-total-price" data-price="2499.99">R$ 2.499,99</div>
+                            </div>
+                        </div>
+                        <div class="item-actions">
+                            <button class="btn-remove" onclick="removeItem(this)">🗑️ Remover</button>
+                            <button class="btn-wishlist-item" onclick="addToWishlist(this)">♡ Salvar para depois</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ITEM 2 -->
+                <div class="cart-item">
+                    <div class="item-image">Imagem</div>
+                    <div class="item-content">
+                        <div class="item-category">Informática</div>
+                        <div class="item-name">Notebook Intel Core i7 16GB RAM SSD 512GB</div>
+                        <div class="item-info">
+                            <span class="item-info-badge">Cor: Cinza</span>
+                            <span class="item-info-badge">Entrega: 5-7 dias</span>
+                        </div>
+                        <div class="item-footer">
+                            <div class="quantity-selector">
+                                <button class="qty-btn" onclick="updateQty(this, -1)">−</button>
+                                <div class="qty-value" data-item-id="2">1</div>
+                                <button class="qty-btn" onclick="updateQty(this, 1)">+</button>
+                            </div>
+                            <div class="item-price">
+                                <div class="item-unit-price">R$ 3.499,99 cada</div>
+                                <div class="item-total-price" data-price="3499.99">R$ 3.499,99</div>
+                            </div>
+                        </div>
+                        <div class="item-actions">
+                            <button class="btn-remove" onclick="removeItem(this)">🗑️ Remover</button>
+                            <button class="btn-wishlist-item" onclick="addToWishlist(this)">♡ Salvar para depois</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ITEM 3 -->
+                <div class="cart-item">
+                    <div class="item-image">Imagem</div>
+                    <div class="item-content">
+                        <div class="item-category">TV e Áudio</div>
+                        <div class="item-name">Fone Bluetooth Premium com Cancelamento de Ruído</div>
+                        <div class="item-info">
+                            <span class="item-info-badge">Cor: Preto</span>
+                            <span class="item-info-badge">Entrega: 2-3 dias</span>
+                        </div>
+                        <div class="item-footer">
+                            <div class="quantity-selector">
+                                <button class="qty-btn" onclick="updateQty(this, -1)">−</button>
+                                <div class="qty-value" data-item-id="3">2</div>
+                                <button class="qty-btn" onclick="updateQty(this, 1)">+</button>
+                            </div>
+                            <div class="item-price">
+                                <div class="item-unit-price">R$ 599,99 cada</div>
+                                <div class="item-total-price" data-price="599.99">R$ 1.199,98</div>
+                            </div>
+                        </div>
+                        <div class="item-actions">
+                            <button class="btn-remove" onclick="removeItem(this)">🗑️ Remover</button>
+                            <button class="btn-wishlist-item" onclick="addToWishlist(this)">♡ Salvar para depois</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ITEM 4 -->
+                <div class="cart-item">
+                    <div class="item-image">Imagem</div>
+                    <div class="item-content">
+                        <div class="item-category">Climatização</div>
+                        <div class="item-name">Ar Condicionado 12mil BTU Inverter WiFi</div>
+                        <div class="item-info">
+                            <span class="item-info-badge">Cor: Branco</span>
+                            <span class="item-info-badge">Entrega: 7-10 dias</span>
+                        </div>
+                        <div class="item-footer">
+                            <div class="quantity-selector">
+                                <button class="qty-btn" onclick="updateQty(this, -1)">−</button>
+                                <div class="qty-value" data-item-id="4">1</div>
+                                <button class="qty-btn" onclick="updateQty(this, 1)">+</button>
+                            </div>
+                            <div class="item-price">
+                                <div class="item-unit-price">R$ 1.299,99 cada</div>
+                                <div class="item-total-price" data-price="1299.99">R$ 1.299,99</div>
+                            </div>
+                        </div>
+                        <div class="item-actions">
+                            <button class="btn-remove" onclick="removeItem(this)">🗑️ Remover</button>
+                            <button class="btn-wishlist-item" onclick="addToWishlist(this)">♡ Salvar para depois</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ITEM 5 -->
+                <div class="cart-item">
+                    <div class="item-image">Imagem</div>
+                    <div class="item-content">
+                        <div class="item-category">Cozinha</div>
+                        <div class="item-name">Fritadeira Elétrica sem Óleo 5.5L Aço Inox</div>
+                        <div class="item-info">
+                            <span class="item-info-badge">Cor: Inox</span>
+                            <span class="item-info-badge">Entrega: 3-5 dias</span>
+                        </div>
+                        <div class="item-footer">
+                            <div class="quantity-selector">
+                                <button class="qty-btn" onclick="updateQty(this, -1)">−</button>
+                                <div class="qty-value" data-item-id="5">1</div>
+                                <button class="qty-btn" onclick="updateQty(this, 1)">+</button>
+                            </div>
+                            <div class="item-price">
+                                <div class="item-unit-price">R$ 249,99 cada</div>
+                                <div class="item-total-price" data-price="249.99">R$ 249,99</div>
+                            </div>
+                        </div>
+                        <div class="item-actions">
+                            <button class="btn-remove" onclick="removeItem(this)">🗑️ Remover</button>
+                            <button class="btn-wishlist-item" onclick="addToWishlist(this)">♡ Salvar para depois</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: ORDER SUMMARY -->
+            <div class="order-summary">
+                <div class="summary-title">Resumo do Pedido</div>
+
+                <div class="summary-row subtotal">
+                    <span>Subtotal (5 itens):</span>
+                    <span class="summary-value" id="subtotal">R$ 8.749,95</span>
+                </div>
+
+                <div class="coupon-section">
+                    <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;">Tem cupom de desconto?</div>
+                    <div class="coupon-input-group">
+                        <input type="text" class="coupon-input" placeholder="Digite seu cupom" id="couponInput">
+                        <button class="coupon-btn" onclick="applyCoupon()">Aplicar</button>
+                    </div>
+                </div>
+
+                <div class="summary-discount-info" id="discountInfo" style="display: none;">
+                    Cupom de desconto aplicado! 🎉<br>
+                    Desconto: <span id="discountAmount">-R$ 0,00</span>
+                </div>
+
+                <div class="summary-row shipping">
+                    <span>Frete:</span>
+                    <span class="summary-value">Grátis ✓</span>
+                </div>
+
+                <div class="summary-row" style="color: var(--text-muted); font-size: 12px;">
+                    <span>Entrega estimada: 7-10 dias úteis</span>
+                </div>
+
+                <div class="summary-row total">
+                    <span>Total:</span>
+                    <span id="total">R$ 8.749,95</span>
+                </div>
+
+                <button class="btn-checkout" onclick="proceedToCheckout()">Ir para Pagamento</button>
+                <button class="btn-continue-shopping-sidebar" onclick="location.href='/'">Continuar Comprando</button>
+
+                <div class="benefits-section">
+                    <div class="benefit">
+                        <span class="benefit-icon">✓</span>
+                        <span>Frete grátis em qualquer compra</span>
+                    </div>
+                    <div class="benefit">
+                        <span class="benefit-icon">✓</span>
+                        <span>Parcelamento sem juros até 12x</span>
+                    </div>
+                    <div class="benefit">
+                        <span class="benefit-icon">✓</span>
+                        <span>Devolução grátis em 30 dias</span>
+                    </div>
+                    <div class="benefit">
+                        <span class="benefit-icon">✓</span>
+                        <span>Garantia de 1 ano</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RELATED PRODUCTS -->
+        <div class="related-products-section">
+            <h2>Quem Comprou Também Viu Isso</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">Imagem</div>
+                    <div class="product-info">
+                        <div class="product-name">Smart Speaker 360°</div>
+                        <div class="product-price">R$ 399,99</div>
+                        <button class="product-add-btn" onclick="addRelatedToCart()">Adicionar</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">Imagem</div>
+                    <div class="product-info">
+                        <div class="product-name">Suporte Articulado TV</div>
+                        <div class="product-price">R$ 199,99</div>
+                        <button class="product-add-btn" onclick="addRelatedToCart()">Adicionar</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">Imagem</div>
+                    <div class="product-info">
+                        <div class="product-name">Mouse e Teclado Wireless</div>
+                        <div class="product-price">R$ 149,99</div>
+                        <button class="product-add-btn" onclick="addRelatedToCart()">Adicionar</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">Imagem</div>
+                    <div class="product-info">
+                        <div class="product-name">Webcam Full HD 1080p</div>
+                        <div class="product-price">R$ 299,99</div>
+                        <button class="product-add-btn" onclick="addRelatedToCart()">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Sobre Vitrio</h3>
+                    <ul>
+                        <li><a href="#">Quem Somos</a></li>
+                        <li><a href="#">Carreiras</a></li>
+                        <li><a href="#">Sustentabilidade</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Atendimento</h3>
+                    <ul>
+                        <li><a href="#">Contato</a></li>
+                        <li><a href="#">Central de Ajuda</a></li>
+                        <li><a href="#">Rastrear Pedido</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Compre Conosco</h3>
+                    <ul>
+                        <li><a href="#">Categorias</a></li>
+                        <li><a href="#">Ofertas</a></li>
+                        <li><a href="#">Novidades</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Políticas</h3>
+                    <ul>
+                        <li><a href="#">Privacidade</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Devoluções</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© 2026 Vitrio E-commerce. Todos os direitos reservados.</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="modal-icon">✓</div>
+            <div class="modal-title" id="modalTitle">Pronto!</div>
+            <div class="modal-text" id="modalText">Sua compra foi processada com sucesso</div>
+            <button class="modal-btn" onclick="closeModal()">OK</button>
+        </div>
+    </div>
+
+    <script>
+        let originalPrices = {
+            1: 2499.99,
+            2: 3499.99,
+            3: 599.99,
+            4: 1299.99,
+            5: 249.99
+        };
+
+        let quantities = {
+            1: 1,
+            2: 1,
+            3: 2,
+            4: 1,
+            5: 1
+        };
+
+        let discountApplied = false;
+        let discountPercent = 0;
+
+        function updateQty(button, change) {
+            const selector = button.closest('.quantity-selector');
+            const qtyValue = selector.querySelector('.qty-value');
+            const itemId = qtyValue.getAttribute('data-item-id');
+            
+            let newQty = quantities[itemId] + change;
+            if (newQty < 1) newQty = 1;
+            
+            quantities[itemId] = newQty;
+            qtyValue.textContent = newQty;
+
+            // Update price
+            const priceElement = button.closest('.item-footer').querySelector('.item-total-price');
+            const newPrice = (originalPrices[itemId] * newQty).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            priceElement.textContent = 'R$ ' + newPrice;
+
+            updateSummary();
+        }
+
+        function removeItem(button) {
+            const item = button.closest('.cart-item');
+            const qtyValue = item.querySelector('.qty-value');
+            const itemId = qtyValue.getAttribute('data-item-id');
+            
+            item.style.opacity = '0';
+            item.style.transform = 'translateX(100%)';
+            
+            setTimeout(() => {
+                item.remove();
+                delete quantities[itemId];
+                updateSummary();
+                checkCartEmpty();
+            }, 300);
+        }
+
+        function addToWishlist(button) {
+            button.textContent = '♥ Adicionado à lista de desejos';
+            button.style.color = 'var(--accent-color)';
+            setTimeout(() => {
+                alert('Produto adicionado à sua lista de desejos!');
+            }, 200);
+        }
+
+        function applyCoupon() {
+            const couponInput = document.getElementById('couponInput');
+            const coupon = couponInput.value.toUpperCase();
+
+            const validCoupons = {
+                'DESCONTO10': 10,
+                'DESCONTO20': 20,
+                'VITRIO15': 15
+            };
+
+            if (validCoupons[coupon]) {
+                discountApplied = true;
+                discountPercent = validCoupons[coupon];
+                document.getElementById('discountInfo').style.display = 'block';
+                couponInput.disabled = true;
+                alert(`Cupom '${coupon}' aplicado! ${discountPercent}% de desconto`);
+                updateSummary();
+            } else {
+                alert('Cupom inválido. Tente: DESCONTO10, DESCONTO20 ou VITRIO15');
+                couponInput.focus();
+            }
+        }
+
+        function updateSummary() {
+            // Calculate subtotal
+            let subtotal = 0;
+            Object.keys(quantities).forEach(itemId => {
+                subtotal += originalPrices[itemId] * quantities[itemId];
+            });
+
+            // Calculate discount
+            let discount = 0;
+            if (discountApplied) {
+                discount = subtotal * (discountPercent / 100);
+            }
+
+            let total = subtotal - discount;
+
+            // Update display
+            document.getElementById('subtotal').textContent = 'R$ ' + subtotal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('discountAmount').textContent = '-R$ ' + discount.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('total').textContent = 'R$ ' + total.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+
+            // Update item count
+            const itemCount = Object.values(quantities).reduce((a, b) => a + b, 0);
+            document.getElementById('cartCount').textContent = itemCount;
+        }
+
+        function checkCartEmpty() {
+            if (Object.keys(quantities).length === 0) {
+                const cartItems = document.getElementById('cartItems');
+                cartItems.innerHTML = `
+                    <div class="empty-cart">
+                        <div class="empty-cart-icon">🛒</div>
+                        <h2>Seu Carrinho Está Vazio</h2>
+                        <p>Você ainda não adicionou nenhum produto. Explore nosso catálogo e encontre tudo o que precisa!</p>
+                        <button class="btn-continue-shopping" onclick="location.href='/'">Continuar Comprando</button>
+                    </div>
+                `;
+            }
+        }
+
+        function proceedToCheckout() {
+            const itemCount = Object.values(quantities).reduce((a, b) => a + b, 0);
+            const totalText = document.getElementById('total').textContent;
+            
+            document.getElementById('modalTitle').textContent = 'Compra Iniciada!';
+            document.getElementById('modalText').textContent = `${itemCount} item(ns) no valor de ${totalText}. Redirecionando para pagamento...`;
+            document.getElementById('successModal').classList.add('active');
+
+            setTimeout(() => {
+                alert('Você será redirecionado para a página de pagamento seguro (como se fosse de verdade em um e-commerce real)');
+                closeModal();
+            }, 2000);
+        }
+
+        function addRelatedToCart() {
+            alert('Produto adicionado ao carrinho!');
+            updateSummary();
+        }
+
+        function closeModal() {
+            document.getElementById('successModal').classList.remove('active');
+        }
+
+        // Initialize
+        updateSummary();
+    </script>
+</body>
+</html>

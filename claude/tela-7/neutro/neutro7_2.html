@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancelar Assinatura - Vitrio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #f5f5f5 0%, #efefef 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff6b35;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff6b35;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: #ff6b35;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            color: #999;
+            margin: 0 0.5rem;
+        }
+
+        .main-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+
+        .warning-banner {
+            background-color: #fff3e0;
+            border-left: 4px solid #ff6b35;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .warning-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .warning-content h3 {
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .warning-content p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .current-plan-info {
+            background-color: #f9f9f9;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .plan-detail {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .plan-detail:last-child {
+            border-bottom: none;
+        }
+
+        .plan-detail-label {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .plan-detail-value {
+            color: #ff6b35;
+            font-weight: bold;
+        }
+
+        .benefits-lost {
+            background-color: #fff5f0;
+            border: 2px solid #ffccc7;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .benefits-lost h3 {
+            color: #d32f2f;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .benefits-lost ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .benefits-lost li {
+            padding: 0.6rem 0;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .benefits-lost li::before {
+            content: "✕";
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-color: #ffccc7;
+            color: #d32f2f;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 0.75rem;
+            line-height: 20px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .reason-section {
+            margin-bottom: 2rem;
+        }
+
+        .reason-section h3 {
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .accordion-item {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .accordion-button {
+            width: 100%;
+            padding: 1.2rem;
+            background-color: #f9f9f9;
+            border: none;
+            text-align: left;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .accordion-button:hover {
+            background-color: #f0f0f0;
+        }
+
+        .accordion-button.active {
+            background-color: #ff6b35;
+            color: white;
+        }
+
+        .accordion-button::after {
+            content: "▼";
+            display: inline-block;
+            transition: transform 0.3s;
+            font-size: 0.8rem;
+        }
+
+        .accordion-button.active::after {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: white;
+        }
+
+        .accordion-content.active {
+            max-height: 300px;
+        }
+
+        .accordion-text {
+            padding: 1.2rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .feedback-section {
+            background-color: #f9f9f9;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .feedback-section h3 {
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 100px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ff6b35;
+        }
+
+        .form-group small {
+            display: block;
+            margin-top: 0.3rem;
+            color: #999;
+        }
+
+        .alternatives-section {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            border: 2px solid #c5cae9;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .alternatives-section h3 {
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .alternative-option {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .alternative-option:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .alternative-option:last-child {
+            margin-bottom: 0;
+        }
+
+        .alternative-content h4 {
+            color: #1a1a1a;
+            margin-bottom: 0.3rem;
+        }
+
+        .alternative-content p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .alternative-button {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid #c5cae9;
+            background-color: white;
+            color: #5e35b1;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex-shrink: 0;
+            margin-left: 1rem;
+        }
+
+        .alternative-button:hover {
+            background-color: #f3e5f5;
+            border-color: #5e35b1;
+        }
+
+        .buttons-section {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-keep {
+            background-color: #ff6b35;
+            color: white;
+            flex: 1;
+        }
+
+        .btn-keep:hover {
+            background-color: #e55a24;
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-keep:active {
+            transform: scale(0.98);
+        }
+
+        .btn-cancel {
+            background-color: #e0e0e0;
+            color: #333;
+            flex: 1;
+        }
+
+        .btn-cancel:hover {
+            background-color: #d0d0d0;
+        }
+
+        .btn-cancel:active {
+            transform: scale(0.98);
+        }
+
+        .btn-support {
+            background-color: white;
+            color: #1a1a1a;
+            border: 2px solid #e0e0e0;
+            flex: 1;
+        }
+
+        .btn-support:hover {
+            border-color: #1a1a1a;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .modal-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-content h2 {
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .modal-content p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .modal-content strong {
+            color: #ff6b35;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-direction: column;
+        }
+
+        .modal-button {
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-confirm {
+            background-color: #ff6b35;
+            color: white;
+        }
+
+        .modal-confirm:hover {
+            background-color: #e55a24;
+        }
+
+        .modal-cancel {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+
+        .modal-cancel:hover {
+            background-color: #d0d0d0;
+        }
+
+        .info-box {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            color: #2e7d32;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 0.8rem;
+            border-radius: 6px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #1a1a1a transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .success-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav a {
+                margin-left: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .main-card {
+                padding: 1.5rem;
+            }
+
+            .buttons-section {
+                flex-direction: column;
+            }
+
+            .alternative-option {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .alternative-button {
+                margin-left: 0;
+                margin-top: 1rem;
+                width: 100%;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 1.5rem;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">🏪 Vitrio</div>
+        <nav>
+            <a href="#inicio">Início</a>
+            <a href="#conta">Minha Conta</a>
+            <a href="#assinatura">Assinatura</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="#conta">Minha Conta</a>
+            <span>→</span>
+            <a href="#assinatura">Gerenciar Assinatura</a>
+            <span>→</span>
+            <span>Cancelar Assinatura</span>
+        </div>
+
+        <div class="main-card fade-in">
+            <div class="warning-banner">
+                <div class="warning-icon">😢</div>
+                <div class="warning-content">
+                    <h3>Nós vamos sentir sua falta!</h3>
+                    <p>Tem certeza que deseja cancelar sua assinatura? Você perderá acesso a todos os benefícios exclusivos.</p>
+                </div>
+            </div>
+
+            <div class="current-plan-info">
+                <h3 style="color: #1a1a1a; margin-bottom: 1rem;">📋 Suas Informações de Assinatura</h3>
+                <div class="plan-detail">
+                    <span class="plan-detail-label">Plano Atual:</span>
+                    <span class="plan-detail-value">Premium</span>
+                </div>
+                <div class="plan-detail">
+                    <span class="plan-detail-label">Data de Ativação:</span>
+                    <span class="plan-detail-value">15 de Março de 2024</span>
+                </div>
+                <div class="plan-detail">
+                    <span class="plan-detail-label">Próxima Cobrança:</span>
+                    <span class="plan-detail-value">7 de Novembro de 2026</span>
+                </div>
+                <div class="plan-detail">
+                    <span class="plan-detail-label">Pontos Disponíveis:</span>
+                    <span class="plan-detail-value">2.450 pontos</span>
+                </div>
+                <div class="plan-detail">
+                    <span class="plan-detail-label">Valor Mensal:</span>
+                    <span class="plan-detail-value">R$ 29,90</span>
+                </div>
+            </div>
+
+            <div class="benefits-lost">
+                <h3>
+                    <span class="tooltip">
+                        ⓘ Ao cancelar, você perderá
+                        <span class="tooltiptext">Esses benefícios serão inacessíveis a partir de amanhã se você confirmar o cancelamento</span>
+                    </span>
+                </h3>
+                <ul>
+                    <li>Frete grátis em todas as compras</li>
+                    <li>Desconto de 20% em todas as compras</li>
+                    <li>Cashback de 10% em pontos</li>
+                    <li>Suporte prioritário 24/7</li>
+                    <li>Acesso antecipado a novos produtos</li>
+                </ul>
+            </div>
+
+            <div class="reason-section">
+                <h3>🤔 Por que você deseja cancelar?</h3>
+                <p style="color: #666; margin-bottom: 1rem;">Sua resposta nos ajuda a melhorar nossos serviços (opcional)</p>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-button" onclick="toggleAccordion(this)">
+                            💰 Motivos Financeiros / Orçamento
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-text">
+                                Entendemos que o orçamento é importante. Você poderia considerar fazer downgrade para nosso plano Essencial (R$ 12,90/mês) e manter alguns dos benefícios? Ou queremos oferecer um cupom de 30% de desconto por 3 meses se você permanecer.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-button" onclick="toggleAccordion(this)">
+                            🛍️ Não Faço Compras com Frequência Suficiente
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-text">
+                                Muitos clientes que fazem compras esporadicamente ainda economizam com o desconto de 20%. Se você planeja comprar apenas uma ou duas vezes por ano, talvez o plano Gratuito com frete acima de R$ 199 seja mais apropriado.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-button" onclick="toggleAccordion(this)">
+                            😞 Insatisfeito com o Serviço ou Produtos
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-text">
+                                Lamentamos ouvir isso! Gostaríamos de resolver seus problemas. Clique no botão "Tenho uma Dúvida" abaixo para falar com nosso time de suporte especializado. Queremos entender o que não está funcionando para você.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-button" onclick="toggleAccordion(this)">
+                            🚀 Encontrei um Melhor Serviço Concorrente
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-text">
+                                Valorizamos seu feedback! Qual serviço você encontrou que é melhor? Podemos ajustar nossos planos ou oferecer benefícios adicionais. Entre em contato com nosso time para uma conversa personalizada sobre como melhorar sua experiência.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-button" onclick="toggleAccordion(this)">
+                            🚫 Outros Motivos
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-text">
+                                Entendemos que existem diversas razões para cancelar. Por favor, compartilhe mais detalhes na seção de feedback abaixo. Seu feedback é valioso para nós e pode nos ajudar a melhorar nossos serviços no futuro.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feedback-section">
+                <h3>💬 Deixe um Comentário (Opcional)</h3>
+                <div class="form-group">
+                    <label for="feedback">Conte-nos o motivo do cancelamento ou o que poderíamos melhorar:</label>
+                    <textarea id="feedback" placeholder="Seu feedback nos ajuda a melhorar..."></textarea>
+                    <small>Caracteres: <span id="charCount">0</span>/500</small>
+                </div>
+            </div>
+
+            <div class="alternatives-section">
+                <h3>✨ Antes de Cancelar, Considere Essas Alternativas</h3>
+                
+                <div class="alternative-option">
+                    <div class="alternative-content">
+                        <h4>📉 Fazer Downgrade para Essencial</h4>
+                        <p>Mantenha os principais benefícios (frete grátis, desconto de 10%) por apenas R$ 12,90/mês</p>
+                    </div>
+                    <button class="alternative-button" onclick="openDowngradeModal()">Fazer Downgrade</button>
+                </div>
+
+                <div class="alternative-option">
+                    <div class="alternative-content">
+                        <h4>🎁 Cupom de 30% Desconto</h4>
+                        <p>Código VITRIO30 válido por 3 meses se você permanecer assinado (Premium apenas)</p>
+                    </div>
+                    <button class="alternative-button" onclick="applyCoupon()">Usar Cupom</button>
+                </div>
+
+                <div class="alternative-option">
+                    <div class="alternative-content">
+                        <h4>⏸️ Pausar Assinatura</h4>
+                        <p>Pause sua assinatura por até 3 meses e retome quando estiver pronto, sem perder seus benefícios</p>
+                    </div>
+                    <button class="alternative-button" onclick="openPauseModal()">Pausar Assinatura</button>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <strong>ℹ️ O que acontece após cancelamento?</strong><br>
+                Você manterá acesso aos benefícios até 7 de Novembro de 2026 (sua próxima data de cobrança). Após essa data, sua conta será convertida para o plano Gratuito. Seus pontos (2.450) serão mantidos por 12 meses.
+            </div>
+
+            <div class="buttons-section">
+                <button class="btn btn-support" onclick="openSupportModal()">❓ Tenho uma Dúvida</button>
+                <button class="btn btn-keep" onclick="keepSubscription()">✓ Manter Assinatura</button>
+                <button class="btn btn-cancel" onclick="openCancelModal()">✕ Cancelar Assinatura</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Confirmação de Cancelamento -->
+    <div class="modal" id="cancelModal">
+        <div class="modal-content fade-in">
+            <div class="modal-icon">⚠️</div>
+            <h2>Tem Certeza que Deseja Cancelar?</h2>
+            <p>Você está prestes a cancelar sua assinatura <strong>Premium</strong>. Esta ação:</p>
+            <ul style="text-align: left; margin: 1.5rem 0; color: #666;">
+                <li>✕ Encerrará seus benefícios em 7 de Novembro de 2026</li>
+                <li>✓ Mantém seus 2.450 pontos por 12 meses</li>
+                <li>✓ Permite reativar a assinatura a qualquer momento</li>
+                <li>✓ Não é reembolsável (período já pago)</li>
+            </ul>
+            <div class="modal-buttons">
+                <button class="modal-button modal-cancel" onclick="closeModal('cancelModal')">← Voltar</button>
+                <button class="modal-button modal-confirm" onclick="confirmCancellation()">Sim, Cancelar Mesmo Assim</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Sucesso no Cancelamento -->
+    <div class="modal" id="successModal">
+        <div class="modal-content fade-in">
+            <div class="success-icon">✓</div>
+            <h2>Assinatura Cancelada</h2>
+            <p>Sua assinatura Premium foi cancelada com sucesso. Você receberá um email de confirmação em breve.</p>
+            <div class="info-box" style="margin: 1.5rem 0;">
+                <strong>Seus Benefícios Continuam Até:</strong> 7 de Novembro de 2026<br>
+                <strong>Seus Pontos:</strong> 2.450 pontos (válidos até 7 de Novembro de 2027)<br>
+                <strong>Cupom de Retorno:</strong> VOLTA15 (15% desconto válido por 30 dias)
+            </div>
+            <p style="color: #666; font-size: 0.9rem;">
+                Se mudar de ideia, você pode reativar sua assinatura a qualquer momento acessando Minha Conta → Gerenciar Assinatura.
+            </p>
+            <div class="modal-buttons">
+                <button class="modal-button modal-confirm" onclick="returnToAccount()">Voltar para Minha Conta</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Downgrade -->
+    <div class="modal" id="downgradeModal">
+        <div class="modal-content fade-in">
+            <div class="modal-icon">📉</div>
+            <h2>Fazer Downgrade para Essencial</h2>
+            <p>Você está prestes a fazer downgrade de <strong>Premium (R$ 29,90/mês)</strong> para <strong>Essencial (R$ 12,90/mês)</strong>.</p>
+            <div style="background-color: #f0f8ff; padding: 1rem; border-radius: 8px; margin: 1.5rem 0; color: #1976d2;">
+                <strong>✓ Você Manterá:</strong>
+                <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                    <li>Frete grátis em todas as compras</li>
+                    <li>Desconto de 10% em compras</li>
+                    <li>Acesso a ofertas exclusivas</li>
+                    <li>Cashback de 5% em pontos</li>
+                </ul>
+            </div>
+            <p style="color: #ff6b35; font-weight: bold;">Você economizará R$ 17,00/mês!</p>
+            <div class="modal-buttons">
+                <button class="modal-button modal-cancel" onclick="closeModal('downgradeModal')">Manter Premium</button>
+                <button class="modal-button modal-confirm" onclick="confirmDowngrade()">Confirmar Downgrade</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Pausar Assinatura -->
+    <div class="modal" id="pauseModal">
+        <div class="modal-content fade-in">
+            <div class="modal-icon">⏸️</div>
+            <h2>Pausar Assinatura</h2>
+            <p>Pause sua assinatura Premium por até 3 meses. Você manterá todos os seus benefícios e pontos durante a pausa.</p>
+            <div style="background-color: #e8f5e9; padding: 1rem; border-radius: 8px; margin: 1.5rem 0; color: #2e7d32;">
+                <strong>✓ Benefícios da Pausa:</strong>
+                <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                    <li>Nenhuma cobrança durante a pausa</li>
+                    <li>Mantenha todos os benefícios e pontos</li>
+                    <li>Reative quando quiser</li>
+                    <li>Sem penalidades</li>
+                </ul>
+            </div>
+            <div class="form-group">
+                <label for="pauseDuration">Duração da Pausa:</label>
+                <select id="pauseDuration" style="width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 8px;">
+                    <option value="1">1 mês</option>
+                    <option value="2">2 meses</option>
+                    <option value="3">3 meses</option>
+                </select>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-button modal-cancel" onclick="closeModal('pauseModal')">Cancelar</button>
+                <button class="modal-button modal-confirm" onclick="confirmPause()">Pausar Assinatura</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Suporte -->
+    <div class="modal" id="supportModal">
+        <div class="modal-content fade-in">
+            <div class="modal-icon">💬</div>
+            <h2>Fale com Nosso Suporte</h2>
+            <p>Nosso time está aqui para ajudar. Escolha como deseja entrar em contato:</p>
+            <div style="margin: 1.5rem 0; text-align: left;">
+                <div class="alternative-option">
+                    <div class="alternative-content">
+                        <h4>💬 Chat ao Vivo</h4>
+                        <p>Fale com um agente agora mesmo (disponível 24/7)</p>
+                    </div>
+                </div>
+                <div class="alternative-option">
+                    <div class="alternative-content">
+                        <h4>📧 Email</h4>
+                        <p>suporte@vitrio.com.br (resposta em 2 horas)</p>
+                    </div>
+                </div>
+                <div class="alternative-option">
+                    <div class="alternative-content">
+                        <h4>📞 Telefone</h4>
+                        <p>0800-VITRIO-1 (7h-22h, seg-sab)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-button modal-confirm" onclick="openLiveChat()">Abrir Chat ao Vivo</button>
+                <button class="modal-button modal-cancel" onclick="closeModal('supportModal')">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Textarea Character Counter
+        document.getElementById('feedback').addEventListener('input', function() {
+            const count = this.value.length;
+            document.getElementById('charCount').textContent = count;
+            if (count > 500) {
+                this.value = this.value.substring(0, 500);
+            }
+        });
+
+        // Accordion Toggle
+        function toggleAccordion(button) {
+            const content = button.nextElementSibling;
+            const isActive = button.classList.contains('active');
+
+            document.querySelectorAll('.accordion-button').forEach(btn => {
+                btn.classList.remove('active');
+                btn.nextElementSibling.classList.remove('active');
+            });
+
+            if (!isActive) {
+                button.classList.add('active');
+                content.classList.add('active');
+            }
+        }
+
+        // Modal Functions
+        function openCancelModal() {
+            document.getElementById('cancelModal').classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        function confirmCancellation() {
+            closeModal('cancelModal');
+            document.getElementById('successModal').classList.add('active');
+        }
+
+        function returnToAccount() {
+            closeModal('successModal');
+            window.location.href = '#account';
+        }
+
+        function openDowngradeModal() {
+            document.getElementById('downgradeModal').classList.add('active');
+        }
+
+        function confirmDowngrade() {
+            closeModal('downgradeModal');
+            alert('✓ Downgrade realizado com sucesso! Seu novo plano (Essencial) será ativado na próxima renovação.');
+            location.reload();
+        }
+
+        function openPauseModal() {
+            document.getElementById('pauseModal').classList.add('active');
+        }
+
+        function confirmPause() {
+            const duration = document.getElementById('pauseDuration').value;
+            closeModal('pauseModal');
+            alert(`✓ Assinatura pausada com sucesso por ${duration} mês(es)! Você receberá um email de confirmação.`);
+            location.reload();
+        }
+
+        function openSupportModal() {
+            document.getElementById('supportModal').classList.add('active');
+        }
+
+        function openLiveChat() {
+            closeModal('supportModal');
+            alert('Abrindo chat ao vivo com suporte...');
+        }
+
+        function applyCoupon() {
+            alert('✓ Cupom VITRIO30 aplicado com sucesso! Seu desconto de 30% será válido pelos próximos 3 meses.');
+        }
+
+        function keepSubscription() {
+            alert('✓ Obrigado por permanecer conosco! Sua assinatura Premium continua ativa.');
+        }
+
+        // Close modal when clicking outside
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

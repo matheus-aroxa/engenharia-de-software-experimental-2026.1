@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitrio - Eletrônicos e Produtos para Casa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1e40af;
+            --secondary-color: #0f766e;
+            --accent-color: #dc2626;
+            --success-color: #16a34a;
+            --warning-color: #ea580c;
+            --light-bg: #f8fafc;
+            --border-color: #e2e8f0;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-muted: #9ca3af;
+            --white: #ffffff;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* HEADER */
+        header {
+            background-color: var(--white);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .search-bar {
+            flex: 1;
+            margin: 0 32px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 16px 10px 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+            background-color: var(--light-bg);
+            transition: border-color 0.2s;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background-color: var(--white);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: var(--text-primary);
+            position: relative;
+            transition: color 0.2s;
+            padding: 8px;
+        }
+
+        .header-btn:hover {
+            color: var(--primary-color);
+        }
+
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--accent-color);
+            color: var(--white);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .login-btn {
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            color: var(--text-primary);
+            transition: all 0.2s;
+        }
+
+        .login-btn:hover {
+            background-color: var(--light-bg);
+        }
+
+        /* NAV CATEGORIES */
+        .nav-categories {
+            background-color: var(--white);
+            border-bottom: 1px solid var(--border-color);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .nav-categories-inner {
+            display: flex;
+            gap: 24px;
+            padding: 12px 0;
+            white-space: nowrap;
+        }
+
+        .nav-category {
+            font-size: 14px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            padding: 4px 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .nav-category:hover,
+        .nav-category.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        /* BANNER PRINCIPAL */
+        .banner {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1e3a8a 100%);
+            color: var(--white);
+            padding: 48px 32px;
+            border-radius: 8px;
+            margin: 24px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .banner-content h1 {
+            font-size: 36px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .banner-content p {
+            font-size: 16px;
+            margin-bottom: 24px;
+            opacity: 0.95;
+        }
+
+        .banner-btn {
+            background-color: var(--accent-color);
+            color: var(--white);
+            border: none;
+            padding: 12px 32px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .banner-btn:hover {
+            background-color: #b91c1c;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .banner-image {
+            width: 300px;
+            height: 240px;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* PROMO CARDS */
+        .promo-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .promo-card {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #115e59 100%);
+            color: var(--white);
+            padding: 24px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: var(--shadow-md);
+        }
+
+        .promo-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .promo-card h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .promo-card p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* SECTION HEADER */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 32px 0 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .section-header h2 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .see-all {
+            color: var(--primary-color);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .see-all:hover {
+            color: var(--text-primary);
+        }
+
+        /* PRODUCT GRID */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.2s;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .product-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+            border-color: var(--primary-color);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background-color: #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 14px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        .product-badge.discount {
+            background-color: var(--accent-color);
+        }
+
+        .product-badge.new {
+            background-color: var(--success-color);
+        }
+
+        .product-info {
+            padding: 16px;
+        }
+
+        .product-category {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .product-name {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            line-height: 1.3;
+            color: var(--text-primary);
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .stars {
+            color: #fbbf24;
+        }
+
+        .rating-count {
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .price-original {
+            font-size: 13px;
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+
+        .price-current {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .price-discount {
+            font-size: 12px;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .product-cta {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-add-cart {
+            flex: 1;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-add-cart:hover {
+            background-color: #1e3a8a;
+        }
+
+        .btn-wishlist {
+            background-color: var(--light-bg);
+            border: 1px solid var(--border-color);
+            width: 44px;
+            height: 44px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all 0.2s;
+        }
+
+        .btn-wishlist:hover {
+            background-color: #fecaca;
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .btn-wishlist.active {
+            background-color: var(--accent-color);
+            color: var(--white);
+            border-color: var(--accent-color);
+        }
+
+        /* OFFERS SECTION */
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin: 32px 0;
+        }
+
+        .offer-card {
+            background: linear-gradient(135deg, var(--warning-color) 0%, #c2410c 100%);
+            color: var(--white);
+            padding: 32px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: var(--shadow-md);
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .offer-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .offer-card h3 {
+            font-size: 28px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .offer-card p {
+            font-size: 14px;
+            margin-bottom: 16px;
+            opacity: 0.95;
+        }
+
+        .offer-card-btn {
+            background-color: var(--white);
+            color: var(--warning-color);
+            border: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            align-self: center;
+        }
+
+        .offer-card-btn:hover {
+            background-color: var(--light-bg);
+        }
+
+        /* SUBSCRIPTION CTA */
+        .subscription-cta {
+            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+            color: var(--white);
+            padding: 32px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 40px 0;
+            box-shadow: var(--shadow-md);
+        }
+
+        .subscription-cta h2 {
+            font-size: 28px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .subscription-cta p {
+            font-size: 16px;
+            margin-bottom: 24px;
+            opacity: 0.95;
+        }
+
+        .subscription-btn {
+            background-color: var(--accent-color);
+            color: var(--white);
+            border: none;
+            padding: 12px 32px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .subscription-btn:hover {
+            background-color: #b91c1c;
+            transform: translateY(-2px);
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--text-primary);
+            color: var(--white);
+            padding: 40px 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+
+        .footer-column h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: var(--white);
+        }
+
+        .footer-newsletter {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 24px;
+            border-radius: 8px;
+            margin-bottom: 32px;
+        }
+
+        .footer-newsletter h3 {
+            margin-bottom: 12px;
+        }
+
+        .footer-newsletter p {
+            font-size: 14px;
+            margin-bottom: 16px;
+            opacity: 0.9;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 8px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .newsletter-form button {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .newsletter-form button:hover {
+            background-color: #1e3a8a;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-icon {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            text-align: center;
+            line-height: 32px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background-color: var(--primary-color);
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 32px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .modal-header h2 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: color 0.2s;
+        }
+
+        .modal-close:hover {
+            color: var(--text-primary);
+        }
+
+        .modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .modal-form input,
+        .modal-form textarea {
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        .modal-form input:focus,
+        .modal-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background-color: var(--white);
+        }
+
+        .modal-form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .modal-form button {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .modal-form button:hover {
+            background-color: #1e3a8a;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .search-bar {
+                margin: 0;
+            }
+
+            .banner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .banner-image {
+                width: 100%;
+                margin-top: 24px;
+            }
+
+            .promo-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+
+            .offers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .banner-content h1 {
+                font-size: 24px;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo" onclick="location.hash='home'">Vitrio</div>
+                <div class="search-bar">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" placeholder="O que você procura?" id="searchInput">
+                </div>
+                <div class="header-actions">
+                    <button class="header-btn" id="accountBtn" onclick="openLoginModal()">👤 Minha Conta</button>
+                    <button class="header-btn" id="cartBtn" onclick="openCart()">
+                        🛒
+                        <span class="badge" id="cartCount">2</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVEGAÇÃO CATEGORIAS -->
+    <div class="nav-categories">
+        <div class="container">
+            <div class="nav-categories-inner" id="categoriesNav">
+                <div class="nav-category active" onclick="filterCategory('all')">Todos os Produtos</div>
+                <div class="nav-category" onclick="filterCategory('tv')">TVs e Áudio</div>
+                <div class="nav-category" onclick="filterCategory('informatica')">Informática</div>
+                <div class="nav-category" onclick="filterCategory('smartphone')">Smartphones</div>
+                <div class="nav-category" onclick="filterCategory('cozinha')">Cozinha</div>
+                <div class="nav-category" onclick="filterCategory('climatizacao')">Climatização</div>
+                <div class="nav-category" onclick="filterCategory('limpeza')">Limpeza</div>
+                <div class="nav-category" onclick="filterCategory('iluminacao')">Iluminação</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div class="container">
+        <!-- BANNER PRINCIPAL -->
+        <div class="banner">
+            <div class="banner-content">
+                <h1>Últimos Lançamentos</h1>
+                <p>Descubra os produtos mais novos em eletrônicos e tecnologia para sua casa.</p>
+                <button class="banner-btn" onclick="openOffers()">Explorar Novidades</button>
+            </div>
+            <div class="banner-image">Imagem em Destaque</div>
+        </div>
+
+        <!-- CARTÕES PROMOCIONAIS -->
+        <div class="promo-cards">
+            <div class="promo-card" onclick="openOffers()">
+                <h3>Até 50% OFF</h3>
+                <p>Em Smartphones Selecionados</p>
+            </div>
+            <div class="promo-card" onclick="openOffers()">
+                <h3>Frete Grátis</h3>
+                <p>Em compras acima de R$ 100</p>
+            </div>
+            <div class="promo-card" onclick="subscribeClub()">
+                <h3>Clube Vitrio</h3>
+                <p>Economize até 20% sempre</p>
+            </div>
+        </div>
+
+        <!-- PRODUTOS EM DESTAQUE -->
+        <div class="section-header">
+            <h2>Produtos em Destaque</h2>
+            <a class="see-all" href="javascript:void(0)">Ver Todos →</a>
+        </div>
+
+        <div class="products-grid" id="productsGrid">
+            <!-- Produtos serão inseridos aqui via JavaScript -->
+        </div>
+
+        <!-- SEÇÃO DE OFERTAS -->
+        <div class="section-header">
+            <h2>Oferta do Dia</h2>
+        </div>
+
+        <div class="offers-grid">
+            <div class="offer-card" onclick="openOffers()">
+                <h3>Smart TV 55"</h3>
+                <p>4K Ultra HD com Bluetooth</p>
+                <button class="offer-card-btn">Ver Oferta</button>
+            </div>
+            <div class="offer-card" onclick="openOffers()">
+                <h3>Fone Wireless</h3>
+                <p>Cancelamento de Ruído</p>
+                <button class="offer-card-btn">Ver Oferta</button>
+            </div>
+        </div>
+
+        <!-- INSCRIÇÃO CLUB -->
+        <div class="subscription-cta">
+            <h2>Junte-se ao Clube Vitrio</h2>
+            <p>Receba 20% de desconto exclusivo, frete grátis e acesso antecipado a ofertas</p>
+            <button class="subscription-btn" onclick="subscribeClub()">Inscrever-se Agora</button>
+        </div>
+
+        <!-- MAIS PRODUTOS -->
+        <div class="section-header">
+            <h2>Mais Vendidos</h2>
+            <a class="see-all" href="javascript:void(0)">Ver Todos →</a>
+        </div>
+
+        <div class="products-grid" id="bestsellersGrid">
+            <!-- Produtos mais vendidos serão inseridos aqui -->
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-newsletter">
+                <h3>Fique por dentro das novidades</h3>
+                <p>Inscreva-se na nossa newsletter e receba ofertas exclusivas no seu e-mail</p>
+                <form class="newsletter-form" onsubmit="handleNewsletterSubscribe(event)">
+                    <input type="email" placeholder="seu@email.com" required>
+                    <button type="submit">Inscrever</button>
+                </form>
+            </div>
+
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Sobre Vitrio</h3>
+                    <ul>
+                        <li><a href="#about">Quem Somos</a></li>
+                        <li><a href="#careers">Carreiras</a></li>
+                        <li><a href="#press">Press</a></li>
+                        <li><a href="#sustainability">Sustentabilidade</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Atendimento ao Cliente</h3>
+                    <ul>
+                        <li><a href="#contact">Contato</a></li>
+                        <li><a href="#help">Central de Ajuda</a></li>
+                        <li><a href="#track">Rastrear Pedido</a></li>
+                        <li><a href="#returns">Devoluções</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Compre Conosco</h3>
+                    <ul>
+                        <li><a href="#categories">Categorias</a></li>
+                        <li><a href="#deals">Ofertas</a></li>
+                        <li><a href="#new">Novidades</a></li>
+                        <li><a href="#warranty">Garantia</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Políticas</h3>
+                    <ul>
+                        <li><a href="#privacy">Privacidade</a></li>
+                        <li><a href="#terms">Termos de Uso</a></li>
+                        <li><a href="#cookies">Cookies</a></li>
+                        <li><a href="#compliance">Conformidade</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div>© 2026 Vitrio E-commerce. Todos os direitos reservados.</div>
+                <div class="footer-socials">
+                    <a href="#" class="social-icon">f</a>
+                    <a href="#" class="social-icon">𝕏</a>
+                    <a href="#" class="social-icon">📷</a>
+                    <a href="#" class="social-icon">▶</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL LOGIN -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Minha Conta</h2>
+                <button class="modal-close" onclick="closeLoginModal()">✕</button>
+            </div>
+            <form class="modal-form" onsubmit="handleLogin(event)">
+                <input type="email" placeholder="seu@email.com" required>
+                <input type="password" placeholder="Sua Senha" required>
+                <button type="submit">Entrar</button>
+                <p style="text-align: center; font-size: 14px; color: var(--text-secondary);">
+                    Não tem conta? <a href="#register" style="color: var(--primary-color); text-decoration: none;" onclick="showRegister(event)">Criar Conta</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL OFERTAS -->
+    <div class="modal" id="offersModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Ofertas Exclusivas</h2>
+                <button class="modal-close" onclick="closeOffers()">✕</button>
+            </div>
+            <div style="text-align: center;">
+                <p style="font-size: 16px; margin-bottom: 20px;">Confira nossas ofertas limitadas por tempo!</p>
+                <button class="subscription-btn" onclick="closeOffers()">Continuar Comprando</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL CARRINHO -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h2>Meu Carrinho</h2>
+                <button class="modal-close" onclick="closeCart()">✕</button>
+            </div>
+            <div style="margin: 20px 0; padding: 16px; background-color: var(--light-bg); border-radius: 6px;">
+                <p>Você tem <strong id="cartItemCount">2</strong> itens no carrinho</p>
+                <p style="margin-top: 10px; font-size: 18px; font-weight: 700;">Total: R$ <span id="cartTotal">2.499,98</span></p>
+            </div>
+            <button class="subscription-btn" style="width: 100%; margin-bottom: 12px;" onclick="proceedToCheckout()">Ir para o Checkout</button>
+            <button class="login-btn" style="width: 100%; cursor: pointer; padding: 12px;" onclick="closeCart()">Continuar Comprando</button>
+        </div>
+    </div>
+
+    <!-- MODAL CLUBE -->
+    <div class="modal" id="clubModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Clube Vitrio</h2>
+                <button class="modal-close" onclick="closeClub()">✕</button>
+            </div>
+            <div style="margin: 20px 0; text-align: center;">
+                <h3 style="font-size: 20px; margin-bottom: 12px;">Benefícios Exclusivos</h3>
+                <ul style="text-align: left; margin: 20px 0; list-style: none;">
+                    <li style="margin: 10px 0;">✓ 20% de desconto em todas as compras</li>
+                    <li style="margin: 10px 0;">✓ Frete grátis em todas as encomendas</li>
+                    <li style="margin: 10px 0;">✓ Acesso antecipado a ofertas e promoções</li>
+                    <li style="margin: 10px 0;">✓ Programa de pontos (1 ponto por real gasto)</li>
+                    <li style="margin: 10px 0;">✓ Suporte prioritário ao cliente</li>
+                </ul>
+                <p style="font-size: 18px; margin: 20px 0;"><strong>R$ 9,90 por mês</strong> ou R$ 99 por ano (economize R$ 19,80)</p>
+            </div>
+            <button class="subscription-btn" style="width: 100%; margin-bottom: 12px;" onclick="joinClub()">Assinar Agora</button>
+            <button class="login-btn" style="width: 100%; cursor: pointer; padding: 12px;" onclick="closeClub()">Quero Saber Mais</button>
+        </div>
+    </div>
+
+    <script>
+        // DADOS DE PRODUTOS
+        const products = [
+            {
+                id: 1,
+                name: 'Smart TV 55" 4K',
+                category: 'tv',
+                price: 2499.99,
+                originalPrice: 3999.99,
+                rating: 4.8,
+                reviews: 245,
+                badge: 'discount',
+                badgeText: '-37%'
+            },
+            {
+                id: 2,
+                name: 'Smartphone Android Flagship',
+                category: 'smartphone',
+                price: 1899.99,
+                originalPrice: 2499.99,
+                rating: 4.6,
+                reviews: 512,
+                badge: 'discount',
+                badgeText: '-24%'
+            },
+            {
+                id: 3,
+                name: 'Notebook Intel Core i7',
+                category: 'informatica',
+                price: 3499.99,
+                originalPrice: 4299.99,
+                rating: 4.7,
+                reviews: 189,
+                badge: 'discount',
+                badgeText: '-19%'
+            },
+            {
+                id: 4,
+                name: 'Fone Bluetooth Premium',
+                category: 'tv',
+                price: 599.99,
+                originalPrice: 899.99,
+                rating: 4.5,
+                reviews: 823,
+                badge: 'discount',
+                badgeText: '-33%'
+            },
+            {
+                id: 5,
+                name: 'Ar Condicionado 12mil BTU',
+                category: 'climatizacao',
+                price: 1299.99,
+                originalPrice: 1799.99,
+                rating: 4.9,
+                reviews: 406,
+                badge: 'discount',
+                badgeText: '-28%'
+            },
+            {
+                id: 6,
+                name: 'Microondas Espelhado 25L',
+                category: 'cozinha',
+                price: 449.99,
+                originalPrice: 699.99,
+                rating: 4.4,
+                reviews: 234,
+                badge: 'discount',
+                badgeText: '-36%'
+            },
+            {
+                id: 7,
+                name: 'Luminária LED Inteligente',
+                category: 'iluminacao',
+                price: 129.99,
+                originalPrice: 299.99,
+                rating: 4.6,
+                reviews: 567,
+                badge: 'new',
+                badgeText: 'NOVO'
+            },
+            {
+                id: 8,
+                name: 'Aspirador Robô WiFi',
+                category: 'limpeza',
+                price: 1899.99,
+                originalPrice: 2999.99,
+                rating: 4.7,
+                reviews: 378,
+                badge: 'discount',
+                badgeText: '-37%'
+            },
+            {
+                id: 9,
+                name: 'Smart Speaker 360°',
+                category: 'tv',
+                price: 399.99,
+                originalPrice: 699.99,
+                rating: 4.5,
+                reviews: 1204,
+                badge: 'discount',
+                badgeText: '-43%'
+            },
+            {
+                id: 10,
+                name: 'Tablet 10" 128GB',
+                category: 'informatica',
+                price: 1199.99,
+                originalPrice: 1799.99,
+                rating: 4.6,
+                reviews: 445,
+                badge: 'discount',
+                badgeText: '-33%'
+            },
+            {
+                id: 11,
+                name: 'Fritadeira Elétrica sem Óleo',
+                category: 'cozinha',
+                price: 249.99,
+                originalPrice: 449.99,
+                rating: 4.8,
+                reviews: 891,
+                badge: 'discount',
+                badgeText: '-44%'
+            },
+            {
+                id: 12,
+                name: 'Impressora Multifuncional',
+                category: 'informatica',
+                price: 699.99,
+                originalPrice: 1099.99,
+                rating: 4.3,
+                reviews: 267,
+                badge: 'discount',
+                badgeText: '-36%'
+            }
+        ];
+
+        // RENDERIZAR PRODUTOS
+        function renderProducts(productsToRender = products, gridId = 'productsGrid') {
+            const grid = document.getElementById(gridId);
+            grid.innerHTML = '';
+
+            productsToRender.forEach(product => {
+                const discount = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
+                const starRating = '★'.repeat(Math.floor(product.rating)) + '☆'.repeat(5 - Math.floor(product.rating));
+
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <div class="product-image">
+                        <span class="product-badge ${product.badge}">${product.badgeText}</span>
+                        Imagem Produto
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">${getCategoryName(product.category)}</div>
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-rating">
+                            <span class="stars">${starRating}</span>
+                            <span class="rating-count">(${product.reviews})</span>
+                        </div>
+                        <div class="product-price">
+                            ${product.originalPrice > product.price ? `<span class="price-original">R$ ${product.originalPrice.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>` : ''}
+                            <span class="price-current">R$ ${product.price.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+                        </div>
+                        <div class="product-cta">
+                            <button class="btn-add-cart" onclick="addToCart(${product.id}, '${product.name}', ${product.price})">Adicionar ao Carrinho</button>
+                            <button class="btn-wishlist" onclick="toggleWishlist(this)">♡</button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function getCategoryName(category) {
+            const categories = {
+                'tv': 'TV e Áudio',
+                'informatica': 'Informática',
+                'smartphone': 'Smartphones',
+                'cozinha': 'Cozinha',
+                'climatizacao': 'Climatização',
+                'limpeza': 'Limpeza',
+                'iluminacao': 'Iluminação'
+            };
+            return categories[category] || category;
+        }
+
+        // FILTRAR CATEGORIA
+        function filterCategory(category) {
+            document.querySelectorAll('.nav-category').forEach(el => el.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (category === 'all') {
+                renderProducts(products, 'productsGrid');
+                renderProducts(products.slice(0, 8), 'bestsellersGrid');
+            } else {
+                const filtered = products.filter(p => p.category === category);
+                renderProducts(filtered.length > 0 ? filtered : products, 'productsGrid');
+                renderProducts(filtered.slice(0, 8), 'bestsellersGrid');
+            }
+        }
+
+        // CARRINHO
+        let cartItems = [];
+
+        function addToCart(id, name, price) {
+            cartItems.push({id, name, price});
+            updateCartCount();
+            alert(`${name} adicionado ao carrinho!`);
+        }
+
+        function updateCartCount() {
+            document.getElementById('cartCount').textContent = cartItems.length;
+            document.getElementById('cartItemCount').textContent = cartItems.length;
+
+            const total = cartItems.reduce((sum, item) => sum + item.price, 0);
+            document.getElementById('cartTotal').textContent = total.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        }
+
+        // MODAIS
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.add('active');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.remove('active');
+        }
+
+        function openCart() {
+            document.getElementById('cartModal').classList.add('active');
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').classList.remove('active');
+        }
+
+        function openOffers() {
+            document.getElementById('offersModal').classList.add('active');
+        }
+
+        function closeOffers() {
+            document.getElementById('offersModal').classList.remove('active');
+        }
+
+        function subscribeClub() {
+            document.getElementById('clubModal').classList.add('active');
+        }
+
+        function closeClub() {
+            document.getElementById('clubModal').classList.remove('active');
+        }
+
+        function proceedToCheckout() {
+            alert('Redirecionando para checkout...');
+            closeCart();
+        }
+
+        function joinClub() {
+            alert('Bem-vindo ao Clube Vitrio! Você acaba de economizar muito.');
+            closeClub();
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            alert('Bem-vindo! Você foi conectado com sucesso.');
+            closeLoginModal();
+        }
+
+        function handleNewsletterSubscribe(e) {
+            e.preventDefault();
+            alert('Obrigado por se inscrever! Confira seu e-mail para confirmação.');
+            e.target.reset();
+        }
+
+        function toggleWishlist(button) {
+            button.classList.toggle('active');
+            button.textContent = button.classList.contains('active') ? '♥' : '♡';
+        }
+
+        function showRegister(e) {
+            e.preventDefault();
+            alert('Página de cadastro');
+        }
+
+        // INICIALIZAR
+        renderProducts(products, 'productsGrid');
+        renderProducts(products.slice(0, 8), 'bestsellersGrid');
+    </script>
+</body>
+</html>

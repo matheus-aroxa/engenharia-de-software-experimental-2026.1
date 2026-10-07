@@ -1,0 +1,13 @@
+3 Design Questions Specific to This Signup Form
+
+1. How do we balance data collection with form friction to maximize conversion?
+
+A signup form's main enemy is abandonment. By strategically organizing fields into progressive sections (Personal Info → Address → Security → Preferences), we reduce cognitive load. We made birthdate, gender, and CPF optional fields—users only provide what's necessary to complete registration, with additional information collected later in their profile. The newsletter checkbox is pre-checked with a benefit-focused description ("exclusive offers") to increase opt-in rates, recognizing that data capture drives future marketing value. Trust badges at the bottom reassure hesitant users in the final moments before submission.
+
+2. Why include social login options and what security/UX benefits do they provide?
+
+Social login (Facebook/Google) reduces friction significantly—users skip password creation entirely. From a business perspective, this dramatically increases conversion rates for hesitant or privacy-conscious users. From a UX perspective, users reuse existing credentials they already know, eliminating "forgot password" issues. However, we placed these before the email option to test conversion, then fall back to traditional email registration. This creates a funnel: try fast option first, then offer traditional path. The divider text "Or create an account with" psychologically positions social login as the premium path.
+
+3. How does the password strength indicator build trust while guiding security best practices?
+
+The real-time password strength meter (Fraca → Média → Forte → Muito Forte) serves dual purposes: it gamifies password creation (users naturally try to reach "Muito Forte") while educating them about requirements (uppercase, numbers, symbols). The color progression (red → orange → blue → green) follows universal UX conventions for security states. This transparent feedback builds trust because users see their password being evaluated by the same rules the backend will enforce, eliminating surprise rejections. The meter also auto-validates the confirmation field, preventing mismatches—users know if passwords match before attempting submission.

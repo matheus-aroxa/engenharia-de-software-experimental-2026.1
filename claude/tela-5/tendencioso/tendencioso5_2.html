@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Vitrio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1e40af;
+            --primary-light: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-light: #9ca3af;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --bg-tertiary: #f3f4f6;
+            --border-color: #e5e7eb;
+            --border-light: #f3f4f6;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-primary);
+            background-color: var(--bg-secondary);
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .header-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .header-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .header-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .progress-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: var(--bg-primary);
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-tertiary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .progress-step.active .step-number {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .progress-step.completed .step-number {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .step-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        .progress-step.active .step-label {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .checkout-wrapper {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .checkout-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-section {
+            background: var(--bg-primary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--bg-tertiary);
+        }
+
+        .section-icon {
+            font-size: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .section-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-grid.full {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .required::after {
+            content: '*';
+            color: var(--error-color);
+            margin-left: 0.25rem;
+        }
+
+        input, select {
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: var(--transition);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .radio-item:hover {
+            border-color: var(--primary-color);
+            background: rgba(37, 99, 235, 0.02);
+        }
+
+        .radio-item input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 0.2rem;
+            cursor: pointer;
+            accent-color: var(--primary-color);
+            flex-shrink: 0;
+        }
+
+        .radio-item input[type="radio"]:checked ~ .radio-content,
+        .radio-item input[type="radio"]:checked {
+            cursor: pointer;
+        }
+
+        .radio-item input[type="radio"]:checked ~ .radio-label {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .radio-content {
+            flex: 1;
+        }
+
+        .radio-label {
+            font-weight: 500;
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .radio-description {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .radio-price {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--success-color);
+            margin-top: 0.5rem;
+        }
+
+        .address-card {
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .address-card:hover {
+            border-color: var(--primary-color);
+        }
+
+        .address-card input[type="radio"] {
+            margin-right: 0.5rem;
+        }
+
+        .address-card.selected {
+            border-color: var(--primary-color);
+            background: rgba(37, 99, 235, 0.02);
+        }
+
+        .address-info {
+            margin-left: 1.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .address-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .address-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .button {
+            padding: 0.875rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .button-primary {
+            background: var(--primary-color);
+            color: white;
+            width: 100%;
+        }
+
+        .button-primary:hover:not(:disabled) {
+            background: var(--primary-dark);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .button-primary:disabled {
+            background: var(--text-light);
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .button-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .button-secondary:hover {
+            background: var(--border-color);
+        }
+
+        .button-link {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        .button-link:hover {
+            text-decoration: underline;
+        }
+
+        .order-summary {
+            background: var(--bg-primary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .summary-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--bg-tertiary);
+        }
+
+        .summary-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+
+        .summary-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .item-image {
+            width: 60px;
+            height: 60px;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .item-price {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .item-quantity {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 0.25rem;
+        }
+
+        .summary-divider {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 1rem 0;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .summary-row.subtotal {
+            color: var(--text-secondary);
+        }
+
+        .summary-row.shipping {
+            color: var(--text-secondary);
+        }
+
+        .summary-row.discount {
+            color: var(--success-color);
+        }
+
+        .summary-row.total {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--bg-tertiary);
+        }
+
+        .coupon-section {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .coupon-input {
+            flex: 1;
+        }
+
+        .coupon-button {
+            padding: 0.75rem 1rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .coupon-button:hover {
+            background: var(--border-color);
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .payment-method {
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .payment-method:hover {
+            border-color: var(--primary-color);
+        }
+
+        .payment-method input[type="radio"] {
+            display: none;
+        }
+
+        .payment-method.selected {
+            border-color: var(--primary-color);
+            background: rgba(37, 99, 235, 0.02);
+        }
+
+        .payment-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .payment-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .card-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .card-fields.full {
+            grid-template-columns: 1fr;
+        }
+
+        .security-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .security-icon {
+            font-size: 1rem;
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        .success-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        .button-loading {
+            position: relative;
+        }
+
+        .button-loading::after {
+            content: '';
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .installment-info {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .checkout-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .order-summary {
+                position: static;
+            }
+
+            .progress-steps {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .progress-steps {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+
+            .form-section {
+                padding: 1rem;
+            }
+
+            .order-summary {
+                padding: 1rem;
+            }
+
+            .step-label {
+                font-size: 0.75rem;
+            }
+
+            .step-number {
+                width: 36px;
+                height: 36px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="#" class="logo">
+                <div class="logo-icon">V</div>
+                Vitrio
+            </a>
+            <div class="header-links">
+                <a href="#">Catálogo</a>
+                <a href="#">Carrinho</a>
+                <a href="#">Contato</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- Progress Steps -->
+            <div class="progress-steps">
+                <div class="progress-step completed">
+                    <div class="step-number">✓</div>
+                    <div class="step-label">Carrinho</div>
+                </div>
+                <div class="progress-step active">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Entrega</div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Pagamento</div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Confirmação</div>
+                </div>
+            </div>
+
+            <!-- Main Checkout Section -->
+            <div class="checkout-wrapper">
+                <form class="checkout-form" id="checkoutForm">
+                    <!-- Delivery Address Section -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <span class="section-icon">📍</span>
+                            <div>
+                                <div class="section-title">Endereço de Entrega</div>
+                                <div class="section-subtitle">Escolha ou insira um novo endereço</div>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 1.5rem;">
+                            <h4 style="font-size: 0.95rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                                Seus Endereços Salvos
+                            </h4>
+
+                            <!-- Saved Address 1 -->
+                            <label class="address-card selected">
+                                <input type="radio" name="savedAddress" value="address1" checked>
+                                <div class="address-info">
+                                    <span class="address-label">Casa (Padrão)</span>
+                                    <div class="address-text">
+                                        Avenida Paulista, 1000 - Apto 2501<br>
+                                        01311-100 - São Paulo, SP
+                                    </div>
+                                </div>
+                            </label>
+
+                            <!-- Saved Address 2 -->
+                            <label class="address-card" style="margin-top: 0.75rem;">
+                                <input type="radio" name="savedAddress" value="address2">
+                                <div class="address-info">
+                                    <span class="address-label">Escritório</span>
+                                    <div class="address-text">
+                                        Rua Augusta, 2800 - Sala 1205<br>
+                                        01305-100 - São Paulo, SP
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+
+                        <button type="button" class="button-link" id="newAddressBtn" style="margin-bottom: 1rem;">
+                            + Adicionar Novo Endereço
+                        </button>
+
+                        <!-- New Address Form (Hidden by default) -->
+                        <div id="newAddressForm" style="display: none; border-top: 1px solid var(--border-color); padding-top: 1.5rem;">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="newCep" class="required">CEP</label>
+                                    <input 
+                                        type="text" 
+                                        id="newCep" 
+                                        placeholder="12345-678"
+                                    >
+                                </div>
+                                <div class="form-group">
+                                    <label for="newNumber" class="required">Número</label>
+                                    <input 
+                                        type="text" 
+                                        id="newNumber" 
+                                        placeholder="123"
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="newStreet" class="required">Rua</label>
+                                    <input 
+                                        type="text" 
+                                        id="newStreet" 
+                                        placeholder="Avenida Principal"
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="newComplement">Complemento</label>
+                                    <input 
+                                        type="text" 
+                                        id="newComplement" 
+                                        placeholder="Apto, sala, etc"
+                                    >
+                                </div>
+                                <div class="form-group">
+                                    <label for="newCity" class="required">Cidade</label>
+                                    <input 
+                                        type="text" 
+                                        id="newCity" 
+                                        placeholder="São Paulo"
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="newState" class="required">Estado</label>
+                                    <select id="newState">
+                                        <option value="">Selecionar</option>
+                                        <option value="SP">São Paulo</option>
+                                        <option value="RJ">Rio de Janeiro</option>
+                                        <option value="MG">Minas Gerais</option>
+                                        <option value="BA">Bahia</option>
+                                        <option value="RS">Rio Grande do Sul</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        <input type="checkbox" id="saveAddress">
+                                        Salvar este endereço
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shipping Options Section -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <span class="section-icon">🚚</span>
+                            <div>
+                                <div class="section-title">Opções de Frete</div>
+                                <div class="section-subtitle">Escolha a melhor opção de entrega</div>
+                            </div>
+                        </div>
+
+                        <div class="radio-group">
+                            <!-- Express Shipping -->
+                            <label class="radio-item selected">
+                                <input type="radio" name="shipping" value="express" checked>
+                                <div class="radio-content">
+                                    <div class="radio-label">Entrega Rápida (24-48h)</div>
+                                    <div class="radio-description">
+                                        Receba seu pedido em até 2 dias úteis na região de São Paulo
+                                    </div>
+                                    <div class="radio-price">R$ 29,90</div>
+                                </div>
+                            </label>
+
+                            <!-- Standard Shipping -->
+                            <label class="radio-item">
+                                <input type="radio" name="shipping" value="standard">
+                                <div class="radio-content">
+                                    <div class="radio-label">Entrega Padrão (3-5 dias)</div>
+                                    <div class="radio-description">
+                                        Entrega em toda região metropolitana de São Paulo
+                                    </div>
+                                    <div class="radio-price">R$ 14,90</div>
+                                </div>
+                            </label>
+
+                            <!-- Economy Shipping -->
+                            <label class="radio-item">
+                                <input type="radio" name="shipping" value="economy">
+                                <div class="radio-content">
+                                    <div class="radio-label">Entrega Econômica (7-10 dias)</div>
+                                    <div class="radio-description">
+                                        Frete econômico para todo Brasil, contando com Correios
+                                    </div>
+                                    <div class="radio-price">Grátis</div>
+                                </div>
+                            </label>
+
+                            <!-- Pickup Option -->
+                            <label class="radio-item">
+                                <input type="radio" name="shipping" value="pickup">
+                                <div class="radio-content">
+                                    <div class="radio-label">Retirar na Loja</div>
+                                    <div class="radio-description">
+                                        Av. Paulista, 1000 - São Paulo, SP<br>
+                                        Disponível em 2 horas
+                                    </div>
+                                    <div class="radio-price">Grátis</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Payment Section -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <span class="section-icon">💳</span>
+                            <div>
+                                <div class="section-title">Forma de Pagamento</div>
+                                <div class="section-subtitle">Escolha como deseja pagar</div>
+                            </div>
+                        </div>
+
+                        <!-- Payment Methods Selection -->
+                        <div class="payment-methods">
+                            <label class="payment-method selected">
+                                <input type="radio" name="paymentMethod" value="card" checked>
+                                <div class="payment-icon">💳</div>
+                                <div class="payment-label">Cartão de Crédito</div>
+                            </label>
+
+                            <label class="payment-method">
+                                <input type="radio" name="paymentMethod" value="debit">
+                                <div class="payment-icon">🏧</div>
+                                <div class="payment-label">Débito</div>
+                            </label>
+
+                            <label class="payment-method">
+                                <input type="radio" name="paymentMethod" value="pix">
+                                <div class="payment-icon">⚡</div>
+                                <div class="payment-label">Pix</div>
+                            </label>
+
+                            <label class="payment-method">
+                                <input type="radio" name="paymentMethod" value="boleto">
+                                <div class="payment-icon">📄</div>
+                                <div class="payment-label">Boleto</div>
+                            </label>
+                        </div>
+
+                        <!-- Card Payment Details -->
+                        <div id="cardPayment">
+                            <div class="form-grid full">
+                                <div class="form-group">
+                                    <label for="cardName" class="required">Nome no Cartão</label>
+                                    <input 
+                                        type="text" 
+                                        id="cardName" 
+                                        placeholder="João Silva Santos"
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="form-grid full">
+                                <div class="form-group">
+                                    <label for="cardNumber" class="required">Número do Cartão</label>
+                                    <input 
+                                        type="text" 
+                                        id="cardNumber" 
+                                        placeholder="0000 0000 0000 0000"
+                                        maxlength="19"
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="card-fields">
+                                <div class="form-group">
+                                    <label for="expiry" class="required">Validade</label>
+                                    <input 
+                                        type="text" 
+                                        id="expiry" 
+                                        placeholder="MM/AA"
+                                        maxlength="5"
+                                    >
+                                </div>
+                                <div class="form-group">
+                                    <label for="cvv" class="required">CVV</label>
+                                    <input 
+                                        type="text" 
+                                        id="cvv" 
+                                        placeholder="123"
+                                        maxlength="4"
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="form-grid full">
+                                <div class="form-group">
+                                    <label for="installments" class="required">Parcelar em</label>
+                                    <select id="installments">
+                                        <option value="1">À vista (sem juros)</option>
+                                        <option value="2">2x de R$ 545,45</option>
+                                        <option value="3">3x de R$ 363,63</option>
+                                        <option value="6">6x de R$ 181,81</option>
+                                        <option value="12">12x de R$ 90,90</option>
+                                    </select>
+                                    <div class="installment-info">
+                                        Comprando no crédito, você tem até 30 dias para devolver
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="security-info">
+                                <span class="security-icon">🔒</span>
+                                <span>Seus dados de pagamento são seguros e criptografados</span>
+                            </div>
+                        </div>
+
+                        <!-- Pix Payment Details -->
+                        <div id="pixPayment" style="display: none;">
+                            <div style="background: var(--bg-tertiary); border-radius: 8px; padding: 1.5rem; text-align: center; margin-top: 1rem;">
+                                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                                    Você receberá um QR Code e chave Pix após confirmar o pedido. A confirmação é instantânea!
+                                </p>
+                                <div class="success-badge">
+                                    ✓ Pagamento sem taxas adicionais
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Boleto Payment Details -->
+                        <div id="boletoPayment" style="display: none;">
+                            <div style="background: var(--bg-tertiary); border-radius: 8px; padding: 1.5rem; margin-top: 1rem;">
+                                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                                    Um boleto bancário será enviado por e-mail após a confirmação do pedido.
+                                </p>
+                                <ul style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.8; margin-left: 1.5rem;">
+                                    <li>Validade: 3 dias úteis</li>
+                                    <li>Cópia será enviada via e-mail</li>
+                                    <li>Seu pedido será entregue após confirmação do pagamento</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Terms Section -->
+                    <div class="form-section" style="background: rgba(16, 185, 129, 0.02); border: 1px solid var(--success-color);">
+                        <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                            <input 
+                                type="checkbox" 
+                                id="agreeTerms" 
+                                style="width: 20px; height: 20px; margin-top: 0.2rem; cursor: pointer;"
+                                checked
+                            >
+                            <label for="agreeTerms" style="cursor: pointer; flex: 1;">
+                                <span style="font-weight: 600; color: var(--text-primary);">
+                                    Confirmo que li e aceito os Termos de Serviço e a Política de Privacidade
+                                </span>
+                                <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.25rem;">
+                                    Você também concorda em receber e-mails de confirmação e atualizações do seu pedido
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Final CTA -->
+                    <button type="submit" class="button button-primary" style="font-size: 1.1rem; padding: 1rem;">
+                        Confirmar Pedido
+                    </button>
+                </form>
+
+                <!-- Order Summary Sidebar -->
+                <aside class="order-summary">
+                    <h3 class="summary-title">Resumo do Pedido</h3>
+
+                    <div class="summary-items">
+                        <div class="summary-item">
+                            <div class="item-image">📱</div>
+                            <div class="item-details">
+                                <div class="item-name">iPhone 15 Pro Max</div>
+                                <div class="item-price">R$ 8.500,00</div>
+                                <div class="item-quantity">Qtd: 1</div>
+                            </div>
+                        </div>
+
+                        <div class="summary-item">
+                            <div class="item-image">⌚</div>
+                            <div class="item-details">
+                                <div class="item-name">Apple Watch Series 9</div>
+                                <div class="item-price">R$ 2.799,00</div>
+                                <div class="item-quantity">Qtd: 1</div>
+                            </div>
+                        </div>
+
+                        <div class="summary-item">
+                            <div class="item-image">🎧</div>
+                            <div class="item-details">
+                                <div class="item-name">AirPods Pro</div>
+                                <div class="item-price">R$ 1.899,00</div>
+                                <div class="item-quantity">Qtd: 2</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="summary-divider">
+
+                    <!-- Coupon Section -->
+                    <div class="coupon-section">
+                        <input 
+                            type="text" 
+                            class="coupon-input" 
+                            id="couponCode" 
+                            placeholder="Código do cupom"
+                        >
+                        <button type="button" class="coupon-button" id="applyCoupon">
+                            Aplicar
+                        </button>
+                    </div>
+
+                    <!-- Price Breakdown -->
+                    <div class="summary-row subtotal">
+                        <span>Subtotal</span>
+                        <span>R$ 1.090,90</span>
+                    </div>
+
+                    <div class="summary-row shipping">
+                        <span id="shippingLabel">Entrega Rápida</span>
+                        <span id="shippingPrice">R$ 29,90</span>
+                    </div>
+
+                    <div class="summary-row discount" id="discountRow" style="display: none;">
+                        <span>Desconto</span>
+                        <span id="discountAmount">-R$ 0,00</span>
+                    </div>
+
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span id="totalPrice">R$ 1.120,80</span>
+                    </div>
+
+                    <!-- Trust Badges -->
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); font-size: 0.85rem; color: var(--text-secondary);">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span>🔒</span>
+                            <span>Compra 100% Segura</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span>✓</span>
+                            <span>Garantia de Satisfação</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span>📞</span>
+                            <span>Suporte 24/7</span>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Form Elements
+        const form = document.getElementById('checkoutForm');
+        const newAddressBtn = document.getElementById('newAddressBtn');
+        const newAddressForm = document.getElementById('newAddressForm');
+        const shippingRadios = document.querySelectorAll('input[name="shipping"]');
+        const paymentMethodRadios = document.querySelectorAll('input[name="paymentMethod"]');
+        const applyCouponBtn = document.getElementById('applyCoupon');
+        const cardNumberInput = document.getElementById('cardNumber');
+        const expiryInput = document.getElementById('expiry');
+        const cvvInput = document.getElementById('cvv');
+        const cardPaymentDiv = document.getElementById('cardPayment');
+        const pixPaymentDiv = document.getElementById('pixPayment');
+        const boletoPaymentDiv = document.getElementById('boletoPayment');
+
+        // New Address Toggle
+        newAddressBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            newAddressForm.style.display = newAddressForm.style.display === 'none' ? 'block' : 'none';
+        });
+
+        // Shipping Option Changes
+        shippingRadios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                updateShippingPrice();
+            });
+        });
+
+        function updateShippingPrice() {
+            const selected = document.querySelector('input[name="shipping"]:checked');
+            const shippingLabel = document.getElementById('shippingLabel');
+            const shippingPrice = document.getElementById('shippingPrice');
+            let price = 0;
+
+            switch(selected.value) {
+                case 'express':
+                    shippingLabel.textContent = 'Entrega Rápida (24-48h)';
+                    shippingPrice.textContent = 'R$ 29,90';
+                    price = 29.90;
+                    break;
+                case 'standard':
+                    shippingLabel.textContent = 'Entrega Padrão (3-5 dias)';
+                    shippingPrice.textContent = 'R$ 14,90';
+                    price = 14.90;
+                    break;
+                case 'economy':
+                    shippingLabel.textContent = 'Entrega Econômica (7-10 dias)';
+                    shippingPrice.textContent = 'Grátis';
+                    price = 0;
+                    break;
+                case 'pickup':
+                    shippingLabel.textContent = 'Retirar na Loja';
+                    shippingPrice.textContent = 'Grátis';
+                    price = 0;
+                    break;
+            }
+
+            updateTotal();
+        }
+
+        // Payment Method Changes
+        paymentMethodRadios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                const method = radio.value;
+                cardPaymentDiv.style.display = 'none';
+                pixPaymentDiv.style.display = 'none';
+                boletoPaymentDiv.style.display = 'none';
+
+                switch(method) {
+                    case 'card':
+                    case 'debit':
+                        cardPaymentDiv.style.display = 'block';
+                        break;
+                    case 'pix':
+                        pixPaymentDiv.style.display = 'block';
+                        break;
+                    case 'boleto':
+                        boletoPaymentDiv.style.display = 'block';
+                        break;
+                }
+            });
+        });
+
+        // Payment Method Selection UI
+        document.querySelectorAll('.payment-method').forEach(method => {
+            method.addEventListener('click', function() {
+                document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        // Radio Item Selection UI
+        document.querySelectorAll('.radio-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.radio-item').forEach(i => i.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        // Address Card Selection UI
+        document.querySelectorAll('.address-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.address-card').forEach(c => c.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        // Card Number Formatting
+        cardNumberInput.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            let formatted = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+            e.target.value = formatted;
+        });
+
+        // Expiry Formatting
+        expiryInput.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.slice(0, 2) + '/' + value.slice(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        // CVV Formatting
+        cvvInput.addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+
+        // Coupon Application
+        applyCouponBtn.addEventListener('click', () => {
+            const couponCode = document.getElementById('couponCode').value.trim().toUpperCase();
+            const discountRow = document.getElementById('discountRow');
+            const discountAmount = document.getElementById('discountAmount');
+
+            if (couponCode === 'DESCONTO10') {
+                applyCouponBtn.textContent = '✓ Aplicado';
+                applyCouponBtn.style.background = 'var(--success-color)';
+                applyCouponBtn.style.color = 'white';
+                discountRow.style.display = 'flex';
+                discountAmount.textContent = '-R$ 109,09';
+                updateTotal(-109.09);
+            } else if (couponCode === '') {
+                alert('Por favor, insira um código de cupom');
+            } else {
+                alert('Cupom inválido');
+            }
+        });
+
+        // Update Total Price
+        function updateTotal(discount = 0) {
+            const subtotal = 1090.90;
+            const shippingPrice = parseFloat(document.getElementById('shippingPrice').textContent.replace(/[^\d,]/g, '').replace(',', '.')) || 0;
+            const total = subtotal + shippingPrice + discount;
+            document.getElementById('totalPrice').textContent = 'R$ ' + total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        // Form Submission
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Validation
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+            
+            if (paymentMethod === 'card' || paymentMethod === 'debit') {
+                if (!cardNumberInput.value || !expiryInput.value || !cvvInput.value) {
+                    alert('Por favor, preencha todos os dados do cartão');
+                    return;
+                }
+            }
+
+            if (!document.getElementById('agreeTerms').checked) {
+                alert('Você deve aceitar os termos para continuar');
+                return;
+            }
+
+            // Submit
+            const submitBtn = form.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.classList.add('button-loading');
+            submitBtn.textContent = 'Processando...';
+
+            setTimeout(() => {
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('button-loading');
+                submitBtn.textContent = '✓ Pedido Confirmado!';
+                submitBtn.style.background = 'var(--success-color)';
+
+                // Collect form data
+                const orderData = {
+                    shippingMethod: document.querySelector('input[name="shipping"]:checked').value,
+                    paymentMethod: paymentMethod,
+                    totalAmount: document.getElementById('totalPrice').textContent,
+                    timestamp: new Date().toISOString()
+                };
+
+                console.log('Pedido realizado:', orderData);
+
+                setTimeout(() => {
+                    // Redirect to confirmation
+                    window.location.href = '#confirmation';
+                }, 2000);
+            }, 2500);
+        });
+    </script>
+</body>
+</html>
