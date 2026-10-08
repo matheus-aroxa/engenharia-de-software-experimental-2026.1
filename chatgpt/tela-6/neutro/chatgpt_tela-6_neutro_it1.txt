@@ -1,0 +1,9 @@
+Pergunta 1
+
+A tela usa o roxo como cor principal para reforçar a identidade da Vitrio e comunicar exclusividade, enquanto o amarelo funciona como cor de destaque para a oferta. O hero ocupa grande parte da primeira dobra e apresenta imediatamente o principal benefício, o preço e o CTA. A comparação entre os planos fica logo abaixo, com o plano mensal visualmente destacado como “Mais escolhido”. Cards, bordas suaves, sombras discretas e bastante espaço em branco dão à página uma aparência de e-commerce comercial, enquanto a seção de benefícios e FAQ reduz dúvidas antes da adesão.
+Pergunta 2
+
+Essa tela aparece quando o cliente está navegando pela loja e demonstra interesse em aderir ao programa pago de benefícios da Vitrio. Ela funciona como uma landing page de conversão: apresenta a proposta do clube, explica os benefícios, compara os planos e conduz o usuário para a etapa de assinatura e pagamento.
+Pergunta 3
+
+O usuário pode clicar no logotipo ou em “Início” para retornar à loja, usar “Continuar comprando”, clicar em “Ver benefícios” para navegar até os planos, escolher entre Clube Mensal e Clube Anual e iniciar a assinatura. Cada botão de assinatura abre um modal com o plano escolhido. No modal, o cliente pode voltar ou avançar para o pagamento. A página também permite abrir e fechar cada pergunta do FAQ, apresentando as respostas correspondentes. O modal pode ainda ser fechado clicando fora de sua área. Todas as ações de navegação e adesão exibem feedback visual por mensagens temporárias.

@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitrio — Eletrônicos e Casa</title>
+  <style>
+    :root {
+      --primary: #5b21b6;
+      --primary-dark: #45158f;
+      --secondary: #f97316;
+      --accent: #facc15;
+      --text: #202124;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --surface: #ffffff;
+      --background: #f7f7f8;
+      --success: #16803c;
+      --danger: #dc2626;
+      --radius: 12px;
+      --shadow: 0 4px 18px rgba(20, 20, 30, .07);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--background);
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topbar {
+      height: 34px;
+      background: #43158b;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .header {
+      background: var(--primary);
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      box-shadow: 0 2px 8px rgba(0,0,0,.12);
+    }
+
+    .header-main {
+      height: 76px;
+      max-width: 1180px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .logo {
+      font-size: 29px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      min-width: 110px;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .search {
+      height: 46px;
+      flex: 1;
+      display: flex;
+      background: #fff;
+      border-radius: 7px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,.1);
+    }
+
+    .search input {
+      border: 0;
+      outline: 0;
+      padding: 0 16px;
+      flex: 1;
+      color: var(--text);
+      min-width: 100px;
+    }
+
+    .search button {
+      width: 56px;
+      border: 0;
+      cursor: pointer;
+      background: #f2f2f4;
+      color: var(--primary);
+      font-size: 20px;
+      transition: .2s;
+    }
+
+    .search button:hover {
+      background: #e5e5e9;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 21px;
+      align-items: center;
+    }
+
+    .header-action {
+      background: transparent;
+      border: 0;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .header-action .icon {
+      font-size: 22px;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      left: 15px;
+      background: var(--secondary);
+      color: white;
+      width: 19px;
+      height: 19px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 10px;
+      font-weight: bold;
+    }
+
+    .nav {
+      height: 44px;
+      background: #fff;
+      color: #333;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1180px;
+      margin: auto;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 29px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .nav a:hover {
+      color: var(--primary);
+    }
+
+    .nav .highlight {
+      color: var(--secondary);
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: auto;
+    }
+
+    .hero {
+      padding: 20px 0 10px;
+      position: relative;
+    }
+
+    .hero-slider {
+      height: 325px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .35s ease;
+      background: #E0E0E0;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .slide-content {
+      width: 55%;
+      padding: 52px 52px;
+      color: #fff;
+      position: relative;
+      z-index: 1;
+    }
+
+    .slide:nth-child(1) {
+      background: linear-gradient(110deg, #37116f 0%, #6d28d9 55%, #8b5cf6 100%);
+    }
+
+    .slide:nth-child(2) {
+      background: linear-gradient(110deg, #0f3b55, #087ea4);
+    }
+
+    .slide:nth-child(3) {
+      background: linear-gradient(110deg, #9a3412, #f97316);
+    }
+
+    .eyebrow {
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .slide h1 {
+      margin: 0 0 12px;
+      font-size: 34px;
+      line-height: 1.08;
+      letter-spacing: -.8px;
+    }
+
+    .slide p {
+      margin: 0 0 24px;
+      font-size: 16px;
+      line-height: 1.45;
+      max-width: 480px;
+    }
+
+    .primary-btn {
+      border: 0;
+      background: var(--secondary);
+      color: white;
+      border-radius: 7px;
+      padding: 12px 22px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .primary-btn:hover {
+      background: #ea650c;
+      transform: translateY(-1px);
+    }
+
+    .slide-art {
+      width: 45%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,.88);
+      font-size: 92px;
+      font-weight: 900;
+    }
+
+    .slider-control {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 4;
+      border: 0;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.92);
+      color: #333;
+      cursor: pointer;
+      font-size: 22px;
+      box-shadow: 0 2px 7px rgba(0,0,0,.2);
+    }
+
+    .slider-control.prev {
+      left: 15px;
+    }
+
+    .slider-control.next {
+      right: 15px;
+    }
+
+    .dots {
+      position: absolute;
+      bottom: 14px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 7px;
+      z-index: 5;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border: 0;
+      padding: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,.55);
+      cursor: pointer;
+    }
+
+    .dot.active {
+      width: 24px;
+      border-radius: 5px;
+      background: #fff;
+    }
+
+    .benefits {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      box-shadow: 0 2px 8px rgba(0,0,0,.03);
+    }
+
+    .benefit {
+      min-height: 72px;
+      padding: 13px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-right: 1px solid var(--border);
+    }
+
+    .benefit:last-child {
+      border-right: 0;
+    }
+
+    .benefit-icon {
+      font-size: 25px;
+      color: var(--primary);
+    }
+
+    .benefit strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 3px;
+    }
+
+    .benefit span {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    section {
+      padding: 27px 0 0;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 17px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: 21px;
+      letter-spacing: -.3px;
+    }
+
+    .see-all {
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 12px;
+    }
+
+    .category {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      min-height: 125px;
+      padding: 13px 7px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .category:hover {
+      transform: translateY(-3px);
+      border-color: #c4b5fd;
+      box-shadow: var(--shadow);
+    }
+
+    .category-icon {
+      width: 59px;
+      height: 59px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #f0eafd;
+      color: var(--primary);
+      font-size: 27px;
+      margin-bottom: 9px;
+    }
+
+    .category span {
+      font-size: 12px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .offer-banner {
+      min-height: 125px;
+      border-radius: 12px;
+      background: linear-gradient(105deg, #171717, #3c3c3c);
+      color: white;
+      padding: 24px 34px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    .offer-copy {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .offer-badge {
+      background: var(--secondary);
+      border-radius: 8px;
+      padding: 11px 15px;
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .offer-banner h2 {
+      margin: 0 0 4px;
+      font-size: 25px;
+    }
+
+    .offer-banner p {
+      margin: 0;
+      color: #ddd;
+      font-size: 13px;
+    }
+
+    .offer-price {
+      font-size: 28px;
+      color: var(--accent);
+      font-weight: 900;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .product-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      overflow: hidden;
+      position: relative;
+      transition: .2s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+
+    .product-image {
+      height: 194px;
+      background: #E0E0E0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #969696;
+      font-size: 49px;
+      position: relative;
+    }
+
+    .discount {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #dc2626;
+      color: #fff;
+      border-radius: 5px;
+      padding: 5px 7px;
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .favorite {
+      position: absolute;
+      right: 9px;
+      top: 8px;
+      width: 31px;
+      height: 31px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,.9);
+      cursor: pointer;
+      color: #666;
+      font-size: 17px;
+    }
+
+    .favorite.active {
+      color: #dc2626;
+    }
+
+    .product-info {
+      padding: 14px;
+    }
+
+    .rating {
+      color: #e59a00;
+      font-size: 11px;
+      margin-bottom: 7px;
+    }
+
+    .product-name {
+      min-height: 38px;
+      font-size: 13px;
+      line-height: 1.45;
+      margin-bottom: 10px;
+    }
+
+    .old-price {
+      color: #8a8a8a;
+      text-decoration: line-through;
+      font-size: 11px;
+      margin-bottom: 2px;
+    }
+
+    .price {
+      font-size: 20px;
+      font-weight: 900;
+      margin-bottom: 3px;
+    }
+
+    .installment {
+      font-size: 11px;
+      color: var(--success);
+      margin-bottom: 13px;
+    }
+
+    .buy-btn {
+      width: 100%;
+      height: 38px;
+      background: var(--primary);
+      color: #fff;
+      border: 0;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 12px;
+      transition: .2s;
+    }
+
+    .buy-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    .newsletter {
+      margin-top: 32px;
+      background: #eeeafb;
+      padding: 27px 45px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .newsletter h2 {
+      margin: 0 0 5px;
+      font-size: 20px;
+    }
+
+    .newsletter p {
+      margin: 0;
+      font-size: 12px;
+      color: #5f5f67;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 8px;
+      min-width: 450px;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      border: 1px solid #d0c9e8;
+      border-radius: 6px;
+      padding: 12px;
+      outline: none;
+      background: white;
+    }
+
+    .footer {
+      margin-top: 35px;
+      background: #252329;
+      color: #fff;
+      padding: 36px 0 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 50px;
+    }
+
+    .footer h3 {
+      margin: 0 0 14px;
+      font-size: 14px;
+    }
+
+    .footer p,
+    .footer a {
+      color: #bbb8c0;
+      font-size: 12px;
+      line-height: 1.9;
+      display: block;
+    }
+
+    .footer a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #414047;
+      margin-top: 28px;
+      padding-top: 16px;
+      text-align: center;
+      color: #99969f;
+      font-size: 11px;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #202124;
+      color: white;
+      padding: 13px 17px;
+      border-radius: 8px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.2);
+      font-size: 13px;
+      transform: translateY(80px);
+      opacity: 0;
+      pointer-events: none;
+      transition: .3s;
+      z-index: 100;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.5);
+      z-index: 90;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal {
+      width: 420px;
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+      position: relative;
+    }
+
+    .modal h2 {
+      margin: 0 0 7px;
+      font-size: 20px;
+    }
+
+    .modal p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      border: 0;
+      background: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #666;
+    }
+
+    .modal input {
+      width: 100%;
+      border: 1px solid #d5d5d5;
+      padding: 12px;
+      border-radius: 6px;
+      outline: none;
+      margin: 10px 0 12px;
+    }
+
+    .modal input:focus {
+      border-color: var(--primary);
+    }
+
+    @media (max-width: 900px) {
+      .header-main,
+      .nav-inner,
+      .container {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .header-main {
+        gap: 12px;
+      }
+
+      .categories {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .products {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .benefits {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .benefit:nth-child(2) {
+        border-right: 0;
+      }
+
+      .benefit:nth-child(-n+2) {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .newsletter {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .newsletter-form {
+        width: 100%;
+        min-width: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    Frete grátis para compras acima de R$ 199 • Aproveite as ofertas da semana
+  </div>
+
+  <header class="header">
+    <div class="header-main">
+      <a class="logo" href="#" data-action="home" aria-label="Vitrio, página inicial">vit<span>r</span>io</a>
+
+      <form class="search" id="searchForm">
+        <input id="searchInput" type="search" placeholder="Busque por produtos, marcas ou categorias" aria-label="Buscar produtos">
+        <button type="submit" aria-label="Pesquisar">⌕</button>
+      </form>
+
+      <div class="header-actions">
+        <button class="header-action" id="accountBtn" type="button">
+          <span class="icon">♙</span>
+          <span>Olá, entre<br>ou cadastre-se</span>
+        </button>
+
+        <button class="header-action" id="cartBtn" type="button" aria-label="Abrir carrinho">
+          <span class="icon">🛒</span>
+          <span class="cart-count" id="cartCount">0</span>
+          <span>Carrinho</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#categorias">Todas as categorias</a>
+      <a href="#eletronicos">Eletrônicos</a>
+      <a href="#casa">Casa</a>
+      <a href="#ofertas" class="highlight">Ofertas</a>
+      <a href="#destaques">Mais vendidos</a>
+      <a href="#novidades">Novidades</a>
+      <a href="#rodape">Atendimento</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+      <section class="hero" aria-label="Ofertas em destaque">
+        <div class="hero-slider" id="heroSlider">
+          <article class="slide active">
+            <div class="slide-content">
+              <div class="eyebrow">Oferta da semana</div>
+              <h1>Seu setup merece um upgrade.</h1>
+              <p>Até 35% OFF em notebooks, monitores e acessórios selecionados.</p>
+              <button class="primary-btn" data-scroll="#destaques">Ver ofertas</button>
+            </div>
+            <div class="slide-art" aria-hidden="true">▣</div>
+          </article>
+
+          <article class="slide">
+            <div class="slide-content">
+              <div class="eyebrow">Casa inteligente</div>
+              <h1>Mais tecnologia para o seu dia.</h1>
+              <p>Smart TVs, caixas de som e dispositivos conectados com condições especiais.</p>
+              <button class="primary-btn" data-search="casa inteligente">Comprar agora</button>
+            </div>
+            <div class="slide-art" aria-hidden="true">⌂</div>
+          </article>
+
+          <article class="slide">
+            <div class="slide-content">
+              <div class="eyebrow">Só nesta semana</div>
+              <h1>Ofertas que cabem no seu bolso.</h1>
+              <p>Parcelamento em até 10x sem juros em produtos selecionados.</p>
+              <button class="primary-btn" data-scroll="#ofertas">Aproveitar ofertas</button>
+            </div>
+            <div class="slide-art" aria-hidden="true">%</div>
+          </article>
+
+          <button class="slider-control prev" id="prevSlide" aria-label="Banner anterior">‹</button>
+          <button class="slider-control next" id="nextSlide" aria-label="Próximo banner">›</button>
+
+          <div class="dots" id="dots">
+            <button class="dot active" data-slide="0" aria-label="Banner 1"></button>
+            <button class="dot" data-slide="1" aria-label="Banner 2"></button>
+            <button class="dot" data-slide="2" aria-label="Banner 3"></button>
+          </div>
+        </div>
+
+        <div class="benefits">
+          <div class="benefit">
+            <span class="benefit-icon">🚚</span>
+            <div><strong>Frete grátis</strong><span>Acima de R$ 199</span></div>
+          </div>
+          <div class="benefit">
+            <span class="benefit-icon">💳</span>
+            <div><strong>Até 10x sem juros</strong><span>Em produtos selecionados</span></div>
+          </div>
+          <div class="benefit">
+            <span class="benefit-icon">🔒</span>
+            <div><strong>Compra segura</strong><span>Seus dados protegidos</span></div>
+          </div>
+          <div class="benefit">
+            <span class="benefit-icon">↩</span>
+            <div><strong>Troca facilitada</strong><span>Até 7 dias após receber</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="categorias">
+        <div class="section-heading">
+          <h2>Encontre por categoria</h2>
+          <a class="see-all" href="#eletronicos">Ver todas ›</a>
+        </div>
+
+        <div class="categories">
+          <a class="category" href="#destaques" data-category="Celulares">
+            <div class="category-icon">▣</div><span>Celulares</span>
+          </a>
+          <a class="category" href="#destaques" data-category="Informática">
+            <div class="category-icon">▤</div><span>Informática</span>
+          </a>
+          <a class="category" href="#destaques" data-category="TV e Vídeo">
+            <div class="category-icon">▥</div><span>TV e Vídeo</span>
+          </a>
+          <a class="category" href="#destaques" data-category="Áudio">
+            <div class="category-icon">♫</div><span>Áudio</span>
+          </a>
+          <a class="category" href="#destaques" data-category="Eletrodomésticos">
+            <div class="category-icon">◇</div><span>Eletrodomésticos</span>
+          </a>
+          <a class="category" href="#destaques" data-category="Casa">
+            <div class="category-icon">⌂</div><span>Casa</span>
+          </a>
+          <a class="category" href="#destaques" data-category="Games">
+            <div class="category-icon">✦</div><span>Games</span>
+          </a>
+          <a class="category" href="#destaques" data-category="Acessórios">
+            <div class="category-icon">◉</div><span>Acessórios</span>
+          </a>
+        </div>
+      </section>
+
+      <section id="ofertas">
+        <div class="offer-banner">
+          <div class="offer-copy">
+            <div class="offer-badge">Oferta relâmpago</div>
+            <div>
+              <h2>Smart TV 50" 4K</h2>
+              <p>Imagem incrível para transformar sua sala.</p>
+            </div>
+          </div>
+          <div>
+            <div class="offer-price">R$ 2.199,00</div>
+            <button class="primary-btn" data-product="Smart TV 50\" 4K">Comprar agora</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="destaques">
+        <div class="section-heading">
+          <h2>Produtos em destaque</h2>
+          <a class="see-all" href="#categorias">Explorar catálogo ›</a>
+        </div>
+
+        <div class="products">
+          <article class="product-card">
+            <div class="product-image">
+              <span class="discount">-18%</span>
+              <button class="favorite" type="button" aria-label="Favoritar Smartphone Galaxy A55">♡</button>
+              📱
+            </div>
+            <div class="product-info">
+              <div class="rating">★★★★★ <span style="color:#888">(128)</span></div>
+              <div class="product-name">Smartphone Galaxy A55 5G 128GB 8GB RAM</div>
+              <div class="old-price">R$ 2.199,00</div>
+              <div class="price">R$ 1.799,00</div>
+              <div class="installment">ou 10x de R$ 179,90 sem juros</div>
+              <button class="buy-btn" data-product="Smartphone Galaxy A55 5G">Adicionar ao carrinho</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image">
+              <span class="discount">-22%</span>
+              <button class="favorite" type="button" aria-label="Favoritar notebook">♡</button>
+              💻
+            </div>
+            <div class="product-info">
+              <div class="rating">★★★★★ <span style="color:#888">(94)</span></div>
+              <div class="product-name">Notebook Vitrio Pro 15,6" Intel Core i5 8GB 512GB SSD</div>
+              <div class="old-price">R$ 3.599,00</div>
+              <div class="price">R$ 2.799,00</div>
+              <div class="installment">ou 10x de R$ 279,90 sem juros</div>
+              <button class="buy-btn" data-product="Notebook Vitrio Pro 15,6&quot;">Adicionar ao carrinho</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image">
+              <span class="discount">-15%</span>
+              <button class="favorite" type="button" aria-label="Favoritar fone de ouvido">♡</button>
+              🎧
+            </div>
+            <div class="product-info">
+              <div class="rating">★★★★☆ <span style="color:#888">(76)</span></div>
+              <div class="product-name">Fone de Ouvido Bluetooth Wave ANC com Cancelamento de Ruído</div>
+              <div class="old-price">R$ 399,00</div>
+              <div class="price">R$ 339,00</div>
+              <div class="installment">ou 6x de R$ 56,50 sem juros</div>
+              <button class="buy-btn" data-product="Fone de Ouvido Bluetooth Wave ANC">Adicionar ao carrinho</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image">
+              <span class="discount">-20%</span>
+              <button class="favorite" type="button" aria-label="Favoritar air fryer">♡</button>
+              🍳
+            </div>
+            <div class="product-info">
+              <div class="rating">★★★★★ <span style="color:#888">(211)</span></div>
+              <div class="product-name">Air Fryer Digital 5,5L 1700W Inox com 8 funções</div>
+              <div class="old-price">R$ 499,00</div>
+              <div class="price">R$ 399,00</div>
+              <div class="installment">ou 7x de R$ 57,00 sem juros</div>
+              <button class="buy-btn" data-product="Air Fryer Digital 5,5L">Adicionar ao carrinho</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="eletronicos">
+        <div class="section-heading">
+          <h2>Mais vendidos</h2>
+          <a class="see-all" href="#destaques">Ver todos ›</a>
+        </div>
+
+        <div class="products">
+          <article class="product-card">
+            <div class="product-image">
+              <button class="favorite" type="button" aria-label="Favoritar monitor">♡</button>
+              🖥️
+            </div>
+            <div class="product-info">
+              <div class="rating">★★★★★ <span style="color:#888">(63)</span></div>
+              <div class="product-name">Monitor 24" Full HD 100Hz com bordas ultrafinas</div>
+              <div class="old-price">R$ 899,00</div>
+              <div class="price">R$ 749,00</div>
+              <div class="installment">ou 10x de R$ 74,90 sem juros</div>
+              <button class="buy-btn" data-product="Monitor 24 Full HD 100Hz">Adicionar ao carrinho</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image">
+              <button class="favorite" type="button" aria-label="Favoritar caixa de som">♡</button>
+              🔊
+            </div>
+            <div class="product-info">
+              <div class="rating">★★★★★ <span style="color:#888">(155)</span></div>
+              <div class="product-name">Caixa de Som Bluetooth 30W com bateria de 12 horas</div>
+              <div class="old-price">R$ 349,00</div>
+              <div class="price">R$ 279,00</div>
+              <div class="installment">ou 5x de R$ 55,80 sem juros</div>
+              <button class="buy-btn" data-product="Caixa de Som Bluetooth 30W">Adicionar ao carrinho</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image">
+              <button class="favorite" type="button" aria-label="Favoritar robô aspirador">♡</button>
+              🤖
+            </div>
+            <div class="product-info">
+              <div class="rating">★★★★☆ <span style="color:#888">(48)</span></div>
+              <div class="product-name">Robô Aspirador Smart com Mapeamento e Controle por App</div>
+              <div class="old-price">R$ 1.499,00</div>
+              <div class="price">R$ 1.199,00</div>
+              <div class="installment">ou 10x de R$ 119,90 sem juros</div>
+              <button class="buy-btn" data-product="Robô Aspirador Smart">Adicionar ao carrinho</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image">
+              <button class="favorite" type="button" aria-label="Favoritar smartwatch">♡</button>
+              ⌚
+            </div>
+            <div class="product-info">
+              <div class="rating">★★★★★ <span style="color:#888">(87)</span></div>
+              <div class="product-name">Smartwatch Fit Pro com GPS, monitor cardíaco e AMOLED</div>
+              <div class="old-price">R$ 699,00</div>
+              <div class="price">R$ 549,00</div>
+              <div class="installment">ou 9x de R$ 61,00 sem juros</div>
+              <button class="buy-btn" data-product="Smartwatch Fit Pro">Adicionar ao carrinho</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="casa">
+        <div class="section-heading">
+          <h2>Ofertas para sua casa</h2>
+          <a class="see-all" href="#ofertas">Ver ofertas ›</a>
+        </div>
+
+        <div class="products">
+          <article class="product-card">
+            <div class="product-image"><span class="discount">-17%</span>☕</div>
+            <div class="product-info">
+              <div class="rating">★★★★★ <span style="color:#888">(109)</span></div>
+              <div class="product-name">Cafeteira Espresso Compacta 15 Bar 1,2L</div>
+              <div class="old-price">R$ 599,00</div>
+              <div class="price">R$ 499,00</div>
+              <div class="installment">ou 8x de R$ 62,38 sem juros</div>
+              <button class="buy-btn" data-product="Cafeteira Espresso Compacta">Adicionar ao carrinho</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image"><span class="discount">-13%</span>🌀</div>
+            <div class="product-info">
+              <div class="rating">★★★★☆ <span style="color:#888">(51)</span></div>
+              <div class="product-name">Ventilador de Coluna 40cm 6 Pás com Controle</div>
+              <div class="old-price">R$ 299,00</div>
+              <div class="price">R$ 259,00</div>
+              <div class="installment">ou 5x de R$ 51,80 sem juros</div>
+              <button class="buy-btn" data-product="Ventilador de Coluna 40cm">Adicionar ao carrinho</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image"><span class="discount">-11%</span>🧹</div>
+            <div class="product-info">
+              <div class="rating">★★★★★ <span style="color:#888">(72)</span></div>
+              <div class="product-name">Aspirador Vertical 2 em 1 1000W com Filtro HEPA</div>
+              <div class="old-price">R$ 449,00</div>
+              <div class="price">R$ 399,00</div>
+              <div class="installment">ou 7x de R$ 57,00 sem juros</div>
+              <button class="buy-btn" data-product="Aspirador Vertical 2 em 1">Adicionar ao carrinho</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image"><span class="discount">-16%</span>🍲</div>
+            <div class="product-info">
+              <div class="rating">★★★★★ <span style="color:#888">(134)</span></div>
+              <div class="product-name">Panela de Pressão Elétrica 5L 900W 10 funções</div>
+              <div class="old-price">R$ 379,00</div>
+              <div class="price">R$ 319,00</div>
+              <div class="installment">ou 6x de R$ 53,17 sem juros</div>
+              <button class="buy-btn" data-product="Panela de Pressão Elétrica 5L">Adicionar ao carrinho</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="novidades">
+        <div class="newsletter">
+          <div>
+            <h2>Receba ofertas em primeira mão</h2>
+            <p>Cadastre seu e-mail e receba novidades, cupons e promoções da Vitrio.</p>
+          </div>
+          <form class="newsletter-form" id="newsletterForm">
+            <input type="email" id="newsletterEmail" placeholder="Seu melhor e-mail" aria-label="Seu melhor e-mail" required>
+            <button class="primary-btn" type="submit">Quero receber</button>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer" id="rodape">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="logo">vit<span>r</span>io</div>
+          <p>Eletrônicos, tecnologia e itens para deixar sua casa ainda melhor.</p>
+          <p>Compra segura, atendimento próximo e ofertas todos os dias.</p>
+        </div>
+
+        <div>
+          <h3>Institucional</h3>
+          <a href="#" data-message="Sobre a Vitrio">Sobre a Vitrio</a>
+          <a href="#" data-message="Política de privacidade">Política de privacidade</a>
+          <a href="#" data-message="Termos de uso">Termos de uso</a>
+        </div>
+
+        <div>
+          <h3>Atendimento</h3>
+          <a href="#" data-message="Central de atendimento: segunda a sábado, das 8h às 20h.">Central de atendimento</a>
+          <a href="#" data-message="Acompanhe seus pedidos pela área Minha conta.">Meus pedidos</a>
+          <a href="#" data-message="Consulte nossa política de trocas e devoluções.">Trocas e devoluções</a>
+        </div>
+
+        <div>
+          <h3>Pagamento</h3>
+          <p>Cartão de crédito</p>
+          <p>Pix</p>
+          <p>Até 10x sem juros</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        © 2026 Vitrio Comércio Digital. Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" aria-label="Fechar">×</button>
+      <h2 id="modalTitle">Entre na sua conta</h2>
+      <p id="modalDescription">Acesse seus pedidos, favoritos e ofertas personalizadas.</p>
+      <form id="loginForm">
+        <input type="email" id="loginEmail" placeholder="Seu e-mail" required>
+        <input type="password" id="loginPassword" placeholder="Sua senha" required>
+        <button class="primary-btn" style="width:100%" type="submit">Entrar</button>
+      </form>
+      <p style="text-align:center;margin-bottom:0">
+        Ainda não tem uma conta?
+        <a href="#" id="registerLink" style="color:#5b21b6;font-weight:bold">Cadastre-se</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      let cartCount = 0;
+      let currentSlide = 0;
+      let sliderTimer;
+
+      const slides = [...document.querySelectorAll(".slide")];
+      const dots = [...document.querySelectorAll(".dot")];
+      const cartCounter = document.getElementById("cartCount");
+      const toast = document.getElementById("toast");
+      const modal = document.getElementById("modalBackdrop");
+      const searchInput = document.getElementById("searchInput");
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add("show");
+        clearTimeout(showToast.timer);
+        showToast.timer = setTimeout(() => toast.classList.remove("show"), 2800);
+      }
+
+      function updateSlide(index) {
+        currentSlide = (index + slides.length) % slides.length;
+        slides.forEach((slide, i) => slide.classList.toggle("active", i === currentSlide));
+        dots.forEach((dot, i) => dot.classList.toggle("active", i === currentSlide));
+      }
+
+      function startSlider() {
+        clearInterval(sliderTimer);
+        sliderTimer = setInterval(() => updateSlide(currentSlide + 1), 5000);
+      }
+
+      document.getElementById("prevSlide").addEventListener("click", () => {
+        updateSlide(currentSlide - 1);
+        startSlider();
+      });
+
+      document.getElementById("nextSlide").addEventListener("click", () => {
+        updateSlide(currentSlide + 1);
+        startSlider();
+      });
+
+      dots.forEach(dot => {
+        dot.addEventListener("click", () => {
+          updateSlide(Number(dot.dataset.slide));
+          startSlider();
+        });
+      });
+
+      document.querySelectorAll(".buy-btn, [data-product]").forEach(button => {
+        button.addEventListener("click", event => {
+          const product = event.currentTarget.dataset.product;
+          if (!product) return;
+          cartCount++;
+          cartCounter.textContent = cartCount;
+          showToast(`${product} foi adicionado ao carrinho.`);
+        });
+      });
+
+      document.querySelectorAll(".favorite").forEach(button => {
+        button.addEventListener("click", event => {
+          event.stopPropagation();
+          const active = button.classList.toggle("active");
+          button.textContent = active ? "♥" : "♡";
+          showToast(active ? "Produto adicionado aos favoritos." : "Produto removido dos favoritos.");
+        });
+      });
+
+      document.querySelectorAll("[data-scroll]").forEach(button => {
+        button.addEventListener("click", () => {
+          document.querySelector(button.dataset.scroll)?.scrollIntoView({ behavior: "smooth" });
+        });
+      });
+
+      document.querySelectorAll("[data-search]").forEach(button => {
+        button.addEventListener("click", () => {
+          searchInput.value = button.dataset.search;
+          searchInput.focus();
+          showToast(`Buscando por "${button.dataset.search}".`);
+          document.getElementById("destaques").scrollIntoView({ behavior: "smooth" });
+        });
+      });
+
+      document.querySelectorAll("[data-category]").forEach(category => {
+        category.addEventListener("click", () => {
+          showToast(`Categoria selecionada: ${category.dataset.category}.`);
+        });
+      });
+
+      document.getElementById("searchForm").addEventListener("submit", event => {
+        event.preventDefault();
+        const query = searchInput.value.trim();
+        if (!query) {
+          searchInput.focus();
+          showToast("Digite o que você procura para iniciar a busca.");
+          return;
+        }
+        showToast(`Busca realizada por: "${query}".`);
+        document.getElementById("destaques").scrollIntoView({ behavior: "smooth" });
+      });
+
+      document.getElementById("cartBtn").addEventListener("click", () => {
+        if (cartCount === 0) {
+          showToast("Seu carrinho está vazio.");
+        } else {
+          showToast(`Seu carrinho possui ${cartCount} ${cartCount === 1 ? "item" : "itens"}.`);
+        }
+      });
+
+      function openLoginModal() {
+        modal.classList.add("open");
+        document.getElementById("loginEmail").focus();
+      }
+
+      function closeLoginModal() {
+        modal.classList.remove("open");
+      }
+
+      document.getElementById("accountBtn").addEventListener("click", openLoginModal);
+      document.getElementById("modalClose").addEventListener("click", closeLoginModal);
+
+      modal.addEventListener("click", event => {
+        if (event.target === modal) closeLoginModal();
+      });
+
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && modal.classList.contains("open")) {
+          closeLoginModal();
+        }
+      });
+
+      document.getElementById("loginForm").addEventListener("submit", event => {
+        event.preventDefault();
+        closeLoginModal();
+        showToast("Login demonstrativo realizado com sucesso.");
+      });
+
+      document.getElementById("registerLink").addEventListener("click", event => {
+        event.preventDefault();
+        closeLoginModal();
+        showToast("Cadastro demonstrativo: formulário de criação de conta.");
+      });
+
+      document.getElementById("newsletterForm").addEventListener("submit", event => {
+        event.preventDefault();
+        const email = document.getElementById("newsletterEmail").value.trim();
+        if (!email) return;
+        event.target.reset();
+        showToast("Cadastro realizado! Você receberá nossas próximas ofertas.");
+      });
+
+      document.querySelectorAll("[data-message]").forEach(link => {
+        link.addEventListener("click", event => {
+          event.preventDefault();
+          showToast(link.dataset.message);
+        });
+      });
+
+      document.querySelectorAll('a[href="#"]').forEach(link => {
+        if (!link.dataset.message && !link.dataset.action) {
+          link.addEventListener("click", event => {
+            event.preventDefault();
+          });
+        }
+      });
+
+      document.querySelector('[data-action="home"]').addEventListener("click", event => {
+        event.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      startSlider();
+    })();
+  </script>
+</body>
+</html>

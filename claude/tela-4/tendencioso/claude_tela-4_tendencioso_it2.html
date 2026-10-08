@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Conta - Vitrio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1e40af;
+            --primary-light: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-light: #9ca3af;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --bg-tertiary: #f3f4f6;
+            --border-color: #e5e7eb;
+            --border-light: #f3f4f6;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-primary);
+            background-color: var(--bg-secondary);
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .header-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .header-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .header-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .login-link {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .signup-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            min-height: calc(100vh - 80px);
+            padding: 3rem 1rem;
+        }
+
+        .benefits-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .benefits-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .benefits-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .benefit-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .benefit-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .benefit-text h3 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+        }
+
+        .benefit-text p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .form-section {
+            background: var(--bg-primary);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .form-header {
+            margin-bottom: 2rem;
+        }
+
+        .form-header h1 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .form-header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-grid.full {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .required::after {
+            content: '*';
+            color: var(--error-color);
+            margin-left: 0.25rem;
+        }
+
+        input, select {
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: var(--transition);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        input.error {
+            border-color: var(--error-color);
+            background: rgba(239, 68, 68, 0.02);
+        }
+
+        input.success {
+            border-color: var(--success-color);
+            background: rgba(16, 185, 129, 0.02);
+        }
+
+        input.error:focus {
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        }
+
+        input.success:focus {
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        .input-helper {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            min-height: 1.2rem;
+        }
+
+        .error-message {
+            color: var(--error-color);
+            display: none;
+        }
+
+        .input.error ~ .input-helper .error-message {
+            display: inline;
+        }
+
+        .success-message {
+            color: var(--success-color);
+            display: none;
+        }
+
+        .input.success ~ .input-helper .success-message {
+            display: inline;
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .password-toggle:hover {
+            color: var(--primary-color);
+        }
+
+        .password-strength {
+            margin-top: 0.5rem;
+            display: flex;
+            gap: 0.25rem;
+            align-items: center;
+        }
+
+        .strength-bar {
+            height: 4px;
+            flex: 1;
+            background: var(--border-color);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .strength-fill {
+            height: 100%;
+            width: 0%;
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        .strength-text {
+            font-size: 0.8rem;
+            font-weight: 600;
+            min-width: 80px;
+            text-align: right;
+        }
+
+        .form-divider {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 2rem 0;
+        }
+
+        .section-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--bg-tertiary);
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            cursor: pointer;
+        }
+
+        .checkbox-input {
+            width: 20px;
+            height: 20px;
+            margin-top: 0.2rem;
+            cursor: pointer;
+            flex-shrink: 0;
+            accent-color: var(--primary-color);
+        }
+
+        .checkbox-label {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            font-weight: 400;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .checkbox-label a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .checkbox-label a:hover {
+            text-decoration: underline;
+        }
+
+        .checkbox-description {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: -0.5rem;
+            margin-left: 2.75rem;
+        }
+
+        .form-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .button {
+            padding: 0.875rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .button-primary {
+            background: var(--primary-color);
+            color: white;
+            width: 100%;
+        }
+
+        .button-primary:hover:not(:disabled) {
+            background: var(--primary-dark);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .button-primary:disabled {
+            background: var(--text-light);
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .button-loading {
+            position: relative;
+        }
+
+        .button-loading::after {
+            content: '';
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .login-prompt {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .login-prompt a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-prompt a:hover {
+            text-decoration: underline;
+        }
+
+        .trust-badges {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .badge-icon {
+            font-size: 1.2rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-primary);
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-header h2 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            color: var(--text-primary);
+        }
+
+        .modal-body {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .modal-body h3 {
+            color: var(--text-primary);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .modal-body ol, .modal-body ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .social-login {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .social-button {
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .social-button:hover {
+            border-color: var(--primary-color);
+            background: var(--bg-tertiary);
+        }
+
+        .divider-text {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .divider-text::before,
+        .divider-text::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: calc(50% - 2rem);
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .divider-text::before {
+            left: 0;
+        }
+
+        .divider-text::after {
+            right: 0;
+        }
+
+        @media (max-width: 1024px) {
+            .signup-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2rem 1rem;
+                min-height: auto;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .benefits-title {
+                font-size: 1.5rem;
+            }
+
+            .form-section {
+                padding: 1.5rem;
+                border-radius: 12px;
+            }
+
+            .form-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .social-login {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+                border-radius: 12px;
+            }
+
+            .trust-badges {
+                gap: 1rem;
+            }
+
+            .signup-wrapper {
+                padding: 1.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="#" class="logo">
+                <div class="logo-icon">V</div>
+                Vitrio
+            </a>
+            <div class="header-links">
+                <a href="#">Catálogo</a>
+                <a href="#">Promoções</a>
+                <a href="#">Contato</a>
+                <a href="#" class="login-link">Entrar</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="signup-wrapper">
+                <section class="benefits-section">
+                    <div>
+                        <h2 class="benefits-title">Bem-vindo ao Vitrio</h2>
+                        <p class="benefits-subtitle">Crie sua conta e desfrute de benefícios exclusivos</p>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="benefit-icon">🚚</div>
+                        <div class="benefit-text">
+                            <h3>Entrega Rápida</h3>
+                            <p>Rastreie seus pedidos em tempo real e receba em casa</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="benefit-icon">💰</div>
+                        <div class="benefit-text">
+                            <h3>Descontos Exclusivos</h3>
+                            <p>Acesso a ofertas especiais e promoções para clientes registrados</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="benefit-icon">❤️</div>
+                        <div class="benefit-text">
+                            <h3>Lista de Desejos</h3>
+                            <p>Salve seus produtos favoritos e receba alertas de promoção</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="benefit-icon">🛡️</div>
+                        <div class="benefit-text">
+                            <h3>Compras Seguras</h3>
+                            <p>Seus dados são protegidos com criptografia de ponta</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="benefit-icon">📱</div>
+                        <div class="benefit-text">
+                            <h3>Suporte 24/7</h3>
+                            <p>Equipe dedicada para ajudar você quando precisar</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="form-section">
+                    <div class="form-header">
+                        <h1>Criar Conta</h1>
+                        <p>Preencha os campos abaixo para começar suas compras</p>
+                    </div>
+
+                    <div class="divider-text">Ou crie uma conta com</div>
+
+                    <div class="social-login">
+                        <button class="social-button">
+                            <span>f</span> Facebook
+                        </button>
+                        <button class="social-button">
+                            <span>G</span> Google
+                        </button>
+                    </div>
+
+                    <form id="signupForm" novalidate>
+                        <!-- Personal Information -->
+                        <div class="section-title">Informações Pessoais</div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="fullName" class="required">Nome Completo</label>
+                                <input 
+                                    type="text" 
+                                    id="fullName" 
+                                    class="input" 
+                                    placeholder="João Silva Santos" 
+                                    data-validate="name"
+                                    required
+                                >
+                                <div class="input-helper">
+                                    <span class="error-message">Por favor, insira seu nome completo</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email" class="required">E-mail</label>
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    class="input" 
+                                    placeholder="seu.email@exemplo.com" 
+                                    data-validate="email"
+                                    required
+                                >
+                                <div class="input-helper">
+                                    <span class="error-message">Por favor, insira um e-mail válido</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="phone" class="required">Telefone</label>
+                                <input 
+                                    type="tel" 
+                                    id="phone" 
+                                    class="input" 
+                                    placeholder="(11) 98765-4321" 
+                                    data-validate="phone"
+                                    required
+                                >
+                                <div class="input-helper">
+                                    <span class="error-message">Por favor, insira um telefone válido</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="birthDate">Data de Nascimento</label>
+                                <input 
+                                    type="date" 
+                                    id="birthDate" 
+                                    class="input"
+                                    data-validate="birthDate"
+                                >
+                                <div class="input-helper">
+                                    <span class="error-message">Você deve ter pelo menos 18 anos</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="gender">Gênero</label>
+                                <select id="gender" class="input">
+                                    <option value="">Selecionar</option>
+                                    <option value="male">Masculino</option>
+                                    <option value="female">Feminino</option>
+                                    <option value="other">Outro</option>
+                                    <option value="prefer-not">Prefiro não informar</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cpf">CPF (opcional)</label>
+                                <input 
+                                    type="text" 
+                                    id="cpf" 
+                                    class="input" 
+                                    placeholder="000.000.000-00"
+                                    data-validate="cpf"
+                                >
+                                <div class="input-helper">
+                                    <span class="error-message">Por favor, insira um CPF válido</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="form-divider">
+
+                        <!-- Address Information -->
+                        <div class="section-title">Endereço</div>
+
+                        <div class="form-grid full">
+                            <div class="form-group">
+                                <label for="cep" class="required">CEP</label>
+                                <input 
+                                    type="text" 
+                                    id="cep" 
+                                    class="input" 
+                                    placeholder="12345-678"
+                                    data-validate="cep"
+                                    required
+                                >
+                                <div class="input-helper">
+                                    <span class="error-message">Por favor, insira um CEP válido</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="street" class="required">Rua</label>
+                                <input 
+                                    type="text" 
+                                    id="street" 
+                                    class="input" 
+                                    placeholder="Avenida Principal" 
+                                    required
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="number" class="required">Número</label>
+                                <input 
+                                    type="text" 
+                                    id="number" 
+                                    class="input" 
+                                    placeholder="123" 
+                                    required
+                                >
+                            </div>
+                        </div>
+
+                        <div class="form-grid full">
+                            <div class="form-group">
+                                <label for="complement">Complemento (apto, sala, etc)</label>
+                                <input 
+                                    type="text" 
+                                    id="complement" 
+                                    class="input" 
+                                    placeholder="Apto 42, Bloco B"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="city" class="required">Cidade</label>
+                                <input 
+                                    type="text" 
+                                    id="city" 
+                                    class="input" 
+                                    placeholder="São Paulo" 
+                                    required
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="state" class="required">Estado</label>
+                                <select id="state" class="input" required>
+                                    <option value="">Selecionar</option>
+                                    <option value="AC">Acre</option>
+                                    <option value="AL">Alagoas</option>
+                                    <option value="AP">Amapá</option>
+                                    <option value="AM">Amazonas</option>
+                                    <option value="BA">Bahia</option>
+                                    <option value="CE">Ceará</option>
+                                    <option value="DF">Distrito Federal</option>
+                                    <option value="ES">Espírito Santo</option>
+                                    <option value="GO">Goiás</option>
+                                    <option value="MA">Maranhão</option>
+                                    <option value="MT">Mato Grosso</option>
+                                    <option value="MS">Mato Grosso do Sul</option>
+                                    <option value="MG">Minas Gerais</option>
+                                    <option value="PA">Pará</option>
+                                    <option value="PB">Paraíba</option>
+                                    <option value="PR">Paraná</option>
+                                    <option value="PE">Pernambuco</option>
+                                    <option value="PI">Piauí</option>
+                                    <option value="RJ">Rio de Janeiro</option>
+                                    <option value="RN">Rio Grande do Norte</option>
+                                    <option value="RS">Rio Grande do Sul</option>
+                                    <option value="RO">Rondônia</option>
+                                    <option value="RR">Roraima</option>
+                                    <option value="SC">Santa Catarina</option>
+                                    <option value="SP">São Paulo</option>
+                                    <option value="SE">Sergipe</option>
+                                    <option value="TO">Tocantins</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <hr class="form-divider">
+
+                        <!-- Security Information -->
+                        <div class="section-title">Segurança</div>
+
+                        <div class="form-grid full">
+                            <div class="form-group">
+                                <label for="password" class="required">Senha</label>
+                                <div class="password-wrapper">
+                                    <input 
+                                        type="password" 
+                                        id="password" 
+                                        class="input" 
+                                        placeholder="Crie uma senha segura" 
+                                        data-validate="password"
+                                        required
+                                    >
+                                    <button type="button" class="password-toggle" id="togglePassword">👁️</button>
+                                </div>
+                                <div class="input-helper">
+                                    <span class="error-message">A senha deve ter pelo menos 8 caracteres</span>
+                                </div>
+                                <div class="password-strength" id="passwordStrength">
+                                    <div class="strength-bar">
+                                        <div class="strength-fill" id="strengthFill"></div>
+                                    </div>
+                                    <span class="strength-text" id="strengthText">-</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-grid full">
+                            <div class="form-group">
+                                <label for="passwordConfirm" class="required">Confirmar Senha</label>
+                                <div class="password-wrapper">
+                                    <input 
+                                        type="password" 
+                                        id="passwordConfirm" 
+                                        class="input" 
+                                        placeholder="Confirme sua senha" 
+                                        data-validate="passwordConfirm"
+                                        required
+                                    >
+                                    <button type="button" class="password-toggle" id="togglePasswordConfirm">👁️</button>
+                                </div>
+                                <div class="input-helper">
+                                    <span class="error-message">As senhas não coincidem</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="form-divider">
+
+                        <!-- Preferences & Agreements -->
+                        <div class="section-title">Preferências</div>
+
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input 
+                                    type="checkbox" 
+                                    id="newsletter" 
+                                    class="checkbox-input"
+                                    checked
+                                >
+                                <label for="newsletter" class="checkbox-label">
+                                    Receber novidades, promoções e ofertas exclusivas por e-mail
+                                </label>
+                            </div>
+                            <p class="checkbox-description">
+                                Você receberá apenas ofertas relevantes. Pode se descadastrar a qualquer momento.
+                            </p>
+
+                            <div class="checkbox-item">
+                                <input 
+                                    type="checkbox" 
+                                    id="sms" 
+                                    class="checkbox-input"
+                                >
+                                <label for="sms" class="checkbox-label">
+                                    Receber notificações por SMS sobre pedidos e promoções
+                                </label>
+                            </div>
+
+                            <div class="checkbox-item">
+                                <input 
+                                    type="checkbox" 
+                                    id="terms" 
+                                    class="checkbox-input"
+                                    data-validate="terms"
+                                    required
+                                >
+                                <label for="terms" class="checkbox-label">
+                                    Aceito os <a href="#" id="termsLink">Termos de Serviço</a> e a <a href="#" id="privacyLink">Política de Privacidade</a>
+                                </label>
+                            </div>
+                            <p class="checkbox-description error-message" id="termsError" style="display: none;">
+                                Você deve aceitar os termos para continuar
+                            </p>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="button button-primary">
+                                Criar Conta
+                            </button>
+                            <p class="login-prompt">
+                                Já tem uma conta? <a href="#">Faça login aqui</a>
+                            </p>
+                        </div>
+                    </form>
+
+                    <div class="trust-badges">
+                        <div class="badge">
+                            <span class="badge-icon">🔒</span>
+                            <span>Criptografia SSL</span>
+                        </div>
+                        <div class="badge">
+                            <span class="badge-icon">✓</span>
+                            <span>100% Seguro</span>
+                        </div>
+                        <div class="badge">
+                            <span class="badge-icon">📞</span>
+                            <span>Suporte 24/7</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Terms Modal -->
+    <div id="termsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Termos de Serviço</h2>
+                <button class="modal-close" id="termsClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h3>1. Aceitação dos Termos</h3>
+                <p>Ao criar uma conta na Vitrio, você concorda com estes termos e condições. Se não concordar, não use nossos serviços.</p>
+
+                <h3>2. Uso Responsável</h3>
+                <p>Você concorda em usar a plataforma apenas para fins legítimos e não irá:</p>
+                <ul>
+                    <li>Transmitir conteúdo ilegal ou prejudicial</li>
+                    <li>Violar direitos de terceiros</li>
+                    <li>Interferir com o funcionamento da plataforma</li>
+                    <li>Tentar ganhar acesso não autorizado</li>
+                </ul>
+
+                <h3>3. Produtos e Serviços</h3>
+                <p>Vitrio se empenha em fornecer produtos de alta qualidade. As descrições de produtos são fornecidas no melhor esforço, mas podem conter imprecisões não intencionais.</p>
+
+                <h3>4. Preços e Disponibilidade</h3>
+                <p>Os preços são sujeitos a alterações sem aviso prévio. A disponibilidade de produtos é garantida apenas após confirmação de pedido.</p>
+
+                <h3>5. Política de Devolução</h3>
+                <p>Você pode devolver produtos dentro de 30 dias após o recebimento, desde que estejam em perfeito estado e com embalagem original.</p>
+
+                <h3>6. Limitação de Responsabilidade</h3>
+                <p>Vitrio não será responsável por danos indiretos, incidentais ou consequentes decorrentes do uso de nossa plataforma.</p>
+
+                <h3>7. Modificações dos Termos</h3>
+                <p>Reservamos o direito de modificar estes termos a qualquer momento. Continuando a usar nossos serviços, você aceita as mudanças.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Modal -->
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Política de Privacidade</h2>
+                <button class="modal-close" id="privacyClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h3>1. Coleta de Dados</h3>
+                <p>Coletamos informações pessoais que você nos fornece ao criar uma conta, incluindo nome, e-mail, telefone e endereço.</p>
+
+                <h3>2. Uso de Dados</h3>
+                <p>Seus dados são utilizados para:</p>
+                <ul>
+                    <li>Processar pedidos e entregas</li>
+                    <li>Personalizar sua experiência</li>
+                    <li>Comunicações de marketing (com seu consentimento)</li>
+                    <li>Melhorar nossos serviços</li>
+                </ul>
+
+                <h3>3. Segurança de Dados</h3>
+                <p>Implementamos medidas de segurança robustas para proteger seus dados contra acesso não autorizado, alteração ou destruição.</p>
+
+                <h3>4. Compartilhamento de Dados</h3>
+                <p>Não compartilhamos seus dados com terceiros sem seu consentimento, exceto quando exigido por lei ou necessário para fornecer nossos serviços (como transportadoras).</p>
+
+                <h3>5. Cookies</h3>
+                <p>Usamos cookies para melhorar sua experiência de navegação. Você pode controlá-los nas configurações do seu navegador.</p>
+
+                <h3>6. Seus Direitos</h3>
+                <p>Você tem o direito de acessar, corrigir ou solicitar a exclusão de seus dados pessoais. Entre em contato conosco para exercer esses direitos.</p>
+
+                <h3>7. Contato</h3>
+                <p>Para perguntas sobre privacidade, envie um e-mail para privacidade@vitrio.com.br</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form Validation
+        const form = document.getElementById('signupForm');
+        const inputs = document.querySelectorAll('.input[data-validate]');
+        const passwordField = document.getElementById('password');
+        const passwordConfirmField = document.getElementById('passwordConfirm');
+        const strengthFill = document.getElementById('strengthFill');
+        const strengthText = document.getElementById('strengthText');
+
+        // Validation Rules
+        const validators = {
+            name: (value) => {
+                const trimmed = value.trim();
+                const parts = trimmed.split(/\s+/);
+                return parts.length >= 2 && parts.every(part => part.length >= 2);
+            },
+            email: (value) => {
+                const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return regex.test(value);
+            },
+            phone: (value) => {
+                const clean = value.replace(/\D/g, '');
+                return clean.length === 11;
+            },
+            birthDate: (value) => {
+                if (!value) return true; // Optional field
+                const birthDate = new Date(value);
+                const today = new Date();
+                let age = today.getFullYear() - birthDate.getFullYear();
+                const monthDiff = today.getMonth() - birthDate.getMonth();
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+                return age >= 18;
+            },
+            password: (value) => value.length >= 8,
+            passwordConfirm: (value) => {
+                return value === passwordField.value && value.length >= 8;
+            },
+            cep: (value) => {
+                const clean = value.replace(/\D/g, '');
+                return clean.length === 8;
+            },
+            cpf: (value) => {
+                if (!value) return true; // Optional
+                const clean = value.replace(/\D/g, '');
+                if (clean.length !== 11) return false;
+                if (/^(\d)\1{10}$/.test(clean)) return false;
+                let sum = 0;
+                let remainder;
+                for (let i = 1; i <= 9; i++) {
+                    sum += parseInt(clean.substring(i - 1, i)) * (11 - i);
+                }
+                remainder = (sum * 10) % 11;
+                if (remainder === 10 || remainder === 11) remainder = 0;
+                if (remainder !== parseInt(clean.substring(9, 10))) return false;
+                sum = 0;
+                for (let i = 1; i <= 10; i++) {
+                    sum += parseInt(clean.substring(i - 1, i)) * (12 - i);
+                }
+                remainder = (sum * 10) % 11;
+                if (remainder === 10 || remainder === 11) remainder = 0;
+                return remainder === parseInt(clean.substring(10, 11));
+            },
+            terms: (value) => {
+                const checkbox = document.getElementById('terms');
+                return checkbox.checked;
+            }
+        };
+
+        // Validate field
+        function validateField(field) {
+            const validationType = field.dataset.validate;
+            if (!validators[validationType]) return true;
+
+            const isValid = validators[validationType](field.value);
+            
+            if (isValid) {
+                field.classList.remove('error');
+                field.classList.add('success');
+            } else {
+                field.classList.add('error');
+                field.classList.remove('success');
+            }
+            
+            return isValid;
+        }
+
+        // Password strength indicator
+        function updatePasswordStrength() {
+            const password = passwordField.value;
+            let strength = 0;
+            let strengthLabel = 'Fraca';
+
+            if (password.length >= 8) strength += 20;
+            if (password.length >= 12) strength += 20;
+            if (/[a-z]/.test(password)) strength += 15;
+            if (/[A-Z]/.test(password)) strength += 15;
+            if (/[0-9]/.test(password)) strength += 15;
+            if (/[^a-zA-Z0-9]/.test(password)) strength += 15;
+
+            if (strength < 30) {
+                strengthLabel = 'Fraca';
+                strengthFill.style.backgroundColor = '#ef4444';
+            } else if (strength < 60) {
+                strengthLabel = 'Média';
+                strengthFill.style.backgroundColor = '#f59e0b';
+            } else if (strength < 85) {
+                strengthLabel = 'Forte';
+                strengthFill.style.backgroundColor = '#3b82f6';
+            } else {
+                strengthLabel = 'Muito Forte';
+                strengthFill.style.backgroundColor = '#10b981';
+            }
+
+            strengthFill.style.width = Math.min(strength, 100) + '%';
+            strengthText.textContent = strengthLabel;
+
+            // Re-validate confirm password
+            if (passwordConfirmField.value) {
+                validateField(passwordConfirmField);
+            }
+        }
+
+        // Password toggle
+        document.getElementById('togglePassword').addEventListener('click', (e) => {
+            e.preventDefault();
+            const type = passwordField.type === 'password' ? 'text' : 'password';
+            passwordField.type = type;
+            e.target.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
+        });
+
+        document.getElementById('togglePasswordConfirm').addEventListener('click', (e) => {
+            e.preventDefault();
+            const type = passwordConfirmField.type === 'password' ? 'text' : 'password';
+            passwordConfirmField.type = type;
+            e.target.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
+        });
+
+        // Input validation listeners
+        inputs.forEach(input => {
+            input.addEventListener('blur', () => {
+                validateField(input);
+            });
+
+            input.addEventListener('input', () => {
+                if (input.classList.contains('error') || input.classList.contains('success')) {
+                    validateField(input);
+                }
+            });
+        });
+
+        // Password strength on input
+        passwordField.addEventListener('input', updatePasswordStrength);
+
+        // Form submission
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Validate all fields
+            let isFormValid = true;
+            inputs.forEach(input => {
+                if (!validateField(input)) {
+                    isFormValid = false;
+                }
+            });
+
+            // Check terms separately
+            const termsCheckbox = document.getElementById('terms');
+            if (!termsCheckbox.checked) {
+                isFormValid = false;
+                document.getElementById('termsError').style.display = 'inline';
+            } else {
+                document.getElementById('termsError').style.display = 'none';
+            }
+
+            if (!isFormValid) return;
+
+            // Submit form
+            const submitButton = form.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.classList.add('button-loading');
+            submitButton.textContent = 'Criando conta...';
+
+            // Simulate API call
+            setTimeout(() => {
+                submitButton.disabled = false;
+                submitButton.classList.remove('button-loading');
+                submitButton.textContent = 'Conta Criada com Sucesso!';
+                submitButton.style.backgroundColor = '#10b981';
+
+                // Collect form data
+                const formData = {
+                    name: document.getElementById('fullName').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    birthDate: document.getElementById('birthDate').value,
+                    gender: document.getElementById('gender').value,
+                    cpf: document.getElementById('cpf').value,
+                    address: {
+                        cep: document.getElementById('cep').value,
+                        street: document.getElementById('street').value,
+                        number: document.getElementById('number').value,
+                        complement: document.getElementById('complement').value,
+                        city: document.getElementById('city').value,
+                        state: document.getElementById('state').value
+                    },
+                    preferences: {
+                        newsletter: document.getElementById('newsletter').checked,
+                        sms: document.getElementById('sms').checked
+                    }
+                };
+
+                console.log('Dados do formulário:', formData);
+
+                // Reset after 3 seconds
+                setTimeout(() => {
+                    form.reset();
+                    submitButton.style.backgroundColor = '';
+                    submitButton.textContent = 'Criar Conta';
+                    inputs.forEach(input => {
+                        input.classList.remove('success', 'error');
+                    });
+                    strengthFill.style.width = '0%';
+                    strengthText.textContent = '-';
+                }, 3000);
+            }, 2000);
+        });
+
+        // Modal functionality
+        const termsModal = document.getElementById('termsModal');
+        const privacyModal = document.getElementById('privacyModal');
+        const termsLink = document.getElementById('termsLink');
+        const privacyLink = document.getElementById('privacyLink');
+        const termsClose = document.getElementById('termsClose');
+        const privacyClose = document.getElementById('privacyClose');
+
+        termsLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            termsModal.classList.add('active');
+        });
+
+        privacyLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            privacyModal.classList.add('active');
+        });
+
+        termsClose.addEventListener('click', () => {
+            termsModal.classList.remove('active');
+        });
+
+        privacyClose.addEventListener('click', () => {
+            privacyModal.classList.remove('active');
+        });
+
+        // Close modal when clicking outside
+        termsModal.addEventListener('click', (e) => {
+            if (e.target === termsModal) {
+                termsModal.classList.remove('active');
+            }
+        });
+
+        privacyModal.addEventListener('click', (e) => {
+            if (e.target === privacyModal) {
+                privacyModal.classList.remove('active');
+            }
+        });
+
+        // Format phone number
+        document.getElementById('phone').addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.slice(0, 11);
+            if (value.length > 7) {
+                value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
+            } else if (value.length > 2) {
+                value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+            }
+            e.target.value = value;
+        });
+
+        // Format CEP
+        document.getElementById('cep').addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 8) value = value.slice(0, 8);
+            if (value.length > 5) {
+                value = `${value.slice(0, 5)}-${value.slice(5)}`;
+            }
+            e.target.value = value;
+        });
+
+        // Format CPF
+        document.getElementById('cpf').addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.slice(0, 11);
+            if (value.length > 8) {
+                value = `${value.slice(0, 3)}.${value.slice(3, 6)}.${value.slice(6, 9)}-${value.slice(9)}`;
+            } else if (value.length > 6) {
+                value = `${value.slice(0, 3)}.${value.slice(3, 6)}.${value.slice(6)}`;
+            } else if (value.length > 3) {
+                value = `${value.slice(0, 3)}.${value.slice(3)}`;
+            }
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>

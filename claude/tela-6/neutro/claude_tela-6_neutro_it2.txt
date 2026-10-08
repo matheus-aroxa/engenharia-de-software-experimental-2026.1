@@ -1,0 +1,13 @@
+Escolhas Visuais e Hierarquia
+
+A tela de clube de assinatura utiliza uma hierarquia visual que destaca as três opções de membros (Gratuito, Essencial e Premium) através de cards em grid responsivo. O card Essencial recebe destaque visual com border laranja (
+#ff6b35) mais espesso e background ligeiramente elevado, indicando sua posição como tier mais popular. Cada card exibe ícone, nome, preço mensal, lista de benefícios com checkmarks, e botão CTA diferenciado. A seção de FAQ abaixo utiliza accordions para gerenciar conteúdo extenso sem scroll excessivo. O background mantém o cinza claro (
+#f5f5f5) com acentos em laranja primária para CTAs.
+
+O que Aciona a Exibição desta Tela?
+
+Esta tela é exibida quando: (1) o usuário acessa o menu "Clube de Assinatura" no header, (2) ao alcançar checkout com múltiplas compras repetidas (recomendação de upgrade), ou (3) via banner promocional na home page. Para usuários já membros, a tela mostra seu status atual ("Membro Essencial desde 2024") com opções de upgrade, downgrade ou cancelamento.
+
+Todas as Interações Possíveis
+
+Usuários podem: (1) clicar em "Aderir Gratuitamente" (tier Gratuito) sem exigir pagamento, (2) clicar em "Assinar Agora" (tiers Essencial/Premium) para iniciar fluxo de pagamento com seleção de período (anual com 20% desconto vs. mensal), (3) expandir/colapsar questões no FAQ através do accordion, (4) clicar em "Gerenciar Assinatura" para acessar painel de membros existentes, (5) comparar benefícios entre tiers deslizando horizontalmente em mobile ou visualizando lado a lado em desktop, (6) visualizar tooltip ao passar hover em benefícios com mais detalhes, (7) cancelar assinatura via modal de confirmação para tiers pagos.

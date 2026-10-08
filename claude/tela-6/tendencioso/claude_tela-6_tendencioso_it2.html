@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club Vitrio - Assinatura Premium</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1e40af;
+            --primary-light: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+            --premium-color: #9333ea;
+            --premium-light: #a855f7;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-light: #9ca3af;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --bg-tertiary: #f3f4f6;
+            --border-color: #e5e7eb;
+            --border-light: #f3f4f6;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #f0f4ff 0%, #f9f5ff 100%);
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .header-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .header-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .header-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--premium-color) 0%, var(--primary-color) 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 4rem 2rem;
+            margin: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.25);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            line-height: 1.5;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: white;
+            color: var(--premium-color);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Benefits Section */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .benefit-card {
+            background: var(--bg-primary);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .benefit-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            margin: 4rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: var(--bg-primary);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            box-shadow: var(--shadow-md);
+            border: 2px solid var(--border-color);
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary-color);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--premium-color);
+            background: linear-gradient(135deg, rgba(147, 51, 234, 0.02) 0%, rgba(168, 85, 247, 0.02) 100%);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .badge-featured {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--premium-color), var(--premium-light));
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .plan-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            height: 2.7rem;
+        }
+
+        .plan-price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--premium-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-card.featured .plan-price {
+            background: linear-gradient(135deg, var(--premium-color), var(--premium-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .plan-period {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border-light);
+        }
+
+        .plan-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .feature-icon {
+            color: var(--success-color);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .plan-cta {
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .plan-cta.primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .plan-cta.primary:hover {
+            background: var(--primary-dark);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .plan-cta.featured {
+            background: linear-gradient(135deg, var(--premium-color), var(--premium-light));
+            color: white;
+            font-size: 1.05rem;
+        }
+
+        .plan-cta.featured:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.3);
+        }
+
+        .plan-cta.secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .plan-cta.secondary:hover {
+            background: var(--border-color);
+        }
+
+        /* Comparison Table */
+        .comparison-section {
+            margin: 4rem 0;
+            background: var(--bg-primary);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .comparison-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table thead {
+            background: var(--bg-tertiary);
+        }
+
+        .comparison-table th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .comparison-table th:first-child {
+            text-align: left;
+        }
+
+        .comparison-table th:not(:first-child) {
+            text-align: center;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .comparison-table td:first-child {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .comparison-table td:not(:first-child) {
+            text-align: center;
+        }
+
+        .table-check {
+            color: var(--success-color);
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .table-cross {
+            color: var(--text-light);
+            font-size: 1.3rem;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin: 4rem 0;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .faq-item {
+            background: var(--bg-primary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-light);
+            transition: var(--transition);
+        }
+
+        .faq-item:hover {
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-md);
+        }
+
+        .faq-question {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .faq-icon {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .faq-answer {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            margin: 4rem 0;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--bg-primary);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .testimonial-rating {
+            color: var(--warning-color);
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .testimonial-text {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-style: italic;
+            line-height: 1.7;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .testimonial-role {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* CTA Section */
+        .final-cta-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--premium-color) 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 4rem 2rem;
+            margin: 4rem 0 3rem;
+            text-align: center;
+        }
+
+        .final-cta-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .final-cta-subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .final-cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .final-cta-btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .final-cta-btn.primary {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .final-cta-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .final-cta-btn.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .final-cta-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem;
+            margin-top: 4rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-primary);
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .modal-close {
+            float: right;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        .modal-close:hover {
+            color: var(--text-primary);
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 1rem 0;
+        }
+
+        .modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-group input {
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .modal-button {
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .modal-button:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .pricing-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                grid-column: span 2;
+            }
+
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .pricing-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                grid-column: span 1;
+                transform: scale(1);
+            }
+
+            .pricing-card.featured:hover {
+                transform: translateY(-10px);
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .final-cta-buttons {
+                flex-direction: column;
+            }
+
+            .final-cta-btn {
+                width: 100%;
+            }
+
+            .final-cta-title {
+                font-size: 1.8rem;
+            }
+
+            .comparison-table {
+                font-size: 0.9rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="#" class="logo">
+                <div class="logo-icon">V</div>
+                Vitrio
+            </a>
+            <div class="header-links">
+                <a href="#">Catálogo</a>
+                <a href="#">Minha Conta</a>
+                <a href="#">Contato</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="hero-content">
+                <div class="hero-badge">✨ Exclusive Club</div>
+                <h1 class="hero-title">Club Vitrio Premium</h1>
+                <p class="hero-subtitle">
+                    Acesso a ofertas exclusivas, frete grátis, descontos especiais e muito mais.
+                    Seja VIP em nossas compras!
+                </p>
+                <a href="#pricing" class="hero-cta">Veja os Planos →</a>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Benefits Section -->
+            <section class="benefits-grid" style="margin-top: 2rem;">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🚚</div>
+                    <h3 class="benefit-title">Frete Grátis</h3>
+                    <p class="benefit-description">
+                        Entrega sem custos em todas as compras, sem valor mínimo
+                    </p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">💰</div>
+                    <h3 class="benefit-title">Descontos Exclusivos</h3>
+                    <p class="benefit-description">
+                        Até 20% de desconto em produtos selecionados e ofertas especiais
+                    </p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">⭐</div>
+                    <h3 class="benefit-title">Acesso Antecipado</h3>
+                    <p class="benefit-description">
+                        Primeiros a saber sobre novos produtos e promoções relámpago
+                    </p>
+                </div>
+            </section>
+
+            <!-- Pricing Section -->
+            <section class="pricing-section" id="pricing">
+                <div class="section-header">
+                    <h2 class="section-title">Escolha Seu Plano</h2>
+                    <p class="section-subtitle">
+                        Encontre o plano perfeito para suas necessidades. Cancele quando quiser.
+                    </p>
+                </div>
+
+                <div class="pricing-cards">
+                    <!-- Free Plan -->
+                    <div class="pricing-card">
+                        <h3 class="plan-name">Padrão</h3>
+                        <p class="plan-description">Para clientes ocasionais</p>
+                        <div class="plan-price">R$ 0</div>
+                        <div class="plan-period">Por sempre</div>
+                        
+                        <div class="plan-features">
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Acesso ao catálogo completo</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Frete a partir de R$ 14,90</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Promoções gerais</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Suporte por e-mail</span>
+                            </div>
+                        </div>
+
+                        <button class="plan-cta secondary">Você está aqui</button>
+                    </div>
+
+                    <!-- Premium Plan (Featured) -->
+                    <div class="pricing-card featured">
+                        <div class="badge-featured">⭐ MAIS POPULAR</div>
+                        <h3 class="plan-name">Premium</h3>
+                        <p class="plan-description">Para clientes frequentes</p>
+                        <div class="plan-price">R$ 9,90</div>
+                        <div class="plan-period">por mês ou R$ 99,90/ano</div>
+                        
+                        <div class="plan-features">
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Frete 100% GRÁTIS</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>15% de desconto em tudo</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Acesso antecipado a ofertas</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Suporte prioritário 24/7</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>2% de cashback em compras</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Frete expresso grátis</span>
+                            </div>
+                        </div>
+
+                        <button class="plan-cta featured" onclick="openModal('premium')">
+                            Assinar Agora
+                        </button>
+                    </div>
+
+                    <!-- Platinum Plan -->
+                    <div class="pricing-card">
+                        <h3 class="plan-name">Platinum</h3>
+                        <p class="plan-description">Para clientes VIP</p>
+                        <div class="plan-price">R$ 19,90</div>
+                        <div class="plan-period">por mês ou R$ 199,90/ano</div>
+                        
+                        <div class="plan-features">
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Tudo do Premium +</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>20% de desconto em tudo</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>5% de cashback</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Atendimento VIP dedicado</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Devoluções estendidas 60 dias</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span>Invites para eventos exclusivos</span>
+                            </div>
+                        </div>
+
+                        <button class="plan-cta primary" onclick="openModal('platinum')">
+                            Assinar Agora
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Comparison Table -->
+            <section class="comparison-section">
+                <h2 class="comparison-title">Comparação de Planos</h2>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Recurso</th>
+                            <th>Padrão</th>
+                            <th>Premium</th>
+                            <th>Platinum</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Frete Grátis</td>
+                            <td><span class="table-cross">✗</span></td>
+                            <td><span class="table-check">✓</span></td>
+                            <td><span class="table-check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Desconto Geral</td>
+                            <td><span class="table-cross">—</span></td>
+                            <td>15%</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>Cashback</td>
+                            <td><span class="table-cross">—</span></td>
+                            <td>2%</td>
+                            <td>5%</td>
+                        </tr>
+                        <tr>
+                            <td>Acesso Antecipado</td>
+                            <td><span class="table-cross">✗</span></td>
+                            <td><span class="table-check">✓</span></td>
+                            <td><span class="table-check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Suporte Prioritário</td>
+                            <td><span class="table-cross">✗</span></td>
+                            <td><span class="table-check">✓</span></td>
+                            <td><span class="table-check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Atendimento Dedicado</td>
+                            <td><span class="table-cross">✗</span></td>
+                            <td><span class="table-cross">✗</span></td>
+                            <td><span class="table-check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Devoluções Estendidas</td>
+                            <td>30 dias</td>
+                            <td>30 dias</td>
+                            <td>60 dias</td>
+                        </tr>
+                        <tr>
+                            <td>Eventos Exclusivos</td>
+                            <td><span class="table-cross">✗</span></td>
+                            <td><span class="table-cross">✗</span></td>
+                            <td><span class="table-check">✓</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="faq-section">
+                <div class="section-header">
+                    <h2 class="section-title">Perguntas Frequentes</h2>
+                </div>
+
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span class="faq-icon">❓</span>
+                            Como faço para cancelar minha assinatura?
+                        </div>
+                        <div class="faq-answer">
+                            Você pode cancelar a qualquer momento na sua conta, sem multa ou taxa de cancelamento. O acesso continuará até o final do período pago.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span class="faq-icon">💳</span>
+                            Qual é o método de pagamento?
+                        </div>
+                        <div class="faq-answer">
+                            Aceitamos cartão de crédito, débito, Pix e boleto. Seu pagamento é renovado automaticamente a menos que você cancele.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span class="faq-icon">🚚</span>
+                            O frete grátis se aplica a todos os produtos?
+                        </div>
+                        <div class="faq-answer">
+                            Sim! O frete grátis é válido para todos os produtos no catálogo de membros Premium e Platinum em qualquer quantidade de compra.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span class="faq-icon">⚡</span>
+                            Posso pausar minha assinatura?
+                        </div>
+                        <div class="faq-answer">
+                            Sim! Você pode pausar sua assinatura por até 3 meses e retomar quando quiser sem perder seus benefícios acumulados.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span class="faq-icon">💰</span>
+                            O cashback é pago em dinheiro?
+                        </div>
+                        <div class="faq-answer">
+                            O cashback é creditado em sua conta como saldo de crédito que pode ser usado imediatamente em novas compras ou solicitado como transferência.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span class="faq-icon">🎁</span>
+                            Há período de teste gratuito?
+                        </div>
+                        <div class="faq-answer">
+                            Oferecemos 7 dias de teste gratuito para Premium e Platinum. Você pode cancelar sem custo se não gostar.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonials Section -->
+            <section class="testimonials-section">
+                <div class="section-header">
+                    <h2 class="section-title">O Que Nossos Clientes Dizem</h2>
+                </div>
+
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                        <p class="testimonial-text">
+                            "O Club Vitrio é incrível! Economizo muito com o frete grátis e os descontos. Voltei-me uma membra Premium e não consigo pensar em voltar!"
+                        </p>
+                        <div class="testimonial-author">Maria Silva</div>
+                        <div class="testimonial-role">Cliente Premium</div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                        <p class="testimonial-text">
+                            "O cashback é fantástico. Já acumulei bastante crédito em apenas 2 meses. O suporte prioritário também é muito rápido e eficiente."
+                        </p>
+                        <div class="testimonial-author">João Santos</div>
+                        <div class="testimonial-role">Cliente Platinum</div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                        <p class="testimonial-text">
+                            "Vale cada centavo! Os descontos exclusivos que recebo como Premium já pagaram a assinatura várias vezes. Recomendo!"
+                        </p>
+                        <div class="testimonial-author">Ana Costa</div>
+                        <div class="testimonial-role">Cliente Premium</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Final CTA Section -->
+            <div class="final-cta-section">
+                <h2 class="final-cta-title">Pronto para se tornar VIP?</h2>
+                <p class="final-cta-subtitle">
+                    Junte-se a milhares de clientes satisfeitos e comece a economizar hoje. 
+                    Cancele quando quiser.
+                </p>
+                <div class="final-cta-buttons">
+                    <button class="final-cta-btn primary" onclick="openModal('premium')">
+                        Assinar Premium
+                    </button>
+                    <button class="final-cta-btn secondary" onclick="openModal('platinum')">
+                        Assinar Platinum
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Subscription Modal -->
+    <div id="subscriptionModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <h2 class="modal-title" id="modalTitle">Assinar Premium</h2>
+            
+            <div id="modalDetails" style="color: var(--text-secondary); margin: 1rem 0; line-height: 1.8;">
+                <!-- Details will be inserted here -->
+            </div>
+
+            <form class="modal-form" id="subscriptionForm">
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" required placeholder="seu.email@exemplo.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Nome Completo</label>
+                    <input type="text" id="name" required placeholder="João Silva Santos">
+                </div>
+
+                <div class="form-group">
+                    <label for="cardName">Nome no Cartão</label>
+                    <input type="text" id="cardName" required placeholder="João Silva Santos">
+                </div>
+
+                <div class="form-group">
+                    <label for="cardNumber">Número do Cartão</label>
+                    <input type="text" id="cardNumber" maxlength="19" required placeholder="0000 0000 0000 0000">
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="expiry">Validade</label>
+                        <input type="text" id="expiry" maxlength="5" required placeholder="MM/AA">
+                    </div>
+                    <div class="form-group">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" maxlength="4" required placeholder="123">
+                    </div>
+                </div>
+
+                <div style="margin: 1rem 0; padding: 1rem; background: var(--bg-tertiary); border-radius: 8px;">
+                    <label style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer;">
+                        <input type="checkbox" id="autoRenew" checked>
+                        <span style="font-size: 0.9rem; color: var(--text-secondary);">
+                            Renovação automática. Você pode cancelar quando quiser.
+                        </span>
+                    </label>
+                </div>
+
+                <button type="submit" class="modal-button">Confirmar Assinatura</button>
+            </form>
+
+            <div style="text-align: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); font-size: 0.85rem; color: var(--text-secondary);">
+                <p>🔒 Seu pagamento é 100% seguro e criptografado</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Vitrio. Todos os direitos reservados. | <a href="#" style="color: var(--primary-color); text-decoration: none;">Política de Privacidade</a> | <a href="#" style="color: var(--primary-color); text-decoration: none;">Termos de Serviço</a></p>
+    </footer>
+
+    <script>
+        const modal = document.getElementById('subscriptionModal');
+        const subscriptionForm = document.getElementById('subscriptionForm');
+        const cardNumberInput = document.getElementById('cardNumber');
+        const expiryInput = document.getElementById('expiry');
+        const cvvInput = document.getElementById('cvv');
+
+        const plans = {
+            premium: {
+                name: 'Premium',
+                price: 'R$ 9,90/mês',
+                description: 'Plano Premium - Frete grátis, 15% de desconto em tudo, acesso antecipado e suporte prioritário.'
+            },
+            platinum: {
+                name: 'Platinum',
+                price: 'R$ 19,90/mês',
+                description: 'Plano Platinum - 20% de desconto em tudo, 5% de cashback, atendimento VIP dedicado e invites para eventos exclusivos.'
+            }
+        };
+
+        function openModal(plan) {
+            const planData = plans[plan];
+            document.getElementById('modalTitle').textContent = `Assinar ${planData.name}`;
+            document.getElementById('modalDetails').innerHTML = `
+                <strong>${planData.name}</strong><br>
+                ${planData.price}<br><br>
+                ${planData.description}
+            `;
+            modal.classList.add('active');
+            subscriptionForm.dataset.plan = plan;
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            subscriptionForm.reset();
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Card number formatting
+        cardNumberInput.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            let formatted = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+            e.target.value = formatted;
+        });
+
+        // Expiry formatting
+        expiryInput.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.slice(0, 2) + '/' + value.slice(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        // CVV formatting
+        cvvInput.addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+
+        // Form submission
+        subscriptionForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Validation
+            if (!cardNumberInput.value || !expiryInput.value || !cvvInput.value) {
+                alert('Por favor, preencha todos os dados do cartão');
+                return;
+            }
+
+            const submitBtn = subscriptionForm.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Processando...';
+
+            setTimeout(() => {
+                const plan = subscriptionForm.dataset.plan;
+                const planData = plans[plan];
+
+                // Collect form data
+                const subscriptionData = {
+                    plan: planData.name,
+                    email: document.getElementById('email').value,
+                    name: document.getElementById('name').value,
+                    autoRenew: document.getElementById('autoRenew').checked,
+                    timestamp: new Date().toISOString()
+                };
+
+                console.log('Assinatura confirmada:', subscriptionData);
+
+                submitBtn.textContent = '✓ Assinatura Confirmada!';
+                submitBtn.style.background = 'var(--success-color)';
+
+                setTimeout(() => {
+                    alert(`Bem-vindo ao Club Vitrio ${planData.name}! Você receberá um e-mail de confirmação em breve.`);
+                    closeModal();
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Confirmar Assinatura';
+                    submitBtn.style.background = '';
+                }, 2000);
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

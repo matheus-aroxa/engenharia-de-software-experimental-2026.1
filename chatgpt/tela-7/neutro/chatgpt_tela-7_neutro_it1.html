@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitrio — Cancelar Clube</title>
+  <style>
+    :root{
+      --purple:#5b21b6;
+      --purple-dark:#43168a;
+      --purple-soft:#f3edff;
+      --text:#202124;
+      --muted:#6b7280;
+      --border:#dedfe3;
+      --bg:#f6f7f9;
+      --white:#fff;
+      --green:#15803d;
+      --red:#c62828;
+      --red-soft:#fff4f4;
+      --yellow:#f5b700;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      min-width:1100px;
+      font-family:Arial,Helvetica,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      font-size:14px;
+    }
+
+    button,input,textarea{font:inherit}
+    button{cursor:pointer}
+
+    .topbar{
+      height:34px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#32105f;
+      color:#fff;
+      font-size:12px;
+    }
+
+    header{
+      height:76px;
+      background:#fff;
+      border-bottom:1px solid #e7e7ea;
+    }
+
+    .header-inner{
+      width:1180px;
+      height:100%;
+      margin:auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    .logo{
+      color:var(--purple);
+      font-size:30px;
+      font-weight:900;
+      letter-spacing:-1.5px;
+      cursor:pointer;
+    }
+
+    .logo span{color:var(--yellow)}
+
+    .account{
+      display:flex;
+      align-items:center;
+      gap:9px;
+      color:#555;
+      font-size:12px;
+    }
+
+    .avatar{
+      width:32px;
+      height:32px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      background:var(--purple-soft);
+      color:var(--purple);
+    }
+
+    main{
+      width:1180px;
+      margin:auto;
+      padding:25px 0 60px;
+    }
+
+    .breadcrumb{
+      margin-bottom:20px;
+      color:var(--muted);
+      font-size:11px;
+    }
+
+    .breadcrumb a{
+      color:var(--muted);
+      text-decoration:none;
+    }
+
+    .breadcrumb span{margin:0 8px}
+
+    .page-grid{
+      display:grid;
+      grid-template-columns:760px 390px;
+      gap:25px;
+      align-items:start;
+    }
+
+    .card{
+      background:var(--white);
+      border:1px solid var(--border);
+      border-radius:11px;
+      box-shadow:0 4px 15px rgba(20,20,30,.04);
+    }
+
+    .main-card{
+      padding:29px 31px;
+    }
+
+    .title-row{
+      display:flex;
+      align-items:flex-start;
+      gap:15px;
+      padding-bottom:22px;
+      border-bottom:1px solid #ececef;
+    }
+
+    .warning-icon{
+      width:43px;
+      height:43px;
+      flex:0 0 43px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      background:var(--red-soft);
+      color:var(--red);
+      font-size:20px;
+    }
+
+    h1{
+      margin:0 0 7px;
+      font-size:25px;
+      letter-spacing:-.5px;
+    }
+
+    .subtitle{
+      margin:0;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.5;
+    }
+
+    .subscription{
+      margin:22px 0;
+      padding:18px;
+      border:1px solid #ddd5f5;
+      border-radius:8px;
+      background:#faf8ff;
+    }
+
+    .subscription-label{
+      margin-bottom:12px;
+      color:var(--purple);
+      font-size:10px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.5px;
+    }
+
+    .subscription-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    .plan-name{
+      margin-bottom:5px;
+      font-size:15px;
+      font-weight:800;
+    }
+
+    .plan-meta{
+      color:var(--muted);
+      font-size:10px;
+    }
+
+    .plan-price{
+      color:var(--purple);
+      font-size:17px;
+      font-weight:800;
+    }
+
+    .benefits-title{
+      margin:0 0 11px;
+      font-size:14px;
+    }
+
+    .benefits{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:9px 20px;
+      margin-bottom:25px;
+    }
+
+    .benefit{
+      display:flex;
+      gap:8px;
+      align-items:flex-start;
+      color:#555;
+      font-size:11px;
+      line-height:1.4;
+    }
+
+    .check{
+      color:var(--green);
+      font-weight:900;
+    }
+
+    .section-divider{
+      height:1px;
+      margin:23px 0;
+      background:#ececef;
+    }
+
+    .form-title{
+      margin:0 0 6px;
+      font-size:15px;
+    }
+
+    .form-help{
+      margin:0 0 17px;
+      color:var(--muted);
+      font-size:11px;
+    }
+
+    .reason{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      padding:12px;
+      margin-bottom:8px;
+      border:1px solid var(--border);
+      border-radius:7px;
+      cursor:pointer;
+    }
+
+    .reason.selected{
+      border-color:var(--purple);
+      background:var(--purple-soft);
+    }
+
+    .reason input{
+      width:16px;
+      height:16px;
+      margin-top:1px;
+      accent-color:var(--purple);
+    }
+
+    .reason-text{
+      font-size:11px;
+      line-height:1.4;
+    }
+
+    textarea{
+      width:100%;
+      min-height:95px;
+      margin-top:9px;
+      padding:11px;
+      resize:vertical;
+      border:1px solid var(--border);
+      border-radius:7px;
+      outline:none;
+    }
+
+    textarea:focus{
+      border-color:var(--purple);
+      box-shadow:0 0 0 3px rgba(91,33,182,.08);
+    }
+
+    .counter{
+      margin-top:5px;
+      text-align:right;
+      color:#999;
+      font-size:9px;
+    }
+
+    .warning{
+      display:flex;
+      gap:10px;
+      margin-top:21px;
+      padding:13px;
+      border-radius:7px;
+      background:#fff9e8;
+      color:#6b5200;
+      font-size:10px;
+      line-height:1.45;
+    }
+
+    .warning strong{
+      display:block;
+      margin-bottom:2px;
+    }
+
+    .actions{
+      display:flex;
+      justify-content:flex-end;
+      gap:9px;
+      margin-top:24px;
+    }
+
+    .btn{
+      height:43px;
+      padding:0 19px;
+      border-radius:6px;
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .btn-secondary{
+      border:1px solid var(--border);
+      background:#fff;
+      color:#555;
+    }
+
+    .btn-danger{
+      border:0;
+      background:var(--red);
+      color:#fff;
+    }
+
+    .btn-danger:hover{background:#a91f1f}
+
+    .side-card{
+      overflow:hidden;
+    }
+
+    .side-header{
+      padding:19px 21px;
+      border-bottom:1px solid #ececef;
+    }
+
+    .side-header h2{
+      margin:0 0 5px;
+      font-size:16px;
+    }
+
+    .side-header p{
+      margin:0;
+      color:var(--muted);
+      font-size:10px;
+      line-height:1.4;
+    }
+
+    .timeline{
+      padding:20px 21px 23px;
+    }
+
+    .timeline-item{
+      position:relative;
+      display:grid;
+      grid-template-columns:25px 1fr;
+      gap:10px;
+      padding-bottom:19px;
+    }
+
+    .timeline-item:last-child{padding-bottom:0}
+
+    .timeline-item:not(:last-child):after{
+      content:"";
+      position:absolute;
+      left:11px;
+      top:24px;
+      width:2px;
+      height:calc(100% - 19px);
+      background:#e5e0ee;
+    }
+
+    .timeline-dot{
+      position:relative;
+      z-index:1;
+      width:23px;
+      height:23px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      background:var(--purple-soft);
+      color:var(--purple);
+      font-size:10px;
+      font-weight:900;
+    }
+
+    .timeline-item.active .timeline-dot{
+      background:var(--purple);
+      color:#fff;
+    }
+
+    .timeline-item h3{
+      margin:1px 0 4px;
+      font-size:11px;
+    }
+
+    .timeline-item p{
+      margin:0;
+      color:var(--muted);
+      font-size:10px;
+      line-height:1.4;
+    }
+
+    .keep-card{
+      margin-top:15px;
+      padding:19px 21px;
+      border:1px solid #ddd5f5;
+      border-radius:9px;
+      background:#faf8ff;
+    }
+
+    .keep-card h2{
+      margin:0 0 7px;
+      color:var(--purple);
+      font-size:14px;
+    }
+
+    .keep-card p{
+      margin:0 0 14px;
+      color:#5d5669;
+      font-size:10px;
+      line-height:1.5;
+    }
+
+    .keep-button{
+      width:100%;
+      height:39px;
+      border:1px solid var(--purple);
+      border-radius:6px;
+      background:#fff;
+      color:var(--purple);
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .support{
+      margin-top:15px;
+      padding:18px 21px;
+      color:var(--muted);
+      font-size:10px;
+      line-height:1.5;
+    }
+
+    .support strong{
+      display:block;
+      margin-bottom:4px;
+      color:var(--text);
+    }
+
+    footer{
+      padding:25px 0;
+      background:#202124;
+      color:#fff;
+    }
+
+    .footer-inner{
+      width:1180px;
+      margin:auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .footer-logo{
+      font-size:18px;
+      font-weight:900;
+    }
+
+    .footer-logo span{color:var(--yellow)}
+
+    .footer-copy{
+      color:#aaa;
+      font-size:10px;
+    }
+
+    .modal{
+      position:fixed;
+      inset:0;
+      z-index:20;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:rgba(0,0,0,.5);
+    }
+
+    .modal.show{display:flex}
+
+    .modal-box{
+      width:455px;
+      padding:27px;
+      border-radius:11px;
+      background:#fff;
+      box-shadow:0 20px 55px rgba(0,0,0,.25);
+    }
+
+    .modal-icon{
+      width:43px;
+      height:43px;
+      margin-bottom:13px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      background:var(--red-soft);
+      color:var(--red);
+      font-size:19px;
+    }
+
+    .modal-box h2{
+      margin:0 0 8px;
+      font-size:19px;
+    }
+
+    .modal-box p{
+      margin:0 0 17px;
+      color:var(--muted);
+      font-size:11px;
+      line-height:1.55;
+    }
+
+    .modal-info{
+      margin-bottom:18px;
+      padding:12px;
+      border-radius:6px;
+      background:#f7f7f8;
+      font-size:10px;
+      line-height:1.5;
+    }
+
+    .modal-actions{
+      display:flex;
+      justify-content:flex-end;
+      gap:8px;
+    }
+
+    .modal-actions button{
+      height:40px;
+      padding:0 17px;
+      border-radius:6px;
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:22px;
+      z-index:30;
+      padding:12px 18px;
+      border-radius:7px;
+      background:#202124;
+      color:#fff;
+      font-size:11px;
+      transform:translate(-50%,80px);
+      opacity:0;
+      transition:.25s;
+    }
+
+    .toast.show{
+      transform:translate(-50%,0);
+      opacity:1;
+    }
+
+    .success-state{
+      display:none;
+      text-align:center;
+      padding:25px 10px 10px;
+    }
+
+    .success-state.show{display:block}
+
+    .success-icon{
+      width:55px;
+      height:55px;
+      margin:0 auto 14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      background:#dcfce7;
+      color:var(--green);
+      font-size:25px;
+    }
+
+    .success-state h2{
+      margin:0 0 8px;
+      font-size:21px;
+    }
+
+    .success-state p{
+      max-width:480px;
+      margin:0 auto 20px;
+      color:var(--muted);
+      font-size:11px;
+      line-height:1.6;
+    }
+
+    .success-state button{
+      height:41px;
+      padding:0 21px;
+      border:0;
+      border-radius:6px;
+      background:var(--purple);
+      color:#fff;
+      font-size:11px;
+      font-weight:800;
+    }
+
+    @media(max-width:1150px){
+      body{min-width:0}
+      main,.header-inner,.footer-inner{
+        width:calc(100% - 40px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    Clube Vitrio • Gerencie sua assinatura de forma simples e transparente
+  </div>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo" id="logo">Vitr<span>i</span>o</div>
+
+      <div class="account">
+        <div class="avatar">👤</div>
+        <div>
+          <strong>Olá, Mariana</strong><br>
+          Minha conta
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="#" id="accountLink">Minha conta</a>
+      <span>›</span>
+      <a href="#" id="clubLink">Clube Vitrio</a>
+      <span>›</span>
+      <strong>Cancelar assinatura</strong>
+    </div>
+
+    <div id="cancelPage">
+      <div class="page-grid">
+        <section class="card main-card">
+          <div class="title-row">
+            <div class="warning-icon">!</div>
+            <div>
+              <h1>Cancelar assinatura do Clube Vitrio</h1>
+              <p class="subtitle">
+                Sentimos que você esteja pensando em sair. Antes de confirmar,
+                confira o que acontece com seus benefícios.
+              </p>
+            </div>
+          </div>
+
+          <div class="subscription">
+            <div class="subscription-label">Sua assinatura atual</div>
+
+            <div class="subscription-row">
+              <div>
+                <div class="plan-name">Clube Vitrio Mensal</div>
+                <div class="plan-meta">Próxima cobrança: 18 de novembro de 2026</div>
+              </div>
+
+              <div class="plan-price">R$ 19,90/mês</div>
+            </div>
+          </div>
+
+          <h2 class="benefits-title">Ao cancelar, você deixará de ter:</h2>
+
+          <div class="benefits">
+            <div class="benefit">
+              <span class="check">✓</span>
+              <span>Frete grátis em pedidos elegíveis</span>
+            </div>
+
+            <div class="benefit">
+              <span class="check">✓</span>
+              <span>Descontos exclusivos de até 15%</span>
+            </div>
+
+            <div class="benefit">
+              <span class="check">✓</span>
+              <span>Acesso antecipado a ofertas</span>
+            </div>
+
+            <div class="benefit">
+              <span class="check">✓</span>
+              <span>Vantagens especiais para assinantes</span>
+            </div>
+          </div>
+
+          <div class="section-divider"></div>
+
+          <h2 class="form-title">Por que você está cancelando?</h2>
+          <p class="form-help">
+            Sua resposta nos ajuda a melhorar o Clube Vitrio. A escolha é opcional.
+          </p>
+
+          <label class="reason">
+            <input type="radio" name="reason" value="preco">
+            <span class="reason-text">O valor da assinatura não compensa para mim.</span>
+          </label>
+
+          <label class="reason">
+            <input type="radio" name="reason" value="pouco-uso">
+            <span class="reason-text">Não estou usando os benefícios com frequência.</span>
+          </label>
+
+          <label class="reason">
+            <input type="radio" name="reason" value="frete">
+            <span class="reason-text">O frete grátis não é útil para as minhas compras.</span>
+          </label>
+
+          <label class="reason">
+            <input type="radio" name="reason" value="ofertas">
+            <span class="reason-text">As ofertas e descontos não atendem às minhas necessidades.</span>
+          </label>
+
+          <label class="reason">
+            <input type="radio" name="reason" value="outro">
+            <span class="reason-text">Outro motivo.</span>
+          </label>
+
+          <textarea id="details" maxlength="300" placeholder="Conte, se quiser, o que poderíamos melhorar."></textarea>
+          <div class="counter"><span id="counter">0</span>/300</div>
+
+          <div class="warning">
+            <div>⚠️</div>
+            <div>
+              <strong>Importante antes de cancelar</strong>
+              O cancelamento impede novas cobranças da assinatura. Seus benefícios
+              continuam disponíveis até o fim do período já pago, quando aplicável.
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-secondary" id="keepButton">Manter minha assinatura</button>
+            <button class="btn btn-danger" id="cancelButton">Continuar com o cancelamento</button>
+          </div>
+        </section>
+
+        <aside>
+          <div class="card side-card">
+            <div class="side-header">
+              <h2>Como funciona o cancelamento</h2>
+              <p>Você mantém o controle da sua assinatura em todas as etapas.</p>
+            </div>
+
+            <div class="timeline">
+              <div class="timeline-item active">
+                <div class="timeline-dot">1</div>
+                <div>
+                  <h3>Solicite o cancelamento</h3>
+                  <p>Confirme que deseja encerrar sua assinatura.</p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot">2</div>
+                <div>
+                  <h3>Confirmação</h3>
+                  <p>Mostraremos a data em que os benefícios serão encerrados.</p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot">3</div>
+                <div>
+                  <h3>Fim da assinatura</h3>
+                  <p>Nenhuma nova cobrança será realizada após o cancelamento.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="keep-card">
+            <h2>Quer apenas pausar a decisão?</h2>
+            <p>
+              Você pode continuar com o Clube e aproveitar frete grátis e
+              descontos exclusivos nas próximas compras.
+            </p>
+            <button class="keep-button" id="keepSideButton">
+              Continuar com o Clube
+            </button>
+          </div>
+
+          <div class="card support">
+            <strong>Precisa de ajuda?</strong>
+            Se você está tendo algum problema com sua assinatura, fale com
+            nosso atendimento antes de cancelar.
+            <br><br>
+            <strong>Atendimento Vitrio</strong>
+            Segunda a sexta, das 8h às 20h.
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <div class="success-state" id="successState">
+      <div class="card" style="padding:42px 35px;">
+        <div class="success-icon">✓</div>
+        <h2>Cancelamento solicitado</h2>
+        <p>
+          Sua assinatura do Clube Vitrio foi cancelada com sucesso.
+          Você continuará podendo usar os benefícios até
+          <strong>18 de novembro de 2026</strong>, conforme as condições do seu
+          período já pago. Não haverá uma nova cobrança após essa data.
+        </p>
+        <button id="backAccount">Voltar para minha conta</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">Vitr<span>i</span>o</div>
+      <div class="footer-copy">
+        © 2026 Vitrio Comércio Eletrônico • Clube Vitrio
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal" id="confirmModal">
+    <div class="modal-box">
+      <div class="modal-icon">!</div>
+      <h2>Confirmar cancelamento?</h2>
+      <p>
+        Você está prestes a cancelar sua assinatura do Clube Vitrio.
+        Depois da confirmação, novas cobranças serão interrompidas.
+      </p>
+
+      <div class="modal-info">
+        <strong>Seu acesso aos benefícios:</strong><br>
+        Você continuará com os benefícios até 18 de novembro de 2026,
+        conforme o período já pago.
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-secondary" id="closeModal">Voltar</button>
+        <button class="btn-danger" id="confirmCancel">Sim, cancelar assinatura</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    (() => {
+      const modal = document.getElementById("confirmModal");
+      const toast = document.getElementById("toast");
+      const cancelPage = document.getElementById("cancelPage");
+      const successState = document.getElementById("successState");
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add("show");
+
+        clearTimeout(window.toastTimer);
+
+        window.toastTimer = setTimeout(() => {
+          toast.classList.remove("show");
+        }, 2600);
+      }
+
+      document.querySelectorAll(".reason").forEach(label => {
+        label.addEventListener("click", () => {
+          document.querySelectorAll(".reason").forEach(item => {
+            item.classList.remove("selected");
+          });
+
+          label.classList.add("selected");
+        });
+      });
+
+      document.getElementById("details").addEventListener("input", event => {
+        document.getElementById("counter").textContent = event.target.value.length;
+      });
+
+      function keepSubscription() {
+        showToast("Sua assinatura continua ativa. Aproveite os benefícios do Clube Vitrio!");
+      }
+
+      document.getElementById("keepButton").addEventListener("click", keepSubscription);
+      document.getElementById("keepSideButton").addEventListener("click", keepSubscription);
+
+      document.getElementById("cancelButton").addEventListener("click", () => {
+        modal.classList.add("show");
+      });
+
+      document.getElementById("closeModal").addEventListener("click", () => {
+        modal.classList.remove("show");
+      });
+
+      modal.addEventListener("click", event => {
+        if (event.target === modal) {
+          modal.classList.remove("show");
+        }
+      });
+
+      document.getElementById("confirmCancel").addEventListener("click", () => {
+        modal.classList.remove("show");
+        cancelPage.style.display = "none";
+        successState.classList.add("show");
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      });
+
+      document.getElementById("backAccount").addEventListener("click", () => {
+        showToast("Voltando para sua conta.");
+      });
+
+      document.getElementById("accountLink").addEventListener("click", event => {
+        event.preventDefault();
+        showToast("Voltando para sua conta.");
+      });
+
+      document.getElementById("clubLink").addEventListener("click", event => {
+        event.preventDefault();
+        showToast("Abrindo os detalhes do Clube Vitrio.");
+      });
+
+      document.getElementById("logo").addEventListener("click", () => {
+        showToast("Voltando para a página inicial.");
+      });
+    })();
+  </script>
+</body>
+</html>

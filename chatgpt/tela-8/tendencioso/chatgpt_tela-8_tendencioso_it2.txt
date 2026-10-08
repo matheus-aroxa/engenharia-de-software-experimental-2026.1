@@ -1,0 +1,43 @@
+Pergunta 1 — Escolhas visuais
+
+A tela usa uma estética de configuração de conta e privacidade, com fundo cinza-claro, cards brancos e roxo como cor institucional. O vermelho aparece apenas nos pontos relacionados à exclusão, sinalizando claramente que se trata de uma ação destrutiva. O conteúdo é dividido entre a área principal, onde o cliente toma a decisão, e uma coluna lateral com recomendações antes da exclusão.
+
+A hierarquia enfatiza primeiro o que será excluído, depois as consequências e, por último, a confirmação. O botão de exclusão começa desabilitado e só fica disponível quando o cliente digita EXCLUIR e marca a confirmação de leitura. Isso reduz exclusões acidentais sem criar uma barreira obscura ao direito de solicitar a exclusão.
+
+Também foi incluída uma etapa final de confirmação em modal para separar “quero solicitar a exclusão” de “confirmo que quero enviar a solicitação”.
+Pergunta 2 — O que aciona esta tela?
+
+A tela é exibida quando um cliente autenticado acessa a área de privacidade da conta e escolhe a opção de excluir sua conta e solicitar a exclusão dos seus dados pessoais.
+
+Um fluxo possível é:
+
+Minha conta → Privacidade → Excluir conta e dados → tela de exclusão.
+
+A página não deve ser exibida automaticamente nem como interrupção da compra. Ela é uma tela explícita de gerenciamento de conta, acessada por iniciativa do cliente.
+Pergunta 3 — Interações possíveis
+
+O cliente pode:
+
+    Voltar para Minha conta.
+
+    Ler quais categorias de dados serão excluídas ou tratadas.
+
+    Consultar os alertas sobre pedidos em andamento, favoritos e assinaturas.
+
+    Abrir o atendimento da Vitrio.
+
+    Digitar EXCLUIR para habilitar a solicitação.
+
+    Marcar a confirmação de que leu e compreendeu as consequências.
+
+    Clicar em “Solicitar exclusão da conta” quando os requisitos forem preenchidos.
+
+    Fechar o modal de confirmação pelo botão ×, clicando fora dele ou usando Esc.
+
+    Escolher “Voltar e manter conta” no modal.
+
+    Confirmar definitivamente em “Confirmar exclusão”.
+
+    Após a confirmação, visualizar a tela de solicitação recebida.
+
+    Clicar em “Ir para a Vitrio” para retornar à loja.

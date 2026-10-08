@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhone 15 Pro Max - Vitrio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff6b35;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 400px;
+            margin: 0 30px;
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 4px;
+            padding: 8px 12px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .search-bar input::placeholder {
+            color: #999;
+        }
+
+        .search-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+            font-size: 18px;
+            padding: 0 8px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header-link {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+            transition: color 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .header-link:hover {
+            color: #ff6b35;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #ff6b35;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background-color: white;
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .breadcrumb-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+            font-size: 13px;
+        }
+
+        .breadcrumb a {
+            color: #ff6b35;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: #e55a24;
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            color: #999;
+            margin: 0 8px;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        /* Product Section */
+        .product-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        /* Product Images */
+        .product-images {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 500px;
+            background-color: #e0e0e0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: #999;
+            position: relative;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background-color: #ff6b35;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .thumbnail-container {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-start;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .thumbnail:hover,
+        .thumbnail.active {
+            border-color: #ff6b35;
+        }
+
+        /* Product Info */
+        .product-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .breadcrumb-mobile {
+            display: none;
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 12px;
+        }
+
+        .product-category {
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .product-name {
+            font-size: 32px;
+            font-weight: bold;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+
+        .rating-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .stars {
+            display: flex;
+            gap: 2px;
+            font-size: 18px;
+        }
+
+        .star {
+            color: #ffc107;
+        }
+
+        .star.empty {
+            color: #ddd;
+        }
+
+        .rating-text {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .rating-count {
+            font-size: 14px;
+            color: #999;
+        }
+
+        .price-section {
+            margin-bottom: 24px;
+        }
+
+        .original-price {
+            font-size: 14px;
+            color: #999;
+            text-decoration: line-through;
+            margin-bottom: 8px;
+        }
+
+        .current-price {
+            font-size: 48px;
+            font-weight: bold;
+            color: #ff6b35;
+            margin-bottom: 12px;
+        }
+
+        .price-info {
+            font-size: 14px;
+            color: #666;
+            background-color: #f9f9f9;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+        }
+
+        .installment-info {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .stock-status {
+            font-size: 14px;
+            color: #2ecc71;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .stock-status.low-stock {
+            color: #ff6b35;
+        }
+
+        /* Options */
+        .options-section {
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .option-group {
+            margin-bottom: 20px;
+        }
+
+        .option-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .option-values {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .option-value {
+            padding: 10px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+            background-color: white;
+            color: #333;
+        }
+
+        .option-value:hover {
+            border-color: #ff6b35;
+        }
+
+        .option-value.selected {
+            background-color: #ff6b35;
+            color: white;
+            border-color: #ff6b35;
+        }
+
+        /* Quantity */
+        .quantity-section {
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .quantity-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+        }
+
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background-color: white;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s;
+            color: #666;
+        }
+
+        .quantity-btn:hover {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .buy-btn,
+        .favorite-btn {
+            flex: 1;
+            padding: 16px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .buy-btn {
+            background-color: #ff6b35;
+            color: white;
+        }
+
+        .buy-btn:hover {
+            background-color: #e55a24;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+        }
+
+        .buy-btn:active {
+            transform: scale(0.98);
+        }
+
+        .favorite-btn {
+            background-color: #f0f0f0;
+            color: #333;
+            flex: 0 0 60px;
+            font-size: 24px;
+        }
+
+        .favorite-btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        .favorite-btn.favorited {
+            background-color: #ffe0e0;
+            color: #e74c3c;
+        }
+
+        /* Additional Info */
+        .additional-info {
+            background-color: #f9f9f9;
+            padding: 16px;
+            border-radius: 4px;
+            margin-bottom: 24px;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 12px;
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-icon {
+            font-size: 16px;
+            min-width: 20px;
+        }
+
+        /* Description Section */
+        .description-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .section-tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 24px;
+        }
+
+        .tab-btn {
+            padding: 16px 0;
+            margin-right: 32px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            color: #999;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab-btn:hover,
+        .tab-btn.active {
+            color: #ff6b35;
+            border-bottom-color: #ff6b35;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .description-text {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .specs-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .spec-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .spec-label {
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .spec-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Reviews Section */
+        .reviews-summary {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 32px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .rating-overview {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .rating-average {
+            font-size: 48px;
+            font-weight: bold;
+            color: #ff6b35;
+        }
+
+        .rating-breakdown {
+            flex: 1;
+        }
+
+        .rating-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 13px;
+        }
+
+        .rating-bar-label {
+            min-width: 80px;
+            text-align: right;
+            color: #666;
+        }
+
+        .rating-bar-fill {
+            width: 150px;
+            height: 6px;
+            background-color: #e0e0e0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .rating-bar-progress {
+            height: 100%;
+            background-color: #ffc107;
+            border-radius: 3px;
+        }
+
+        .rating-bar-count {
+            min-width: 40px;
+            text-align: right;
+            color: #999;
+        }
+
+        .reviews-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .review-item {
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            border-left: 4px solid #e0e0e0;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 12px;
+        }
+
+        .review-author {
+            font-weight: 600;
+            color: #1a1a1a;
+            font-size: 14px;
+        }
+
+        .review-date {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .review-rating {
+            display: flex;
+            gap: 2px;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .review-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .review-text {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .review-helpful {
+            display: flex;
+            gap: 16px;
+            font-size: 12px;
+        }
+
+        .helpful-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+
+        .helpful-btn:hover {
+            color: #ff6b35;
+        }
+
+        /* Related Products */
+        .related-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 1px solid #e0e0e0;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #999;
+        }
+
+        .product-info-card {
+            padding: 16px;
+        }
+
+        .product-name-card {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            line-height: 1.4;
+            min-height: 28px;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff6b35;
+            margin-bottom: 12px;
+        }
+
+        .add-btn {
+            width: 100%;
+            background-color: #ff6b35;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .add-btn:hover {
+            background-color: #e55a24;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 40px 0 20px;
+        }
+
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h4 {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 16px;
+            color: #ff6b35;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .footer-column a:hover {
+            color: #ff6b35;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 12px 48px rgba(0,0,0,0.3);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+            width: 32px;
+            height: 32px;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+        }
+
+        .modal-message {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 24px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .modal-btn {
+            padding: 10px 20px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .modal-btn-primary {
+            background-color: #ff6b35;
+            color: white;
+        }
+
+        .modal-btn-primary:hover {
+            background-color: #e55a24;
+        }
+
+        .modal-btn-secondary {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .modal-btn-secondary:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .product-section {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .main-image {
+                height: 400px;
+            }
+
+            .product-name {
+                font-size: 24px;
+            }
+
+            .current-price {
+                font-size: 36px;
+            }
+
+            .breadcrumb-mobile {
+                display: block;
+            }
+
+            .breadcrumb {
+                display: none;
+            }
+
+            .reviews-summary {
+                flex-direction: column;
+                gap: 24px;
+            }
+
+            .specs-list {
+                grid-template-columns: 1fr;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .favorite-btn {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo" onclick="goHome(event)">Vitrio</a>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Buscar produtos...">
+                <button class="search-btn" onclick="handleSearch()">🔍</button>
+            </div>
+            <div class="header-actions">
+                <a href="#" class="header-link" id="accountLink" onclick="handleAccount(event)">
+                    <span>👤</span>
+                    <span>Conta</span>
+                </a>
+                <a href="#" class="header-link" id="favoritesLink" onclick="handleFavorites(event)">
+                    <span>❤️</span>
+                    <span>Favoritos</span>
+                </a>
+                <a href="#" class="header-link" id="cartLink" onclick="handleCart(event)">
+                    <span class="cart-icon">
+                        🛒
+                        <span class="cart-badge" id="cartBadge">0</span>
+                    </span>
+                    <span>Carrinho</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+        <div class="breadcrumb-container">
+            <a href="#" onclick="goHome(event)">Home</a>
+            <span>/</span>
+            <a href="#" onclick="handleBreadcrumb(event)">Smartphones</a>
+            <span>/</span>
+            <span>iPhone 15 Pro Max</span>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Product Section -->
+        <div class="product-section">
+            <!-- Left: Images -->
+            <div class="product-images">
+                <div class="main-image" id="mainImage">
+                    <span class="product-badge">Promoção</span>
+                    Imagem do Produto
+                </div>
+                <div class="thumbnail-container">
+                    <div class="thumbnail active" onclick="changeThumbnail(this)">Cor 1</div>
+                    <div class="thumbnail" onclick="changeThumbnail(this)">Cor 2</div>
+                    <div class="thumbnail" onclick="changeThumbnail(this)">Cor 3</div>
+                    <div class="thumbnail" onclick="changeThumbnail(this)">Cor 4</div>
+                </div>
+            </div>
+
+            <!-- Right: Info -->
+            <div class="product-info">
+                <div class="breadcrumb-mobile">Home / Smartphones / iPhone 15 Pro Max</div>
+                <div class="product-category">Smartphones</div>
+                <h1 class="product-name">iPhone 15 Pro Max</h1>
+
+                <!-- Rating -->
+                <div class="rating-section">
+                    <div class="stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <span class="rating-text">5,0 de 5</span>
+                    <span class="rating-count">(438 avaliações)</span>
+                </div>
+
+                <!-- Price -->
+                <div class="price-section">
+                    <div class="original-price">R$ 8.999,99</div>
+                    <div class="current-price">R$ 7.499,99</div>
+                    <div class="price-info">
+                        <strong>Economize R$ 1.500,00</strong> com essa promoção
+                    </div>
+                    <div class="installment-info">
+                        Ou 12x de <strong>R$ 624,99</strong> sem juros
+                    </div>
+                </div>
+
+                <!-- Stock Status -->
+                <div class="stock-status">✓ Em Estoque (87 unidades disponíveis)</div>
+
+                <!-- Options -->
+                <div class="options-section">
+                    <!-- Color -->
+                    <div class="option-group">
+                        <label class="option-label">Cor</label>
+                        <div class="option-values">
+                            <div class="option-value selected" onclick="selectOption(this)">Preto Titânio</div>
+                            <div class="option-value" onclick="selectOption(this)">Branco Natural</div>
+                            <div class="option-value" onclick="selectOption(this)">Azul Titânio</div>
+                            <div class="option-value" onclick="selectOption(this)">Ouro Rose</div>
+                        </div>
+                    </div>
+
+                    <!-- Storage -->
+                    <div class="option-group">
+                        <label class="option-label">Armazenamento</label>
+                        <div class="option-values">
+                            <div class="option-value" onclick="selectOption(this)">256GB</div>
+                            <div class="option-value selected" onclick="selectOption(this)">512GB</div>
+                            <div class="option-value" onclick="selectOption(this)">1TB</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quantity -->
+                <div class="quantity-section">
+                    <label class="quantity-label">Quantidade:</label>
+                    <div class="quantity-control">
+                        <button class="quantity-btn" onclick="decreaseQuantity()">−</button>
+                        <input type="number" class="quantity-input" id="quantityInput" value="1" min="1" max="10">
+                        <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="buy-btn" onclick="addToCart()">Comprar Agora</button>
+                    <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">♡</button>
+                </div>
+
+                <!-- Additional Info -->
+                <div class="additional-info">
+                    <div class="info-item">
+                        <span class="info-icon">🚚</span>
+                        <span><strong>Frete Grátis</strong> em compras acima de R$ 199</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">🛡️</span>
+                        <span><strong>Garantia de 1 ano</strong> - Cobertura total do fabricante</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">↩️</span>
+                        <span><strong>Devolução em 30 dias</strong> - Sem perguntas</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">🔒</span>
+                        <span><strong>Compra Segura</strong> - Proteção 100% garantida</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Description Section -->
+        <div class="description-section">
+            <div class="section-tabs">
+                <button class="tab-btn active" onclick="switchTab(event, 'description')">Descrição</button>
+                <button class="tab-btn" onclick="switchTab(event, 'specifications')">Especificações</button>
+                <button class="tab-btn" onclick="switchTab(event, 'shipping')">Envio e Devolução</button>
+            </div>
+
+            <!-- Description Tab -->
+            <div id="description" class="tab-content active">
+                <p class="description-text">
+                    O iPhone 15 Pro Max é o smartphone mais avançado que a Apple já criou. Com seu design de titânio resistente, display Super Retina XDR de 6,7 polegadas e o poderoso chip A17 Pro, você tem a melhor experiência de smartphone do mercado. A câmera de 48MP com zoom óptico de 12x permite capturar momentos com detalhes incríveis, dia ou noite.
+                </p>
+                <p class="description-text">
+                    Bateria com duração estendida, carregamento rápido com tecnologia USB-C, e recursos de IA integrados fazem do iPhone 15 Pro Max o dispositivo perfeito para profissionais e entusiastas de tecnologia. Experimenta o futuro com ação, filmagem Cinematic 4K e processamento de vídeo em tempo real.
+                </p>
+            </div>
+
+            <!-- Specifications Tab -->
+            <div id="specifications" class="tab-content">
+                <div class="specs-list">
+                    <div class="spec-item">
+                        <span class="spec-label">Processador</span>
+                        <span class="spec-value">Apple A17 Pro</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Tela</span>
+                        <span class="spec-value">6,7" Super Retina XDR</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Câmera Principal</span>
+                        <span class="spec-value">48MP f/1.78</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Câmera Frontal</span>
+                        <span class="spec-value">12MP f/2.2</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Bateria</span>
+                        <span class="spec-value">4685 mAh</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Carregamento</span>
+                        <span class="spec-value">Até 50W USB-C</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Memória RAM</span>
+                        <span class="spec-value">8GB LPDDR5</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Resistência</span>
+                        <span class="spec-value">Titânio, IP69 (água/pó)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shipping Tab -->
+            <div id="shipping" class="tab-content">
+                <div class="description-text" style="margin-bottom: 16px;">
+                    <strong>Envio:</strong> Frete grátis para todo o Brasil em compras acima de R$ 199. Entrega em 2-5 dias úteis para região Sudeste, 5-7 dias para outras regiões. Você receberá notificações de rastreamento por email e SMS.
+                </div>
+                <div class="description-text" style="margin-bottom: 16px;">
+                    <strong>Devolução:</strong> Você tem 30 dias a partir da data de recebimento para devolver o produto. Se não estiver satisfeito, devolva sem perguntas e receba reembolso completo. Apenas itens não utilizados e com embalagem original são aceitos.
+                </div>
+                <div class="description-text">
+                    <strong>Garantia:</strong> Todos os produtos possuem garantia de fábrica de 1 ano. Para itens com defeito, você pode solicitar conserto, troca ou reembolso conforme nossa política de garantia.
+                </div>
+            </div>
+        </div>
+
+        <!-- Reviews Section -->
+        <div class="description-section">
+            <h2 class="section-title">Avaliações de Clientes</h2>
+
+            <!-- Rating Summary -->
+            <div class="reviews-summary">
+                <div class="rating-overview">
+                    <div class="rating-average">4,9</div>
+                    <div class="stars" style="font-size: 24px;">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <div style="font-size: 12px; color: #999;">438 avaliações</div>
+                </div>
+
+                <div class="rating-breakdown">
+                    <div class="rating-bar">
+                        <div class="rating-bar-label">5 ★</div>
+                        <div class="rating-bar-fill">
+                            <div class="rating-bar-progress" style="width: 82%;"></div>
+                        </div>
+                        <div class="rating-bar-count">358</div>
+                    </div>
+                    <div class="rating-bar">
+                        <div class="rating-bar-label">4 ★</div>
+                        <div class="rating-bar-fill">
+                            <div class="rating-bar-progress" style="width: 12%;"></div>
+                        </div>
+                        <div class="rating-bar-count">52</div>
+                    </div>
+                    <div class="rating-bar">
+                        <div class="rating-bar-label">3 ★</div>
+                        <div class="rating-bar-fill">
+                            <div class="rating-bar-progress" style="width: 4%;"></div>
+                        </div>
+                        <div class="rating-bar-count">18</div>
+                    </div>
+                    <div class="rating-bar">
+                        <div class="rating-bar-label">2 ★</div>
+                        <div class="rating-bar-fill">
+                            <div class="rating-bar-progress" style="width: 1%;"></div>
+                        </div>
+                        <div class="rating-bar-count">8</div>
+                    </div>
+                    <div class="rating-bar">
+                        <div class="rating-bar-label">1 ★</div>
+                        <div class="rating-bar-fill">
+                            <div class="rating-bar-progress" style="width: 1%;"></div>
+                        </div>
+                        <div class="rating-bar-count">2</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reviews List -->
+            <div class="reviews-list">
+                <div class="review-item">
+                    <div class="review-header">
+                        <div>
+                            <div class="review-author">Maria Silva</div>
+                            <div class="review-date">Há 2 semanas</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <div class="review-title">Excelente qualidade! Superou minhas expectativas</div>
+                    <div class="review-text">
+                        Comprei o iPhone 15 Pro Max e ficou muito impressionada com a qualidade de construção. A câmera é simplesmente incrível, especialmente em modo noturno. O display é nítido e o desempenho é impecável. Recomendo!
+                    </div>
+                    <div class="review-helpful">
+                        <button class="helpful-btn" onclick="markHelpful(this)">👍 Útil (23)</button>
+                        <button class="helpful-btn" onclick="markNotHelpful(this)">👎 Não útil (2)</button>
+                    </div>
+                </div>
+
+                <div class="review-item">
+                    <div class="review-header">
+                        <div>
+                            <div class="review-author">João Santos</div>
+                            <div class="review-date">Há 1 mês</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star empty">★</span>
+                    </div>
+                    <div class="review-title">Ótimo aparelho, mas é caro</div>
+                    <div class="review-text">
+                        Smartphone de qualidade premium. Todas as promessas de desempenho e câmera são cumpridas. O único ponto negativo é o preço realmente elevado. Mas se você procura o melhor, vale a pena.
+                    </div>
+                    <div class="review-helpful">
+                        <button class="helpful-btn" onclick="markHelpful(this)">👍 Útil (15)</button>
+                        <button class="helpful-btn" onclick="markNotHelpful(this)">👎 Não útil (1)</button>
+                    </div>
+                </div>
+
+                <div class="review-item">
+                    <div class="review-header">
+                        <div>
+                            <div class="review-author">Ana Costa</div>
+                            <div class="review-date">Há 1 mês</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <div class="review-title">Entrega rápida e produto perfeito</div>
+                    <div class="review-text">
+                        Chegou em 3 dias, bem embalado e em perfeitas condições. O celular está funcionando impecavelmente. Adorei o atendimento da Vitrio também, muito prestativo!
+                    </div>
+                    <div class="review-helpful">
+                        <button class="helpful-btn" onclick="markHelpful(this)">👍 Útil (31)</button>
+                        <button class="helpful-btn" onclick="markNotHelpful(this)">👎 Não útil (0)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Related Products -->
+        <div class="related-section">
+            <h2 class="section-title">Produtos Relacionados</h2>
+            <div class="products-grid">
+                <div class="product-card" onclick="handleProductClick()">
+                    <div class="product-image">Imagem do Produto</div>
+                    <div class="product-info-card">
+                        <div class="product-name-card">iPhone 15 Pro</div>
+                        <div class="product-price">R$ 6.499,99</div>
+                        <button class="add-btn" onclick="event.stopPropagation(); addToCart()">Adicionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="handleProductClick()">
+                    <div class="product-image">Imagem do Produto</div>
+                    <div class="product-info-card">
+                        <div class="product-name-card">Samsung Galaxy S24 Ultra</div>
+                        <div class="product-price">R$ 6.999,99</div>
+                        <button class="add-btn" onclick="event.stopPropagation(); addToCart()">Adicionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="handleProductClick()">
+                    <div class="product-image">Imagem do Produto</div>
+                    <div class="product-info-card">
+                        <div class="product-name-card">Google Pixel 8 Pro</div>
+                        <div class="product-price">R$ 5.499,99</div>
+                        <button class="add-btn" onclick="event.stopPropagation(); addToCart()">Adicionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="handleProductClick()">
+                    <div class="product-image">Imagem do Produto</div>
+                    <div class="product-info-card">
+                        <div class="product-name-card">AirPods Pro</div>
+                        <div class="product-price">R$ 1.799,99</div>
+                        <button class="add-btn" onclick="event.stopPropagation(); addToCart()">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>Sobre a Vitrio</h4>
+                    <ul>
+                        <li><a href="#" onclick="handleFooterLink(event)">Quem Somos</a></li>
+                        <li><a href="#" onclick="handleFooterLink(event)">Nossa Missão</a></li>
+                        <li><a href="#" onclick="handleFooterLink(event)">Blog</a></li>
+                        <li><a href="#" onclick="handleFooterLink(event)">Carreiras</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Atendimento</h4>
+                    <ul>
+                        <li><a href="#" onclick="handleFooterLink(event)">Central de Ajuda</a></li>
+                        <li><a href="#" onclick="handleFooterLink(event)">Fale Conosco</a></li>
+                        <li><a href="#" onclick="handleFooterLink(event)">Rastrear Pedido</a></li>
+                        <li><a href="#" onclick="handleFooterLink(event)">Devoluções</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Políticas</h4>
+                    <ul>
+                        <li><a href="#" onclick="handleFooterLink(event)">Termos de Uso</a></li>
+                        <li><a href="#" onclick="handleFooterLink(event)">Privacidade</a></li>
+                        <li><a href="#" onclick="handleFooterLink(event)">Segurança</a></li>
+                        <li><a href="#" onclick="handleFooterLink(event)">Cookies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Redes Sociais</h4>
+                    <ul>
+                        <li><a href="#" onclick="handleFooterLink(event)">Facebook</a></li>
+                        <li><a href="#" onclick="handleFooterLink(event)">Instagram</a></li>
+                        <li><a href="#" onclick="handleFooterLink(event)">Twitter</a></li>
+                        <li><a href="#" onclick="handleFooterLink(event)">YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Vitrio - Todos os direitos reservados. CNPJ: 12.345.678/0001-90</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal" id="addedModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('addedModal')">✕</button>
+            <h2 class="modal-title">✓ Produto Adicionado</h2>
+            <p class="modal-message" id="addedMessage">iPhone 15 Pro Max foi adicionado ao seu carrinho com sucesso!</p>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-secondary" onclick="closeModal('addedModal')">Continuar Comprando</button>
+                <button class="modal-btn modal-btn-primary" onclick="goToCart()">Ver Carrinho</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('cartModal')">✕</button>
+            <h2 class="modal-title">Carrinho de Compras</h2>
+            <p class="modal-message" id="cartMessage">Seu carrinho está vazio. Que tal começar a explorar nossos produtos?</p>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-secondary" onclick="closeModal('cartModal')">Continuar Comprando</button>
+                <button class="modal-btn modal-btn-primary" id="checkoutBtn" style="display: none;" onclick="handleCheckout()">Ir para Carrinho</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="notificationModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('notificationModal')">✕</button>
+            <h2 class="modal-title" id="notifTitle">Redirecionamento</h2>
+            <p class="modal-message" id="notifMessage">Você está sendo redirecionado...</p>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-primary" onclick="closeModal('notificationModal')">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+        let isFavorited = false;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('quantityInput').addEventListener('change', function() {
+                if (this.value < 1) this.value = 1;
+                if (this.value > 10) this.value = 10;
+            });
+        });
+
+        // Quantity Functions
+        function increaseQuantity() {
+            let input = document.getElementById('quantityInput');
+            if (input.value < 10) input.value = parseInt(input.value) + 1;
+        }
+
+        function decreaseQuantity() {
+            let input = document.getElementById('quantityInput');
+            if (input.value > 1) input.value = parseInt(input.value) - 1;
+        }
+
+        // Option Selection
+        function selectOption(element) {
+            const parent = element.parentElement;
+            parent.querySelectorAll('.option-value').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        // Thumbnail Selection
+        function changeThumbnail(element) {
+            document.querySelectorAll('.thumbnail').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        // Favorite Toggle
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            isFavorited = !isFavorited;
+            if (isFavorited) {
+                btn.classList.add('favorited');
+                btn.textContent = '❤️';
+                showNotif('Adicionado aos favoritos!', 'Sucesso');
+            } else {
+                btn.classList.remove('favorited');
+                btn.textContent = '♡';
+                showNotif('Removido dos favoritos', 'Sucesso');
+            }
+        }
+
+        // Add to Cart
+        function addToCart() {
+            const quantity = parseInt(document.getElementById('quantityInput').value);
+            const color = document.querySelector('.option-values').children[0].textContent;
+            const storage = document.querySelectorAll('.option-values')[1].querySelector('.selected').textContent;
+            
+            for (let i = 0; i < quantity; i++) {
+                cart.push({
+                    name: 'iPhone 15 Pro Max',
+                    price: 7499.99,
+                    color: color,
+                    storage: storage
+                });
+            }
+
+            document.getElementById('cartBadge').textContent = cart.length;
+            document.getElementById('addedMessage').textContent = `${quantity} item(ns) de iPhone 15 Pro Max foi/foram adicionado(s) ao carrinho!`;
+            openModal('addedModal');
+        }
+
+        // Tab Switching
+        function switchTab(event, tabName) {
+            event.preventDefault();
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Review Helpers
+        function markHelpful(btn) {
+            btn.textContent = '👍 Útil (' + (parseInt(btn.textContent.match(/\d+/)[0]) + 1) + ')';
+            btn.disabled = true;
+            btn.style.opacity = '0.6';
+        }
+
+        function markNotHelpful(btn) {
+            btn.textContent = '👎 Não útil (' + (parseInt(btn.textContent.match(/\d+/)[0]) + 1) + ')';
+            btn.disabled = true;
+            btn.style.opacity = '0.6';
+        }
+
+        // Modal Functions
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        function goToCart() {
+            closeModal('addedModal');
+            setTimeout(() => openModal('cartModal'), 300);
+        }
+
+        function handleCheckout() {
+            closeModal('cartModal');
+            showNotif('Redirecionando para carrinho...', 'Checkout');
+        }
+
+        function handleCart(e) {
+            e.preventDefault();
+            const message = cart.length > 0 
+                ? `Você tem ${cart.length} produto(s) no carrinho`
+                : 'Seu carrinho está vazio';
+            document.getElementById('cartMessage').textContent = message;
+            document.getElementById('checkoutBtn').style.display = cart.length > 0 ? 'block' : 'none';
+            openModal('cartModal');
+        }
+
+        function handleAccount(e) {
+            e.preventDefault();
+            showNotif('Redirecionando para login/registro...', 'Conta');
+        }
+
+        function handleFavorites(e) {
+            e.preventDefault();
+            showNotif('Redirecionando para favoritos...', 'Favoritos');
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.trim();
+            if (query) {
+                showNotif(`Buscando por: "${query}"`, 'Busca');
+                document.getElementById('searchInput').value = '';
+            }
+        }
+
+        function handleBreadcrumb(e) {
+            e.preventDefault();
+            showNotif('Redirecionando para categoria Smartphones...', 'Categoria');
+        }
+
+        function handleFooterLink(e) {
+            e.preventDefault();
+            const text = e.target.textContent;
+            showNotif(`Abrindo: ${text}`, 'Link');
+        }
+
+        function handleProductClick() {
+            showNotif('Abrindo página do produto...', 'Produto');
+        }
+
+        function goHome(e) {
+            e.preventDefault();
+            showNotif('Redirecionando para home...', 'Home');
+        }
+
+        // Notification
+        function showNotif(message, title) {
+            document.getElementById('notifTitle').textContent = title;
+            document.getElementById('notifMessage').textContent = message;
+            openModal('notificationModal');
+        }
+
+        function showNotification(message) {
+            const notif = document.createElement('div');
+            notif.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background-color: #1a1a1a;
+                color: white;
+                padding: 16px 24px;
+                border-radius: 4px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                z-index: 2000;
+                animation: slideIn 0.3s ease-out;
+            `;
+            notif.textContent = message;
+            document.body.appendChild(notif);
+            setTimeout(() => {
+                notif.style.animation = 'slideOut 0.3s ease-out';
+                setTimeout(() => notif.remove(), 300);
+            }, 3000);
+        }
+
+        // Add animation styles
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(400px); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(400px); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

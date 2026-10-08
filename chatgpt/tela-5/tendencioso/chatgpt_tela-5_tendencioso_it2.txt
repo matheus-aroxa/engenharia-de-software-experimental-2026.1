@@ -1,0 +1,59 @@
+Pergunta 1 — Escolhas visuais
+
+A tela usa uma estrutura de checkout em duas colunas: à esquerda ficam as etapas que exigem ação — endereço, frete e pagamento — e à direita fica um resumo persistente do pedido. Em desktop, isso permite que o cliente revise o valor sem precisar voltar ou rolar até outra região da página.
+
+O roxo representa a identidade da Vitrio e estados selecionados, enquanto o laranja fica reservado ao CTA “Finalizar compra”, criando um ponto focal muito claro. Verde comunica segurança, aprovação e frete grátis. Os cartões brancos sobre fundo cinza-claro criam separação visual sem deixar a interface pesada.
+
+O resumo apresenta produtos, cupom, frete, desconto e total em uma hierarquia progressiva. O formulário de pagamento também oferece abas para cartão, PIX e boleto, reduzindo a quantidade de informação simultânea.
+Pergunta 2 — O que aciona essa tela?
+
+A tela é exibida quando o cliente sai do carrinho e seleciona “Finalizar compra”. É, portanto, uma etapa de alta intenção da jornada: o cliente já escolheu os produtos e está prestes a concluir o pagamento.
+
+O fluxo apresentado é:
+
+Carrinho → Entrega e pagamento → Confirmação.
+
+O checkout mantém o resumo do pedido visível para diminuir dúvidas sobre preço, frete e descontos antes da conclusão.
+Pergunta 3 — Interações possíveis
+
+O cliente pode:
+
+    Selecionar ou alterar o endereço de entrega.
+
+    Abrir o formulário para informar outro endereço.
+
+    Preencher CEP, estado, rua, número, complemento, bairro e cidade.
+
+    Salvar o novo endereço.
+
+    Escolher entre frete econômico grátis, padrão e expresso.
+
+    Ver o prazo estimado associado a cada modalidade.
+
+    Alternar entre cartão, PIX e boleto.
+
+    Informar número, titular, validade e CVV do cartão.
+
+    Visualizar a prévia do cartão enquanto preenche os dados.
+
+    Escolher o número de parcelas.
+
+    Inserir e aplicar um cupom promocional.
+
+    Receber feedback caso o cupom seja inválido.
+
+    Conferir subtotal, frete, desconto e valor final em tempo real.
+
+    Finalizar a compra.
+
+    Revisar e confirmar o pedido no modal de confirmação.
+
+    Cancelar a confirmação antes de concluir.
+
+    Após a confirmação, visualizar o número do pedido e a mensagem de sucesso.
+
+    Continuar comprando depois da conclusão.
+
+    Usar o logotipo para retornar à vitrine.
+
+A tela também possui validações para evitar que o pedido seja finalizado com dados essenciais incompletos, mantendo o cliente no checkout em vez de simplesmente interromper o fluxo.

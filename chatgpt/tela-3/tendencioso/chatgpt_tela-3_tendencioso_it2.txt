@@ -1,0 +1,53 @@
+Pergunta 1 — Escolhas visuais
+
+O carrinho usa uma estrutura de duas colunas, com os produtos ocupando a maior área e o resumo da compra em um painel lateral fixo. O objetivo é manter o valor total e o botão “Finalizar compra” sempre visíveis, reduzindo a fricção no momento de conversão.
+
+O roxo representa a identidade da Vitrio e os elementos de navegação, enquanto o laranja é reservado ao CTA principal. O verde comunica benefícios financeiros e operacionais, como desconto no Pix, estoque e frete grátis.
+
+O resumo apresenta subtotal, desconto, frete e total em uma hierarquia bastante clara. O valor final recebe maior destaque e o valor no Pix aparece logo abaixo para incentivar uma forma de pagamento potencialmente mais econômica para o negócio.
+
+Abaixo do carrinho há recomendações de produtos complementares. Elas são discretas para não competir com a finalização da compra, mas permitem aumentar o ticket médio.
+Pergunta 2 — O que aciona essa tela?
+
+A tela aparece quando o cliente seleciona “Adicionar ao carrinho” em uma página de produto ou acessa o ícone do carrinho no cabeçalho.
+
+Ela representa a etapa imediatamente anterior ao checkout. O usuário já escolheu os produtos e agora precisa revisar quantidades, preço, frete e possíveis descontos antes de iniciar a identificação e o pagamento.
+
+A barra de progresso mostra visualmente o caminho:
+
+Carrinho → Identificação → Pagamento
+
+Isso reduz a incerteza sobre o processo e comunica que a finalização está próxima.
+Pergunta 3 — Interações possíveis
+
+O usuário pode:
+
+    Alterar a quantidade de cada produto.
+
+    Remover produtos individualmente.
+
+    Remover todos os produtos do carrinho.
+
+    Salvar um produto para comprar depois.
+
+    Calcular o frete informando o CEP.
+
+    Aplicar o cupom promocional VITRIO10.
+
+    Adicionar produtos complementares diretamente da seção “Complete seu pedido”.
+
+    Consultar o Clube Vitrio.
+
+    Abrir a área de Minha conta.
+
+    Pesquisar produtos pelo campo de busca.
+
+    Continuar comprando.
+
+    Finalizar a compra.
+
+    Fechar o modal pelo ×, clicando fora dele ou pressionando Esc.
+
+    Avançar para a próxima etapa de identificação através do botão de finalização.
+
+O fluxo prioriza a conversão mantendo o CTA principal e o resumo permanentemente disponíveis, enquanto frete grátis, desconto no Pix, cupom e cross-sell atuam como mecanismos para reduzir abandono e elevar o valor do pedido.

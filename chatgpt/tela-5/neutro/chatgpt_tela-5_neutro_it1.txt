@@ -1,0 +1,9 @@
+Pergunta 1
+
+A tela foi estruturada em duas colunas, mantendo o fluxo de checkout concentrado à esquerda e o resumo do pedido sempre visível à direita. O roxo é usado como cor principal da Vitrio para ações e estados selecionados, enquanto tons neutros mantêm o formulário limpo e comercial. As três etapas — endereço, frete e pagamento — recebem numeração e separação visual para facilitar a leitura da jornada. O resumo usa preços em destaque, separação entre subtotal, frete, desconto e total, além de um botão de finalização claramente identificado.
+Pergunta 2
+
+Esta tela aparece depois que o cliente já selecionou os produtos e decidiu avançar do carrinho para a compra. É a etapa em que ele informa ou confirma o endereço, escolhe a modalidade de entrega e fornece os dados necessários para pagamento, antes da criação efetiva do pedido.
+Pergunta 3
+
+O usuário pode voltar ao carrinho pelo breadcrumb ou clicar no logotipo para retornar à loja. Pode preencher CEP, endereço, número, complemento, bairro, cidade e estado. O campo de CEP possui formatação automática e o link “Não sei meu CEP” apresenta uma orientação. Nas opções de frete, o usuário pode selecionar entrega expressa, normal ou grátis, e o valor total é atualizado automaticamente. No pagamento, pode alternar entre cartão de crédito, Pix e boleto. No cartão, pode informar número, nome, CPF, validade, CVV e parcelamento. Também pode aplicar o cupom VITRIO5, que concede desconto, enquanto cupons inválidos geram uma mensagem. Ao clicar em “Finalizar pedido”, todos os campos obrigatórios são validados e os erros aparecem junto aos respectivos campos. Com os dados válidos, é exibida uma confirmação do pedido em modal, que pode ser fechada pelo botão “Continuar” ou clicando fora da caixa.

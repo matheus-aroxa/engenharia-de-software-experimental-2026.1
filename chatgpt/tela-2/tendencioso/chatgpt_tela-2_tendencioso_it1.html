@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitrio — Smartphone Vitrio One 5G 256GB</title>
+  <style>
+    :root {
+      --purple: #5b21b6;
+      --purple-dark: #43168c;
+      --orange: #ff6b00;
+      --green: #16803c;
+      --red: #d92d20;
+      --text: #24243a;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --bg: #f7f7fa;
+      --white: #fff;
+      --placeholder: #e0e0e0;
+      --shadow: 0 4px 18px rgba(30, 20, 50, .08);
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.45;
+    }
+
+    button, input, select {
+      font: inherit;
+    }
+
+    button, a {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: 1180px;
+      max-width: calc(100% - 40px);
+      margin: 0 auto;
+    }
+
+    .top-strip {
+      height: 34px;
+      background: #35106e;
+      color: white;
+      font-size: 12px;
+    }
+
+    .top-strip .container {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .top-links {
+      display: flex;
+      gap: 22px;
+    }
+
+    .top-links a:hover {
+      text-decoration: underline;
+    }
+
+    header {
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+    }
+
+    .main-header {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .logo {
+      min-width: 145px;
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      color: var(--purple);
+    }
+
+    .logo span {
+      color: var(--orange);
+    }
+
+    .search {
+      flex: 1;
+      position: relative;
+    }
+
+    .search input {
+      width: 100%;
+      height: 46px;
+      border: 1px solid #d5d5dd;
+      border-radius: 24px;
+      padding: 0 52px 0 18px;
+      outline: none;
+      background: #fafafa;
+    }
+
+    .search input:focus {
+      border-color: var(--purple);
+      box-shadow: 0 0 0 3px rgba(91,33,182,.1);
+      background: white;
+    }
+
+    .search button {
+      position: absolute;
+      right: 4px;
+      top: 4px;
+      width: 38px;
+      height: 38px;
+      border: 0;
+      border-radius: 50%;
+      background: var(--purple);
+      color: white;
+      font-size: 18px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .header-action {
+      position: relative;
+      border: 0;
+      background: transparent;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      color: var(--text);
+    }
+
+    .header-action .icon {
+      font-size: 23px;
+    }
+
+    .header-action small,
+    .header-action strong {
+      display: block;
+      text-align: left;
+    }
+
+    .header-action small {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .header-action strong {
+      font-size: 12px;
+    }
+
+    .cart-badge {
+      position: absolute;
+      left: 17px;
+      top: -7px;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 5px;
+      border-radius: 10px;
+      background: var(--orange);
+      color: #fff;
+      font-size: 10px;
+      display: grid;
+      place-items: center;
+      font-weight: bold;
+    }
+
+    .nav {
+      border-top: 1px solid #f0f0f3;
+      background: #fff;
+    }
+
+    .nav .container {
+      height: 43px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav a {
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .nav a:hover {
+      color: var(--purple);
+    }
+
+    .nav .offers {
+      color: var(--orange);
+    }
+
+    main {
+      padding-bottom: 40px;
+    }
+
+    .breadcrumbs {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .breadcrumbs a:hover {
+      color: var(--purple);
+    }
+
+    .product-main {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 500px 1fr;
+      gap: 35px;
+      box-shadow: var(--shadow);
+    }
+
+    /* Galeria */
+    .gallery {
+      display: grid;
+      grid-template-columns: 74px 1fr;
+      gap: 15px;
+    }
+
+    .thumbnails {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .thumbnail {
+      width: 72px;
+      height: 72px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--placeholder);
+      cursor: pointer;
+    }
+
+    .thumbnail.active {
+      border: 2px solid var(--purple);
+    }
+
+    .main-image-wrap {
+      position: relative;
+    }
+
+    .main-image {
+      height: 430px;
+      background: var(--placeholder);
+      border-radius: 10px;
+      position: relative;
+    }
+
+    .image-label {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: var(--red);
+      color: white;
+      padding: 5px 9px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .zoom-hint {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(255,255,255,.92);
+      color: var(--muted);
+      border-radius: 5px;
+      padding: 5px 8px;
+      font-size: 10px;
+    }
+
+    .share {
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .share button {
+      border: 1px solid var(--border);
+      background: #fff;
+      width: 29px;
+      height: 29px;
+      border-radius: 50%;
+    }
+
+    /* Informações */
+    .product-info {
+      padding-right: 5px;
+    }
+
+    .brand {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    .product-title {
+      font-size: 26px;
+      line-height: 1.18;
+      letter-spacing: -.6px;
+      margin-bottom: 9px;
+    }
+
+    .sku {
+      font-size: 10px;
+      color: #8b8b96;
+      margin-bottom: 12px;
+    }
+
+    .rating-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .stars {
+      color: #f59e0b;
+      letter-spacing: 1px;
+      font-size: 16px;
+    }
+
+    .rating-line a {
+      color: var(--purple);
+      font-size: 12px;
+      text-decoration: underline;
+    }
+
+    .price-box {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 17px 0;
+      margin-bottom: 17px;
+    }
+
+    .old-price {
+      color: #8a8a94;
+      text-decoration: line-through;
+      font-size: 13px;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 9px;
+      margin-top: 2px;
+    }
+
+    .price {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .discount {
+      color: var(--red);
+      background: #fff0ef;
+      padding: 4px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .pix {
+      color: var(--green);
+      font-weight: 700;
+      font-size: 13px;
+      margin-top: 2px;
+    }
+
+    .installment {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 3px;
+    }
+
+    .selection-title {
+      font-size: 13px;
+      font-weight: 700;
+      margin: 16px 0 8px;
+    }
+
+    .colors {
+      display: flex;
+      gap: 8px;
+    }
+
+    .color-btn {
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background: #fff;
+      font-size: 12px;
+    }
+
+    .color-btn.selected {
+      border: 2px solid var(--purple);
+      padding: 7px 11px;
+      color: var(--purple);
+      font-weight: 700;
+    }
+
+    .shipping-box {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 13px;
+      margin: 17px 0;
+      background: #fafafa;
+    }
+
+    .shipping-title {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .shipping-form {
+      display: flex;
+      gap: 7px;
+    }
+
+    .shipping-form input {
+      width: 125px;
+      height: 38px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 0 10px;
+      outline: none;
+    }
+
+    .shipping-form button {
+      height: 38px;
+      padding: 0 13px;
+      border: 1px solid var(--purple);
+      color: var(--purple);
+      background: #fff;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .shipping-result {
+      margin-top: 9px;
+      color: var(--green);
+      font-size: 11px;
+      display: none;
+    }
+
+    .purchase-row {
+      display: grid;
+      grid-template-columns: 105px 1fr;
+      gap: 10px;
+      margin-top: 9px;
+    }
+
+    .quantity {
+      height: 50px;
+      display: flex;
+      border: 1px solid #ccc;
+      border-radius: 7px;
+      overflow: hidden;
+    }
+
+    .quantity button {
+      width: 32px;
+      border: 0;
+      background: #f5f5f6;
+      font-size: 18px;
+    }
+
+    .quantity input {
+      flex: 1;
+      width: 35px;
+      border: 0;
+      text-align: center;
+      outline: none;
+      font-weight: 700;
+    }
+
+    .buy-button {
+      height: 50px;
+      border: 0;
+      border-radius: 7px;
+      background: var(--orange);
+      color: #fff;
+      font-weight: 800;
+      font-size: 15px;
+      box-shadow: 0 4px 10px rgba(255,107,0,.2);
+    }
+
+    .buy-button:hover {
+      background: #e85f00;
+    }
+
+    .buy-button:active {
+      transform: translateY(1px);
+    }
+
+    .security {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+      margin-top: 17px;
+    }
+
+    .security-item {
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 9px;
+      font-size: 10px;
+      color: var(--muted);
+      background: #fff;
+    }
+
+    .security-item strong {
+      display: block;
+      color: var(--text);
+      font-size: 11px;
+      margin-bottom: 2px;
+    }
+
+    /* Cross sell */
+    .recommendation {
+      margin-top: 22px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 21px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 16px;
+    }
+
+    .mini-products {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .mini-product {
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 11px;
+      background: #fff;
+    }
+
+    .mini-image {
+      height: 125px;
+      background: var(--placeholder);
+      border-radius: 7px;
+      margin-bottom: 8px;
+    }
+
+    .mini-product h3 {
+      font-size: 12px;
+      min-height: 34px;
+      line-height: 1.3;
+    }
+
+    .mini-product .mini-price {
+      font-size: 15px;
+      font-weight: 800;
+      margin-top: 4px;
+    }
+
+    .mini-add {
+      margin-top: 8px;
+      height: 31px;
+      width: 100%;
+      border: 1px solid var(--purple);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--purple);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .mini-add:hover {
+      background: #f5efff;
+    }
+
+    /* Detalhes e avaliações */
+    .details {
+      margin-top: 22px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tab {
+      padding: 16px 24px;
+      border: 0;
+      background: transparent;
+      font-weight: 700;
+      color: var(--muted);
+      font-size: 13px;
+      border-bottom: 3px solid transparent;
+    }
+
+    .tab.active {
+      color: var(--purple);
+      border-bottom-color: var(--purple);
+    }
+
+    .tab-content {
+      display: none;
+      padding: 23px;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .description {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 35px;
+    }
+
+    .description h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .description p {
+      color: #555564;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .specs {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .specs td {
+      padding: 9px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .specs td:first-child {
+      width: 40%;
+      color: var(--muted);
+    }
+
+    /* Avaliações */
+    .review-summary {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 30px;
+      margin-bottom: 25px;
+    }
+
+    .average {
+      text-align: center;
+      border-right: 1px solid var(--border);
+      padding-right: 25px;
+    }
+
+    .average-number {
+      font-size: 39px;
+      font-weight: 800;
+    }
+
+    .average .stars {
+      display: block;
+      margin: 2px 0;
+    }
+
+    .average small {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .bars {
+      max-width: 450px;
+    }
+
+    .bar-line {
+      display: grid;
+      grid-template-columns: 42px 1fr 38px;
+      gap: 7px;
+      align-items: center;
+      font-size: 11px;
+      margin: 4px 0;
+    }
+
+    .bar {
+      height: 7px;
+      background: #ececef;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      background: #f59e0b;
+    }
+
+    .review {
+      border-top: 1px solid var(--border);
+      padding: 17px 0;
+    }
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .review-author {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .verified {
+      color: var(--green);
+      font-size: 10px;
+    }
+
+    .review-date {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .review p {
+      font-size: 12px;
+      color: #555564;
+    }
+
+    /* Toast e modal */
+    .toast {
+      position: fixed;
+      right: 25px;
+      bottom: 25px;
+      background: #222;
+      color: #fff;
+      padding: 14px 18px;
+      border-radius: 9px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.2);
+      font-size: 13px;
+      opacity: 0;
+      transform: translateY(15px);
+      pointer-events: none;
+      transition: .25s;
+      z-index: 100;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 90;
+      padding: 20px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal {
+      width: 430px;
+      max-width: 100%;
+      background: #fff;
+      border-radius: 14px;
+      padding: 27px;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    }
+
+    .modal-close {
+      position: absolute;
+      right: 15px;
+      top: 12px;
+      border: 0;
+      background: transparent;
+      font-size: 24px;
+      color: #777;
+    }
+
+    .modal h2 {
+      font-size: 21px;
+      margin-bottom: 7px;
+    }
+
+    .modal p {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 18px;
+    }
+
+    .modal input {
+      width: 100%;
+      height: 43px;
+      border: 1px solid #d5d5dc;
+      border-radius: 7px;
+      padding: 0 12px;
+      margin-bottom: 10px;
+      outline: none;
+    }
+
+    .modal button[type="submit"] {
+      width: 100%;
+      height: 43px;
+      border: 0;
+      border-radius: 7px;
+      background: var(--purple);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    footer {
+      background: #211f29;
+      color: #fff;
+      padding: 32px 0 18px;
+      margin-top: 30px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr repeat(3, 1fr);
+      gap: 35px;
+    }
+
+    footer h4 {
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    footer p,
+    footer a {
+      color: #bbb8c2;
+      font-size: 11px;
+      line-height: 2;
+    }
+
+    .footer-logo {
+      font-size: 25px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .footer-logo span {
+      color: var(--orange);
+    }
+
+    .copyright {
+      border-top: 1px solid #393641;
+      margin-top: 24px;
+      padding-top: 14px;
+      color: #85828d;
+      font-size: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    @media (max-width: 950px) {
+      .container {
+        max-width: calc(100% - 24px);
+      }
+
+      .header-action > div {
+        display: none;
+      }
+
+      .product-main {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery {
+        max-width: 600px;
+      }
+
+      .description {
+        grid-template-columns: 1fr;
+      }
+
+      .mini-products {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav .container {
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="top-strip">
+    <div class="container">
+      <span>Frete grátis acima de R$ 299 para todo o Brasil</span>
+      <div class="top-links">
+        <a href="#" data-action="help">Ajuda</a>
+        <a href="#" data-action="orders">Acompanhe seu pedido</a>
+        <a href="#" data-action="stores">Nossas lojas</a>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <div class="container main-header">
+      <a class="logo" href="#" data-action="home">Vitrio<span>.</span></a>
+
+      <form class="search" id="searchForm">
+        <input id="searchInput" type="search"
+               placeholder="O que você está procurando?"
+               aria-label="Pesquisar produtos">
+        <button type="submit" aria-label="Pesquisar">⌕</button>
+      </form>
+
+      <div class="header-actions">
+        <button class="header-action" data-action="account">
+          <span class="icon">♙</span>
+          <div>
+            <small>Olá!</small>
+            <strong>Entrar ou cadastrar</strong>
+          </div>
+        </button>
+
+        <button class="header-action" data-action="favorites">
+          <span class="icon">♡</span>
+          <div>
+            <small>Seus</small>
+            <strong>Favoritos</strong>
+          </div>
+        </button>
+
+        <button class="header-action" data-action="cart">
+          <span class="icon">🛒</span>
+          <span class="cart-badge" id="cartCount">0</span>
+          <div>
+            <small>Seu</small>
+            <strong>Carrinho</strong>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <div class="container">
+        <a href="#" data-category="Eletrônicos">Eletrônicos</a>
+        <a href="#" data-category="Informática">Informática</a>
+        <a href="#" data-category="Celulares">Celulares</a>
+        <a href="#" data-category="TV e Áudio">TV e Áudio</a>
+        <a href="#" data-category="Casa">Casa</a>
+        <a href="#" data-category="Eletrodomésticos">Eletrodomésticos</a>
+        <a href="#" data-category="Acessórios">Acessórios</a>
+        <a href="#" class="offers" data-category="Ofertas">🔥 Ofertas</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="breadcrumbs">
+        <a href="#" data-action="home">Início</a>
+        <span>›</span>
+        <a href="#" data-category="Celulares">Celulares</a>
+        <span>›</span>
+        <span>Smartphones</span>
+        <span>›</span>
+        <strong>Vitrio One 5G</strong>
+      </div>
+
+      <section class="product-main">
+
+        <div class="gallery">
+          <div class="thumbnails">
+            <button class="thumbnail active" data-thumb="1" aria-label="Visualização 1"></button>
+            <button class="thumbnail" data-thumb="2" aria-label="Visualização 2"></button>
+            <button class="thumbnail" data-thumb="3" aria-label="Visualização 3"></button>
+            <button class="thumbnail" data-thumb="4" aria-label="Visualização 4"></button>
+          </div>
+
+          <div class="main-image-wrap">
+            <div class="main-image" id="mainImage">
+              <span class="image-label">OFERTA</span>
+              <span class="zoom-hint">🔍 Passe o mouse para ampliar</span>
+            </div>
+
+            <div class="share">
+              <span>Compartilhe:</span>
+              <button data-share="WhatsApp" aria-label="Compartilhar no WhatsApp">☏</button>
+              <button data-share="Facebook" aria-label="Compartilhar no Facebook">f</button>
+              <button data-share="Copiar link" aria-label="Copiar link">🔗</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-info">
+          <div class="brand">Vitrio</div>
+
+          <h1 class="product-title">
+            Smartphone Vitrio One 5G 256GB, 8GB RAM, Câmera 50MP
+          </h1>
+
+          <div class="sku">Código do produto: VTO5G256GB</div>
+
+          <div class="rating-line">
+            <span class="stars">★★★★★</span>
+            <a href="#reviews" id="reviewLink">4,8 (248 avaliações)</a>
+          </div>
+
+          <div class="price-box">
+            <div class="old-price">De R$ 2.799,00</div>
+            <div class="price-row">
+              <span class="price">R$ 2.299,00</span>
+              <span class="discount">18% OFF</span>
+            </div>
+            <div class="pix">R$ 2.184,05 no Pix</div>
+            <div class="installment">ou 12x de R$ 191,58 sem juros no cartão</div>
+          </div>
+
+          <div class="selection-title">Escolha a cor:</div>
+          <div class="colors">
+            <button class="color-btn selected">Preto</button>
+            <button class="color-btn">Azul</button>
+            <button class="color-btn">Prata</button>
+          </div>
+
+          <div class="shipping-box">
+            <div class="shipping-title">🚚 Consulte o prazo de entrega</div>
+
+            <form class="shipping-form" id="shippingForm">
+              <input id="cep" inputmode="numeric" maxlength="9"
+                     placeholder="00000-000" aria-label="CEP">
+              <button type="submit">Calcular frete</button>
+            </form>
+
+            <div class="shipping-result" id="shippingResult"></div>
+          </div>
+
+          <div class="purchase-row">
+            <div class="quantity">
+              <button id="decrease" type="button" aria-label="Diminuir quantidade">−</button>
+              <input id="quantity" value="1" inputmode="numeric" aria-label="Quantidade">
+              <button id="increase" type="button" aria-label="Aumentar quantidade">+</button>
+            </div>
+
+            <button class="buy-button" id="buyButton">
+              Comprar agora
+            </button>
+          </div>
+
+          <div class="security">
+            <div class="security-item">
+              <strong>🔒 Compra segura</strong>
+              Seus dados protegidos
+            </div>
+            <div class="security-item">
+              <strong>↩ Troca fácil</strong>
+              Conforme nossa política
+            </div>
+            <div class="security-item">
+              <strong>✓ Produto original</strong>
+              Garantia Vitrio
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="recommendation">
+        <h2 class="section-title">Complete sua compra</h2>
+        <p class="section-subtitle">
+          Acessórios selecionados para aproveitar ainda mais seu novo smartphone.
+        </p>
+
+        <div class="mini-products">
+          <article class="mini-product">
+            <div class="mini-image"></div>
+            <h3>Fone Bluetooth Vitrio AirSound Pro</h3>
+            <div class="mini-price">R$ 279,00</div>
+            <button class="mini-add" data-product="Fone Bluetooth Vitrio AirSound Pro">
+              Adicionar ao carrinho
+            </button>
+          </article>
+
+          <article class="mini-product">
+            <div class="mini-image"></div>
+            <h3>Carregador Turbo USB-C 30W Vitrio</h3>
+            <div class="mini-price">R$ 99,00</div>
+            <button class="mini-add" data-product="Carregador Turbo USB-C 30W Vitrio">
+              Adicionar ao carrinho
+            </button>
+          </article>
+
+          <article class="mini-product">
+            <div class="mini-image"></div>
+            <h3>Película de vidro 3D para Vitrio One</h3>
+            <div class="mini-price">R$ 49,90</div>
+            <button class="mini-add" data-product="Película de vidro 3D para Vitrio One">
+              Adicionar ao carrinho
+            </button>
+          </article>
+
+          <article class="mini-product">
+            <div class="mini-image"></div>
+            <h3>Capa Antichoque Premium Vitrio One</h3>
+            <div class="mini-price">R$ 79,90</div>
+            <button class="mini-add" data-product="Capa Antichoque Premium Vitrio One">
+              Adicionar ao carrinho
+            </button>
+          </article>
+        </div>
+      </section>
+
+      <section class="details" id="reviews">
+        <div class="tabs">
+          <button class="tab active" data-tab="description">Descrição</button>
+          <button class="tab" data-tab="specifications">Especificações</button>
+          <button class="tab" data-tab="reviews">Avaliações (248)</button>
+        </div>
+
+        <div class="tab-content active" id="description">
+          <div class="description">
+            <div>
+              <h3>Potência para acompanhar sua rotina</h3>
+              <p>
+                O Vitrio One 5G combina desempenho, velocidade e uma experiência
+                fluida em um smartphone pensado para trabalho, entretenimento e
+                fotografia.
+              </p>
+              <p>
+                Com 256GB de armazenamento, 8GB de RAM e conectividade 5G,
+                você tem espaço e velocidade para seus aplicativos, fotos,
+                vídeos e arquivos.
+              </p>
+              <p>
+                A câmera principal de 50MP ajuda a registrar seus momentos com
+                riqueza de detalhes, enquanto a bateria de longa duração mantém
+                você conectado durante o dia.
+              </p>
+            </div>
+
+            <div>
+              <h3>O que vem na caixa</h3>
+              <p>• Smartphone Vitrio One 5G</p>
+              <p>• Cabo USB-C</p>
+              <p>• Carregador</p>
+              <p>• Chave para bandeja SIM</p>
+              <p>• Guia rápido e certificado de garantia</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="specifications">
+          <table class="specs">
+            <tr><td>Tela</td><td>6,6" Full HD+ AMOLED</td></tr>
+            <tr><td>Processador</td><td>Octa-core 2,8 GHz</td></tr>
+            <tr><td>Memória RAM</td><td>8 GB</td></tr>
+            <tr><td>Armazenamento</td><td>256 GB</td></tr>
+            <tr><td>Câmera traseira</td><td>50 MP + 8 MP + 2 MP</td></tr>
+            <tr><td>Câmera frontal</td><td>16 MP</td></tr>
+            <tr><td>Bateria</td><td>5.000 mAh</td></tr>
+            <tr><td>Conectividade</td><td>5G, Wi-Fi, Bluetooth 5.3, USB-C</td></tr>
+            <tr><td>Sistema operacional</td><td>Android</td></tr>
+            <tr><td>Garantia</td><td>12 meses</td></tr>
+          </table>
+        </div>
+
+        <div class="tab-content" id="reviewsContent">
+          <div class="review-summary">
+            <div class="average">
+              <div class="average-number">4,8</div>
+              <span class="stars">★★★★★</span>
+              <small>248 avaliações</small>
+            </div>
+
+            <div class="bars">
+              <div class="bar-line">
+                <span>5 estrelas</span>
+                <div class="bar"><span style="width: 86%"></span></div>
+                <span>86%</span>
+              </div>
+              <div class="bar-line">
+                <span>4 estrelas</span>
+                <div class="bar"><span style="width: 10%"></span></div>
+                <span>10%</span>
+              </div>
+              <div class="bar-line">
+                <span>3 estrelas</span>
+                <div class="bar"><span style="width: 3%"></span></div>
+                <span>3%</span>
+              </div>
+              <div class="bar-line">
+                <span>2 estrelas</span>
+                <div class="bar"><span style="width: 1%"></span></div>
+                <span>1%</span>
+              </div>
+              <div class="bar-line">
+                <span>1 estrela</span>
+                <div class="bar"><span style="width: 0%"></span></div>
+                <span>0%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="review">
+            <div class="review-header">
+              <div>
+                <span class="review-author">Mariana S.</span>
+                <span class="verified">✓ Compra verificada</span>
+              </div>
+              <span class="review-date">Há 8 dias</span>
+            </div>
+            <div class="stars">★★★★★</div>
+            <p>
+              Excelente aparelho. A tela é muito boa e o desempenho atende
+              tranquilamente ao uso do dia a dia. A entrega também foi rápida.
+            </p>
+          </div>
+
+          <div class="review">
+            <div class="review-header">
+              <div>
+                <span class="review-author">Carlos R.</span>
+                <span class="verified">✓ Compra verificada</span>
+              </div>
+              <span class="review-date">Há 15 dias</span>
+            </div>
+            <div class="stars">★★★★★</div>
+            <p>
+              Gostei bastante do custo-benefício. Os 256GB fazem diferença
+              para quem instala muitos aplicativos e guarda bastante foto.
+            </p>
+          </div>
+
+          <div class="review">
+            <div class="review-header">
+              <div>
+                <span class="review-author">Fernanda A.</span>
+                <span class="verified">✓ Compra verificada</span>
+              </div>
+              <span class="review-date">Há 23 dias</span>
+            </div>
+            <div class="stars">★★★★☆</div>
+            <p>
+              Produto bonito e rápido. A bateria dura bem durante meu dia de
+              trabalho e o carregamento é bastante prático.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">Vitrio<span>.</span></div>
+          <p>Tecnologia, casa e praticidade para sua rotina.</p>
+          <p>Atendimento: segunda a sábado, das 8h às 20h.</p>
+        </div>
+
+        <div>
+          <h4>Institucional</h4>
+          <a href="#" data-action="about">Sobre a Vitrio</a><br>
+          <a href="#" data-action="stores">Nossas lojas</a><br>
+          <a href="#" data-action="privacy">Privacidade</a>
+        </div>
+
+        <div>
+          <h4>Atendimento</h4>
+          <a href="#" data-action="help">Central de ajuda</a><br>
+          <a href="#" data-action="orders">Acompanhar pedido</a><br>
+          <a href="#" data-action="returns">Trocas e devoluções</a>
+        </div>
+
+        <div>
+          <h4>Pagamento e segurança</h4>
+          <p>Cartão de crédito, Pix e boleto.</p>
+          <p>Ambiente protegido para suas compras.</p>
+          <p>Compra segura Vitrio.</p>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <span>© 2026 Vitrio Comércio Digital. Todos os direitos reservados.</span>
+        <span>Preços e condições sujeitos a alteração.</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" id="modalClose" aria-label="Fechar">×</button>
+      <h2 id="modalTitle">Entre ou crie sua conta</h2>
+      <p id="modalDescription">
+        Acesse seus pedidos, favoritos e condições exclusivas da Vitrio.
+      </p>
+
+      <form id="accountForm">
+        <input type="email" id="accountEmail" placeholder="Seu e-mail" required>
+        <input type="password" id="accountPassword" placeholder="Sua senha" required minlength="6">
+        <button type="submit">Continuar</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const toast = document.getElementById("toast");
+    const cartCount = document.getElementById("cartCount");
+    const modalBackdrop = document.getElementById("modalBackdrop");
+    let cart = 0;
+    let toastTimer;
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+
+      toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2800);
+    }
+
+    function openModal(title, description) {
+      document.getElementById("modalTitle").textContent = title;
+      document.getElementById("modalDescription").textContent = description;
+      modalBackdrop.classList.add("open");
+      setTimeout(() => document.getElementById("accountEmail").focus(), 50);
+    }
+
+    function closeModal() {
+      modalBackdrop.classList.remove("open");
+    }
+
+    /* Busca */
+    document.getElementById("searchForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const value = document.getElementById("searchInput").value.trim();
+
+      if (!value) {
+        showToast("Digite um produto para pesquisar.");
+        document.getElementById("searchInput").focus();
+        return;
+      }
+
+      showToast('Buscando por "' + value + '"...');
+    });
+
+    /* Navegação do menu */
+    document.querySelectorAll("[data-category]").forEach(link => {
+      link.addEventListener("click", function(e) {
+        e.preventDefault();
+        showToast("Abrindo categoria " + this.dataset.category + "...");
+      });
+    });
+
+    /* Ações do cabeçalho e rodapé */
+    document.querySelectorAll("[data-action]").forEach(element => {
+      element.addEventListener("click", function(e) {
+        e.preventDefault();
+
+        const action = this.dataset.action;
+
+        if (action === "account") {
+          openModal(
+            "Entre ou crie sua conta",
+            "Acesse seus pedidos, favoritos e condições exclusivas da Vitrio."
+          );
+        } else if (action === "cart") {
+          if (cart === 0) {
+            showToast("Seu carrinho está vazio.");
+          } else {
+            showToast(
+              "Seu carrinho tem " + cart +
+              (cart === 1 ? " item." : " itens.")
+            );
+          }
+        } else if (action === "favorites") {
+          showToast("Sua lista de favoritos está disponível após entrar na conta.");
+        } else if (action === "home") {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+          showToast("Abrindo " + action + "...");
+        }
+      });
+    });
+
+    /* Galeria */
+    document.querySelectorAll(".thumbnail").forEach(thumbnail => {
+      thumbnail.addEventListener("click", function() {
+        document.querySelectorAll(".thumbnail").forEach(item => {
+          item.classList.remove("active");
+        });
+
+        this.classList.add("active");
+
+        const number = this.dataset.thumb;
+        document.getElementById("mainImage").style.backgroundColor =
+          number === "1" ? "#E0E0E0" :
+          number === "2" ? "#d8d8d8" :
+          number === "3" ? "#cccccc" :
+          "#e3e3e3";
+
+        showToast("Visualização " + number + " selecionada.");
+      });
+    });
+
+    /* Cores */
+    document.querySelectorAll(".color-btn").forEach(button => {
+      button.addEventListener("click", function() {
+        document.querySelectorAll(".color-btn").forEach(item => {
+          item.classList.remove("selected");
+        });
+
+        this.classList.add("selected");
+        showToast("Cor selecionada: " + this.textContent + ".");
+      });
+    });
+
+    /* Compartilhamento */
+    document.querySelectorAll("[data-share]").forEach(button => {
+      button.addEventListener("click", function() {
+        const type = this.dataset.share;
+
+        if (type === "Copiar link") {
+          if (navigator.clipboard) {
+            navigator.clipboard.writeText(window.location.href)
+              .then(() => showToast("Link do produto copiado."));
+          } else {
+            showToast("Link do produto pronto para compartilhar.");
+          }
+        } else {
+          showToast("Compartilhamento via " + type + " selecionado.");
+        }
+      });
+    });
+
+    /* CEP */
+    document.getElementById("cep").addEventListener("input", function() {
+      let value = this.value.replace(/\D/g, "").slice(0, 8);
+
+      if (value.length > 5) {
+        value = value.slice(0, 5) + "-" + value.slice(5);
+      }
+
+      this.value = value;
+    });
+
+    document.getElementById("shippingForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const cep = document.getElementById("cep").value.replace(/\D/g, "");
+      const result = document.getElementById("shippingResult");
+
+      if (cep.length !== 8) {
+        showToast("Digite um CEP válido com 8 números.");
+        document.getElementById("cep").focus();
+        return;
+      }
+
+      result.style.display = "block";
+      result.innerHTML =
+        "✓ Entrega econômica: <strong>grátis</strong> — até 7 dias úteis. " +
+        "Entrega expressa: <strong>R$ 19,90</strong> — até 3 dias úteis.";
+    });
+
+    /* Quantidade */
+    const quantityInput = document.getElementById("quantity");
+
+    function normalizeQuantity() {
+      let value = parseInt(quantityInput.value, 10);
+
+      if (isNaN(value) || value < 1) value = 1;
+      if (value > 10) value = 10;
+
+      quantityInput.value = value;
+    }
+
+    document.getElementById("decrease").addEventListener("click", function() {
+      normalizeQuantity();
+      quantityInput.value = Math.max(1, parseInt(quantityInput.value) - 1);
+    });
+
+    document.getElementById("increase").addEventListener("click", function() {
+      normalizeQuantity();
+      quantityInput.value = Math.min(10, parseInt(quantityInput.value) + 1);
+    });
+
+    quantityInput.addEventListener("change", normalizeQuantity);
+
+    /* Comprar */
+    document.getElementById("buyButton").addEventListener("click", function() {
+      normalizeQuantity();
+
+      const quantity = parseInt(quantityInput.value);
+      cart += quantity;
+      cartCount.textContent = cart;
+
+      showToast(
+        quantity + (quantity === 1 ? " unidade" : " unidades") +
+        " adicionada(s) ao carrinho. Você pode continuar comprando."
+      );
+    });
+
+    /* Cross-sell */
+    document.querySelectorAll(".mini-add").forEach(button => {
+      button.addEventListener("click", function() {
+        cart++;
+        cartCount.textContent = cart;
+
+        showToast(
+          this.dataset.product + " foi adicionado ao carrinho."
+        );
+      });
+    });
+
+    /* Abas */
+    const tabs = document.querySelectorAll(".tab");
+
+    tabs.forEach(tab => {
+      tab.addEventListener("click", function() {
+        tabs.forEach(item => item.classList.remove("active"));
+        document.querySelectorAll(".tab-content").forEach(content => {
+          content.classList.remove("active");
+        });
+
+        this.classList.add("active");
+
+        const target = this.dataset.tab;
+
+        if (target === "description") {
+          document.getElementById("description").classList.add("active");
+        }
+
+        if (target === "specifications") {
+          document.getElementById("specifications").classList.add("active");
+        }
+
+        if (target === "reviews") {
+          document.getElementById("reviewsContent").classList.add("active");
+        }
+      });
+    });
+
+    /* Link de avaliações */
+    document.getElementById("reviewLink").addEventListener("click", function(e) {
+      e.preventDefault();
+
+      document.querySelector('.tab[data-tab="reviews"]').click();
+
+      document.getElementById("reviews").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    });
+
+    /* Modal */
+    document.getElementById("modalClose").addEventListener("click", closeModal);
+
+    modalBackdrop.addEventListener("click", function(e) {
+      if (e.target === modalBackdrop) closeModal();
+    });
+
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "Escape" && modalBackdrop.classList.contains("open")) {
+        closeModal();
+      }
+    });
+
+    document.getElementById("accountForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const email = document.getElementById("accountEmail").value.trim();
+
+      closeModal();
+      showToast("Acesso iniciado para " + email + ".");
+      this.reset();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+Pergunta 1 — Escolhas visuais
+
+A página usa um layout de formulário + benefícios, adequado para desktop de 1280 px. O formulário ocupa a maior área porque é a ação principal, enquanto o painel lateral reforça os motivos para criar uma conta.
+
+O roxo funciona como cor institucional e de confiança; o laranja é reservado ao CTA “Criar minha conta”, criando contraste e uma hierarquia visual clara. Verde é usado para estados positivos e segurança.
+
+O formulário foi dividido em três blocos: dados pessoais, senha e preferências. Isso reduz a sensação de formulário longo. A validação é feita diretamente nos campos, com máscara de CPF, celular e data, além de indicador visual de força da senha.
+
+As preferências de comunicação aparecem separadas do consentimento obrigatório. Isso evita misturar a aceitação necessária dos termos com a adesão voluntária às comunicações de marketing.
+Pergunta 2 — O que aciona essa tela?
+
+A tela é acionada quando um visitante escolhe “Criar conta”, normalmente a partir do cabeçalho, checkout ou área de login da Vitrio.
+
+Ela pode aparecer antes da compra, quando o visitante deseja se cadastrar, ou durante o checkout quando é necessário criar uma conta para continuar. O objetivo é tornar o cadastro rápido o suficiente para não interromper a intenção de compra.
+
+Após o preenchimento correto e o aceite dos termos, o formulário apresenta uma confirmação de conta criada.
+Pergunta 3 — Interações possíveis
+
+O usuário pode:
+
+    Informar nome completo, CPF, data de nascimento, e-mail e celular.
+
+    Visualizar validações de campos inválidos.
+
+    Utilizar máscaras automáticas para CPF, celular e data.
+
+    Criar uma senha e visualizar sua força em tempo real.
+
+    Conferir os requisitos individuais da senha.
+
+    Mostrar ou ocultar a senha.
+
+    Confirmar a senha.
+
+    Aceitar os Termos de Uso e Política de Privacidade.
+
+    Abrir os textos de Termos de Uso e Política de Privacidade em modal.
+
+    Optar por receber ou não comunicações de marketing.
+
+    Escolher canais de comunicação: e-mail, WhatsApp e SMS.
+
+    Acessar a área de login caso já possua uma conta.
+
+    Conhecer o Clube Vitrio.
+
+    Enviar o formulário para criar a conta.
+
+    Receber confirmação visual após o cadastro.
+
+    Continuar para a loja após a criação da conta.
+
+    Fechar os modais pelo botão ×, clicando fora deles ou usando Esc.
+
+A experiência prioriza conversão e qualidade do cadastro sem tornar o formulário excessivamente longo: os dados essenciais são solicitados no momento adequado, enquanto informações opcionais ficam claramente identificadas.

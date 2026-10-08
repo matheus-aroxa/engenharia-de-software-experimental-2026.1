@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitrio — Criar conta</title>
+
+  <style>
+    :root {
+      --purple: #5b21b6;
+      --purple-dark: #43158b;
+      --purple-light: #f0eafd;
+      --orange: #f97316;
+      --orange-dark: #df620d;
+      --green: #16803c;
+      --red: #dc2626;
+      --text: #202124;
+      --muted: #6b7280;
+      --border: #d9dce1;
+      --background: #f6f6f8;
+      --white: #fff;
+      --placeholder: #E0E0E0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--text);
+      background: var(--background);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topbar {
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      background: var(--purple-dark);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .header {
+      height: 76px;
+      color: #fff;
+      background: var(--purple);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .12);
+    }
+
+    .header-inner {
+      width: 1180px;
+      max-width: calc(100% - 32px);
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      color: #fff;
+      font-size: 29px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+    }
+
+    .logo span {
+      color: #facc15;
+    }
+
+    .back-link {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      width: 100%;
+      padding: 34px 16px 55px;
+    }
+
+    .page {
+      width: 540px;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .steps {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 23px;
+    }
+
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: #92959b;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .step.active {
+      color: var(--purple);
+    }
+
+    .step-number {
+      width: 25px;
+      height: 25px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #e3e4e7;
+      font-size: 10px;
+    }
+
+    .step.active .step-number {
+      color: #fff;
+      background: var(--purple);
+    }
+
+    .step-line {
+      width: 65px;
+      height: 1px;
+      margin: 0 10px;
+      background: #d8d9dd;
+    }
+
+    .card {
+      border: 1px solid #e4e5e8;
+      border-radius: 12px;
+      background: var(--white);
+      box-shadow: 0 5px 22px rgba(25, 25, 35, .06);
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 26px 35px 21px;
+      border-bottom: 1px solid #eeeef0;
+    }
+
+    h1 {
+      margin: 0 0 7px;
+      font-size: 24px;
+      letter-spacing: -.4px;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .form {
+      padding: 24px 35px 29px;
+    }
+
+    .section-title {
+      margin: 0 0 14px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px 14px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .required {
+      color: var(--red);
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .input,
+    .select {
+      width: 100%;
+      height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      outline: none;
+      padding: 0 12px;
+      color: var(--text);
+      background: #fff;
+      font-size: 12px;
+      transition: border-color .15s, box-shadow .15s;
+    }
+
+    .input:focus,
+    .select:focus {
+      border-color: var(--purple);
+      box-shadow: 0 0 0 3px rgba(91, 33, 182, .09);
+    }
+
+    .input.invalid,
+    .select.invalid {
+      border-color: var(--red);
+    }
+
+    .input.valid {
+      border-color: var(--green);
+    }
+
+    .input.password {
+      padding-right: 43px;
+    }
+
+    .password-toggle {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 40px;
+      height: 42px;
+      border: 0;
+      color: #777;
+      background: transparent;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .password-toggle:hover {
+      color: var(--purple);
+    }
+
+    .hint {
+      min-height: 15px;
+      margin-top: 5px;
+      color: #8a8d93;
+      font-size: 9px;
+      line-height: 1.4;
+    }
+
+    .hint.error {
+      color: var(--red);
+    }
+
+    .hint.success {
+      color: var(--green);
+    }
+
+    .divider {
+      height: 1px;
+      margin: 22px 0;
+      background: #eeeeef;
+    }
+
+    .password-strength {
+      display: none;
+      margin-top: 8px;
+    }
+
+    .password-strength.visible {
+      display: block;
+    }
+
+    .strength-bar {
+      height: 4px;
+      overflow: hidden;
+      border-radius: 4px;
+      background: #e8e8eb;
+    }
+
+    .strength-fill {
+      width: 0;
+      height: 100%;
+      background: var(--red);
+      transition: width .2s, background .2s;
+    }
+
+    .strength-label {
+      margin-top: 4px;
+      color: #777;
+      font-size: 9px;
+    }
+
+    .terms {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      margin-top: 20px;
+      color: #60636a;
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .terms input {
+      width: 16px;
+      height: 16px;
+      flex: 0 0 16px;
+      margin: 0;
+      accent-color: var(--purple);
+      cursor: pointer;
+    }
+
+    .terms a {
+      color: var(--purple);
+      font-weight: 700;
+    }
+
+    .terms a:hover {
+      text-decoration: underline;
+    }
+
+    .terms.error {
+      color: var(--red);
+    }
+
+    .submit-button {
+      width: 100%;
+      height: 47px;
+      margin-top: 21px;
+      border: 0;
+      border-radius: 6px;
+      color: #fff;
+      background: var(--orange);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 900;
+      transition: background .15s, transform .15s;
+    }
+
+    .submit-button:hover {
+      background: var(--orange-dark);
+      transform: translateY(-1px);
+    }
+
+    .submit-button:disabled {
+      cursor: not-allowed;
+      opacity: .6;
+      transform: none;
+    }
+
+    .login {
+      padding: 18px 35px;
+      border-top: 1px solid #eeeef0;
+      color: #666a72;
+      text-align: center;
+      font-size: 11px;
+    }
+
+    .login a {
+      color: var(--purple);
+      font-weight: 800;
+    }
+
+    .login a:hover {
+      text-decoration: underline;
+    }
+
+    .security-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      margin-top: 19px;
+      color: #777a81;
+      font-size: 9px;
+    }
+
+    .security-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .security-icon {
+      color: var(--green);
+      font-size: 12px;
+    }
+
+    footer {
+      padding: 19px 16px 26px;
+      color: #85878d;
+      text-align: center;
+      font-size: 9px;
+    }
+
+    .toast {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 20;
+      max-width: 350px;
+      padding: 13px 17px;
+      border-radius: 7px;
+      color: #fff;
+      background: #202124;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, .22);
+      font-size: 11px;
+      opacity: 0;
+      transform: translateY(60px);
+      transition: .25s;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, .52);
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal {
+      position: relative;
+      width: 440px;
+      max-width: 100%;
+      padding: 28px;
+      border-radius: 11px;
+      background: #fff;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, .22);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 13px;
+      border: 0;
+      color: #777;
+      background: transparent;
+      cursor: pointer;
+      font-size: 23px;
+    }
+
+    .modal h2 {
+      margin: 0 0 9px;
+      font-size: 19px;
+    }
+
+    .modal p {
+      margin: 0 0 17px;
+      color: #686b72;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .modal-action {
+      width: 100%;
+      height: 41px;
+      border: 0;
+      border-radius: 6px;
+      color: #fff;
+      background: var(--purple);
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    @media (max-width: 600px) {
+      .topbar {
+        padding: 0 10px;
+        text-align: center;
+        font-size: 9px;
+      }
+
+      .header {
+        height: 67px;
+      }
+
+      .header-inner {
+        max-width: calc(100% - 24px);
+      }
+
+      .logo {
+        font-size: 25px;
+      }
+
+      main {
+        padding: 22px 10px 35px;
+      }
+
+      .steps {
+        margin-bottom: 17px;
+      }
+
+      .step-line {
+        width: 28px;
+        margin: 0 6px;
+      }
+
+      .step {
+        font-size: 9px;
+      }
+
+      .card-header,
+      .form {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .field-grid {
+        grid-template-columns: 1fr;
+        gap: 13px;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .security-row {
+        flex-direction: column;
+        gap: 7px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    Frete grátis para compras acima de R$ 199 • Até 10x sem juros
+  </div>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="#" class="logo" id="homeLink">vit<span>r</span>io</a>
+
+      <a href="#" class="back-link" id="backLink">
+        ← Voltar para a loja
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <div class="page">
+
+      <div class="steps" aria-label="Etapas do cadastro">
+        <div class="step active">
+          <span class="step-number">1</span>
+          <span>Dados pessoais</span>
+        </div>
+
+        <span class="step-line"></span>
+
+        <div class="step">
+          <span class="step-number">2</span>
+          <span>Conta criada</span>
+        </div>
+      </div>
+
+      <section class="card">
+
+        <div class="card-header">
+          <h1>Crie sua conta Vitrio</h1>
+          <p class="subtitle">
+            Cadastre-se para acompanhar pedidos, salvar seus endereços
+            e ter uma experiência de compra mais rápida.
+          </p>
+        </div>
+
+        <form class="form" id="registerForm" novalidate>
+
+          <h2 class="section-title">Dados pessoais</h2>
+
+          <div class="field-grid">
+
+            <div class="field full">
+              <label for="name">
+                Nome completo <span class="required">*</span>
+              </label>
+
+              <input
+                class="input"
+                id="name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                placeholder="Digite seu nome completo"
+                maxlength="100"
+                required>
+
+              <div class="hint" id="nameHint">
+                Informe seu nome e sobrenome.
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="cpf">
+                CPF <span class="required">*</span>
+              </label>
+
+              <input
+                class="input"
+                id="cpf"
+                name="cpf"
+                type="text"
+                inputmode="numeric"
+                autocomplete="off"
+                placeholder="000.000.000-00"
+                maxlength="14"
+                required>
+
+              <div class="hint" id="cpfHint"></div>
+            </div>
+
+            <div class="field">
+              <label for="birthDate">
+                Data de nascimento <span class="required">*</span>
+              </label>
+
+              <input
+                class="input"
+                id="birthDate"
+                name="birthDate"
+                type="text"
+                inputmode="numeric"
+                placeholder="DD/MM/AAAA"
+                maxlength="10"
+                required>
+
+              <div class="hint" id="birthHint"></div>
+            </div>
+
+            <div class="field full">
+              <label for="email">
+                E-mail <span class="required">*</span>
+              </label>
+
+              <input
+                class="input"
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                placeholder="voce@exemplo.com"
+                maxlength="120"
+                required>
+
+              <div class="hint" id="emailHint">
+                Usaremos seu e-mail para acessar sua conta e enviar atualizações.
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="phone">
+                Celular <span class="required">*</span>
+              </label>
+
+              <input
+                class="input"
+                id="phone"
+                name="phone"
+                type="tel"
+                autocomplete="tel"
+                inputmode="tel"
+                placeholder="(00) 00000-0000"
+                maxlength="15"
+                required>
+
+              <div class="hint" id="phoneHint"></div>
+            </div>
+
+          </div>
+
+          <div class="divider"></div>
+
+          <h2 class="section-title">Crie sua senha</h2>
+
+          <div class="field-grid">
+
+            <div class="field">
+              <label for="password">
+                Senha <span class="required">*</span>
+              </label>
+
+              <div class="input-wrap">
+                <input
+                  class="input password"
+                  id="password"
+                  name="password"
+                  type="password"
+                  autocomplete="new-password"
+                  placeholder="Digite sua senha"
+                  minlength="8"
+                  maxlength="64"
+                  required>
+
+                <button
+                  class="password-toggle"
+                  type="button"
+                  data-target="password"
+                  aria-label="Mostrar senha">
+                  ◉
+                </button>
+              </div>
+
+              <div class="password-strength" id="passwordStrength">
+                <div class="strength-bar">
+                  <div class="strength-fill" id="strengthFill"></div>
+                </div>
+                <div class="strength-label" id="strengthLabel">
+                  Senha fraca
+                </div>
+              </div>
+
+              <div class="hint" id="passwordHint">
+                Use pelo menos 8 caracteres, com letras e números.
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="confirmPassword">
+                Confirmar senha <span class="required">*</span>
+              </label>
+
+              <div class="input-wrap">
+                <input
+                  class="input password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type="password"
+                  autocomplete="new-password"
+                  placeholder="Repita sua senha"
+                  required>
+
+                <button
+                  class="password-toggle"
+                  type="button"
+                  data-target="confirmPassword"
+                  aria-label="Mostrar senha">
+                  ◉
+                </button>
+              </div>
+
+              <div class="hint" id="confirmPasswordHint"></div>
+            </div>
+
+          </div>
+
+          <label class="terms" id="termsLabel">
+            <input type="checkbox" id="terms" required>
+            <span>
+              Li e concordo com os
+              <a href="#" id="termsLink">Termos de Uso</a>
+              e a
+              <a href="#" id="privacyLink">Política de Privacidade</a>
+              da Vitrio. <span class="required">*</span>
+            </span>
+          </label>
+
+          <button class="submit-button" type="submit" id="submitButton">
+            Criar minha conta
+          </button>
+
+        </form>
+
+        <div class="login">
+          Já possui uma conta?
+          <a href="#" id="loginLink">Entrar na Vitrio</a>
+        </div>
+
+      </section>
+
+      <div class="security-row">
+        <div class="security-item">
+          <span class="security-icon">🔒</span>
+          Seus dados estão protegidos
+        </div>
+
+        <div class="security-item">
+          <span class="security-icon">✓</span>
+          Cadastro gratuito
+        </div>
+
+        <div class="security-item">
+          <span class="security-icon">🛡</span>
+          Compra segura
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    © 2026 Vitrio Comércio Digital. Todos os direitos reservados.
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <div class="modal-overlay" id="infoModal">
+    <div class="modal">
+      <button class="modal-close" id="modalClose" type="button">×</button>
+
+      <h2 id="modalTitle">Informações</h2>
+
+      <p id="modalText"></p>
+
+      <button class="modal-action" id="modalOk" type="button">
+        Entendi
+      </button>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const form = document.getElementById("registerForm");
+      const toast = document.getElementById("toast");
+      const infoModal = document.getElementById("infoModal");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalText = document.getElementById("modalText");
+      const submitButton = document.getElementById("submitButton");
+
+      let toastTimer;
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add("show");
+
+        clearTimeout(toastTimer);
+
+        toastTimer = setTimeout(() => {
+          toast.classList.remove("show");
+        }, 3000);
+      }
+
+      function openModal(title, text) {
+        modalTitle.textContent = title;
+        modalText.textContent = text;
+        infoModal.classList.add("open");
+      }
+
+      function closeModal() {
+        infoModal.classList.remove("open");
+      }
+
+      function onlyDigits(value) {
+        return value.replace(/\D/g, "");
+      }
+
+      function formatCPF(value) {
+        const digits = onlyDigits(value).slice(0, 11);
+
+        let result = digits;
+
+        if (digits.length > 3) {
+          result = digits.slice(0, 3) + "." + digits.slice(3);
+        }
+
+        if (digits.length > 6) {
+          result = result.slice(0, 7) + "." + result.slice(7);
+        }
+
+        if (digits.length > 9) {
+          result = result.slice(0, 11) + "-" + result.slice(11);
+        }
+
+        return result;
+      }
+
+      function formatPhone(value) {
+        const digits = onlyDigits(value).slice(0, 11);
+
+        if (digits.length <= 2) {
+          return digits;
+        }
+
+        if (digits.length <= 7) {
+          return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+        }
+
+        if (digits.length <= 10) {
+          return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
+        }
+
+        return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+      }
+
+      function formatDate(value) {
+        const digits = onlyDigits(value).slice(0, 8);
+
+        if (digits.length <= 2) {
+          return digits;
+        }
+
+        if (digits.length <= 4) {
+          return `${digits.slice(0, 2)}/${digits.slice(2)}`;
+        }
+
+        return `${digits.slice(0, 2)}/${digits.slice(2, 4)}/${digits.slice(4)}`;
+      }
+
+      function isValidCPF(cpf) {
+        const digits = onlyDigits(cpf);
+
+        if (digits.length !== 11 || /^(\d)\1{10}$/.test(digits)) {
+          return false;
+        }
+
+        let sum = 0;
+
+        for (let i = 0; i < 9; i++) {
+          sum += Number(digits.charAt(i)) * (10 - i);
+        }
+
+        let remainder = (sum * 10) % 11;
+
+        if (remainder === 10) {
+          remainder = 0;
+        }
+
+        if (remainder !== Number(digits.charAt(9))) {
+          return false;
+        }
+
+        sum = 0;
+
+        for (let i = 0; i < 10; i++) {
+          sum += Number(digits.charAt(i)) * (11 - i);
+        }
+
+        remainder = (sum * 10) % 11;
+
+        if (remainder === 10) {
+          remainder = 0;
+        }
+
+        return remainder === Number(digits.charAt(10));
+      }
+
+      function isValidBirthDate(value) {
+        const match = value.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+
+        if (!match) {
+          return false;
+        }
+
+        const day = Number(match[1]);
+        const month = Number(match[2]);
+        const year = Number(match[3]);
+
+        const date = new Date(year, month - 1, day);
+        const today = new Date();
+
+        if (
+          date.getFullYear() !== year ||
+          date.getMonth() !== month - 1 ||
+          date.getDate() !== day
+        ) {
+          return false;
+        }
+
+        if (date > today) {
+          return false;
+        }
+
+        const minimumAgeDate = new Date(
+          today.getFullYear() - 18,
+          today.getMonth(),
+          today.getDate()
+        );
+
+        return date <= minimumAgeDate;
+      }
+
+      function validateName(showMessage = true) {
+        const input = document.getElementById("name");
+        const hint = document.getElementById("nameHint");
+        const words = input.value.trim().split(/\s+/).filter(Boolean);
+        const valid = words.length >= 2 && input.value.trim().length >= 5;
+
+        input.classList.toggle("valid", valid);
+        input.classList.toggle("invalid", !valid && input.value.length > 0);
+
+        if (showMessage && !valid && input.value.length > 0) {
+          hint.className = "hint error";
+          hint.textContent = "Digite seu nome e sobrenome.";
+        } else if (valid) {
+          hint.className = "hint success";
+          hint.textContent = "Nome informado corretamente.";
+        } else {
+          hint.className = "hint";
+          hint.textContent = "Informe seu nome e sobrenome.";
+        }
+
+        return valid;
+      }
+
+      function validateCPF(showMessage = true) {
+        const input = document.getElementById("cpf");
+        const hint = document.getElementById("cpfHint");
+        const value = input.value;
+
+        const valid = isValidCPF(value);
+
+        input.classList.toggle("valid", valid);
+        input.classList.toggle(
+          "invalid",
+          !valid && onlyDigits(value).length > 0
+        );
+
+        if (showMessage && !valid && onlyDigits(value).length > 0) {
+          hint.className = "hint error";
+          hint.textContent = "Confira o CPF informado.";
+        } else if (valid) {
+          hint.className = "hint success";
+          hint.textContent = "CPF válido.";
+        } else {
+          hint.className = "hint";
+          hint.textContent = "";
+        }
+
+        return valid;
+      }
+
+      function validateBirth(showMessage = true) {
+        const input = document.getElementById("birthDate");
+        const hint = document.getElementById("birthHint");
+
+        const valid = isValidBirthDate(input.value);
+
+        input.classList.toggle("valid", valid);
+        input.classList.toggle(
+          "invalid",
+          !valid && input.value.length > 0
+        );
+
+        if (showMessage && !valid && input.value.length > 0) {
+          hint.className = "hint error";
+          hint.textContent =
+            "Informe uma data válida. É necessário ter 18 anos ou mais.";
+        } else if (valid) {
+          hint.className = "hint success";
+          hint.textContent = "Data válida.";
+        } else {
+          hint.className = "hint";
+          hint.textContent = "";
+        }
+
+        return valid;
+      }
+
+      function validateEmail(showMessage = true) {
+        const input = document.getElementById("email");
+        const hint = document.getElementById("emailHint");
+
+        const valid =
+          /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim());
+
+        input.classList.toggle("valid", valid);
+        input.classList.toggle(
+          "invalid",
+          !valid && input.value.length > 0
+        );
+
+        if (showMessage && !valid && input.value.length > 0) {
+          hint.className = "hint error";
+          hint.textContent = "Digite um e-mail válido.";
+        } else if (valid) {
+          hint.className = "hint success";
+          hint.textContent = "E-mail válido.";
+        } else {
+          hint.className = "hint";
+          hint.textContent =
+            "Usaremos seu e-mail para acessar sua conta e enviar atualizações.";
+        }
+
+        return valid;
+      }
+
+      function validatePhone(showMessage = true) {
+        const input = document.getElementById("phone");
+        const hint = document.getElementById("phoneHint");
+
+        const valid = onlyDigits(input.value).length === 11;
+
+        input.classList.toggle("valid", valid);
+        input.classList.toggle(
+          "invalid",
+          !valid && input.value.length > 0
+        );
+
+        if (showMessage && !valid && input.value.length > 0) {
+          hint.className = "hint error";
+          hint.textContent = "Digite um celular com DDD.";
+        } else if (valid) {
+          hint.className = "hint success";
+          hint.textContent = "Celular válido.";
+        } else {
+          hint.className = "hint";
+          hint.textContent = "";
+        }
+
+        return valid;
+      }
+
+      function passwordScore(password) {
+        let score = 0;
+
+        if (password.length >= 8) score++;
+        if (/[a-z]/.test(password)) score++;
+        if (/[A-Z]/.test(password)) score++;
+        if (/\d/.test(password)) score++;
+        if (/[^A-Za-z0-9]/.test(password)) score++;
+
+        return score;
+      }
+
+      function updatePasswordStrength() {
+        const password = document.getElementById("password");
+        const strength = document.getElementById("passwordStrength");
+        const fill = document.getElementById("strengthFill");
+        const label = document.getElementById("strengthLabel");
+
+        if (!password.value) {
+          strength.classList.remove("visible");
+          return;
+        }
+
+        strength.classList.add("visible");
+
+        const score = passwordScore(password.value);
+
+        const states = [
+          { width: "20%", color: "#dc2626", text: "Senha muito fraca" },
+          { width: "40%", color: "#ef4444", text: "Senha fraca" },
+          { width: "60%", color: "#eab308", text: "Senha razoável" },
+          { width: "80%", color: "#65a30d", text: "Senha boa" },
+          { width: "100%", color: "#16803c", text: "Senha forte" }
+        ];
+
+        const state = states[Math.max(0, score - 1)];
+
+        fill.style.width = state.width;
+        fill.style.background = state.color;
+        label.textContent = state.text;
+      }
+
+      function validatePassword() {
+        const password = document.getElementById("password");
+        const hint = document.getElementById("passwordHint");
+
+        const valid =
+          password.value.length >= 8 &&
+          /[A-Za-z]/.test(password.value) &&
+          /\d/.test(password.value);
+
+        password.classList.toggle("valid", valid);
+        password.classList.toggle(
+          "invalid",
+          !valid && password.value.length > 0
+        );
+
+        if (valid) {
+          hint.className = "hint success";
+          hint.textContent = "Senha atende aos requisitos.";
+        } else {
+          hint.className = "hint";
+          hint.textContent =
+            "Use pelo menos 8 caracteres, com letras e números.";
+        }
+
+        updatePasswordStrength();
+
+        return valid;
+      }
+
+      function validatePasswordConfirmation() {
+        const password = document.getElementById("password");
+        const confirm = document.getElementById("confirmPassword");
+        const hint = document.getElementById("confirmPasswordHint");
+
+        const valid =
+          confirm.value.length > 0 &&
+          password.value === confirm.value;
+
+        confirm.classList.toggle("valid", valid);
+        confirm.classList.toggle(
+          "invalid",
+          !valid && confirm.value.length > 0
+        );
+
+        if (valid) {
+          hint.className = "hint success";
+          hint.textContent = "As senhas são iguais.";
+        } else if (confirm.value.length > 0) {
+          hint.className = "hint error";
+          hint.textContent = "As senhas não coincidem.";
+        } else {
+          hint.className = "hint";
+          hint.textContent = "";
+        }
+
+        return valid;
+      }
+
+      document.getElementById("cpf").addEventListener("input", event => {
+        event.target.value = formatCPF(event.target.value);
+        validateCPF(false);
+      });
+
+      document.getElementById("phone").addEventListener("input", event => {
+        event.target.value = formatPhone(event.target.value);
+        validatePhone(false);
+      });
+
+      document.getElementById("birthDate").addEventListener("input", event => {
+        event.target.value = formatDate(event.target.value);
+        validateBirth(false);
+      });
+
+      document.getElementById("name").addEventListener("blur", () => {
+        validateName();
+      });
+
+      document.getElementById("cpf").addEventListener("blur", () => {
+        validateCPF();
+      });
+
+      document.getElementById("birthDate").addEventListener("blur", () => {
+        validateBirth();
+      });
+
+      document.getElementById("email").addEventListener("blur", () => {
+        validateEmail();
+      });
+
+      document.getElementById("phone").addEventListener("blur", () => {
+        validatePhone();
+      });
+
+      document.getElementById("password").addEventListener("input", () => {
+        validatePassword();
+        validatePasswordConfirmation();
+      });
+
+      document.getElementById("confirmPassword").addEventListener("input", () => {
+        validatePasswordConfirmation();
+      });
+
+      document.querySelectorAll(".password-toggle").forEach(button => {
+        button.addEventListener("click", () => {
+          const target = document.getElementById(button.dataset.target);
+
+          if (target.type === "password") {
+            target.type = "text";
+            button.textContent = "◉";
+            button.setAttribute("aria-label", "Ocultar senha");
+          } else {
+            target.type = "password";
+            button.textContent = "◉";
+            button.setAttribute("aria-label", "Mostrar senha");
+          }
+        });
+      });
+
+      form.addEventListener("submit", event => {
+        event.preventDefault();
+
+        const validName = validateName(true);
+        const validCPF = validateCPF(true);
+        const validBirth = validateBirth(true);
+        const validEmail = validateEmail(true);
+        const validPhone = validatePhone(true);
+        const validPassword = validatePassword();
+        const validConfirmation = validatePasswordConfirmation();
+
+        const terms = document.getElementById("terms");
+        const termsLabel = document.getElementById("termsLabel");
+
+        if (!terms.checked) {
+          termsLabel.classList.add("error");
+        } else {
+          termsLabel.classList.remove("error");
+        }
+
+        const valid =
+          validName &&
+          validCPF &&
+          validBirth &&
+          validEmail &&
+          validPhone &&
+          validPassword &&
+          validConfirmation &&
+          terms.checked;
+
+        if (!valid) {
+          showToast("Revise os campos destacados antes de continuar.");
+          return;
+        }
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Criando sua conta...";
+
+        setTimeout(() => {
+          document.querySelector(".step.active").classList.remove("active");
+          document.querySelectorAll(".step")[1].classList.add("active");
+
+          submitButton.textContent = "Conta criada com sucesso!";
+          showToast("Sua conta Vitrio foi criada com sucesso.");
+
+          setTimeout(() => {
+            submitButton.disabled = false;
+            submitButton.textContent = "Criar minha conta";
+          }, 2500);
+        }, 900);
+      });
+
+      document.getElementById("termsLink").addEventListener("click", event => {
+        event.preventDefault();
+
+        openModal(
+          "Termos de Uso",
+          "Ao criar sua conta, você concorda com as condições de utilização da Vitrio, incluindo regras de compra, pagamento, entrega, trocas e utilização da plataforma."
+        );
+      });
+
+      document.getElementById("privacyLink").addEventListener("click", event => {
+        event.preventDefault();
+
+        openModal(
+          "Política de Privacidade",
+          "A Vitrio utiliza seus dados para criar e proteger sua conta, processar pedidos, realizar entregas e oferecer atendimento. Seus dados são tratados de acordo com a legislação aplicável."
+        );
+      });
+
+      document.getElementById("loginLink").addEventListener("click", event => {
+        event.preventDefault();
+        showToast("Abrindo a área de login.");
+      });
+
+      document.getElementById("homeLink").addEventListener("click", event => {
+        event.preventDefault();
+        showToast("Voltando para a página inicial.");
+      });
+
+      document.getElementById("backLink").addEventListener("click", event => {
+        event.preventDefault();
+        showToast("Voltando para a loja.");
+      });
+
+      document.getElementById("modalClose").addEventListener("click", closeModal);
+      document.getElementById("modalOk").addEventListener("click", closeModal);
+
+      infoModal.addEventListener("click", event => {
+        if (event.target === infoModal) {
+          closeModal();
+        }
+      });
+
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape") {
+          closeModal();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+Escolhas Visuais e Hierarquia
+
+A tela de cancelamento utiliza uma hierarquia visual que desestimula a ação precipitada através de design cuidadoso. O card principal ocupa espaço central com background branco sobre gradient suave de fundo. Cores quentes (laranja 
+#ff6b35) são reservadas apenas para o botão "Manter Assinatura" (CTA positiva), enquanto o botão "Cancelar Assinatura" usa cinza neutro, invertendo a hierarquia visual tradicional. A seção "Por que cancelar?" oferece alternativas antes do ponto de não retorno. Ícones emotivos (😢) humanizam a experiência. Mensagens destacam benefícios perdidos em laranja suave para criar hesitação cognitiva sem parecer manipulador.
+
+O que Aciona a Exibição desta Tela?
+
+Esta tela aparece quando: (1) o usuário clica em "Gerenciar Assinatura" → "Cancelar Plano" no painel de conta, (2) acessa via email de retenção com link direto, ou (3) tenta se desinscrever via menu de configurações de conta. Um modal de confirmação precede este fluxo para evitar cliques acidentais. Membros ativos veem informações sobre data de próxima cobrança e créditos/pontos pendentes.
+
+Todas as Interações Possíveis
+
+Usuários podem: (1) clicar em "Manter Assinatura" para retornar ao painel, (2) clicar em "Fazer Downgrade" para reduzir plano em vez de cancelar (alternativa de retenção), (3) clicar em "Tenho uma Dúvida" para abrir chat com suporte, (4) expandir/colapsar as razões de cancelamento (accordion) selecionando sua situação específica, (5) visualizar tooltip com benefícios perdidos ao passar hover em "Ao cancelar, você perderá", (6) inserir motivo opcional em campo de texto (feedback), (7) clicar em "Confirmar Cancelamento" para proceder com processo de reversão (email de confirmação é enviado), (8) visualizar modal de despedida com ofertas de retorno (cupom 15% desconto para 30 dias).

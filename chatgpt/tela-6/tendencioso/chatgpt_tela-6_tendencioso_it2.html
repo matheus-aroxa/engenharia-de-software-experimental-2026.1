@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitrio+ — Clube de benefícios</title>
+
+  <style>
+    :root{
+      --purple:#5b2bbf;
+      --purple-dark:#38176f;
+      --purple-light:#f1edff;
+      --orange:#ff6b35;
+      --orange-dark:#e95727;
+      --green:#16834a;
+      --green-light:#eaf8f0;
+      --yellow:#ffd85a;
+      --text:#25212a;
+      --muted:#706a77;
+      --border:#ded9e4;
+      --bg:#f6f5f8;
+      --white:#fff;
+      --shadow:0 12px 35px rgba(46,25,75,.10);
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+      font-size:14px;
+    }
+
+    button,input{font:inherit}
+    button{cursor:pointer}
+    a{text-decoration:none;color:inherit}
+
+    .topbar{
+      height:34px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:var(--purple-dark);
+      color:#fff;
+      font-size:11px;
+      font-weight:700;
+    }
+
+    header{
+      height:72px;
+      background:#fff;
+      border-bottom:1px solid var(--border);
+    }
+
+    .header-inner{
+      width:1160px;
+      height:100%;
+      margin:auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    .logo{
+      font-size:28px;
+      font-weight:900;
+      letter-spacing:-1.5px;
+      color:var(--purple);
+    }
+
+    .logo span{color:var(--orange)}
+
+    .nav{
+      display:flex;
+      gap:28px;
+      color:#625c68;
+      font-size:11px;
+      font-weight:650;
+    }
+
+    .nav a:hover{color:var(--purple)}
+
+    .account{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:#615a68;
+      font-size:10px;
+      font-weight:700;
+    }
+
+    .account-icon{
+      width:32px;
+      height:32px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:var(--purple-light);
+      color:var(--purple);
+    }
+
+    main{
+      width:1160px;
+      margin:auto;
+      padding-bottom:65px;
+    }
+
+    /* Hero */
+
+    .hero{
+      position:relative;
+      margin-top:24px;
+      min-height:330px;
+      overflow:hidden;
+      border-radius:16px;
+      background:
+        radial-gradient(circle at 80% 25%,rgba(255,216,90,.28),transparent 25%),
+        linear-gradient(120deg,#351467,#6b35c5 65%,#8b5ce1);
+      color:#fff;
+      box-shadow:var(--shadow);
+    }
+
+    .hero:after{
+      content:"";
+      position:absolute;
+      width:390px;
+      height:390px;
+      right:30px;
+      bottom:-180px;
+      border:55px solid rgba(255,255,255,.08);
+      border-radius:50%;
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:2;
+      width:58%;
+      padding:48px 0 42px 50px;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      padding:7px 11px;
+      border-radius:20px;
+      background:rgba(255,255,255,.14);
+      color:#fff;
+      font-size:9px;
+      font-weight:800;
+      letter-spacing:.4px;
+      text-transform:uppercase;
+    }
+
+    .hero h1{
+      margin:15px 0 10px;
+      font-size:39px;
+      line-height:1.05;
+      letter-spacing:-1.5px;
+    }
+
+    .hero h1 strong{color:var(--yellow)}
+
+    .hero p{
+      max-width:525px;
+      margin:0;
+      color:#eee7fa;
+      font-size:13px;
+      line-height:1.65;
+    }
+
+    .hero-price{
+      display:flex;
+      align-items:end;
+      gap:8px;
+      margin-top:22px;
+    }
+
+    .hero-price strong{
+      font-size:29px;
+      letter-spacing:-1px;
+    }
+
+    .hero-price span{
+      margin-bottom:4px;
+      color:#ddd1ef;
+      font-size:10px;
+    }
+
+    .hero-button{
+      margin-top:20px;
+      height:45px;
+      padding:0 23px;
+      border:0;
+      border-radius:8px;
+      background:var(--orange);
+      color:#fff;
+      font-size:11px;
+      font-weight:850;
+      box-shadow:0 8px 18px rgba(0,0,0,.16);
+    }
+
+    .hero-button:hover{background:var(--orange-dark)}
+
+    .hero-badge{
+      position:absolute;
+      z-index:3;
+      right:78px;
+      top:54px;
+      width:220px;
+      height:220px;
+      border-radius:50%;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow:0 15px 45px rgba(20,0,50,.20);
+      backdrop-filter:blur(5px);
+    }
+
+    .hero-badge .crown{
+      font-size:31px;
+      margin-bottom:5px;
+    }
+
+    .hero-badge strong{
+      font-size:23px;
+      letter-spacing:-.8px;
+    }
+
+    .hero-badge span{
+      margin-top:4px;
+      font-size:9px;
+      color:#e6dafa;
+    }
+
+    /* Benefits */
+
+    .section{
+      margin-top:29px;
+    }
+
+    .section-heading{
+      display:flex;
+      justify-content:space-between;
+      align-items:end;
+      margin-bottom:14px;
+    }
+
+    .section-heading h2{
+      margin:0;
+      font-size:20px;
+      letter-spacing:-.5px;
+    }
+
+    .section-heading p{
+      margin:4px 0 0;
+      color:var(--muted);
+      font-size:10px;
+    }
+
+    .benefits{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+    }
+
+    .benefit{
+      min-height:135px;
+      padding:19px;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:11px;
+      box-shadow:0 5px 18px rgba(40,25,65,.05);
+    }
+
+    .benefit-icon{
+      width:35px;
+      height:35px;
+      display:grid;
+      place-items:center;
+      margin-bottom:13px;
+      border-radius:8px;
+      background:var(--purple-light);
+      color:var(--purple);
+      font-size:16px;
+    }
+
+    .benefit:nth-child(2) .benefit-icon{
+      background:var(--green-light);
+      color:var(--green);
+    }
+
+    .benefit:nth-child(3) .benefit-icon{
+      background:#fff2dd;
+      color:#c97800;
+    }
+
+    .benefit:nth-child(4) .benefit-icon{
+      background:#e9f4ff;
+      color:#2376b8;
+    }
+
+    .benefit h3{
+      margin:0 0 6px;
+      font-size:11px;
+    }
+
+    .benefit p{
+      margin:0;
+      color:var(--muted);
+      font-size:9px;
+      line-height:1.55;
+    }
+
+    /* Plan */
+
+    .plan-section{
+      display:grid;
+      grid-template-columns:1fr 370px;
+      gap:18px;
+      margin-top:28px;
+      align-items:stretch;
+    }
+
+    .comparison{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:11px;
+      overflow:hidden;
+      box-shadow:0 5px 18px rgba(40,25,65,.05);
+    }
+
+    .comparison-header{
+      padding:18px 20px;
+      border-bottom:1px solid #ece8ef;
+    }
+
+    .comparison-header h2{
+      margin:0;
+      font-size:17px;
+    }
+
+    .comparison-header p{
+      margin:5px 0 0;
+      color:var(--muted);
+      font-size:9px;
+    }
+
+    .comparison-row{
+      display:grid;
+      grid-template-columns:1.7fr 1fr 1fr;
+      min-height:43px;
+      border-bottom:1px solid #eeeaf0;
+      align-items:center;
+    }
+
+    .comparison-row:last-child{border-bottom:0}
+
+    .comparison-row > div{
+      padding:0 16px;
+      font-size:9px;
+    }
+
+    .comparison-row.header{
+      min-height:38px;
+      background:#faf9fb;
+      font-weight:800;
+      color:#5c5663;
+    }
+
+    .comparison-row .club{
+      color:var(--purple);
+      font-weight:850;
+    }
+
+    .yes{
+      color:var(--green);
+      font-size:14px;
+      font-weight:900;
+    }
+
+    .no{
+      color:#aaa4ad;
+      font-size:12px;
+    }
+
+    /* Subscription card */
+
+    .subscription{
+      position:relative;
+      overflow:hidden;
+      padding:25px;
+      border:2px solid var(--purple);
+      border-radius:13px;
+      background:#fff;
+      box-shadow:0 10px 28px rgba(72,35,145,.13);
+    }
+
+    .popular{
+      position:absolute;
+      top:0;
+      right:0;
+      padding:7px 12px;
+      border-radius:0 10px 0 10px;
+      background:var(--purple);
+      color:#fff;
+      font-size:8px;
+      font-weight:850;
+      text-transform:uppercase;
+      letter-spacing:.4px;
+    }
+
+    .subscription h2{
+      margin:0;
+      font-size:17px;
+    }
+
+    .subscription .description{
+      margin:6px 0 18px;
+      color:var(--muted);
+      font-size:9px;
+      line-height:1.5;
+    }
+
+    .price-line{
+      display:flex;
+      align-items:end;
+      gap:5px;
+      margin-bottom:3px;
+    }
+
+    .price-line strong{
+      color:var(--purple);
+      font-size:34px;
+      letter-spacing:-1.5px;
+    }
+
+    .price-line span{
+      margin-bottom:6px;
+      color:var(--muted);
+      font-size:9px;
+    }
+
+    .billing{
+      color:var(--muted);
+      font-size:8px;
+    }
+
+    .subscribe{
+      width:100%;
+      height:45px;
+      margin-top:18px;
+      border:0;
+      border-radius:8px;
+      background:var(--orange);
+      color:#fff;
+      font-size:11px;
+      font-weight:850;
+    }
+
+    .subscribe:hover{background:var(--orange-dark)}
+
+    .cancel-note{
+      margin-top:9px;
+      text-align:center;
+      color:var(--muted);
+      font-size:8px;
+    }
+
+    .small-benefits{
+      margin:18px 0 0;
+      padding:15px 0 0;
+      border-top:1px solid #ebe7ee;
+      list-style:none;
+    }
+
+    .small-benefits li{
+      display:flex;
+      gap:8px;
+      margin:8px 0;
+      color:#4f4956;
+      font-size:9px;
+    }
+
+    .small-benefits li span{
+      color:var(--green);
+      font-weight:900;
+    }
+
+    /* Savings calculator */
+
+    .calculator{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:20px;
+      padding:25px;
+      border-radius:13px;
+      background:linear-gradient(110deg,#fff,#f5f0ff);
+      border:1px solid #ddd2f2;
+    }
+
+    .calculator h2{
+      margin:0 0 7px;
+      font-size:18px;
+    }
+
+    .calculator p{
+      margin:0;
+      color:var(--muted);
+      font-size:9px;
+      line-height:1.55;
+    }
+
+    .range-label{
+      display:flex;
+      justify-content:space-between;
+      margin-bottom:8px;
+      font-size:9px;
+      font-weight:750;
+    }
+
+    #frequency{
+      width:100%;
+      accent-color:var(--purple);
+    }
+
+    .frequency-value{
+      margin-top:5px;
+      color:var(--purple);
+      font-size:10px;
+      font-weight:850;
+    }
+
+    .saving-result{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:flex-end;
+      padding-right:8px;
+    }
+
+    .saving-result span{
+      color:var(--muted);
+      font-size:9px;
+    }
+
+    .saving-result strong{
+      margin-top:4px;
+      color:var(--green);
+      font-size:28px;
+      letter-spacing:-1px;
+    }
+
+    .saving-result small{
+      margin-top:3px;
+      color:var(--muted);
+      font-size:8px;
+    }
+
+    /* FAQ */
+
+    .faq{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:9px;
+    }
+
+    details{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:8px;
+      padding:0 14px;
+    }
+
+    summary{
+      padding:14px 0;
+      cursor:pointer;
+      list-style:none;
+      font-size:10px;
+      font-weight:750;
+    }
+
+    summary::-webkit-details-marker{display:none}
+
+    details p{
+      margin:0 0 14px;
+      color:var(--muted);
+      font-size:9px;
+      line-height:1.6;
+    }
+
+    /* Modal */
+
+    .modal-bg{
+      position:fixed;
+      inset:0;
+      z-index:50;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:rgba(26,17,37,.55);
+    }
+
+    .modal-bg.open{display:flex}
+
+    .modal{
+      position:relative;
+      width:450px;
+      padding:28px;
+      border-radius:13px;
+      background:#fff;
+      box-shadow:0 25px 80px rgba(0,0,0,.25);
+    }
+
+    .modal-close{
+      position:absolute;
+      top:12px;
+      right:12px;
+      width:28px;
+      height:28px;
+      border:0;
+      border-radius:50%;
+      background:#f0edf2;
+      color:#625c68;
+      font-size:16px;
+    }
+
+    .modal h2{
+      margin:0 0 7px;
+      font-size:18px;
+    }
+
+    .modal > p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:10px;
+      line-height:1.6;
+    }
+
+    .modal-summary{
+      padding:14px;
+      border-radius:8px;
+      background:var(--purple-light);
+      margin-bottom:16px;
+    }
+
+    .modal-summary strong{
+      display:block;
+      color:var(--purple);
+      font-size:15px;
+    }
+
+    .modal-summary span{
+      display:block;
+      margin-top:3px;
+      color:#665d72;
+      font-size:8px;
+    }
+
+    .modal-fields{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+
+    .modal-field.full{grid-column:1/-1}
+
+    .modal-field label{
+      display:block;
+      margin-bottom:4px;
+      font-size:9px;
+      font-weight:750;
+    }
+
+    .modal-field input{
+      width:100%;
+      height:38px;
+      padding:0 10px;
+      border:1px solid #d7d1dc;
+      border-radius:6px;
+      outline:none;
+      font-size:9px;
+    }
+
+    .modal-field input:focus{
+      border-color:var(--purple);
+      box-shadow:0 0 0 3px rgba(91,43,191,.08);
+    }
+
+    .consent{
+      display:flex;
+      gap:8px;
+      margin:14px 0;
+      color:var(--muted);
+      font-size:8px;
+      line-height:1.45;
+    }
+
+    .consent input{accent-color:var(--purple)}
+
+    .modal-actions{
+      display:flex;
+      gap:8px;
+    }
+
+    .modal-actions button{
+      flex:1;
+      height:42px;
+      border-radius:7px;
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .cancel{
+      border:1px solid #d8d2dc;
+      background:#fff;
+      color:#615b68;
+    }
+
+    .confirm{
+      border:0;
+      background:var(--orange);
+      color:#fff;
+    }
+
+    /* Success */
+
+    .success{
+      display:none;
+      padding:35px;
+      margin-top:28px;
+      border-radius:13px;
+      background:#fff;
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      text-align:center;
+    }
+
+    .success-icon{
+      width:64px;
+      height:64px;
+      margin:0 auto 13px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      background:var(--green-light);
+      color:var(--green);
+      font-size:28px;
+    }
+
+    .success h2{
+      margin:0 0 7px;
+      font-size:21px;
+    }
+
+    .success p{
+      max-width:520px;
+      margin:0 auto 18px;
+      color:var(--muted);
+      font-size:10px;
+      line-height:1.6;
+    }
+
+    .success button{
+      height:40px;
+      padding:0 20px;
+      border:0;
+      border-radius:7px;
+      background:var(--purple);
+      color:#fff;
+      font-size:9px;
+      font-weight:800;
+    }
+
+    .toast{
+      position:fixed;
+      z-index:100;
+      right:20px;
+      bottom:20px;
+      max-width:330px;
+      padding:12px 15px;
+      border-radius:7px;
+      background:#29252e;
+      color:#fff;
+      font-size:9px;
+      font-weight:650;
+      opacity:0;
+      transform:translateY(15px);
+      pointer-events:none;
+      transition:.2s;
+    }
+
+    .toast.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    @media(max-width:900px){
+      .header-inner,main{width:calc(100% - 30px)}
+      .nav{display:none}
+      .hero-content{width:100%;padding-right:40px}
+      .hero-badge{display:none}
+      .benefits{grid-template-columns:1fr 1fr}
+      .plan-section,.calculator{grid-template-columns:1fr}
+      .saving-result{align-items:flex-start}
+    }
+
+    @media(max-width:600px){
+      .benefits,.faq{grid-template-columns:1fr}
+      .hero h1{font-size:30px}
+      .comparison{overflow:auto}
+      .comparison-row{min-width:550px}
+      .modal{width:calc(100% - 30px)}
+      .modal-fields{grid-template-columns:1fr}
+      .modal-field.full{grid-column:auto}
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    ✦ Vitrio+ • Frete grátis e descontos exclusivos para membros
+  </div>
+
+  <header>
+    <div class="header-inner">
+
+      <a href="#" class="logo" id="logo">
+        Vitr<span>io</span>
+      </a>
+
+      <nav class="nav">
+        <a href="#beneficios">Benefícios</a>
+        <a href="#plano">O clube</a>
+        <a href="#economia">Sua economia</a>
+        <a href="#duvidas">Dúvidas</a>
+      </nav>
+
+      <div class="account">
+        <div class="account-icon">◉</div>
+        Olá, cliente
+      </div>
+
+    </div>
+  </header>
+
+  <main id="page">
+
+    <!-- HERO -->
+    <section class="hero">
+
+      <div class="hero-content">
+
+        <div class="eyebrow">
+          ♛ Clube de assinatura Vitrio+
+        </div>
+
+        <h1>
+          Comprar mais,<br>
+          <strong>pagar menos.</strong>
+        </h1>
+
+        <p>
+          Entre para o Vitrio+ e tenha frete grátis, descontos exclusivos
+          e ofertas especiais em eletrônicos e itens para sua casa.
+        </p>
+
+        <div class="hero-price">
+          <strong>R$ 19,90</strong>
+          <span>/ mês</span>
+        </div>
+
+        <button class="hero-button" id="heroSubscribe">
+          Quero ser Vitrio+
+        </button>
+
+      </div>
+
+      <div class="hero-badge">
+        <div class="crown">♛</div>
+        <strong>Vitrio+</strong>
+        <span>Benefícios em todas as suas compras</span>
+      </div>
+
+    </section>
+
+    <!-- BENEFÍCIOS -->
+    <section class="section" id="beneficios">
+
+      <div class="section-heading">
+        <div>
+          <h2>Por que ser Vitrio+?</h2>
+          <p>Benefícios que fazem a assinatura valer a pena todos os meses.</p>
+        </div>
+      </div>
+
+      <div class="benefits">
+
+        <article class="benefit">
+          <div class="benefit-icon">🚚</div>
+          <h3>Frete grátis</h3>
+          <p>
+            Frete grátis em pedidos elegíveis, sem precisar esperar
+            uma promoção de frete.
+          </p>
+        </article>
+
+        <article class="benefit">
+          <div class="benefit-icon">%</div>
+          <h3>Até 15% de desconto</h3>
+          <p>
+            Preços especiais em milhares de produtos selecionados
+            para membros do clube.
+          </p>
+        </article>
+
+        <article class="benefit">
+          <div class="benefit-icon">⚡</div>
+          <h3>Ofertas antecipadas</h3>
+          <p>
+            Acesso antecipado a campanhas, lançamentos e oportunidades
+            especiais da Vitrio.
+          </p>
+        </article>
+
+        <article class="benefit">
+          <div class="benefit-icon">♥</div>
+          <h3>Benefícios exclusivos</h3>
+          <p>
+            Vantagens especiais para membros, incluindo condições
+            diferenciadas em campanhas selecionadas.
+          </p>
+        </article>
+
+      </div>
+
+    </section>
+
+    <!-- COMPARAÇÃO -->
+    <section class="plan-section" id="plano">
+
+      <div class="comparison">
+
+        <div class="comparison-header">
+          <h2>Veja o que muda para você</h2>
+          <p>Mais vantagens para quem compra com frequência na Vitrio.</p>
+        </div>
+
+        <div class="comparison-row header">
+          <div>Benefício</div>
+          <div>Cliente Vitrio</div>
+          <div class="club">Vitrio+</div>
+        </div>
+
+        <div class="comparison-row">
+          <div>Comprar na Vitrio</div>
+          <div class="yes">✓</div>
+          <div class="club yes">✓</div>
+        </div>
+
+        <div class="comparison-row">
+          <div>Frete grátis em pedidos elegíveis</div>
+          <div class="no">—</div>
+          <div class="club yes">✓</div>
+        </div>
+
+        <div class="comparison-row">
+          <div>Descontos exclusivos de até 15%</div>
+          <div class="no">—</div>
+          <div class="club yes">✓</div>
+        </div>
+
+        <div class="comparison-row">
+          <div>Acesso antecipado a ofertas</div>
+          <div class="no">—</div>
+          <div class="club yes">✓</div>
+        </div>
+
+        <div class="comparison-row">
+          <div>Ofertas especiais para membros</div>
+          <div class="no">—</div>
+          <div class="club yes">✓</div>
+        </div>
+
+      </div>
+
+      <aside class="subscription">
+
+        <div class="popular">Mais escolhido</div>
+
+        <h2>Vitrio+</h2>
+
+        <p class="description">
+          Assine e aproveite seus benefícios automaticamente nas compras
+          elegíveis.
+        </p>
+
+        <div class="price-line">
+          <strong>R$ 19,90</strong>
+          <span>/ mês</span>
+        </div>
+
+        <div class="billing">
+          Cobrança mensal recorrente
+        </div>
+
+        <button class="subscribe" id="subscribeButton">
+          Assinar Vitrio+
+        </button>
+
+        <div class="cancel-note">
+          Cancele quando quiser, direto pela sua conta.
+        </div>
+
+        <ul class="small-benefits">
+          <li><span>✓</span> Frete grátis em pedidos elegíveis</li>
+          <li><span>✓</span> Descontos de até 15%</li>
+          <li><span>✓</span> Ofertas antes dos demais clientes</li>
+          <li><span>✓</span> Sem fidelidade mínima</li>
+        </ul>
+
+      </aside>
+
+    </section>
+
+    <!-- CALCULADORA -->
+    <section class="section" id="economia">
+
+      <div class="calculator">
+
+        <div>
+          <h2>Quanto você pode economizar?</h2>
+          <p>
+            Conte quantas compras você costuma fazer por mês.
+            A estimativa considera R$ 15 de frete médio economizado
+            por pedido e uma economia média de 8% nos produtos elegíveis.
+          </p>
+
+          <div style="margin-top:22px">
+            <div class="range-label">
+              <span>Compras por mês</span>
+              <span id="frequencyNumber">3 compras</span>
+            </div>
+
+            <input
+              id="frequency"
+              type="range"
+              min="1"
+              max="8"
+              value="3">
+
+            <div class="frequency-value">
+              Ajuste para a sua frequência de compras
+            </div>
+          </div>
+        </div>
+
+        <div class="saving-result">
+          <span>Economia estimada por mês</span>
+          <strong id="saving">R$ 69,00</strong>
+          <small>descontos + frete • menos R$ 19,90 da assinatura</small>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="duvidas">
+
+      <div class="section-heading">
+        <div>
+          <h2>Ficou com alguma dúvida?</h2>
+          <p>Veja as respostas sobre o funcionamento do Vitrio+.</p>
+        </div>
+      </div>
+
+      <div class="faq">
+
+        <details>
+          <summary>Como funciona o frete grátis?</summary>
+          <p>
+            O benefício é aplicado automaticamente aos pedidos e produtos
+            elegíveis enquanto sua assinatura estiver ativa. As condições
+            podem variar conforme produto, região e modalidade de entrega.
+          </p>
+        </details>
+
+        <details>
+          <summary>Quando começo a receber os benefícios?</summary>
+          <p>
+            Os benefícios são disponibilizados após a confirmação da sua
+            assinatura. As condições aplicáveis aparecem na página do
+            produto e no carrinho.
+          </p>
+        </details>
+
+        <details>
+          <summary>Posso cancelar quando quiser?</summary>
+          <p>
+            Sim. Não há fidelidade mínima. O cancelamento pode ser feito
+            pela área da sua conta e os benefícios permanecem disponíveis
+            conforme as condições do período já pago.
+          </p>
+        </details>
+
+        <details>
+          <summary>A assinatura renova automaticamente?</summary>
+          <p>
+            Sim. O Vitrio+ possui cobrança recorrente mensal. Antes da
+            renovação, você pode consultar as condições da assinatura
+            na sua conta.
+          </p>
+        </details>
+
+      </div>
+
+    </section>
+
+    <!-- SUCESSO -->
+    <section class="success" id="success">
+
+      <div class="success-icon">✓</div>
+
+      <h2>Bem-vindo ao Vitrio+!</h2>
+
+      <p>
+        Sua assinatura foi confirmada. A partir de agora, os benefícios
+        do clube estarão disponíveis nas compras elegíveis da sua conta.
+      </p>
+
+      <button id="continueButton">
+        Continuar comprando
+      </button>
+
+    </section>
+
+  </main>
+
+  <!-- MODAL DE ASSINATURA -->
+  <div class="modal-bg" id="modalBg">
+
+    <div class="modal">
+
+      <button class="modal-close" id="closeModal">×</button>
+
+      <h2>Assine o Vitrio+</h2>
+
+      <p>
+        Falta pouco para você começar a aproveitar frete grátis,
+        descontos e ofertas exclusivas.
+      </p>
+
+      <div class="modal-summary">
+        <strong>R$ 19,90/mês</strong>
+        <span>Cobrança mensal • sem fidelidade mínima</span>
+      </div>
+
+      <div class="modal-fields">
+
+        <div class="modal-field">
+          <label for="name">Nome completo</label>
+          <input id="name" placeholder="Seu nome">
+        </div>
+
+        <div class="modal-field">
+          <label for="email">E-mail</label>
+          <input id="email" type="email" placeholder="seu@email.com">
+        </div>
+
+        <div class="modal-field full">
+          <label for="card">Cartão para cobrança</label>
+          <input id="card" inputmode="numeric" maxlength="19"
+                 placeholder="0000 0000 0000 0000">
+        </div>
+
+      </div>
+
+      <label class="consent">
+        <input id="terms" type="checkbox">
+        <span>
+          Li e concordo com as condições do Vitrio+ e autorizo a cobrança
+          mensal da assinatura enquanto ela permanecer ativa.
+        </span>
+      </label>
+
+      <div class="modal-actions">
+        <button class="cancel" id="cancelModal">
+          Agora não
+        </button>
+
+        <button class="confirm" id="confirmSubscription">
+          Confirmar assinatura
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    (() => {
+      const $ = selector => document.querySelector(selector);
+
+      const modal = $("#modalBg");
+      const toast = $("#toast");
+      let toastTimer;
+
+      function showToast(message){
+        toast.textContent = message;
+        toast.classList.add("show");
+
+        clearTimeout(toastTimer);
+
+        toastTimer = setTimeout(() => {
+          toast.classList.remove("show");
+        }, 2800);
+      }
+
+      function openModal(){
+        modal.classList.add("open");
+        $("#name").focus();
+      }
+
+      function closeModal(){
+        modal.classList.remove("open");
+      }
+
+      $("#heroSubscribe").addEventListener("click", openModal);
+      $("#subscribeButton").addEventListener("click", openModal);
+
+      $("#closeModal").addEventListener("click", closeModal);
+      $("#cancelModal").addEventListener("click", closeModal);
+
+      modal.addEventListener("click", event => {
+        if(event.target === modal){
+          closeModal();
+        }
+      });
+
+      // Máscara do cartão
+      $("#card").addEventListener("input", event => {
+        let value = event.target.value
+          .replace(/\D/g, "")
+          .slice(0,16);
+
+        value = value.replace(/(.{4})/g, "$1 ").trim();
+
+        event.target.value = value;
+      });
+
+      // Calculadora de economia
+      const frequency = $("#frequency");
+
+      function updateSavings(){
+        const purchases = Number(frequency.value);
+
+        /*
+          Estimativa:
+          R$ 15 de frete economizado por pedido
+          + R$ 12 de economia média em descontos por pedido.
+        */
+        const monthlyBenefit = purchases * 27;
+        const monthlySaving =
+          Math.max(0, monthlyBenefit - 19.90);
+
+        $("#frequencyNumber").textContent =
+          purchases === 1
+            ? "1 compra"
+            : purchases + " compras";
+
+        $("#saving").textContent =
+          monthlySaving.toLocaleString("pt-BR", {
+            style:"currency",
+            currency:"BRL"
+          });
+      }
+
+      frequency.addEventListener("input", updateSavings);
+      updateSavings();
+
+      // Confirmação
+      $("#confirmSubscription").addEventListener("click", () => {
+
+        const name = $("#name").value.trim();
+        const email = $("#email").value.trim();
+        const card = $("#card").value.replace(/\D/g, "");
+        const terms = $("#terms").checked;
+
+        if(name.length < 3){
+          showToast("Informe seu nome completo.");
+          $("#name").focus();
+          return;
+        }
+
+        if(!email.includes("@") || !email.includes(".")){
+          showToast("Informe um e-mail válido.");
+          $("#email").focus();
+          return;
+        }
+
+        if(card.length < 16){
+          showToast("Informe um cartão válido para a assinatura.");
+          $("#card").focus();
+          return;
+        }
+
+        if(!terms){
+          showToast("Aceite as condições do Vitrio+ para continuar.");
+          return;
+        }
+
+        closeModal();
+
+        $("#page").querySelectorAll(
+          ".hero,.section,.plan-section"
+        ).forEach(element => {
+          element.style.display = "none";
+        });
+
+        $("#success").style.display = "block";
+
+        window.scrollTo({
+          top:0,
+          behavior:"smooth"
+        });
+      });
+
+      $("#continueButton").addEventListener("click", () => {
+        showToast("Voltando para a vitrine da Vitrio…");
+      });
+
+      $("#logo").addEventListener("click", event => {
+        event.preventDefault();
+        window.scrollTo({
+          top:0,
+          behavior:"smooth"
+        });
+      });
+
+      // Navegação suave
+      document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener("click", event => {
+          const targetId = link.getAttribute("href");
+
+          if(targetId === "#") return;
+
+          const target = document.querySelector(targetId);
+
+          if(target){
+            event.preventDefault();
+            target.scrollIntoView({
+              behavior:"smooth",
+              block:"start"
+            });
+          }
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>

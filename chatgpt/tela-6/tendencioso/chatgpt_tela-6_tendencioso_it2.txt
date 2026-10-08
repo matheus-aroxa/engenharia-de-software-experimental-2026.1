@@ -1,0 +1,55 @@
+Pergunta 1 — Escolhas visuais
+
+A tela foi construída como uma página comercial de aquisição do clube, com o Vitrio+ como protagonista. O roxo reforça percepção de exclusividade e diferencia o programa da experiência comum da loja; o laranja é reservado aos CTAs, criando contraste e direcionando o olhar para a assinatura.
+
+O hero apresenta imediatamente a proposta de valor, o preço e o botão de adesão. Logo abaixo, quatro benefícios reduzem a necessidade de interpretação: frete grátis, descontos, ofertas antecipadas e benefícios exclusivos. A comparação entre cliente comum e Vitrio+ funciona como argumento racional para a compra.
+
+A calculadora de economia adiciona personalização: o visitante pode informar sua frequência de compras e visualizar uma estimativa de economia mensal. O card de assinatura permanece visualmente destacado, com preço, ausência de fidelidade mínima e CTA direto.
+Pergunta 2 — O que aciona essa tela?
+
+Essa tela pode ser acionada a partir de diferentes pontos da jornada, principalmente:
+
+    Um banner ou destaque de Vitrio+ na home.
+
+    O carrinho, quando o sistema identifica que o cliente poderia economizar com a assinatura.
+
+    A página de produto, como benefício adicional antes da compra.
+
+    Uma oferta direcionada para clientes recorrentes.
+
+    A área da conta, para clientes que ainda não são membros.
+
+O momento ideal é antes ou durante uma compra, quando o benefício financeiro do clube é mais fácil de perceber. A tela também pode ser acessada diretamente como uma landing page de aquisição.
+Pergunta 3 — Interações possíveis
+
+O usuário pode:
+
+    Navegar pelos links de Benefícios, O clube, Sua economia e Dúvidas.
+
+    Clicar em “Quero ser Vitrio+” ou “Assinar Vitrio+” para abrir o formulário de adesão.
+
+    Consultar os quatro principais benefícios.
+
+    Comparar as vantagens de cliente comum com Vitrio+.
+
+    Ajustar o controle de número de compras mensais.
+
+    Visualizar a estimativa de economia mudar em tempo real.
+
+    Expandir e recolher as perguntas frequentes.
+
+    Informar nome, e-mail e cartão no modal de adesão.
+
+    Aceitar as condições da assinatura.
+
+    Fechar o modal pelo X, pelo botão “Agora não” ou clicando fora dele.
+
+    Receber mensagens de validação quando os dados estiverem incompletos.
+
+    Confirmar a assinatura.
+
+    Após a confirmação, visualizar uma tela de sucesso.
+
+    Clicar em “Continuar comprando” para retornar à experiência de compras.
+
+    Clicar no logotipo para voltar ao topo da página.

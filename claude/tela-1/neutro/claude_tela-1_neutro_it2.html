@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitrio - Loja de Eletrônicos e Itens para Casa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff6b35;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 400px;
+            margin: 0 30px;
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 4px;
+            padding: 8px 12px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .search-bar input::placeholder {
+            color: #999;
+        }
+
+        .search-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+            font-size: 18px;
+            padding: 0 8px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header-link {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+            transition: color 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .header-link:hover {
+            color: #ff6b35;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #ff6b35;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+
+        /* Navigation */
+        .nav-bar {
+            background-color: #f9f9f9;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 0;
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 0;
+            height: 48px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 0 16px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #ff6b35;
+            border-bottom-color: #ff6b35;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Banner */
+        .hero-section {
+            margin-top: 20px;
+            margin-bottom: 40px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .banner-carousel {
+            position: relative;
+            height: 400px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 40px;
+            color: white;
+        }
+
+        .banner-carousel.banner-2 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .banner-carousel.banner-3 {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .banner-content {
+            flex: 1;
+        }
+
+        .banner-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .banner-subtitle {
+            font-size: 18px;
+            margin-bottom: 24px;
+            opacity: 0.95;
+        }
+
+        .banner-discount {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 24px;
+            background-color: rgba(255,255,255,0.2);
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 4px;
+        }
+
+        .banner-cta {
+            background-color: #ff6b35;
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .banner-cta:hover {
+            background-color: #e55a24;
+            transform: translateY(-2px);
+        }
+
+        .banner-placeholder {
+            flex: 1;
+            height: 300px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background-color: white;
+            transform: scale(1.2);
+        }
+
+        /* Categories */
+        .categories-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+        }
+
+        .category-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            border-color: #ff6b35;
+        }
+
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+        }
+
+        .category-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        /* Products Section */
+        .products-section {
+            margin-bottom: 40px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .see-all {
+            color: #ff6b35;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .see-all:hover {
+            color: #e55a24;
+            text-decoration: underline;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #999;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background-color: #ff6b35;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .product-badge.best-seller {
+            background-color: #2ecc71;
+        }
+
+        .product-info {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .product-rating {
+            display: flex;
+            gap: 2px;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+
+        .star {
+            color: #ffc107;
+        }
+
+        .star.empty {
+            color: #ddd;
+        }
+
+        .product-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            line-height: 1.4;
+            min-height: 28px;
+        }
+
+        .product-price-section {
+            margin-bottom: 12px;
+        }
+
+        .product-original-price {
+            font-size: 12px;
+            color: #999;
+            text-decoration: line-through;
+            margin-bottom: 4px;
+        }
+
+        .product-price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ff6b35;
+        }
+
+        .product-installments {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .add-to-cart-btn {
+            background-color: #ff6b35;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            margin-top: auto;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #e55a24;
+        }
+
+        .add-to-cart-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Offers Banner */
+        .offers-banner {
+            background: linear-gradient(135deg, #ff6b35 0%, #e55a24 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .offers-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background-color: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+
+        .offers-banner-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .offers-title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .offers-subtitle {
+            font-size: 16px;
+            margin-bottom: 24px;
+            opacity: 0.95;
+        }
+
+        .offers-cta {
+            background-color: white;
+            color: #ff6b35;
+            border: none;
+            padding: 12px 32px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .offers-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h4 {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 16px;
+            color: #ff6b35;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .footer-column a:hover {
+            color: #ff6b35;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 12px 48px rgba(0,0,0,0.3);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s;
+        }
+
+        .modal-close:hover {
+            color: #333;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+        }
+
+        .modal-message {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .modal-btn {
+            padding: 10px 20px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .modal-btn-primary {
+            background-color: #ff6b35;
+            color: white;
+        }
+
+        .modal-btn-primary:hover {
+            background-color: #e55a24;
+        }
+
+        .modal-btn-secondary {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .modal-btn-secondary:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .search-bar {
+                max-width: 100%;
+                margin: 0;
+            }
+
+            .banner-carousel {
+                flex-direction: column;
+                height: auto;
+                padding: 20px;
+            }
+
+            .banner-title {
+                font-size: 28px;
+            }
+
+            .banner-placeholder {
+                width: 100%;
+                height: 200px;
+                margin-top: 20px;
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            }
+
+            .offers-banner {
+                padding: 20px;
+            }
+
+            .offers-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">Vitrio</a>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Buscar produtos...">
+                <button class="search-btn">🔍</button>
+            </div>
+            <div class="header-actions">
+                <a href="#" class="header-link" id="loginLink">
+                    <span>👤</span>
+                    <span>Conta</span>
+                </a>
+                <a href="#" class="header-link" id="favoritesLink">
+                    <span>❤️</span>
+                    <span>Favoritos</span>
+                </a>
+                <a href="#" class="header-link" id="cartLink">
+                    <span class="cart-icon">
+                        🛒
+                        <span class="cart-badge" id="cartBadge">0</span>
+                    </span>
+                    <span>Carrinho</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <a href="#" class="nav-link active" onclick="scrollToSection('categories')">Categorias</a>
+            <a href="#" class="nav-link" onclick="scrollToSection('destaque')">Produtos em Destaque</a>
+            <a href="#" class="nav-link" onclick="scrollToSection('promocoes')">Promoções</a>
+            <a href="#" class="nav-link" onclick="scrollToSection('bestsellers')">Mais Vendidos</a>
+            <a href="#" class="nav-link" onclick="handleNavClick(event)">Frete Grátis</a>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Hero Banner Carousel -->
+        <div class="hero-section">
+            <div class="banner-carousel" id="bannerCarousel">
+                <div class="banner-content">
+                    <h1 class="banner-title">Descubra Inovação</h1>
+                    <p class="banner-subtitle">Os melhores eletrônicos com as melhores ofertas</p>
+                    <div class="banner-discount">Até 50% OFF</div>
+                    <button class="banner-cta" onclick="handleBannerCTA()">Ver Ofertas</button>
+                </div>
+                <div class="banner-placeholder">Imagem do Banner</div>
+            </div>
+            <div class="carousel-dots">
+                <span class="dot active" onclick="changeBanner(0)"></span>
+                <span class="dot" onclick="changeBanner(1)"></span>
+                <span class="dot" onclick="changeBanner(2)"></span>
+            </div>
+        </div>
+
+        <!-- Categories Section -->
+        <section class="categories-section" id="categories">
+            <h2 class="section-title">Navegue por Categoria</h2>
+            <div class="categories-grid">
+                <div class="category-card" onclick="handleCategoryClick(event)">
+                    <div class="category-icon">📱</div>
+                    <div class="category-name">Smartphones</div>
+                </div>
+                <div class="category-card" onclick="handleCategoryClick(event)">
+                    <div class="category-icon">💻</div>
+                    <div class="category-name">Computadores</div>
+                </div>
+                <div class="category-card" onclick="handleCategoryClick(event)">
+                    <div class="category-icon">⌚</div>
+                    <div class="category-name">Acessórios</div>
+                </div>
+                <div class="category-card" onclick="handleCategoryClick(event)">
+                    <div class="category-icon">🏠</div>
+                    <div class="category-name">Casa Inteligente</div>
+                </div>
+                <div class="category-card" onclick="handleCategoryClick(event)">
+                    <div class="category-icon">🎮</div>
+                    <div class="category-name">Games</div>
+                </div>
+                <div class="category-card" onclick="handleCategoryClick(event)">
+                    <div class="category-icon">📷</div>
+                    <div class="category-name">Câmeras</div>
+                </div>
+                <div class="category-card" onclick="handleCategoryClick(event)">
+                    <div class="category-icon">🎧</div>
+                    <div class="category-name">Áudio</div>
+                </div>
+                <div class="category-card" onclick="handleCategoryClick(event)">
+                    <div class="category-icon">🔋</div>
+                    <div class="category-name">Carregadores</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Offers Banner -->
+        <section class="offers-banner" id="promocoes">
+            <div class="offers-banner-content">
+                <h3 class="offers-title">🎉 Aproveite as Mega Promoções</h3>
+                <p class="offers-subtitle">Descontos imperdíveis em eletrônicos e itens para casa</p>
+                <button class="offers-cta" onclick="handleOffersCTA()">Explorar Promoções</button>
+            </div>
+        </section>
+
+        <!-- Featured Products Section -->
+        <section class="products-section" id="destaque">
+            <div class="section-header">
+                <h2 class="section-title">Produtos em Destaque</h2>
+                <a href="#" class="see-all" onclick="handleSeeAll(event)">Ver todos</a>
+            </div>
+            <div class="products-grid" id="featuredProducts">
+                <!-- Products will be inserted here by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Best Sellers Section -->
+        <section class="products-section" id="bestsellers">
+            <div class="section-header">
+                <h2 class="section-title">Mais Vendidos</h2>
+                <a href="#" class="see-all" onclick="handleSeeAll(event)">Ver todos</a>
+            </div>
+            <div class="products-grid" id="bestSellers">
+                <!-- Products will be inserted here by JavaScript -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>Sobre a Vitrio</h4>
+                    <ul>
+                        <li><a href="#" onclick="handleFooterLink(event)">Quem Somos</a></li>
+                        <li><a href="#" onclick="handleFooterLink(event)">Nossa Missão</a></li>
+                        <li><a href="#" onclick="handleFooterLink(event)">Blog</a></li>
+                        <li><a href="#" onclick="handleFooterLink(event)">Carreiras</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Atendimento</h4>
+                    <ul>
+                        <li><a href="#" onclick="handleFooterLink(event)">Central de Ajuda</a></li>
+                        <li><a href="#" onclick="handleFooterLink(event)">Fale Conosco</a></li>
+                        <li><a href="#" onclick="handleFooterLink(event)">Rastrear Pedido</a></li>
+                        <li><a href="#" onclick="handleFooterLink(event)">Devoluções</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Políticas</h4>
+                    <ul>
+                        <li><a href="#" onclick="handleFooterLink(event)">Termos de Uso</a></li>
+                        <li><a href="#" onclick="handleFooterLink(event)">Privacidade</a></li>
+                        <li><a href="#" onclick="handleFooterLink(event)">Segurança</a></li>
+                        <li><a href="#" onclick="handleFooterLink(event)">Cookies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Redes Sociais</h4>
+                    <ul>
+                        <li><a href="#" onclick="handleFooterLink(event)">Facebook</a></li>
+                        <li><a href="#" onclick="handleFooterLink(event)">Instagram</a></li>
+                        <li><a href="#" onclick="handleFooterLink(event)">Twitter</a></li>
+                        <li><a href="#" onclick="handleFooterLink(event)">YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Vitrio - Todos os direitos reservados. CNPJ: 12.345.678/0001-90</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('loginModal')">✕</button>
+            <h2 class="modal-title">Acessar Conta</h2>
+            <p class="modal-message">Faça login na sua conta Vitrio para acessar sua conta, pedidos e favoritos.</p>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-secondary" onclick="closeModal('loginModal')">Cancelar</button>
+                <button class="modal-btn modal-btn-primary" onclick="handleLoginSubmit()">Entrar / Registrar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('cartModal')">✕</button>
+            <h2 class="modal-title">Carrinho de Compras</h2>
+            <p class="modal-message" id="cartMessage">Seu carrinho está vazio. Que tal começar a explorar nossos produtos?</p>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-secondary" onclick="closeModal('cartModal')">Continuar Comprando</button>
+                <button class="modal-btn modal-btn-primary" id="checkoutBtn" style="display: none;" onclick="handleCheckout()">Ir para Carrinho</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="addedModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('addedModal')">✕</button>
+            <h2 class="modal-title">✓ Produto Adicionado</h2>
+            <p class="modal-message" id="addedMessage">O produto foi adicionado ao seu carrinho com sucesso!</p>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-secondary" onclick="closeModal('addedModal')">Continuar Comprando</button>
+                <button class="modal-btn modal-btn-primary" onclick="goToCart()">Ver Carrinho</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Product Data
+        const featuredProducts = [
+            {
+                id: 1,
+                name: 'iPhone 15 Pro Max',
+                category: 'Smartphones',
+                originalPrice: 8999.99,
+                price: 7499.99,
+                rating: 5,
+                badge: 'Promoção',
+                installments: '12x R$ 624,99'
+            },
+            {
+                id: 2,
+                name: 'MacBook Pro 16"',
+                category: 'Computadores',
+                originalPrice: 12999.99,
+                price: 10999.99,
+                rating: 5,
+                badge: 'Promoção',
+                installments: '12x R$ 916,66'
+            },
+            {
+                id: 3,
+                name: 'AirPods Pro',
+                category: 'Áudio',
+                originalPrice: 2299.99,
+                price: 1799.99,
+                rating: 4,
+                badge: null,
+                installments: '6x R$ 299,99'
+            },
+            {
+                id: 4,
+                name: 'Samsung Smart TV 55"',
+                category: 'Casa Inteligente',
+                originalPrice: 3499.99,
+                price: 2799.99,
+                rating: 5,
+                badge: 'Promoção',
+                installments: '12x R$ 233,33'
+            },
+            {
+                id: 5,
+                name: 'iPad Air',
+                category: 'Tablets',
+                originalPrice: 6499.99,
+                price: 5299.99,
+                rating: 5,
+                badge: null,
+                installments: '12x R$ 441,66'
+            },
+            {
+                id: 6,
+                name: 'Sony WH-1000XM5',
+                category: 'Áudio',
+                originalPrice: 2799.99,
+                price: 1999.99,
+                rating: 5,
+                badge: 'Promoção',
+                installments: '8x R$ 249,99'
+            },
+            {
+                id: 7,
+                name: 'Google Pixel 8 Pro',
+                category: 'Smartphones',
+                originalPrice: 6999.99,
+                price: 5499.99,
+                rating: 4,
+                badge: null,
+                installments: '10x R$ 549,99'
+            },
+            {
+                id: 8,
+                name: 'DJI Mini 3 Pro',
+                category: 'Câmeras',
+                originalPrice: 3299.99,
+                price: 2699.99,
+                rating: 5,
+                badge: 'Promoção',
+                installments: '12x R$ 224,99'
+            }
+        ];
+
+        const bestSellerProducts = [
+            {
+                id: 9,
+                name: 'Carregador Rápido USB-C 65W',
+                category: 'Carregadores',
+                originalPrice: 299.99,
+                price: 149.99,
+                rating: 5,
+                badge: 'Mais Vendido',
+                installments: '3x R$ 49,99',
+                isBestSeller: true
+            },
+            {
+                id: 10,
+                name: 'Fone Bluetooth Intelbras',
+                category: 'Áudio',
+                originalPrice: 599.99,
+                price: 349.99,
+                rating: 4,
+                badge: 'Mais Vendido',
+                installments: '4x R$ 87,49',
+                isBestSeller: true
+            },
+            {
+                id: 11,
+                name: 'Suporte Ajustável para Smartphone',
+                category: 'Acessórios',
+                originalPrice: 199.99,
+                price: 89.99,
+                rating: 5,
+                badge: null,
+                installments: 'À vista',
+                isBestSeller: true
+            },
+            {
+                id: 12,
+                name: 'Câmera Segurança Inteligente',
+                category: 'Casa Inteligente',
+                originalPrice: 899.99,
+                price: 599.99,
+                rating: 5,
+                badge: 'Mais Vendido',
+                installments: '6x R$ 99,99',
+                isBestSeller: true
+            },
+            {
+                id: 13,
+                name: 'Kindle Paperwhite',
+                category: 'Acessórios',
+                originalPrice: 499.99,
+                price: 399.99,
+                rating: 5,
+                badge: null,
+                installments: '6x R$ 66,66'
+            },
+            {
+                id: 14,
+                name: 'Xbox Game Pass 3 Meses',
+                category: 'Games',
+                originalPrice: 199.99,
+                price: 99.99,
+                rating: 5,
+                badge: 'Mais Vendido',
+                installments: 'À vista',
+                isBestSeller: true
+            },
+            {
+                id: 15,
+                name: 'Cooler de Ar Portátil',
+                category: 'Casa Inteligente',
+                originalPrice: 799.99,
+                price: 499.99,
+                rating: 4,
+                badge: null,
+                installments: '8x R$ 62,49'
+            },
+            {
+                id: 16,
+                name: 'Teclado Mecânico RGB',
+                category: 'Acessórios',
+                originalPrice: 699.99,
+                price: 449.99,
+                rating: 5,
+                badge: 'Promoção',
+                installments: '6x R$ 74,99'
+            }
+        ];
+
+        let cart = [];
+        let currentBannerIndex = 0;
+        const bannerTexts = [
+            { title: 'Descubra Inovação', subtitle: 'Os melhores eletrônicos com as melhores ofertas', discount: 'Até 50% OFF' },
+            { title: 'Aproveite as Ofertas', subtitle: 'Eletrônicos de qualidade com preço imperdível', discount: 'Até 40% OFF' },
+            { title: 'Sua Casa Inteligente', subtitle: 'Transforme seu lar com tecnologia de ponta', discount: 'Até 35% OFF' }
+        ];
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProducts();
+            startBannerAutoRotation();
+        });
+
+        // Render products
+        function renderProducts() {
+            renderProductGrid('featuredProducts', featuredProducts);
+            renderProductGrid('bestSellers', bestSellerProducts);
+        }
+
+        function renderProductGrid(containerId, products) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = products.map(product => `
+                <div class="product-card">
+                    <div class="product-image">
+                        ${product.badge ? `<span class="product-badge ${product.isBestSeller ? 'best-seller' : ''}">${product.badge}</span>` : ''}
+                        Imagem do Produto
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">
+                            ${Array(5).fill().map((_, i) => `<span class="star ${i < product.rating ? '' : 'empty'}">★</span>`).join('')}
+                        </div>
+                        <h3 class="product-name">${product.name}</h3>
+                        <div class="product-price-section">
+                            ${product.originalPrice ? `<div class="product-original-price">R$ ${product.originalPrice.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>` : ''}
+                            <div class="product-price">R$ ${product.price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
+                        </div>
+                        <div class="product-installments">${product.installments}</div>
+                        <button class="add-to-cart-btn" onclick="addToCart(${product.id}, '${product.name}', ${product.price})">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Cart functions
+        function addToCart(id, name, price) {
+            cart.push({ id, name, price });
+            document.getElementById('cartBadge').textContent = cart.length;
+            
+            const message = `${name} foi adicionado ao carrinho!`;
+            document.getElementById('addedMessage').textContent = message;
+            openModal('addedModal');
+        }
+
+        function goToCart() {
+            closeModal('addedModal');
+            setTimeout(() => openModal('cartModal'), 300);
+        }
+
+        // Banner carousel
+        function changeBanner(index) {
+            currentBannerIndex = index;
+            updateBanner();
+            updateDots();
+        }
+
+        function updateBanner() {
+            const banner = bannerTexts[currentBannerIndex];
+            const bannerEl = document.getElementById('bannerCarousel');
+            
+            // Update class for background color
+            bannerEl.className = 'banner-carousel';
+            if (currentBannerIndex === 1) bannerEl.classList.add('banner-2');
+            if (currentBannerIndex === 2) bannerEl.classList.add('banner-3');
+            
+            bannerEl.querySelector('.banner-title').textContent = banner.title;
+            bannerEl.querySelector('.banner-subtitle').textContent = banner.subtitle;
+            bannerEl.querySelector('.banner-discount').textContent = banner.discount;
+        }
+
+        function updateDots() {
+            document.querySelectorAll('.dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentBannerIndex);
+            });
+        }
+
+        function startBannerAutoRotation() {
+            setInterval(() => {
+                currentBannerIndex = (currentBannerIndex + 1) % bannerTexts.length;
+                updateBanner();
+                updateDots();
+            }, 5000);
+        }
+
+        // Modal functions
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        // Event handlers
+        function handleBannerCTA() {
+            document.getElementById('promocoes').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function handleOffersCTA() {
+            document.getElementById('destaque').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function handleCategoryClick(e) {
+            const categoryName = e.currentTarget.querySelector('.category-name').textContent;
+            showNotification(`Redirecionando para categoria: ${categoryName}`);
+        }
+
+        function handleSeeAll(e) {
+            e.preventDefault();
+            showNotification('Redirecionando para página de produtos...');
+        }
+
+        function handleCheckout() {
+            closeModal('cartModal');
+            showNotification('Redirecionando para checkout...');
+        }
+
+        function handleLoginSubmit() {
+            closeModal('loginModal');
+            showNotification('Redirecionando para página de login...');
+        }
+
+        function handleFooterLink(e) {
+            e.preventDefault();
+            const text = e.target.textContent;
+            showNotification(`Abrindo: ${text}`);
+        }
+
+        function handleNavClick(e) {
+            e.preventDefault();
+            showNotification('Confira nossa promoção de frete grátis!');
+        }
+
+        function scrollToSection(sectionId) {
+            event.preventDefault();
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Header interactions
+        document.getElementById('loginLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal('loginModal');
+        });
+
+        document.getElementById('cartLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            const message = cart.length > 0 
+                ? `Você tem ${cart.length} produto(s) no carrinho totalizando R$ ${(cart.reduce((sum, item) => sum + item.price, 0)).toLocaleString('pt-BR', {minimumFractionDigits: 2})}`
+                : 'Seu carrinho está vazio';
+            document.getElementById('cartMessage').textContent = message;
+            document.getElementById('checkoutBtn').style.display = cart.length > 0 ? 'block' : 'none';
+            openModal('cartModal');
+        });
+
+        document.getElementById('favoritesLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            showNotification('Redirecionando para favoritos...');
+        });
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const query = this.value.trim();
+                if (query) {
+                    showNotification(`Buscando por: "${query}"`);
+                    this.value = '';
+                }
+            }
+        });
+
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            const query = document.getElementById('searchInput').value.trim();
+            if (query) {
+                showNotification(`Buscando por: "${query}"`);
+                document.getElementById('searchInput').value = '';
+            }
+        });
+
+        // Utility notification function
+        function showNotification(message) {
+            const notif = document.createElement('div');
+            notif.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background-color: #1a1a1a;
+                color: white;
+                padding: 16px 24px;
+                border-radius: 4px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                z-index: 2000;
+                animation: slideIn 0.3s ease-out;
+            `;
+            notif.textContent = message;
+            document.body.appendChild(notif);
+            setTimeout(() => {
+                notif.style.animation = 'slideOut 0.3s ease-out';
+                setTimeout(() => notif.remove(), 300);
+            }, 3000);
+        }
+
+        // Add animation styles
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(400px); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(400px); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

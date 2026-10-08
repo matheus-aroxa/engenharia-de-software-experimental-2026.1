@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitrio+ — Cancelar assinatura</title>
+
+  <style>
+    :root{
+      --purple:#5b2bbf;
+      --purple-dark:#38176f;
+      --purple-light:#f1edff;
+      --orange:#ff6b35;
+      --orange-dark:#e95727;
+      --green:#16834a;
+      --green-light:#eaf8f0;
+      --red:#c93636;
+      --red-light:#fff0f0;
+      --text:#29242e;
+      --muted:#756e7b;
+      --border:#ded9e4;
+      --bg:#f6f5f8;
+      --white:#fff;
+      --shadow:0 10px 32px rgba(46,25,75,.09);
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+      font-size:14px;
+    }
+
+    button,input,textarea,select{font:inherit}
+    button{cursor:pointer}
+    a{text-decoration:none;color:inherit}
+
+    .topbar{
+      height:34px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:var(--purple-dark);
+      color:#fff;
+      font-size:11px;
+      font-weight:700;
+    }
+
+    header{
+      height:72px;
+      background:#fff;
+      border-bottom:1px solid var(--border);
+    }
+
+    .header-inner{
+      width:1120px;
+      height:100%;
+      margin:auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    .logo{
+      font-size:28px;
+      font-weight:900;
+      letter-spacing:-1.5px;
+      color:var(--purple);
+    }
+
+    .logo span{color:var(--orange)}
+
+    .header-right{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      color:#625c68;
+      font-size:10px;
+      font-weight:700;
+    }
+
+    .account{
+      display:flex;
+      align-items:center;
+      gap:9px;
+    }
+
+    .account-icon{
+      width:32px;
+      height:32px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      background:var(--purple-light);
+      color:var(--purple);
+    }
+
+    main{
+      width:1120px;
+      margin:auto;
+      padding:28px 0 60px;
+    }
+
+    .breadcrumb{
+      margin-bottom:18px;
+      color:var(--muted);
+      font-size:9px;
+    }
+
+    .breadcrumb a{
+      color:var(--purple);
+      font-weight:700;
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns:1fr 350px;
+      gap:20px;
+      align-items:start;
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:12px;
+      box-shadow:var(--shadow);
+    }
+
+    .main-card{
+      padding:30px 34px;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      padding:6px 9px;
+      border-radius:15px;
+      background:var(--purple-light);
+      color:var(--purple);
+      font-size:8px;
+      font-weight:850;
+      text-transform:uppercase;
+      letter-spacing:.4px;
+    }
+
+    h1{
+      margin:13px 0 7px;
+      font-size:25px;
+      letter-spacing:-.7px;
+    }
+
+    .intro{
+      max-width:650px;
+      margin:0;
+      color:var(--muted);
+      font-size:10px;
+      line-height:1.65;
+    }
+
+    .membership{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-top:23px;
+      padding:16px;
+      border-radius:9px;
+      background:#faf9fc;
+      border:1px solid #ebe7ef;
+    }
+
+    .membership-left{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .crown{
+      width:39px;
+      height:39px;
+      display:grid;
+      place-items:center;
+      border-radius:9px;
+      background:var(--purple-light);
+      color:var(--purple);
+      font-size:18px;
+    }
+
+    .membership strong{
+      display:block;
+      font-size:11px;
+    }
+
+    .membership small{
+      display:block;
+      margin-top:3px;
+      color:var(--muted);
+      font-size:8px;
+    }
+
+    .active{
+      padding:5px 8px;
+      border-radius:12px;
+      background:var(--green-light);
+      color:var(--green);
+      font-size:8px;
+      font-weight:850;
+    }
+
+    .section-title{
+      margin:26px 0 10px;
+      font-size:13px;
+    }
+
+    .reason-list{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+    }
+
+    .reason{
+      position:relative;
+    }
+
+    .reason input{
+      position:absolute;
+      opacity:0;
+      pointer-events:none;
+    }
+
+    .reason label{
+      display:flex;
+      align-items:center;
+      min-height:51px;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:8px;
+      color:#4f4955;
+      font-size:9px;
+      cursor:pointer;
+      transition:.15s;
+    }
+
+    .reason label:hover{
+      border-color:#b9a8d8;
+      background:#fcfaff;
+    }
+
+    .reason input:checked + label{
+      border-color:var(--purple);
+      background:var(--purple-light);
+      color:var(--purple-dark);
+      box-shadow:0 0 0 1px var(--purple);
+      font-weight:750;
+    }
+
+    .reason label:before{
+      content:"";
+      width:14px;
+      height:14px;
+      margin-right:9px;
+      flex:0 0 14px;
+      border:1px solid #c7c0cc;
+      border-radius:50%;
+      background:#fff;
+    }
+
+    .reason input:checked + label:before{
+      border:4px solid var(--purple);
+    }
+
+    .other-wrap{
+      display:none;
+      margin-top:9px;
+    }
+
+    .other-wrap.visible{display:block}
+
+    textarea{
+      width:100%;
+      min-height:78px;
+      padding:10px;
+      resize:vertical;
+      border:1px solid var(--border);
+      border-radius:7px;
+      outline:none;
+      color:var(--text);
+      font-size:9px;
+    }
+
+    textarea:focus{
+      border-color:var(--purple);
+      box-shadow:0 0 0 3px rgba(91,43,191,.08);
+    }
+
+    .offer{
+      margin-top:22px;
+      padding:17px;
+      border:1px solid #d7c9f0;
+      border-radius:9px;
+      background:linear-gradient(110deg,#faf8ff,#f2edff);
+    }
+
+    .offer-header{
+      display:flex;
+      align-items:center;
+      gap:9px;
+    }
+
+    .offer-icon{
+      width:31px;
+      height:31px;
+      display:grid;
+      place-items:center;
+      border-radius:7px;
+      background:#fff;
+      color:var(--purple);
+    }
+
+    .offer h3{
+      margin:0;
+      font-size:11px;
+    }
+
+    .offer p{
+      margin:3px 0 0;
+      color:var(--muted);
+      font-size:8px;
+    }
+
+    .offer-content{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
+      margin-top:13px;
+    }
+
+    .offer-content strong{
+      color:var(--purple);
+      font-size:13px;
+    }
+
+    .keep-button{
+      height:35px;
+      padding:0 14px;
+      border:1px solid var(--purple);
+      border-radius:6px;
+      background:#fff;
+      color:var(--purple);
+      font-size:9px;
+      font-weight:800;
+    }
+
+    .keep-button:hover{
+      background:var(--purple);
+      color:#fff;
+    }
+
+    .warning{
+      display:flex;
+      gap:10px;
+      margin-top:22px;
+      padding:13px;
+      border-radius:8px;
+      background:#fff8e9;
+      color:#72551d;
+      font-size:8px;
+      line-height:1.55;
+    }
+
+    .warning strong{
+      display:block;
+      margin-bottom:2px;
+      font-size:9px;
+    }
+
+    .actions{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-top:25px;
+      padding-top:20px;
+      border-top:1px solid #ebe7ee;
+    }
+
+    .back-button{
+      height:42px;
+      padding:0 17px;
+      border:1px solid var(--border);
+      border-radius:7px;
+      background:#fff;
+      color:#625b68;
+      font-size:9px;
+      font-weight:750;
+    }
+
+    .cancel-button{
+      height:42px;
+      padding:0 20px;
+      border:0;
+      border-radius:7px;
+      background:var(--red);
+      color:#fff;
+      font-size:9px;
+      font-weight:850;
+    }
+
+    .cancel-button:hover{background:#ad2e2e}
+
+    .side{
+      padding:21px;
+    }
+
+    .side h2{
+      margin:0 0 15px;
+      font-size:14px;
+    }
+
+    .benefit{
+      display:flex;
+      gap:10px;
+      padding:12px 0;
+      border-bottom:1px solid #eeeaf0;
+    }
+
+    .benefit:last-child{border-bottom:0}
+
+    .benefit-icon{
+      width:28px;
+      height:28px;
+      flex:0 0 28px;
+      display:grid;
+      place-items:center;
+      border-radius:7px;
+      background:var(--green-light);
+      color:var(--green);
+      font-size:12px;
+    }
+
+    .benefit strong{
+      display:block;
+      font-size:9px;
+    }
+
+    .benefit p{
+      margin:3px 0 0;
+      color:var(--muted);
+      font-size:8px;
+      line-height:1.45;
+    }
+
+    .billing{
+      margin-top:17px;
+      padding-top:16px;
+      border-top:1px solid #ebe7ee;
+    }
+
+    .billing-row{
+      display:flex;
+      justify-content:space-between;
+      margin:7px 0;
+      color:var(--muted);
+      font-size:9px;
+    }
+
+    .billing-row strong{
+      color:var(--text);
+    }
+
+    .help{
+      margin-top:15px;
+      padding:13px;
+      border-radius:7px;
+      background:#faf9fb;
+      color:var(--muted);
+      font-size:8px;
+      line-height:1.55;
+    }
+
+    .help a{
+      color:var(--purple);
+      font-weight:800;
+    }
+
+    /* Modal */
+    .modal-bg{
+      position:fixed;
+      inset:0;
+      z-index:20;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:15px;
+      background:rgba(28,19,38,.58);
+    }
+
+    .modal-bg.open{display:flex}
+
+    .modal{
+      position:relative;
+      width:430px;
+      padding:28px;
+      border-radius:12px;
+      background:#fff;
+      box-shadow:0 25px 80px rgba(0,0,0,.25);
+    }
+
+    .modal-close{
+      position:absolute;
+      top:11px;
+      right:11px;
+      width:28px;
+      height:28px;
+      border:0;
+      border-radius:50%;
+      background:#f0edf2;
+      color:#625b68;
+      font-size:16px;
+    }
+
+    .modal-icon{
+      width:44px;
+      height:44px;
+      display:grid;
+      place-items:center;
+      margin-bottom:13px;
+      border-radius:50%;
+      background:var(--red-light);
+      color:var(--red);
+      font-size:20px;
+    }
+
+    .modal h2{
+      margin:0 0 7px;
+      font-size:18px;
+    }
+
+    .modal p{
+      margin:0;
+      color:var(--muted);
+      font-size:9px;
+      line-height:1.6;
+    }
+
+    .modal-summary{
+      margin:17px 0;
+      padding:13px;
+      border-radius:7px;
+      background:#faf9fb;
+    }
+
+    .modal-summary-row{
+      display:flex;
+      justify-content:space-between;
+      margin:5px 0;
+      font-size:9px;
+    }
+
+    .modal-summary-row span{color:var(--muted)}
+
+    .modal-actions{
+      display:flex;
+      gap:8px;
+      margin-top:18px;
+    }
+
+    .modal-actions button{
+      flex:1;
+      height:41px;
+      border-radius:7px;
+      font-size:9px;
+      font-weight:800;
+    }
+
+    .stay{
+      border:1px solid var(--purple);
+      background:#fff;
+      color:var(--purple);
+    }
+
+    .confirm{
+      border:0;
+      background:var(--red);
+      color:#fff;
+    }
+
+    /* Success */
+    .success{
+      display:none;
+      max-width:670px;
+      margin:30px auto;
+      padding:40px;
+      text-align:center;
+    }
+
+    .success.show{display:block}
+
+    .success-icon{
+      width:64px;
+      height:64px;
+      display:grid;
+      place-items:center;
+      margin:0 auto 15px;
+      border-radius:50%;
+      background:var(--green-light);
+      color:var(--green);
+      font-size:28px;
+    }
+
+    .success h1{
+      margin:0 0 8px;
+      font-size:22px;
+    }
+
+    .success p{
+      max-width:500px;
+      margin:0 auto;
+      color:var(--muted);
+      font-size:10px;
+      line-height:1.65;
+    }
+
+    .success-info{
+      margin:20px 0;
+      padding:14px;
+      border-radius:8px;
+      background:#faf9fb;
+      color:#5e5764;
+      font-size:9px;
+    }
+
+    .success button{
+      height:40px;
+      padding:0 19px;
+      border:0;
+      border-radius:7px;
+      background:var(--purple);
+      color:#fff;
+      font-size:9px;
+      font-weight:800;
+    }
+
+    .toast{
+      position:fixed;
+      z-index:100;
+      right:20px;
+      bottom:20px;
+      padding:12px 15px;
+      border-radius:7px;
+      background:#29252e;
+      color:#fff;
+      font-size:9px;
+      font-weight:650;
+      opacity:0;
+      transform:translateY(15px);
+      pointer-events:none;
+      transition:.2s;
+    }
+
+    .toast.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    @media(max-width:850px){
+      .header-inner,main{width:calc(100% - 30px)}
+      .layout{grid-template-columns:1fr}
+      .side{order:2}
+    }
+
+    @media(max-width:560px){
+      .reason-list{grid-template-columns:1fr}
+      .main-card{padding:22px}
+      .membership{align-items:flex-start;gap:10px}
+      .offer-content{align-items:flex-start;flex-direction:column}
+      .actions{gap:10px;align-items:stretch;flex-direction:column}
+      .actions button{width:100%}
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    ✦ Vitrio+ • Gerencie sua assinatura com facilidade
+  </div>
+
+  <header>
+    <div class="header-inner">
+
+      <a href="#" class="logo" id="logo">
+        Vitr<span>io</span>
+      </a>
+
+      <div class="header-right">
+        <span>Minha conta</span>
+
+        <div class="account">
+          <div class="account-icon">◉</div>
+          Olá, Mariana
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+
+    <div class="breadcrumb">
+      <a href="#" id="accountLink">Minha conta</a>
+      &nbsp;/&nbsp; Vitrio+ &nbsp;/&nbsp; Cancelar assinatura
+    </div>
+
+    <div id="cancelPage">
+
+      <div class="layout">
+
+        <section class="card main-card">
+
+          <div class="eyebrow">Gerenciar assinatura</div>
+
+          <h1>Você quer cancelar o Vitrio+?</h1>
+
+          <p class="intro">
+            Sentiremos sua falta. Antes de confirmar, conte por que está
+            pensando em sair. Sua resposta nos ajuda a melhorar o clube
+            para você e para outros clientes.
+          </p>
+
+          <div class="membership">
+
+            <div class="membership-left">
+              <div class="crown">♛</div>
+
+              <div>
+                <strong>Vitrio+</strong>
+                <small>Assinatura mensal • próxima cobrança em 15/11/2026</small>
+              </div>
+            </div>
+
+            <div class="active">ATIVA</div>
+
+          </div>
+
+          <h2 class="section-title">
+            Qual é o principal motivo do cancelamento?
+          </h2>
+
+          <div class="reason-list">
+
+            <div class="reason">
+              <input type="radio" name="reason" id="r1" value="Pouco uso">
+              <label for="r1">Estou usando pouco os benefícios</label>
+            </div>
+
+            <div class="reason">
+              <input type="radio" name="reason" id="r2" value="Preço">
+              <label for="r2">O valor da assinatura não compensa</label>
+            </div>
+
+            <div class="reason">
+              <input type="radio" name="reason" id="r3" value="Frete">
+              <label for="r3">Não preciso mais de frete grátis</label>
+            </div>
+
+            <div class="reason">
+              <input type="radio" name="reason" id="r4" value="Experiência">
+              <label for="r4">Não estou satisfeito com o clube</label>
+            </div>
+
+            <div class="reason">
+              <input type="radio" name="reason" id="r5" value="Compras">
+              <label for="r5">Estou comprando menos na Vitrio</label>
+            </div>
+
+            <div class="reason">
+              <input type="radio" name="reason" id="r6" value="Outro">
+              <label for="r6">Outro motivo</label>
+            </div>
+
+          </div>
+
+          <div class="other-wrap" id="otherWrap">
+            <textarea id="otherReason"
+              placeholder="Se quiser, conte um pouco mais sobre sua decisão."></textarea>
+          </div>
+
+          <div class="offer">
+
+            <div class="offer-header">
+              <div class="offer-icon">★</div>
+
+              <div>
+                <h3>Talvez você queira ficar mais um pouco</h3>
+                <p>Uma alternativa antes de cancelar sua assinatura.</p>
+              </div>
+            </div>
+
+            <div class="offer-content">
+              <div>
+                <strong>Ganhe 50% de desconto por 3 meses</strong>
+              </div>
+
+              <button class="keep-button" id="keepButton">
+                Quero aproveitar
+              </button>
+            </div>
+
+          </div>
+
+          <div class="warning">
+            <div>⚠</div>
+
+            <div>
+              <strong>Antes de cancelar</strong>
+              O acesso aos benefícios do Vitrio+ será encerrado ao final
+              do período já pago. Você não terá uma nova cobrança após
+              o cancelamento.
+            </div>
+          </div>
+
+          <div class="actions">
+
+            <button class="back-button" id="backButton">
+              ← Voltar para minha conta
+            </button>
+
+            <button class="cancel-button" id="cancelButton">
+              Continuar com o cancelamento
+            </button>
+
+          </div>
+
+        </section>
+
+        <aside class="card side">
+
+          <h2>O que você perderá</h2>
+
+          <div class="benefit">
+            <div class="benefit-icon">🚚</div>
+            <div>
+              <strong>Frete grátis</strong>
+              <p>Em pedidos e produtos elegíveis ao benefício.</p>
+            </div>
+          </div>
+
+          <div class="benefit">
+            <div class="benefit-icon">%</div>
+            <div>
+              <strong>Descontos exclusivos</strong>
+              <p>Condições especiais em produtos selecionados.</p>
+            </div>
+          </div>
+
+          <div class="benefit">
+            <div class="benefit-icon">⚡</div>
+            <div>
+              <strong>Ofertas antecipadas</strong>
+              <p>Acesso antecipado a campanhas e oportunidades.</p>
+            </div>
+          </div>
+
+          <div class="billing">
+
+            <div class="billing-row">
+              <span>Plano atual</span>
+              <strong>Vitrio+</strong>
+            </div>
+
+            <div class="billing-row">
+              <span>Valor mensal</span>
+              <strong>R$ 19,90</strong>
+            </div>
+
+            <div class="billing-row">
+              <span>Próxima cobrança</span>
+              <strong>15/11/2026</strong>
+            </div>
+
+          </div>
+
+          <div class="help">
+            Mudou de ideia ou precisa de ajuda?
+            <a href="#" id="supportLink">Fale com nosso atendimento</a>.
+          </div>
+
+        </aside>
+
+      </div>
+
+    </div>
+
+    <!-- CONFIRMAÇÃO FINAL -->
+    <section class="card success" id="successPage">
+
+      <div class="success-icon">✓</div>
+
+      <h1>Assinatura cancelada</h1>
+
+      <p>
+        Pronto. Sua assinatura do Vitrio+ foi cancelada e não haverá
+        uma nova cobrança. Você continuará aproveitando os benefícios
+        até o fim do período já pago.
+      </p>
+
+      <div class="success-info">
+        <strong>Benefícios disponíveis até 15/11/2026</strong><br>
+        Depois dessa data, sua conta continuará ativa normalmente,
+        mas sem as vantagens do Vitrio+.
+      </div>
+
+      <button id="continueButton">
+        Continuar comprando
+      </button>
+
+    </section>
+
+  </main>
+
+  <!-- MODAL DE CONFIRMAÇÃO -->
+  <div class="modal-bg" id="modalBg">
+
+    <div class="modal">
+
+      <button class="modal-close" id="closeModal">×</button>
+
+      <div class="modal-icon">!</div>
+
+      <h2>Confirmar cancelamento?</h2>
+
+      <p>
+        Você está prestes a cancelar sua assinatura do Vitrio+.
+        Não haverá nova cobrança após o cancelamento.
+      </p>
+
+      <div class="modal-summary">
+
+        <div class="modal-summary-row">
+          <span>Plano</span>
+          <strong>Vitrio+</strong>
+        </div>
+
+        <div class="modal-summary-row">
+          <span>Valor atual</span>
+          <strong>R$ 19,90/mês</strong>
+        </div>
+
+        <div class="modal-summary-row">
+          <span>Benefícios até</span>
+          <strong>15/11/2026</strong>
+        </div>
+
+      </div>
+
+      <p>
+        Você poderá assinar novamente no futuro, caso queira voltar
+        a aproveitar os benefícios.
+      </p>
+
+      <div class="modal-actions">
+        <button class="stay" id="stayButton">
+          Manter assinatura
+        </button>
+
+        <button class="confirm" id="confirmCancel">
+          Sim, cancelar
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    (() => {
+      const $ = selector => document.querySelector(selector);
+
+      const modal = $("#modalBg");
+      const toast = $("#toast");
+      let toastTimer;
+
+      function showToast(message){
+        toast.textContent = message;
+        toast.classList.add("show");
+
+        clearTimeout(toastTimer);
+
+        toastTimer = setTimeout(() => {
+          toast.classList.remove("show");
+        }, 2800);
+      }
+
+      function openModal(){
+        const selected = document.querySelector(
+          'input[name="reason"]:checked'
+        );
+
+        if(!selected){
+          showToast("Selecione o principal motivo do cancelamento.");
+          return;
+        }
+
+        if(selected.value === "Outro" &&
+           !$("#otherReason").value.trim()){
+          showToast("Conte brevemente o motivo do cancelamento.");
+          $("#otherReason").focus();
+          return;
+        }
+
+        modal.classList.add("open");
+      }
+
+      function closeModal(){
+        modal.classList.remove("open");
+      }
+
+      // Exibe campo adicional quando "Outro" é selecionado.
+      document.querySelectorAll('input[name="reason"]').forEach(input => {
+        input.addEventListener("change", () => {
+          $("#otherWrap").classList.toggle(
+            "visible",
+            input.value === "Outro"
+          );
+        });
+      });
+
+      $("#cancelButton").addEventListener("click", openModal);
+
+      $("#closeModal").addEventListener("click", closeModal);
+      $("#stayButton").addEventListener("click", closeModal);
+
+      modal.addEventListener("click", event => {
+        if(event.target === modal){
+          closeModal();
+        }
+      });
+
+      // Retenção: aplica oferta alternativa sem impedir o cancelamento.
+      $("#keepButton").addEventListener("click", () => {
+        closeModal();
+
+        showToast(
+          "Oferta aplicada: 50% de desconto por 3 meses. Sua assinatura continua ativa."
+        );
+      });
+
+      $("#confirmCancel").addEventListener("click", () => {
+
+        closeModal();
+
+        $("#cancelPage").style.display = "none";
+        $("#successPage").classList.add("show");
+
+        window.scrollTo({
+          top:0,
+          behavior:"smooth"
+        });
+      });
+
+      $("#backButton").addEventListener("click", event => {
+        event.preventDefault();
+        showToast("Voltando para a sua conta…");
+      });
+
+      $("#accountLink").addEventListener("click", event => {
+        event.preventDefault();
+        showToast("Abrindo sua conta…");
+      });
+
+      $("#supportLink").addEventListener("click", event => {
+        event.preventDefault();
+        showToast("Abrindo o atendimento da Vitrio…");
+      });
+
+      $("#logo").addEventListener("click", event => {
+        event.preventDefault();
+
+        window.scrollTo({
+          top:0,
+          behavior:"smooth"
+        });
+      });
+
+      $("#continueButton").addEventListener("click", () => {
+        showToast("Voltando para a vitrine da Vitrio…");
+      });
+
+      // ESC fecha o modal.
+      document.addEventListener("keydown", event => {
+        if(event.key === "Escape" && modal.classList.contains("open")){
+          closeModal();
+        }
+      });
+
+    })();
+  </script>
+
+</body>
+</html>

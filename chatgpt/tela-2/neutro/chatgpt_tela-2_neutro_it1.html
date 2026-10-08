@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitrio — Notebook Vitrio Pro 15,6"</title>
+  <style>
+    :root{
+      --primary:#5b21b6;
+      --primary-dark:#45168c;
+      --primary-light:#f2ecfc;
+      --accent:#f59e0b;
+      --success:#15803d;
+      --danger:#dc2626;
+      --text:#202124;
+      --muted:#6b7280;
+      --border:#e5e7eb;
+      --background:#f6f7f9;
+      --surface:#fff;
+      --placeholder:#e0e0e0;
+      --shadow:0 8px 25px rgba(20,20,30,.08);
+    }
+
+    *{box-sizing:border-box}
+
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      color:var(--text);
+      background:var(--background);
+      font-size:14px;
+    }
+
+    button,input,select{font:inherit}
+    button,a{cursor:pointer}
+
+    .topbar{
+      height:34px;
+      background:#35106b;
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:12px;
+    }
+
+    header{
+      background:#fff;
+      border-bottom:1px solid var(--border);
+    }
+
+    .header-main,
+    nav,
+    main,
+    .footer-inner,
+    .footer-bottom{
+      width:1180px;
+      margin:auto;
+    }
+
+    .header-main{
+      height:78px;
+      display:flex;
+      align-items:center;
+      gap:25px;
+    }
+
+    .logo{
+      color:var(--primary);
+      font-size:30px;
+      font-weight:800;
+      letter-spacing:-1.5px;
+      white-space:nowrap;
+    }
+
+    .logo span{color:var(--accent)}
+
+    .search{
+      position:relative;
+      flex:1;
+      max-width:600px;
+    }
+
+    .search input{
+      width:100%;
+      height:44px;
+      padding:0 48px 0 16px;
+      border:1px solid #d5d8de;
+      border-radius:8px;
+      background:#fafafa;
+      outline:none;
+    }
+
+    .search input:focus{
+      border-color:var(--primary);
+      box-shadow:0 0 0 3px rgba(91,33,182,.1);
+      background:#fff;
+    }
+
+    .search button{
+      position:absolute;
+      top:0;
+      right:0;
+      width:48px;
+      height:44px;
+      border:0;
+      background:transparent;
+      color:var(--primary);
+      font-size:20px;
+    }
+
+    .header-actions{
+      display:flex;
+      gap:7px;
+      align-items:center;
+    }
+
+    .header-action{
+      position:relative;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:7px;
+      border:0;
+      border-radius:8px;
+      background:transparent;
+      text-align:left;
+    }
+
+    .header-action:hover{background:#f5f3fa}
+
+    .header-icon{
+      color:var(--primary);
+      font-size:22px;
+    }
+
+    .header-action small{
+      display:block;
+      color:var(--muted);
+      font-size:10px;
+    }
+
+    .header-action strong{font-size:12px}
+
+    .cart-badge{
+      position:absolute;
+      top:0;
+      left:19px;
+      min-width:17px;
+      height:17px;
+      border-radius:20px;
+      padding:0 4px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:var(--accent);
+      color:#fff;
+      font-size:10px;
+      font-weight:700;
+    }
+
+    nav{
+      height:44px;
+      display:flex;
+      align-items:center;
+      gap:28px;
+      overflow:hidden;
+    }
+
+    nav a{
+      color:#3f4146;
+      text-decoration:none;
+      font-size:13px;
+      font-weight:600;
+      white-space:nowrap;
+    }
+
+    nav a:hover{color:var(--primary)}
+
+    main{
+      padding:20px 0 55px;
+    }
+
+    .breadcrumb{
+      color:var(--muted);
+      font-size:11px;
+      margin-bottom:18px;
+    }
+
+    .breadcrumb a{
+      color:var(--muted);
+      text-decoration:none;
+    }
+
+    .breadcrumb a:hover{color:var(--primary)}
+    .breadcrumb span{margin:0 7px;color:#a1a1aa}
+
+    .product-main{
+      display:grid;
+      grid-template-columns:575px 1fr;
+      gap:42px;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:11px;
+      padding:25px;
+      box-shadow:0 2px 7px rgba(20,20,30,.03);
+    }
+
+    .gallery{
+      display:grid;
+      grid-template-columns:74px 1fr;
+      gap:13px;
+    }
+
+    .thumbnails{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .thumb{
+      width:72px;
+      height:72px;
+      border:1px solid var(--border);
+      border-radius:7px;
+      background:var(--placeholder);
+      color:#858585;
+      font-size:9px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+    }
+
+    .thumb.active{
+      border:2px solid var(--primary);
+      background:#f0f0f0;
+    }
+
+    .main-image{
+      position:relative;
+      height:440px;
+      background:var(--placeholder);
+      border-radius:9px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#888;
+      font-size:12px;
+    }
+
+    .zoom{
+      position:absolute;
+      right:13px;
+      bottom:13px;
+      border:0;
+      background:#fff;
+      color:#444;
+      width:34px;
+      height:34px;
+      border-radius:50%;
+      box-shadow:0 2px 8px rgba(0,0,0,.12);
+      font-size:16px;
+    }
+
+    .favorite{
+      position:absolute;
+      right:13px;
+      top:13px;
+      border:0;
+      background:#fff;
+      color:#777;
+      width:36px;
+      height:36px;
+      border-radius:50%;
+      box-shadow:0 2px 8px rgba(0,0,0,.1);
+      font-size:19px;
+      z-index:2;
+    }
+
+    .favorite.active{
+      color:var(--danger);
+    }
+
+    .product-info{
+      padding:3px 5px 0 0;
+    }
+
+    .brand{
+      color:var(--muted);
+      text-transform:uppercase;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:.3px;
+    }
+
+    h1{
+      margin:7px 0 10px;
+      font-size:27px;
+      line-height:1.18;
+      letter-spacing:-.6px;
+    }
+
+    .sku{
+      color:#92959b;
+      font-size:10px;
+      margin-bottom:13px;
+    }
+
+    .rating-row{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding-bottom:17px;
+      border-bottom:1px solid var(--border);
+    }
+
+    .stars{
+      color:var(--accent);
+      letter-spacing:1px;
+      font-size:15px;
+    }
+
+    .rating-row a{
+      color:var(--primary);
+      font-size:12px;
+      font-weight:600;
+      text-decoration:none;
+    }
+
+    .price-box{
+      padding:18px 0 12px;
+    }
+
+    .old-price{
+      color:var(--muted);
+      text-decoration:line-through;
+      font-size:12px;
+    }
+
+    .price{
+      color:var(--text);
+      font-size:31px;
+      font-weight:800;
+      letter-spacing:-.7px;
+      margin-top:3px;
+    }
+
+    .cash{
+      color:var(--success);
+      font-size:11px;
+      margin-top:4px;
+      font-weight:600;
+    }
+
+    .installments{
+      color:#4b5563;
+      font-size:12px;
+      margin-top:4px;
+    }
+
+    .shipping-box{
+      background:#faf9fc;
+      border:1px solid #e5dff1;
+      border-radius:7px;
+      padding:13px;
+      margin:8px 0 16px;
+    }
+
+    .shipping-title{
+      font-weight:700;
+      font-size:12px;
+      margin-bottom:8px;
+    }
+
+    .shipping-form{
+      display:flex;
+      gap:8px;
+    }
+
+    .shipping-form input{
+      height:37px;
+      width:130px;
+      border:1px solid #d5d8de;
+      border-radius:6px;
+      padding:0 9px;
+      outline:none;
+    }
+
+    .shipping-form input:focus{border-color:var(--primary)}
+
+    .shipping-form button{
+      height:37px;
+      border:1px solid var(--primary);
+      background:#fff;
+      color:var(--primary);
+      border-radius:6px;
+      padding:0 12px;
+      font-weight:700;
+      font-size:11px;
+    }
+
+    .shipping-result{
+      margin-top:9px;
+      color:var(--success);
+      font-size:11px;
+      display:none;
+    }
+
+    .option-label{
+      display:block;
+      font-size:12px;
+      font-weight:700;
+      margin-bottom:8px;
+    }
+
+    .options{
+      display:flex;
+      gap:8px;
+      margin-bottom:16px;
+    }
+
+    .option{
+      height:36px;
+      padding:0 14px;
+      border:1px solid #d7d9de;
+      border-radius:6px;
+      background:#fff;
+      font-size:11px;
+    }
+
+    .option.active{
+      color:var(--primary);
+      border-color:var(--primary);
+      background:var(--primary-light);
+      font-weight:700;
+    }
+
+    .buy-row{
+      display:grid;
+      grid-template-columns:100px 1fr;
+      gap:9px;
+    }
+
+    .quantity{
+      display:flex;
+      height:47px;
+      border:1px solid #d7d9de;
+      border-radius:7px;
+      overflow:hidden;
+    }
+
+    .quantity button{
+      width:31px;
+      border:0;
+      background:#fff;
+      font-size:17px;
+    }
+
+    .quantity button:hover{background:#f4f4f5}
+
+    .quantity span{
+      flex:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+    }
+
+    .buy-button{
+      height:47px;
+      border:0;
+      border-radius:7px;
+      background:var(--primary);
+      color:#fff;
+      font-weight:800;
+      font-size:14px;
+    }
+
+    .buy-button:hover{background:var(--primary-dark)}
+
+    .cart-button{
+      width:100%;
+      height:43px;
+      border:1px solid var(--primary);
+      color:var(--primary);
+      background:#fff;
+      border-radius:7px;
+      font-weight:700;
+      margin-top:9px;
+    }
+
+    .cart-button:hover{background:var(--primary-light)}
+
+    .seller{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      margin-top:17px;
+      padding-top:15px;
+      border-top:1px solid var(--border);
+      color:var(--muted);
+      font-size:11px;
+    }
+
+    .seller strong{color:var(--text)}
+
+    .trust{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:15px;
+    }
+
+    .trust-item{
+      background:#fafafa;
+      border-radius:6px;
+      padding:10px;
+      font-size:10px;
+      color:#555;
+    }
+
+    .trust-item strong{
+      display:block;
+      color:var(--text);
+      margin-bottom:3px;
+    }
+
+    .details{
+      margin-top:20px;
+      display:grid;
+      grid-template-columns:1fr 360px;
+      gap:20px;
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:10px;
+    }
+
+    .card-section{
+      padding:22px;
+    }
+
+    .card-section + .card-section{
+      border-top:1px solid var(--border);
+    }
+
+    .card h2{
+      margin:0 0 16px;
+      font-size:18px;
+    }
+
+    .description{
+      color:#4b5563;
+      font-size:13px;
+      line-height:1.65;
+      margin:0;
+    }
+
+    .specs{
+      width:100%;
+      border-collapse:collapse;
+    }
+
+    .specs td{
+      padding:10px 9px;
+      border-bottom:1px solid #f0f0f0;
+      font-size:12px;
+    }
+
+    .specs td:first-child{
+      color:var(--muted);
+      width:40%;
+    }
+
+    .highlight-box{
+      background:var(--primary-light);
+      border-radius:7px;
+      padding:15px;
+      margin-top:18px;
+    }
+
+    .highlight-box strong{
+      color:var(--primary);
+      font-size:12px;
+    }
+
+    .highlight-box p{
+      margin:5px 0 0;
+      color:#5d536d;
+      font-size:11px;
+      line-height:1.5;
+    }
+
+    .rating-summary{
+      display:grid;
+      grid-template-columns:150px 1fr;
+      gap:25px;
+      align-items:center;
+      margin-bottom:18px;
+    }
+
+    .average{
+      text-align:center;
+    }
+
+    .average strong{
+      display:block;
+      font-size:38px;
+    }
+
+    .average .stars{font-size:16px}
+    .average small{color:var(--muted);font-size:10px}
+
+    .bars{font-size:11px}
+
+    .bar-row{
+      display:grid;
+      grid-template-columns:30px 1fr 35px;
+      align-items:center;
+      gap:7px;
+      margin:5px 0;
+    }
+
+    .bar{
+      height:7px;
+      background:#eee;
+      border-radius:10px;
+      overflow:hidden;
+    }
+
+    .bar span{
+      display:block;
+      height:100%;
+      background:var(--accent);
+    }
+
+    .review{
+      padding:17px 0;
+      border-top:1px solid var(--border);
+    }
+
+    .review-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .review-name{
+      font-weight:700;
+      font-size:12px;
+    }
+
+    .review-date{
+      color:var(--muted);
+      font-size:10px;
+    }
+
+    .review-stars{
+      color:var(--accent);
+      font-size:12px;
+      margin:5px 0;
+    }
+
+    .review p{
+      color:#555;
+      font-size:12px;
+      line-height:1.5;
+      margin:0;
+    }
+
+    .review-actions{
+      margin-top:8px;
+      color:var(--muted);
+      font-size:10px;
+    }
+
+    .question-box{
+      margin-top:20px;
+      padding:17px;
+      border-radius:8px;
+      background:#fafafa;
+      border:1px solid var(--border);
+    }
+
+    .question-box p{
+      font-size:12px;
+      color:#555;
+      margin:0 0 11px;
+    }
+
+    .question-box button{
+      height:36px;
+      border:1px solid var(--primary);
+      border-radius:6px;
+      background:#fff;
+      color:var(--primary);
+      font-weight:700;
+      font-size:11px;
+      padding:0 14px;
+    }
+
+    footer{
+      background:#202124;
+      color:#fff;
+      padding:35px 0 25px;
+    }
+
+    .footer-inner{
+      display:grid;
+      grid-template-columns:1.4fr 1fr 1fr 1fr;
+      gap:35px;
+    }
+
+    footer h3{
+      margin:0 0 13px;
+      font-size:14px;
+    }
+
+    footer p,footer a{
+      display:block;
+      color:#b9bbc0;
+      font-size:11px;
+      line-height:1.8;
+      text-decoration:none;
+    }
+
+    footer a:hover{color:#fff}
+
+    .footer-logo{
+      font-size:24px;
+      font-weight:800;
+      margin-bottom:8px;
+    }
+
+    .footer-logo span{color:var(--accent)}
+
+    .footer-bottom{
+      border-top:1px solid #36373a;
+      margin-top:25px;
+      padding-top:18px;
+      color:#8f9298;
+      font-size:10px;
+    }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:22px;
+      transform:translate(-50%,80px);
+      opacity:0;
+      transition:.25s;
+      z-index:30;
+      background:#202124;
+      color:#fff;
+      padding:12px 18px;
+      border-radius:7px;
+      font-size:12px;
+      box-shadow:var(--shadow);
+    }
+
+    .toast.show{
+      transform:translate(-50%,0);
+      opacity:1;
+    }
+
+    .modal-backdrop{
+      position:fixed;
+      inset:0;
+      background:rgba(15,10,25,.48);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:40;
+    }
+
+    .modal-backdrop.open{display:flex}
+
+    .modal{
+      width:450px;
+      background:#fff;
+      border-radius:10px;
+      overflow:hidden;
+      box-shadow:0 20px 55px rgba(0,0,0,.25);
+    }
+
+    .modal-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:18px 20px;
+      border-bottom:1px solid var(--border);
+    }
+
+    .modal-head h2{
+      margin:0;
+      font-size:17px;
+    }
+
+    .close{
+      width:31px;
+      height:31px;
+      border:0;
+      border-radius:50%;
+      background:#f3f4f6;
+      font-size:18px;
+    }
+
+    .modal-body{padding:20px}
+
+    .modal-body label{
+      display:block;
+      font-size:11px;
+      font-weight:700;
+      margin-bottom:5px;
+    }
+
+    .modal-body textarea,
+    .modal-body input{
+      width:100%;
+      border:1px solid #d5d8de;
+      border-radius:6px;
+      outline:none;
+      padding:9px;
+      margin-bottom:13px;
+    }
+
+    .modal-body textarea{
+      height:95px;
+      resize:vertical;
+    }
+
+    .modal-body textarea:focus,
+    .modal-body input:focus{border-color:var(--primary)}
+
+    .modal-footer{
+      padding:14px 20px;
+      background:#fafafa;
+      border-top:1px solid var(--border);
+      display:flex;
+      justify-content:flex-end;
+      gap:8px;
+    }
+
+    .modal-footer button{
+      height:38px;
+      border-radius:6px;
+      padding:0 15px;
+      font-weight:700;
+    }
+
+    .modal-cancel{
+      border:1px solid #d7d9de;
+      background:#fff;
+    }
+
+    .modal-confirm{
+      border:0;
+      background:var(--primary);
+      color:#fff;
+    }
+
+    @media(max-width:900px){
+      .header-main,nav,main,.footer-inner,.footer-bottom{
+        width:calc(100% - 30px);
+      }
+
+      .header-main{gap:10px}
+      .header-action div:last-child{display:none}
+      .product-main{grid-template-columns:1fr}
+      .details{grid-template-columns:1fr}
+      .main-image{height:360px}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    Frete grátis acima de R$ 299 para regiões participantes • Até 10x sem juros
+  </div>
+
+  <header>
+    <div class="header-main">
+      <div class="logo" id="logo">Vitr<span>i</span>o</div>
+
+      <form class="search" id="searchForm">
+        <input
+          id="searchInput"
+          type="search"
+          placeholder="Busque por produtos, marcas e categorias"
+          aria-label="Buscar produtos">
+        <button type="submit" aria-label="Buscar">⌕</button>
+      </form>
+
+      <div class="header-actions">
+        <button class="header-action" id="accountButton">
+          <div class="header-icon">♙</div>
+          <div>
+            <small>Olá, cliente</small>
+            <strong>Minha conta</strong>
+          </div>
+        </button>
+
+        <button class="header-action" id="cartButton">
+          <div class="header-icon">🛒</div>
+          <span class="cart-badge" id="cartBadge">0</span>
+          <div>
+            <small>Seu carrinho</small>
+            <strong id="cartTotal">R$ 0,00</strong>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <nav>
+      <a href="#inicio">Início</a>
+      <a href="#categorias">Categorias</a>
+      <a href="#eletronicos">Eletrônicos</a>
+      <a href="#informatica">Informática</a>
+      <a href="#casa">Casa e cozinha</a>
+      <a href="#celulares">Celulares</a>
+      <a href="#ofertas">Ofertas</a>
+    </nav>
+  </header>
+
+  <main id="inicio">
+    <div class="breadcrumb">
+      <a href="#inicio">Início</a>
+      <span>›</span>
+      <a href="#informatica">Informática</a>
+      <span>›</span>
+      <span>Notebooks</span>
+      <span>›</span>
+      <strong>Notebook Vitrio Pro 15,6"</strong>
+    </div>
+
+    <section class="product-main">
+      <div class="gallery">
+        <div class="thumbnails">
+          <button class="thumb active" data-image="Imagem principal do notebook">
+            Foto 1
+          </button>
+          <button class="thumb" data-image="Notebook aberto">
+            Foto 2
+          </button>
+          <button class="thumb" data-image="Teclado do notebook">
+            Foto 3
+          </button>
+          <button class="thumb" data-image="Lateral do notebook">
+            Foto 4
+          </button>
+          <button class="thumb" data-image="Tela do notebook">
+            Foto 5
+          </button>
+        </div>
+
+        <div class="main-image" id="mainImage">
+          <button class="favorite" id="favorite" aria-label="Adicionar aos favoritos">♡</button>
+          <span id="imageLabel">Imagem principal do notebook</span>
+          <button class="zoom" id="zoomButton" aria-label="Ampliar imagem">⌕</button>
+        </div>
+      </div>
+
+      <div class="product-info">
+        <div class="brand">Vitrio Pro</div>
+
+        <h1>Notebook Vitrio Pro 15,6" Intel Core i5 16GB 512GB SSD</h1>
+
+        <div class="sku">Código do produto: VTR-NB15-I5-512</div>
+
+        <div class="rating-row">
+          <div class="stars">★★★★★</div>
+          <a href="#avaliacoes" id="ratingLink">4,8 • 128 avaliações</a>
+        </div>
+
+        <div class="price-box">
+          <div class="old-price">De R$ 3.899,00</div>
+          <div class="price">R$ 3.499,00</div>
+          <div class="cash">R$ 3.324,05 no Pix, com 5% de desconto</div>
+          <div class="installments">ou 10x de R$ 349,90 sem juros no cartão</div>
+        </div>
+
+        <div class="shipping-box">
+          <div class="shipping-title">Confira o prazo de entrega</div>
+
+          <div class="shipping-form">
+            <input id="cepInput" maxlength="9" placeholder="Digite seu CEP">
+            <button id="calculateShipping">Calcular</button>
+          </div>
+
+          <div class="shipping-result" id="shippingResult"></div>
+        </div>
+
+        <span class="option-label">Cor: Cinza</span>
+
+        <div class="options">
+          <button class="option active">Cinza</button>
+          <button class="option">Prata</button>
+        </div>
+
+        <div class="buy-row">
+          <div class="quantity">
+            <button id="minus">−</button>
+            <span id="quantity">1</span>
+            <button id="plus">+</button>
+          </div>
+
+          <button class="buy-button" id="buyButton">
+            Comprar agora
+          </button>
+        </div>
+
+        <button class="cart-button" id="addCartButton">
+          Adicionar ao carrinho
+        </button>
+
+        <div class="seller">
+          🏪 Vendido e entregue por <strong>Vitrio</strong>
+          <span>•</span>
+          Loja oficial
+        </div>
+
+        <div class="trust">
+          <div class="trust-item">
+            <strong>🔒 Compra segura</strong>
+            Dados protegidos
+          </div>
+          <div class="trust-item">
+            <strong>↩ Troca fácil</strong>
+            Até 7 dias
+          </div>
+          <div class="trust-item">
+            <strong>🚚 Envio rápido</strong>
+            Pedido acompanhado
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="details">
+      <div class="card">
+        <div class="card-section">
+          <h2>Sobre este produto</h2>
+          <p class="description">
+            O Notebook Vitrio Pro foi desenvolvido para quem precisa de desempenho
+            para trabalhar, estudar e aproveitar seus conteúdos favoritos. Com
+            processador Intel Core i5, 16 GB de memória RAM e SSD de 512 GB, ele
+            combina velocidade para tarefas do dia a dia com armazenamento amplo.
+            A tela de 15,6 polegadas Full HD oferece uma experiência confortável
+            para produtividade, filmes e navegação.
+          </p>
+
+          <div class="highlight-box">
+            <strong>Por que escolher o Vitrio Pro?</strong>
+            <p>
+              Inicialização rápida pelo SSD, memória de 16 GB para multitarefas,
+              tela Full HD de 15,6" e conectividade completa para sua rotina.
+            </p>
+          </div>
+        </div>
+
+        <div class="card-section" id="informatica">
+          <h2>Especificações técnicas</h2>
+
+          <table class="specs">
+            <tr>
+              <td>Processador</td>
+              <td>Intel Core i5-1235U</td>
+            </tr>
+            <tr>
+              <td>Memória RAM</td>
+              <td>16 GB DDR4</td>
+            </tr>
+            <tr>
+              <td>Armazenamento</td>
+              <td>SSD NVMe 512 GB</td>
+            </tr>
+            <tr>
+              <td>Tela</td>
+              <td>15,6" Full HD, 1920 × 1080</td>
+            </tr>
+            <tr>
+              <td>Sistema operacional</td>
+              <td>Windows 11 Home</td>
+            </tr>
+            <tr>
+              <td>Conectividade</td>
+              <td>Wi-Fi 6, Bluetooth 5.2</td>
+            </tr>
+            <tr>
+              <td>Portas</td>
+              <td>2 USB-A, 1 USB-C, HDMI e áudio</td>
+            </tr>
+            <tr>
+              <td>Cor</td>
+              <td>Cinza</td>
+            </tr>
+            <tr>
+              <td>Peso</td>
+              <td>1,72 kg</td>
+            </tr>
+            <tr>
+              <td>Garantia</td>
+              <td>12 meses</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <aside class="card">
+        <div class="card-section">
+          <h2>Conteúdo da embalagem</h2>
+          <p class="description">
+            1 Notebook Vitrio Pro, 1 fonte de alimentação, 1 cabo de energia,
+            1 manual de instruções e certificado de garantia.
+          </p>
+        </div>
+
+        <div class="card-section">
+          <h2>Informações de entrega</h2>
+          <p class="description">
+            O prazo e o valor do frete são calculados de acordo com o CEP informado.
+            Após a confirmação do pagamento, você poderá acompanhar o pedido
+            diretamente pela sua conta Vitrio.
+          </p>
+        </div>
+
+        <div class="card-section">
+          <h2>Tem alguma dúvida?</h2>
+          <div class="question-box">
+            <p>
+              Nossa equipe pode ajudar com dúvidas sobre características,
+              compatibilidade e utilização do produto.
+            </p>
+            <button id="questionButton">Fazer uma pergunta</button>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="card" id="avaliacoes" style="margin-top:20px;">
+      <div class="card-section">
+        <h2>Avaliações dos clientes</h2>
+
+        <div class="rating-summary">
+          <div class="average">
+            <strong>4,8</strong>
+            <div class="stars">★★★★★</div>
+            <small>128 avaliações</small>
+          </div>
+
+          <div class="bars">
+            <div class="bar-row">
+              <span>5 ★</span>
+              <div class="bar"><span style="width:88%"></span></div>
+              <span>112</span>
+            </div>
+            <div class="bar-row">
+              <span>4 ★</span>
+              <div class="bar"><span style="width:10%"></span></div>
+              <span>13</span>
+            </div>
+            <div class="bar-row">
+              <span>3 ★</span>
+              <div class="bar"><span style="width:2%"></span></div>
+              <span>2</span>
+            </div>
+            <div class="bar-row">
+              <span>2 ★</span>
+              <div class="bar"><span style="width:1%"></span></div>
+              <span>1</span>
+            </div>
+            <div class="bar-row">
+              <span>1 ★</span>
+              <div class="bar"><span style="width:0%"></span></div>
+              <span>0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="review">
+          <div class="review-head">
+            <span class="review-name">Mariana S.</span>
+            <span class="review-date">Há 12 dias</span>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p>
+            Notebook muito rápido para trabalho e estudos. A tela é ótima e
+            gostei bastante de ter 16 GB de memória. Chegou antes do prazo.
+          </p>
+          <div class="review-actions">Avaliação verificada • Esta avaliação foi útil</div>
+        </div>
+
+        <div class="review">
+          <div class="review-head">
+            <span class="review-name">Carlos R.</span>
+            <span class="review-date">Há 24 dias</span>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p>
+            Excelente custo-benefício. O SSD deixa o sistema bem rápido e o
+            acabamento é bonito. Recomendo para quem trabalha em home office.
+          </p>
+          <div class="review-actions">Avaliação verificada • Esta avaliação foi útil</div>
+        </div>
+
+        <div class="review">
+          <div class="review-head">
+            <span class="review-name">Fernanda M.</span>
+            <span class="review-date">Há 1 mês</span>
+          </div>
+          <div class="review-stars">★★★★☆</div>
+          <p>
+            Produto conforme anunciado e embalagem muito bem protegida.
+            Estou usando diariamente para faculdade e até agora está atendendo
+            muito bem.
+          </p>
+          <div class="review-actions">Avaliação verificada • Esta avaliação foi útil</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">Vitr<span>i</span>o</div>
+        <p>Eletrônicos, tecnologia e produtos para deixar sua casa ainda melhor.</p>
+      </div>
+
+      <div>
+        <h3>Institucional</h3>
+        <a href="#sobre">Sobre a Vitrio</a>
+        <a href="#trabalhe">Trabalhe conosco</a>
+        <a href="#privacidade">Privacidade</a>
+      </div>
+
+      <div>
+        <h3>Atendimento</h3>
+        <a href="#ajuda">Central de ajuda</a>
+        <a href="#trocas">Trocas e devoluções</a>
+        <a href="#contato">Fale conosco</a>
+      </div>
+
+      <div>
+        <h3>Compre com segurança</h3>
+        <p>Pagamento protegido e acompanhamento do pedido.</p>
+        <a href="#pedidos">Acompanhar pedido</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © 2026 Vitrio Comércio Eletrônico. Todos os direitos reservados.
+    </div>
+  </footer>
+
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <h2 id="modalTitle">Minha conta</h2>
+        <button class="close" id="closeModal" aria-label="Fechar">×</button>
+      </div>
+
+      <div class="modal-body">
+        <div id="loginFields">
+          <label for="email">E-mail</label>
+          <input id="email" type="email" placeholder="seuemail@exemplo.com">
+
+          <label for="password">Senha</label>
+          <input id="password" type="password" placeholder="Digite sua senha">
+        </div>
+
+        <div id="questionFields" style="display:none;">
+          <p>
+            Envie sua dúvida sobre o produto. Nossa equipe responderá pela
+            central de atendimento.
+          </p>
+          <label for="question">Sua pergunta</label>
+          <textarea id="question" placeholder="Digite sua dúvida sobre o produto"></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="modal-cancel" id="cancelModal">Cancelar</button>
+        <button class="modal-confirm" id="confirmModal">Entrar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    (() => {
+      let quantity = 1;
+      let cartCount = 0;
+      let cartTotal = 0;
+      let modalMode = "login";
+
+      const toast = document.getElementById("toast");
+      const modal = document.getElementById("modalBackdrop");
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add("show");
+        clearTimeout(window.toastTimer);
+
+        window.toastTimer = setTimeout(() => {
+          toast.classList.remove("show");
+        }, 2700);
+      }
+
+      function money(value) {
+        return value.toLocaleString("pt-BR", {
+          style:"currency",
+          currency:"BRL"
+        });
+      }
+
+      function updateQuantity() {
+        document.getElementById("quantity").textContent = quantity;
+      }
+
+      document.getElementById("plus").addEventListener("click", () => {
+        if (quantity < 10) {
+          quantity++;
+          updateQuantity();
+        } else {
+          showToast("Você atingiu o limite de 10 unidades por compra.");
+        }
+      });
+
+      document.getElementById("minus").addEventListener("click", () => {
+        if (quantity > 1) {
+          quantity--;
+          updateQuantity();
+        }
+      });
+
+      document.querySelectorAll(".thumb").forEach(thumb => {
+        thumb.addEventListener("click", () => {
+          document.querySelectorAll(".thumb").forEach(item => {
+            item.classList.remove("active");
+          });
+
+          thumb.classList.add("active");
+          document.getElementById("imageLabel").textContent =
+            thumb.dataset.image;
+
+          showToast("Imagem do produto alterada.");
+        });
+      });
+
+      document.getElementById("favorite").addEventListener("click", event => {
+        const button = event.currentTarget;
+        button.classList.toggle("active");
+
+        if (button.classList.contains("active")) {
+          button.textContent = "♥";
+          showToast("Produto adicionado aos favoritos.");
+        } else {
+          button.textContent = "♡";
+          showToast("Produto removido dos favoritos.");
+        }
+      });
+
+      document.getElementById("zoomButton").addEventListener("click", () => {
+        showToast("Visualização ampliada do produto.");
+      });
+
+      document.querySelectorAll(".option").forEach(option => {
+        option.addEventListener("click", () => {
+          document.querySelectorAll(".option").forEach(item => {
+            item.classList.remove("active");
+          });
+
+          option.classList.add("active");
+          showToast("Cor selecionada: " + option.textContent + ".");
+        });
+      });
+
+      document.getElementById("calculateShipping").addEventListener("click", () => {
+        const input = document.getElementById("cepInput");
+        const result = document.getElementById("shippingResult");
+        const cep = input.value.replace(/\D/g, "");
+
+        if (cep.length !== 8) {
+          showToast("Digite um CEP válido com 8 números.");
+          input.focus();
+          return;
+        }
+
+        result.style.display = "block";
+        result.innerHTML =
+          "✓ Entrega padrão: <strong>5 a 7 dias úteis</strong> • Frete grátis para este pedido.";
+
+        showToast("Prazo de entrega calculado.");
+      });
+
+      function addToCart() {
+        const price = 3499 * quantity;
+        cartCount += quantity;
+        cartTotal += price;
+
+        document.getElementById("cartBadge").textContent = cartCount;
+        document.getElementById("cartTotal").textContent = money(cartTotal);
+
+        showToast(
+          quantity +
+          (quantity === 1 ? " unidade adicionada" : " unidades adicionadas") +
+          " ao carrinho."
+        );
+      }
+
+      document.getElementById("addCartButton").addEventListener("click", addToCart);
+
+      document.getElementById("buyButton").addEventListener("click", () => {
+        addToCart();
+
+        setTimeout(() => {
+          showToast("Produto adicionado. Continuando para o pagamento...");
+          window.location.hash = "pagamento";
+        }, 500);
+      });
+
+      document.getElementById("ratingLink").addEventListener("click", event => {
+        event.preventDefault();
+        document.getElementById("avaliacoes").scrollIntoView({
+          behavior:"smooth",
+          block:"start"
+        });
+      });
+
+      document.getElementById("searchForm").addEventListener("submit", event => {
+        event.preventDefault();
+
+        const value = document.getElementById("searchInput").value.trim();
+
+        if (!value) {
+          showToast("Digite o produto, marca ou categoria que você procura.");
+          document.getElementById("searchInput").focus();
+          return;
+        }
+
+        showToast("Buscando por “" + value + "”...");
+        window.location.hash = "busca-" + encodeURIComponent(value);
+      });
+
+      document.getElementById("cartButton").addEventListener("click", () => {
+        if (cartCount === 0) {
+          showToast("Seu carrinho está vazio.");
+        } else {
+          showToast(
+            cartCount +
+            " item(ns) no carrinho • Total de " +
+            money(cartTotal)
+          );
+        }
+      });
+
+      document.getElementById("logo").addEventListener("click", () => {
+        window.scrollTo({
+          top:0,
+          behavior:"smooth"
+        });
+      });
+
+      document.getElementById("accountButton").addEventListener("click", () => {
+        modalMode = "login";
+
+        document.getElementById("modalTitle").textContent = "Minha conta";
+        document.getElementById("loginFields").style.display = "block";
+        document.getElementById("questionFields").style.display = "none";
+        document.getElementById("confirmModal").textContent = "Entrar";
+
+        modal.classList.add("open");
+        document.getElementById("email").focus();
+      });
+
+      document.getElementById("questionButton").addEventListener("click", () => {
+        modalMode = "question";
+
+        document.getElementById("modalTitle").textContent = "Fazer uma pergunta";
+        document.getElementById("loginFields").style.display = "none";
+        document.getElementById("questionFields").style.display = "block";
+        document.getElementById("confirmModal").textContent = "Enviar pergunta";
+
+        modal.classList.add("open");
+        document.getElementById("question").focus();
+      });
+
+      function closeModal() {
+        modal.classList.remove("open");
+      }
+
+      document.getElementById("closeModal").addEventListener("click", closeModal);
+      document.getElementById("cancelModal").addEventListener("click", closeModal);
+
+      modal.addEventListener("click", event => {
+        if (event.target === modal) {
+          closeModal();
+        }
+      });
+
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && modal.classList.contains("open")) {
+          closeModal();
+        }
+      });
+
+      document.getElementById("confirmModal").addEventListener("click", () => {
+        if (modalMode === "login") {
+          const email = document.getElementById("email").value.trim();
+          const password = document.getElementById("password").value.trim();
+
+          if (!email || !password) {
+            showToast("Preencha seu e-mail e sua senha.");
+            return;
+          }
+
+          closeModal();
+          showToast("Login realizado com sucesso.");
+        }
+
+        if (modalMode === "question") {
+          const question = document.getElementById("question").value.trim();
+
+          if (!question) {
+            showToast("Digite sua pergunta antes de enviar.");
+            return;
+          }
+
+          closeModal();
+          document.getElementById("question").value = "";
+          showToast("Sua pergunta foi enviada com sucesso.");
+        }
+      });
+
+      document.querySelectorAll("nav a").forEach(link => {
+        link.addEventListener("click", event => {
+          const href = link.getAttribute("href");
+          const target = href ? document.querySelector(href) : null;
+
+          if (target) {
+            event.preventDefault();
+            target.scrollIntoView({
+              behavior:"smooth",
+              block:"start"
+            });
+          } else {
+            event.preventDefault();
+            showToast("Seção disponível em breve.");
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

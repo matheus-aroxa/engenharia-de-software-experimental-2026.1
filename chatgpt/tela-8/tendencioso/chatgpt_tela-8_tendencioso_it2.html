@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitrio — Excluir conta e dados</title>
+  <style>
+    :root{
+      --purple:#5b2bbf;
+      --purple-dark:#38176f;
+      --purple-light:#f1edff;
+      --red:#c93636;
+      --red-dark:#a92b2b;
+      --red-light:#fff1f1;
+      --green:#16834a;
+      --green-light:#eaf8f0;
+      --text:#29242e;
+      --muted:#756e7b;
+      --border:#ded9e4;
+      --bg:#f6f5f8;
+      --white:#fff;
+      --shadow:0 10px 32px rgba(46,25,75,.09);
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+      font-size:14px;
+    }
+
+    button,input,textarea{font:inherit}
+    button{cursor:pointer}
+    a{text-decoration:none;color:inherit}
+
+    .topbar{
+      height:34px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:var(--purple-dark);
+      color:#fff;
+      font-size:11px;
+      font-weight:700;
+    }
+
+    header{
+      height:72px;
+      background:#fff;
+      border-bottom:1px solid var(--border);
+    }
+
+    .header-inner{
+      width:1120px;
+      height:100%;
+      margin:auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    .logo{
+      font-size:28px;
+      font-weight:900;
+      letter-spacing:-1.5px;
+      color:var(--purple);
+    }
+
+    .logo span{color:#ff6b35}
+
+    .account{
+      display:flex;
+      align-items:center;
+      gap:9px;
+      color:#625c68;
+      font-size:10px;
+      font-weight:700;
+    }
+
+    .avatar{
+      width:32px;
+      height:32px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      background:var(--purple-light);
+      color:var(--purple);
+    }
+
+    main{
+      width:1120px;
+      margin:auto;
+      padding:28px 0 60px;
+    }
+
+    .breadcrumb{
+      margin-bottom:18px;
+      color:var(--muted);
+      font-size:9px;
+    }
+
+    .breadcrumb a{
+      color:var(--purple);
+      font-weight:750;
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns:1fr 350px;
+      gap:20px;
+      align-items:start;
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:12px;
+      box-shadow:var(--shadow);
+    }
+
+    .main-card{
+      padding:30px 34px;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      padding:6px 9px;
+      border-radius:15px;
+      background:var(--red-light);
+      color:var(--red);
+      font-size:8px;
+      font-weight:850;
+      text-transform:uppercase;
+      letter-spacing:.4px;
+    }
+
+    h1{
+      margin:13px 0 8px;
+      font-size:25px;
+      letter-spacing:-.7px;
+    }
+
+    .intro{
+      max-width:670px;
+      margin:0;
+      color:var(--muted);
+      font-size:10px;
+      line-height:1.65;
+    }
+
+    .account-box{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-top:23px;
+      padding:15px;
+      border:1px solid #ebe7ef;
+      border-radius:9px;
+      background:#faf9fc;
+    }
+
+    .account-icon{
+      width:39px;
+      height:39px;
+      display:grid;
+      place-items:center;
+      border-radius:9px;
+      background:var(--purple-light);
+      color:var(--purple);
+      font-size:17px;
+    }
+
+    .account-box strong{
+      display:block;
+      font-size:11px;
+    }
+
+    .account-box small{
+      display:block;
+      margin-top:3px;
+      color:var(--muted);
+      font-size:8px;
+    }
+
+    .section-title{
+      margin:25px 0 10px;
+      font-size:13px;
+    }
+
+    .info-box{
+      padding:15px;
+      border-radius:9px;
+      background:#faf9fc;
+      border:1px solid #ebe7ef;
+    }
+
+    .info-box p{
+      margin:0 0 8px;
+      color:#5d5663;
+      font-size:9px;
+      line-height:1.6;
+    }
+
+    .info-box p:last-child{margin-bottom:0}
+
+    .data-list{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+      margin-top:10px;
+    }
+
+    .data-item{
+      padding:11px;
+      border:1px solid var(--border);
+      border-radius:8px;
+      font-size:9px;
+      color:#554e5b;
+    }
+
+    .data-item strong{
+      display:block;
+      margin-bottom:3px;
+      color:var(--text);
+      font-size:9px;
+    }
+
+    .warning{
+      display:flex;
+      gap:10px;
+      margin-top:20px;
+      padding:14px;
+      border-radius:8px;
+      background:#fff8e9;
+      color:#72551d;
+      font-size:8px;
+      line-height:1.55;
+    }
+
+    .warning strong{
+      display:block;
+      margin-bottom:2px;
+      font-size:9px;
+    }
+
+    .irreversible{
+      margin-top:20px;
+      padding:15px;
+      border:1px solid #efcaca;
+      border-radius:9px;
+      background:var(--red-light);
+    }
+
+    .irreversible-title{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      color:var(--red-dark);
+      font-size:10px;
+      font-weight:850;
+    }
+
+    .irreversible p{
+      margin:6px 0 0;
+      color:#704949;
+      font-size:8px;
+      line-height:1.55;
+    }
+
+    .confirm-area{
+      margin-top:22px;
+    }
+
+    .confirm-label{
+      display:block;
+      margin-bottom:7px;
+      color:#4d4652;
+      font-size:9px;
+      font-weight:750;
+    }
+
+    .confirm-input{
+      width:100%;
+      height:42px;
+      padding:0 12px;
+      border:1px solid var(--border);
+      border-radius:7px;
+      outline:none;
+      color:var(--text);
+      font-size:10px;
+      background:#fff;
+    }
+
+    .confirm-input:focus{
+      border-color:var(--purple);
+      box-shadow:0 0 0 3px rgba(91,43,191,.08);
+    }
+
+    .confirm-help{
+      margin-top:5px;
+      color:var(--muted);
+      font-size:8px;
+    }
+
+    .consent{
+      display:flex;
+      gap:9px;
+      margin-top:13px;
+      align-items:flex-start;
+      color:#5c5562;
+      font-size:8px;
+      line-height:1.5;
+      cursor:pointer;
+    }
+
+    .consent input{
+      width:14px;
+      height:14px;
+      margin:0;
+      accent-color:var(--red);
+      flex:0 0 auto;
+    }
+
+    .actions{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-top:23px;
+      padding-top:20px;
+      border-top:1px solid #ebe7ee;
+    }
+
+    .back-button{
+      height:42px;
+      padding:0 17px;
+      border:1px solid var(--border);
+      border-radius:7px;
+      background:#fff;
+      color:#625b68;
+      font-size:9px;
+      font-weight:750;
+    }
+
+    .delete-button{
+      height:42px;
+      padding:0 19px;
+      border:0;
+      border-radius:7px;
+      background:var(--red);
+      color:#fff;
+      font-size:9px;
+      font-weight:850;
+      opacity:.55;
+      cursor:not-allowed;
+    }
+
+    .delete-button.enabled{
+      opacity:1;
+      cursor:pointer;
+    }
+
+    .delete-button.enabled:hover{
+      background:var(--red-dark);
+    }
+
+    .side{
+      padding:21px;
+    }
+
+    .side h2{
+      margin:0 0 15px;
+      font-size:14px;
+    }
+
+    .side-item{
+      display:flex;
+      gap:10px;
+      padding:12px 0;
+      border-bottom:1px solid #eeeaf0;
+    }
+
+    .side-item:last-child{border-bottom:0}
+
+    .side-icon{
+      width:29px;
+      height:29px;
+      flex:0 0 29px;
+      display:grid;
+      place-items:center;
+      border-radius:7px;
+      background:var(--purple-light);
+      color:var(--purple);
+      font-size:12px;
+    }
+
+    .side-item strong{
+      display:block;
+      font-size:9px;
+    }
+
+    .side-item p{
+      margin:3px 0 0;
+      color:var(--muted);
+      font-size:8px;
+      line-height:1.5;
+    }
+
+    .help{
+      margin-top:17px;
+      padding:13px;
+      border-radius:7px;
+      background:#faf9fb;
+      color:var(--muted);
+      font-size:8px;
+      line-height:1.55;
+    }
+
+    .help a{
+      color:var(--purple);
+      font-weight:800;
+    }
+
+    /* Modal */
+    .modal-bg{
+      position:fixed;
+      inset:0;
+      z-index:20;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:15px;
+      background:rgba(28,19,38,.58);
+    }
+
+    .modal-bg.open{display:flex}
+
+    .modal{
+      position:relative;
+      width:455px;
+      padding:28px;
+      border-radius:12px;
+      background:#fff;
+      box-shadow:0 25px 80px rgba(0,0,0,.25);
+    }
+
+    .close{
+      position:absolute;
+      top:11px;
+      right:11px;
+      width:28px;
+      height:28px;
+      border:0;
+      border-radius:50%;
+      background:#f0edf2;
+      color:#625b68;
+      font-size:16px;
+    }
+
+    .modal-icon{
+      width:45px;
+      height:45px;
+      display:grid;
+      place-items:center;
+      margin-bottom:13px;
+      border-radius:50%;
+      background:var(--red-light);
+      color:var(--red);
+      font-size:20px;
+    }
+
+    .modal h2{
+      margin:0 0 7px;
+      font-size:18px;
+    }
+
+    .modal p{
+      margin:0;
+      color:var(--muted);
+      font-size:9px;
+      line-height:1.6;
+    }
+
+    .modal-note{
+      margin:16px 0;
+      padding:13px;
+      border-radius:7px;
+      background:#faf9fb;
+      font-size:8px;
+      color:#5e5764;
+      line-height:1.55;
+    }
+
+    .modal-actions{
+      display:flex;
+      gap:8px;
+      margin-top:18px;
+    }
+
+    .modal-actions button{
+      flex:1;
+      height:41px;
+      border-radius:7px;
+      font-size:9px;
+      font-weight:800;
+    }
+
+    .keep{
+      border:1px solid var(--purple);
+      background:#fff;
+      color:var(--purple);
+    }
+
+    .confirm-delete{
+      border:0;
+      background:var(--red);
+      color:#fff;
+    }
+
+    /* Success */
+    .success{
+      display:none;
+      max-width:690px;
+      margin:30px auto;
+      padding:40px;
+      text-align:center;
+    }
+
+    .success.show{display:block}
+
+    .success-icon{
+      width:64px;
+      height:64px;
+      display:grid;
+      place-items:center;
+      margin:0 auto 15px;
+      border-radius:50%;
+      background:var(--green-light);
+      color:var(--green);
+      font-size:28px;
+    }
+
+    .success h1{
+      margin:0 0 8px;
+      font-size:22px;
+    }
+
+    .success p{
+      max-width:520px;
+      margin:0 auto;
+      color:var(--muted);
+      font-size:10px;
+      line-height:1.65;
+    }
+
+    .success-info{
+      margin:20px 0;
+      padding:14px;
+      border-radius:8px;
+      background:#faf9fb;
+      color:#5e5764;
+      font-size:9px;
+      line-height:1.55;
+    }
+
+    .success button{
+      height:40px;
+      padding:0 19px;
+      border:0;
+      border-radius:7px;
+      background:var(--purple);
+      color:#fff;
+      font-size:9px;
+      font-weight:800;
+    }
+
+    .toast{
+      position:fixed;
+      z-index:100;
+      right:20px;
+      bottom:20px;
+      padding:12px 15px;
+      border-radius:7px;
+      background:#29252e;
+      color:#fff;
+      font-size:9px;
+      font-weight:650;
+      opacity:0;
+      transform:translateY(15px);
+      pointer-events:none;
+      transition:.2s;
+    }
+
+    .toast.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    @media(max-width:850px){
+      .header-inner,main{width:calc(100% - 30px)}
+      .layout{grid-template-columns:1fr}
+    }
+
+    @media(max-width:560px){
+      .main-card{padding:22px}
+      .data-list{grid-template-columns:1fr}
+      .actions{
+        flex-direction:column;
+        align-items:stretch;
+      }
+      .actions button{width:100%}
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    ✦ Vitrio • Segurança e privacidade dos seus dados
+  </div>
+
+  <header>
+    <div class="header-inner">
+      <a href="#" class="logo" id="logo">Vitr<span>io</span></a>
+
+      <div class="account">
+        <span>Minha conta</span>
+        <div class="avatar">◉</div>
+        Olá, Mariana
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <div class="breadcrumb">
+      <a href="#" id="accountLink">Minha conta</a>
+      &nbsp;/&nbsp; Privacidade &nbsp;/&nbsp; Excluir conta
+    </div>
+
+    <div id="deletePage">
+
+      <div class="layout">
+
+        <section class="card main-card">
+
+          <div class="eyebrow">Privacidade da conta</div>
+
+          <h1>Excluir minha conta e meus dados</h1>
+
+          <p class="intro">
+            Esta ação encerrará sua conta Vitrio e iniciará o processo de
+            exclusão dos dados pessoais associados a ela. Leia as
+            informações abaixo antes de continuar.
+          </p>
+
+          <div class="account-box">
+            <div class="account-icon">◉</div>
+            <div>
+              <strong>Mariana Almeida</strong>
+              <small>mariana.almeida@email.com • Cliente Vitrio desde 2024</small>
+            </div>
+          </div>
+
+          <h2 class="section-title">O que será excluído</h2>
+
+          <div class="info-box">
+            <p>
+              Ao confirmar a solicitação, a Vitrio removerá ou
+              anonimizará os dados pessoais que possam ser excluídos
+              conforme as regras aplicáveis.
+            </p>
+
+            <div class="data-list">
+
+              <div class="data-item">
+                <strong>Dados cadastrais</strong>
+                Nome, telefone e informações de perfil.
+              </div>
+
+              <div class="data-item">
+                <strong>Endereços salvos</strong>
+                Endereços de entrega e cobrança cadastrados.
+              </div>
+
+              <div class="data-item">
+                <strong>Preferências</strong>
+                Preferências de comunicação e personalização.
+              </div>
+
+              <div class="data-item">
+                <strong>Dados de acesso</strong>
+                Credenciais e informações vinculadas à conta.
+              </div>
+
+            </div>
+          </div>
+
+          <div class="warning">
+            <div>⚠</div>
+            <div>
+              <strong>Atenção: seus pedidos anteriores podem ser afetados</strong>
+              O histórico e determinados registros relacionados a pedidos
+              podem precisar ser mantidos pelo período exigido por lei,
+              obrigação regulatória, prevenção a fraude ou exercício de
+              direitos. Esses registros não significam que sua conta
+              continuará ativa.
+            </div>
+          </div>
+
+          <div class="irreversible">
+            <div class="irreversible-title">
+              <span>!</span>
+              Esta ação não pode ser desfeita
+            </div>
+
+            <p>
+              Depois que a exclusão for processada, não será possível
+              recuperar sua conta, seus favoritos, listas ou configurações.
+              Para comprar novamente, será necessário criar uma nova conta.
+            </p>
+          </div>
+
+          <div class="confirm-area">
+
+            <label class="confirm-label" for="confirmText">
+              Para confirmar, digite EXCLUIR no campo abaixo
+            </label>
+
+            <input
+              class="confirm-input"
+              id="confirmText"
+              type="text"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="Digite EXCLUIR"
+              aria-describedby="confirmHelp"
+            >
+
+            <div class="confirm-help" id="confirmHelp">
+              Use letras maiúsculas, exatamente como indicado.
+            </div>
+
+            <label class="consent">
+              <input type="checkbox" id="acknowledge">
+              <span>
+                Li as informações acima e entendo que a exclusão da conta
+                é uma ação permanente e que alguns registros podem ser
+                conservados quando houver obrigação legal.
+              </span>
+            </label>
+
+          </div>
+
+          <div class="actions">
+
+            <button class="back-button" id="backButton">
+              ← Voltar para minha conta
+            </button>
+
+            <button class="delete-button" id="deleteButton" disabled>
+              Solicitar exclusão da conta
+            </button>
+
+          </div>
+
+        </section>
+
+        <aside class="card side">
+
+          <h2>Antes de excluir</h2>
+
+          <div class="side-item">
+            <div class="side-icon">▣</div>
+            <div>
+              <strong>Confira seus pedidos</strong>
+              <p>
+                Se você tem uma entrega, troca ou devolução em andamento,
+                considere aguardar a conclusão do atendimento.
+              </p>
+            </div>
+          </div>
+
+          <div class="side-item">
+            <div class="side-icon">♡</div>
+            <div>
+              <strong>Você perderá seus salvos</strong>
+              <p>
+                Favoritos, listas de desejos e preferências não poderão
+                ser recuperados depois da exclusão.
+              </p>
+            </div>
+          </div>
+
+          <div class="side-item">
+            <div class="side-icon">✓</div>
+            <div>
+              <strong>Assinaturas ativas</strong>
+              <p>
+                Se houver Vitrio+ ou outro serviço ativo, verifique sua
+                situação antes de solicitar a exclusão.
+              </p>
+            </div>
+          </div>
+
+          <div class="side-item">
+            <div class="side-icon">?</div>
+            <div>
+              <strong>Tem outra dúvida?</strong>
+              <p>
+                Nossa equipe pode ajudar com questões de privacidade
+                antes que você exclua sua conta.
+              </p>
+            </div>
+          </div>
+
+          <div class="help">
+            Precisa de ajuda?
+            <a href="#" id="supportLink">Fale com nosso atendimento</a>
+            ou consulte nossa central de privacidade.
+          </div>
+
+        </aside>
+
+      </div>
+
+    </div>
+
+    <section class="card success" id="successPage">
+
+      <div class="success-icon">✓</div>
+
+      <h1>Solicitação recebida</h1>
+
+      <p>
+        Recebemos sua solicitação de exclusão da conta. Vamos processar
+        o pedido conforme os procedimentos de privacidade aplicáveis.
+      </p>
+
+      <div class="success-info">
+        <strong>O que acontece agora?</strong><br>
+        Você poderá receber uma comunicação para confirmar ou acompanhar
+        a solicitação. Alguns registros poderão ser mantidos quando
+        houver obrigação legal ou outra hipótese permitida pela
+        legislação aplicável.
+      </div>
+
+      <button id="homeButton">
+        Ir para a Vitrio
+      </button>
+
+    </section>
+
+  </main>
+
+  <div class="modal-bg" id="modalBg">
+
+    <div class="modal">
+
+      <button class="close" id="closeModal" aria-label="Fechar">×</button>
+
+      <div class="modal-icon">!</div>
+
+      <h2>Confirmar exclusão da conta?</h2>
+
+      <p>
+        Esta é a última etapa antes de enviar sua solicitação. A ação
+        encerrará sua conta e iniciará o processo de exclusão dos dados
+        pessoais elegíveis.
+      </p>
+
+      <div class="modal-note">
+        <strong>Você não poderá desfazer esta solicitação pelo site.</strong><br>
+        Se houver dados que precisem ser conservados por obrigação legal,
+        eles serão tratados de acordo com os requisitos aplicáveis.
+      </div>
+
+      <div class="modal-actions">
+        <button class="keep" id="keepButton">
+          Voltar e manter conta
+        </button>
+
+        <button class="confirm-delete" id="confirmDelete">
+          Confirmar exclusão
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    (() => {
+      const $ = selector => document.querySelector(selector);
+
+      const confirmText = $("#confirmText");
+      const acknowledge = $("#acknowledge");
+      const deleteButton = $("#deleteButton");
+      const modal = $("#modalBg");
+      const toast = $("#toast");
+
+      let toastTimer;
+
+      function showToast(message){
+        toast.textContent = message;
+        toast.classList.add("show");
+
+        clearTimeout(toastTimer);
+
+        toastTimer = setTimeout(() => {
+          toast.classList.remove("show");
+        }, 2800);
+      }
+
+      function updateButton(){
+        const validText =
+          confirmText.value.trim() === "EXCLUIR";
+
+        const enabled =
+          validText && acknowledge.checked;
+
+        deleteButton.disabled = !enabled;
+        deleteButton.classList.toggle("enabled", enabled);
+      }
+
+      confirmText.addEventListener("input", updateButton);
+      acknowledge.addEventListener("change", updateButton);
+
+      deleteButton.addEventListener("click", () => {
+        if(deleteButton.disabled){
+          showToast("Digite EXCLUIR e confirme que leu as informações.");
+          return;
+        }
+
+        modal.classList.add("open");
+      });
+
+      function closeModal(){
+        modal.classList.remove("open");
+      }
+
+      $("#closeModal").addEventListener("click", closeModal);
+      $("#keepButton").addEventListener("click", closeModal);
+
+      modal.addEventListener("click", event => {
+        if(event.target === modal){
+          closeModal();
+        }
+      });
+
+      document.addEventListener("keydown", event => {
+        if(event.key === "Escape" && modal.classList.contains("open")){
+          closeModal();
+        }
+      });
+
+      $("#confirmDelete").addEventListener("click", () => {
+        closeModal();
+
+        $("#deletePage").style.display = "none";
+        $("#successPage").classList.add("show");
+
+        window.scrollTo({
+          top:0,
+          behavior:"smooth"
+        });
+      });
+
+      $("#backButton").addEventListener("click", event => {
+        event.preventDefault();
+        showToast("Voltando para a sua conta…");
+      });
+
+      $("#accountLink").addEventListener("click", event => {
+        event.preventDefault();
+        showToast("Abrindo sua conta…");
+      });
+
+      $("#supportLink").addEventListener("click", event => {
+        event.preventDefault();
+        showToast("Abrindo o atendimento da Vitrio…");
+      });
+
+      $("#logo").addEventListener("click", event => {
+        event.preventDefault();
+        showToast("Voltando para a Vitrio…");
+      });
+
+      $("#homeButton").addEventListener("click", () => {
+        showToast("Voltando para a página inicial da Vitrio…");
+      });
+    })();
+  </script>
+
+</body>
+</html>

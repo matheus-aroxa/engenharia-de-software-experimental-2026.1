@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitrio — Criar conta</title>
+  <style>
+    :root {
+      --blue: #2457d6;
+      --blue-dark: #193fa5;
+      --text: #20242b;
+      --muted: #68717e;
+      --border: #cbd1da;
+      --background: #f6f7f9;
+      --white: #ffffff;
+      --green: #137647;
+      --red: #b42318;
+      --focus: #2457d6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: var(--background);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.45;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button,
+    input,
+    a {
+      outline-offset: 2px;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    a:focus-visible {
+      outline: 3px solid rgba(36, 87, 214, .28);
+    }
+
+    .topbar {
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #172033;
+      color: #fff;
+      font-size: 12px;
+      padding: 0 15px;
+      text-align: center;
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid #e1e4e8;
+    }
+
+    .header-inner {
+      width: 1120px;
+      max-width: calc(100% - 32px);
+      height: 76px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .logo {
+      color: var(--blue);
+      text-decoration: none;
+      font-size: 29px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .header-message {
+      color: var(--muted);
+      font-size: 13px;
+      text-align: right;
+    }
+
+    .header-message strong {
+      color: var(--text);
+      display: block;
+      font-size: 14px;
+    }
+
+    main {
+      width: 1120px;
+      max-width: calc(100% - 32px);
+      margin: 0 auto;
+      padding: 36px 0 65px;
+    }
+
+    .breadcrumb {
+      margin-bottom: 20px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .breadcrumb a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 700px) 350px;
+      gap: 25px;
+      align-items: start;
+      justify-content: center;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid #dce1e8;
+      border-radius: 10px;
+      box-shadow: 0 3px 12px rgba(20, 30, 45, .06);
+    }
+
+    .form-card {
+      padding: 30px 32px 28px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 27px;
+      letter-spacing: -.4px;
+    }
+
+    .intro {
+      margin: 0 0 27px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .required-note {
+      margin-bottom: 21px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .section-title {
+      margin: 26px 0 15px;
+      padding-top: 23px;
+      border-top: 1px solid #e2e5e9;
+      font-size: 16px;
+    }
+
+    .section-title:first-of-type {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 17px 15px;
+    }
+
+    .field {
+      min-width: 0;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .optional {
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    input {
+      width: 100%;
+      height: 43px;
+      border: 1px solid #b9c0ca;
+      border-radius: 7px;
+      background: #fff;
+      padding: 0 12px;
+      color: var(--text);
+    }
+
+    input::placeholder {
+      color: #8a929d;
+    }
+
+    input[aria-invalid="true"] {
+      border-color: var(--red);
+    }
+
+    .password-wrapper {
+      position: relative;
+    }
+
+    .password-wrapper input {
+      padding-right: 74px;
+    }
+
+    .password-toggle {
+      position: absolute;
+      top: 50%;
+      right: 7px;
+      transform: translateY(-50%);
+      height: 30px;
+      border: 0;
+      background: transparent;
+      color: var(--blue);
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .field-help {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .error {
+      display: none;
+      margin-top: 5px;
+      color: var(--red);
+      font-size: 10px;
+    }
+
+    .error.show {
+      display: block;
+    }
+
+    .password-strength {
+      margin-top: 8px;
+    }
+
+    .strength-track {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3px;
+      height: 4px;
+    }
+
+    .strength-track span {
+      border-radius: 3px;
+      background: #e1e4e8;
+    }
+
+    .strength-label {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .consent-box {
+      margin-top: 25px;
+      padding-top: 21px;
+      border-top: 1px solid #e2e5e9;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      margin: 13px 0;
+    }
+
+    .checkbox-row input {
+      width: 17px;
+      height: 17px;
+      min-width: 17px;
+      margin: 1px 0 0;
+      accent-color: var(--blue);
+    }
+
+    .checkbox-row label {
+      margin: 0;
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--text);
+    }
+
+    .checkbox-row a {
+      color: var(--blue);
+    }
+
+    .marketing {
+      padding: 12px;
+      background: #f7f8fa;
+      border: 1px solid #e0e4e9;
+      border-radius: 7px;
+    }
+
+    .marketing label {
+      font-size: 11px;
+    }
+
+    .marketing-note {
+      margin: 0 0 0 26px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .privacy-note {
+      margin: 17px 0 0;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .submit-area {
+      margin-top: 25px;
+    }
+
+    .submit-button {
+      width: 100%;
+      min-height: 48px;
+      border: 1px solid var(--blue);
+      border-radius: 7px;
+      background: var(--blue);
+      color: #fff;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .submit-button:hover {
+      background: var(--blue-dark);
+    }
+
+    .submit-button:disabled {
+      background: #aab4c6;
+      border-color: #aab4c6;
+      cursor: not-allowed;
+    }
+
+    .login-line {
+      margin: 18px 0 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .login-line a {
+      color: var(--blue);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .info-card {
+      padding: 24px;
+    }
+
+    .info-card h2 {
+      margin: 0 0 17px;
+      font-size: 18px;
+    }
+
+    .info-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .info-list li {
+      position: relative;
+      padding: 0 0 16px 27px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid #e6e8ec;
+      font-size: 12px;
+    }
+
+    .info-list li:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .check {
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--green);
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .info-list strong {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 13px;
+    }
+
+    .info-list span {
+      color: var(--muted);
+    }
+
+    .privacy-card {
+      margin-top: 15px;
+      padding: 18px;
+      background: #f7f9fc;
+      border: 1px solid #dce3ed;
+      border-radius: 8px;
+    }
+
+    .privacy-card strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 12px;
+    }
+
+    .privacy-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .privacy-card a {
+      color: var(--blue);
+    }
+
+    footer {
+      background: #fff;
+      border-top: 1px solid #dce1e8;
+    }
+
+    .footer-inner {
+      width: 1120px;
+      max-width: calc(100% - 32px);
+      margin: 0 auto;
+      padding: 25px 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+    }
+
+    .success {
+      display: none;
+      text-align: center;
+      padding: 38px 30px;
+    }
+
+    .success.show {
+      display: block;
+    }
+
+    .success-icon {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 15px;
+      border-radius: 50%;
+      background: #e7f5ed;
+      color: var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 27px;
+      font-weight: 800;
+    }
+
+    .success h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+    }
+
+    .success p {
+      max-width: 500px;
+      margin: 0 auto 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .success-button {
+      border: 1px solid var(--blue);
+      background: var(--blue);
+      color: #fff;
+      border-radius: 7px;
+      padding: 11px 18px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .toast {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      width: 350px;
+      max-width: calc(100% - 44px);
+      display: none;
+      padding: 13px 15px;
+      border-radius: 8px;
+      background: #172033;
+      color: #fff;
+      box-shadow: 0 8px 28px rgba(0,0,0,.2);
+      font-size: 12px;
+      z-index: 20;
+    }
+
+    .toast.show {
+      display: block;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .header-message {
+        display: none;
+      }
+
+      .info-card {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .form-card {
+        padding: 23px 18px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    Seus dados são usados somente para as finalidades informadas durante o cadastro.
+  </div>
+
+  <header>
+    <div class="header-inner">
+      <a href="#" class="logo" id="logo">Vitrio</a>
+
+      <div class="header-message">
+        Já tem uma conta?
+        <strong><a href="#" id="loginHeader">Entrar</a></strong>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="#" id="homeLink">Início</a>
+      <span> / Criar conta</span>
+    </div>
+
+    <div class="layout">
+      <section class="card form-card" id="formCard">
+        <div id="formContent">
+          <h1>Criar sua conta</h1>
+          <p class="intro">
+            Tenha uma conta Vitrio para acompanhar pedidos e gerenciar seus dados.
+            Criar uma conta é opcional para comprar na loja.
+          </p>
+
+          <div class="required-note">
+            Campos marcados com * são obrigatórios.
+          </div>
+
+          <form id="accountForm" novalidate>
+            <h2 class="section-title">Dados pessoais</h2>
+
+            <div class="form-grid">
+              <div class="field">
+                <label for="firstName">Nome *</label>
+                <input
+                  id="firstName"
+                  name="firstName"
+                  type="text"
+                  autocomplete="given-name"
+                  placeholder="Ex.: Mariana"
+                  required
+                >
+                <div class="error" id="firstNameError">
+                  Informe seu nome.
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="lastName">Sobrenome *</label>
+                <input
+                  id="lastName"
+                  name="lastName"
+                  type="text"
+                  autocomplete="family-name"
+                  placeholder="Ex.: Oliveira"
+                  required
+                >
+                <div class="error" id="lastNameError">
+                  Informe seu sobrenome.
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="cpf">CPF *</label>
+                <input
+                  id="cpf"
+                  name="cpf"
+                  type="text"
+                  inputmode="numeric"
+                  maxlength="14"
+                  autocomplete="off"
+                  placeholder="000.000.000-00"
+                  required
+                >
+                <div class="field-help">
+                  Usado para identificar sua conta e cumprir obrigações legais quando aplicável.
+                </div>
+                <div class="error" id="cpfError">
+                  Informe um CPF válido.
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="birthDate">
+                  Data de nascimento <span class="optional">(opcional)</span>
+                </label>
+                <input
+                  id="birthDate"
+                  name="birthDate"
+                  type="date"
+                  autocomplete="bday"
+                >
+                <div class="error" id="birthDateError">
+                  Informe uma data válida.
+                </div>
+              </div>
+
+              <div class="field full">
+                <label for="phone">Celular *</label>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  inputmode="tel"
+                  maxlength="15"
+                  autocomplete="tel"
+                  placeholder="(00) 00000-0000"
+                  required
+                >
+                <div class="field-help">
+                  Poderemos usar este número para assuntos relacionados à sua conta e pedidos.
+                </div>
+                <div class="error" id="phoneError">
+                  Informe um celular válido.
+                </div>
+              </div>
+            </div>
+
+            <h2 class="section-title">Dados de acesso</h2>
+
+            <div class="form-grid">
+              <div class="field full">
+                <label for="email">E-mail *</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  placeholder="voce@exemplo.com"
+                  required
+                >
+                <div class="field-help">
+                  Usaremos seu e-mail para acesso à conta e comunicações necessárias sobre ela.
+                </div>
+                <div class="error" id="emailError">
+                  Informe um endereço de e-mail válido.
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="password">Senha *</label>
+                <div class="password-wrapper">
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    autocomplete="new-password"
+                    placeholder="Crie uma senha"
+                    required
+                  >
+                  <button
+                    type="button"
+                    class="password-toggle"
+                    data-target="password"
+                  >
+                    Mostrar
+                  </button>
+                </div>
+
+                <div class="password-strength" aria-live="polite">
+                  <div class="strength-track">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <div class="strength-label" id="strengthLabel">
+                    Digite uma senha.
+                  </div>
+                </div>
+
+                <div class="error" id="passwordError">
+                  A senha deve ter pelo menos 8 caracteres, incluindo letra e número.
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="confirmPassword">Confirmar senha *</label>
+                <div class="password-wrapper">
+                  <input
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type="password"
+                    autocomplete="new-password"
+                    placeholder="Digite a senha novamente"
+                    required
+                  >
+                  <button
+                    type="button"
+                    class="password-toggle"
+                    data-target="confirmPassword"
+                  >
+                    Mostrar
+                  </button>
+                </div>
+                <div class="error" id="confirmPasswordError">
+                  As senhas precisam ser iguais.
+                </div>
+              </div>
+            </div>
+
+            <div class="consent-box">
+              <h2 class="section-title">Privacidade e comunicações</h2>
+
+              <div class="checkbox-row">
+                <input id="terms" name="terms" type="checkbox" required>
+                <label for="terms">
+                  Li e aceito os
+                  <a href="#" id="termsLink">Termos de uso</a>
+                  da Vitrio. *
+                </label>
+              </div>
+
+              <div class="checkbox-row">
+                <input id="privacy" name="privacy" type="checkbox" required>
+                <label for="privacy">
+                  Li a
+                  <a href="#" id="privacyLink">Política de privacidade</a>
+                  e estou ciente de como meus dados serão tratados para criação e
+                  manutenção da conta. *
+                </label>
+              </div>
+
+              <div class="marketing">
+                <div class="checkbox-row" style="margin: 0;">
+                  <input id="marketing" name="marketing" type="checkbox">
+                  <label for="marketing">
+                    Quero receber ofertas, novidades e conteúdos da Vitrio por
+                    e-mail e outros canais.
+                    <span class="optional">(opcional)</span>
+                  </label>
+                </div>
+
+                <p class="marketing-note">
+                  Você pode deixar esta opção desmarcada e ainda criar sua conta normalmente.
+                  Também poderá alterar essa escolha depois.
+                </p>
+              </div>
+
+              <p class="privacy-note">
+                Para proteger sua privacidade, coletamos somente os dados necessários
+                para as finalidades apresentadas. Não usamos o aceite de marketing
+                como condição para criar sua conta.
+              </p>
+            </div>
+
+            <div class="submit-area">
+              <button class="submit-button" id="submitButton" type="submit">
+                Criar minha conta
+              </button>
+
+              <p class="login-line">
+                Já possui uma conta?
+                <a href="#" id="loginLink">Entrar</a>
+              </p>
+            </div>
+          </form>
+        </div>
+
+        <div class="success" id="successContent">
+          <div class="success-icon">✓</div>
+          <h2>Conta criada com sucesso</h2>
+          <p>
+            Sua conta Vitrio foi criada. Agora você poderá acompanhar seus pedidos
+            e gerenciar seus dados de acesso.
+          </p>
+          <button class="success-button" id="continueButton" type="button">
+            Continuar para a loja
+          </button>
+        </div>
+      </section>
+
+      <aside>
+        <section class="card info-card">
+          <h2>O que você terá com uma conta</h2>
+
+          <ul class="info-list">
+            <li>
+              <span class="check">✓</span>
+              <strong>Acompanhar pedidos</strong>
+              <span>Consulte o andamento e o histórico das suas compras.</span>
+            </li>
+
+            <li>
+              <span class="check">✓</span>
+              <strong>Gerenciar seus dados</strong>
+              <span>Atualize informações da conta quando precisar.</span>
+            </li>
+
+            <li>
+              <span class="check">✓</span>
+              <strong>Facilitar próximas compras</strong>
+              <span>Você poderá salvar informações para não precisar digitá-las novamente.</span>
+            </li>
+
+            <li>
+              <span class="check">✓</span>
+              <strong>Controle sobre comunicações</strong>
+              <span>Marketing é opcional e pode ser desativado posteriormente.</span>
+            </li>
+          </ul>
+        </section>
+
+        <section class="privacy-card">
+          <strong>Você não precisa criar uma conta para comprar.</strong>
+          <p>
+            Se preferir, é possível concluir uma compra como visitante.
+            A criação de conta é uma escolha do cliente.
+          </p>
+        </section>
+
+        <section class="privacy-card">
+          <strong>Seus dados permanecem sob seu controle.</strong>
+          <p>
+            Você poderá solicitar acesso, correção ou exclusão dos dados da conta,
+            respeitadas as obrigações legais aplicáveis.
+          </p>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>© 2026 Vitrio · Todos os direitos reservados.</div>
+
+      <div class="footer-links">
+        <a href="#" id="footerPrivacy">Privacidade</a>
+        <a href="#" id="footerTerms">Termos de uso</a>
+        <a href="#" id="footerHelp">Atendimento</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" aria-live="polite"></div>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const form = document.getElementById("accountForm");
+      const toast = document.getElementById("toast");
+      const formContent = document.getElementById("formContent");
+      const successContent = document.getElementById("successContent");
+
+      let toastTimer;
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add("show");
+
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toast.classList.remove("show");
+        }, 3500);
+      }
+
+      function showError(input, errorId, show) {
+        const error = document.getElementById(errorId);
+
+        input.setAttribute("aria-invalid", show ? "true" : "false");
+        error.classList.toggle("show", show);
+      }
+
+      function onlyDigits(value) {
+        return value.replace(/\D/g, "");
+      }
+
+      function formatCPF(value) {
+        let digits = onlyDigits(value).slice(0, 11);
+
+        if (digits.length > 9) {
+          return digits.replace(
+            /(\d{3})(\d{3})(\d{3})(\d{1,2})/,
+            "$1.$2.$3-$4"
+          );
+        }
+
+        if (digits.length > 6) {
+          return digits.replace(
+            /(\d{3})(\d{3})(\d{1,3})/,
+            "$1.$2.$3"
+          );
+        }
+
+        if (digits.length > 3) {
+          return digits.replace(
+            /(\d{3})(\d{1,3})/,
+            "$1.$2"
+          );
+        }
+
+        return digits;
+      }
+
+      function isValidCPF(cpf) {
+        const digits = onlyDigits(cpf);
+
+        if (digits.length !== 11 || /^(\d)\1+$/.test(digits)) {
+          return false;
+        }
+
+        let sum = 0;
+
+        for (let i = 0; i < 9; i++) {
+          sum += Number(digits[i]) * (10 - i);
+        }
+
+        let remainder = (sum * 10) % 11;
+        if (remainder === 10) remainder = 0;
+
+        if (remainder !== Number(digits[9])) {
+          return false;
+        }
+
+        sum = 0;
+
+        for (let i = 0; i < 10; i++) {
+          sum += Number(digits[i]) * (11 - i);
+        }
+
+        remainder = (sum * 10) % 11;
+        if (remainder === 10) remainder = 0;
+
+        return remainder === Number(digits[10]);
+      }
+
+      function formatPhone(value) {
+        const digits = onlyDigits(value).slice(0, 11);
+
+        if (digits.length > 10) {
+          return digits.replace(
+            /(\d{2})(\d{5})(\d{1,4})/,
+            "($1) $2-$3"
+          );
+        }
+
+        if (digits.length > 6) {
+          return digits.replace(
+            /(\d{2})(\d{4})(\d{1,4})/,
+            "($1) $2-$3"
+          );
+        }
+
+        if (digits.length > 2) {
+          return digits.replace(
+            /(\d{2})(\d+)/,
+            "($1) $2"
+          );
+        }
+
+        return digits;
+      }
+
+      function passwordScore(password) {
+        if (!password) return 0;
+
+        let score = 0;
+
+        if (password.length >= 8) score++;
+        if (/[A-Za-z]/.test(password)) score++;
+        if (/\d/.test(password)) score++;
+        if (/[^A-Za-z0-9]/.test(password) || password.length >= 12) score++;
+
+        return Math.min(score, 4);
+      }
+
+      function updatePasswordStrength() {
+        const password = document.getElementById("password");
+        const bars = document.querySelectorAll(".strength-track span");
+        const label = document.getElementById("strengthLabel");
+        const score = passwordScore(password.value);
+
+        const colors = [
+          "#dce1e8",
+          "#d9534f",
+          "#e0a800",
+          "#5a8f29",
+          "#137647"
+        ];
+
+        bars.forEach((bar, index) => {
+          bar.style.background =
+            index < score ? colors[score] : "#e1e4e8";
+        });
+
+        const labels = [
+          "Digite uma senha.",
+          "Senha fraca.",
+          "Senha razoável.",
+          "Senha boa.",
+          "Senha forte."
+        ];
+
+        label.textContent = labels[score];
+      }
+
+      document.getElementById("cpf").addEventListener("input", event => {
+        event.target.value = formatCPF(event.target.value);
+      });
+
+      document.getElementById("phone").addEventListener("input", event => {
+        event.target.value = formatPhone(event.target.value);
+      });
+
+      document.getElementById("password").addEventListener(
+        "input",
+        updatePasswordStrength
+      );
+
+      document.querySelectorAll(".password-toggle").forEach(button => {
+        button.addEventListener("click", () => {
+          const input = document.getElementById(button.dataset.target);
+          const showing = input.type === "text";
+
+          input.type = showing ? "password" : "text";
+          button.textContent = showing ? "Mostrar" : "Ocultar";
+        });
+      });
+
+      function validate() {
+        let valid = true;
+
+        const firstName = document.getElementById("firstName");
+        const lastName = document.getElementById("lastName");
+        const cpf = document.getElementById("cpf");
+        const birthDate = document.getElementById("birthDate");
+        const phone = document.getElementById("phone");
+        const email = document.getElementById("email");
+        const password = document.getElementById("password");
+        const confirmPassword = document.getElementById("confirmPassword");
+        const terms = document.getElementById("terms");
+        const privacy = document.getElementById("privacy");
+
+        const firstNameValid = firstName.value.trim().length >= 2;
+        showError(firstName, "firstNameError", !firstNameValid);
+        valid = valid && firstNameValid;
+
+        const lastNameValid = lastName.value.trim().length >= 2;
+        showError(lastName, "lastNameError", !lastNameValid);
+        valid = valid && lastNameValid;
+
+        const cpfValid = isValidCPF(cpf.value);
+        showError(cpf, "cpfError", !cpfValid);
+        valid = valid && cpfValid;
+
+        let birthValid = true;
+
+        if (birthDate.value) {
+          const date = new Date(birthDate.value + "T00:00:00");
+          const today = new Date();
+          birthValid =
+            !Number.isNaN(date.getTime()) &&
+            date <= today;
+        }
+
+        showError(birthDate, "birthDateError", !birthValid);
+        valid = valid && birthValid;
+
+        const phoneDigits = onlyDigits(phone.value);
+        const phoneValid = phoneDigits.length === 11;
+        showError(phone, "phoneError", !phoneValid);
+        valid = valid && phoneValid;
+
+        const emailValid =
+          /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+
+        showError(email, "emailError", !emailValid);
+        valid = valid && emailValid;
+
+        const passwordValid =
+          password.value.length >= 8 &&
+          /[A-Za-z]/.test(password.value) &&
+          /\d/.test(password.value);
+
+        showError(password, "passwordError", !passwordValid);
+        valid = valid && passwordValid;
+
+        const passwordsMatch =
+          password.value !== "" &&
+          password.value === confirmPassword.value;
+
+        showError(
+          confirmPassword,
+          "confirmPasswordError",
+          !passwordsMatch
+        );
+
+        valid = valid && passwordsMatch;
+
+        if (!terms.checked) {
+          terms.focus();
+          showToast("Aceite os Termos de uso para criar a conta.");
+          valid = false;
+        }
+
+        if (!privacy.checked) {
+          privacy.focus();
+          showToast("Confirme que leu a Política de privacidade.");
+          valid = false;
+        }
+
+        return valid;
+      }
+
+      form.addEventListener("submit", event => {
+        event.preventDefault();
+
+        if (!validate()) {
+          const firstError = form.querySelector(
+            '[aria-invalid="true"]'
+          );
+
+          if (firstError) {
+            firstError.focus();
+          }
+
+          return;
+        }
+
+        const submitButton = document.getElementById("submitButton");
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Criando conta…";
+
+        /*
+          Demonstração local: nenhuma informação é enviada para um servidor.
+          Em uma implementação real, o envio ocorreria somente após
+          autenticação, validação no servidor e demais controles de segurança.
+        */
+        setTimeout(() => {
+          formContent.style.display = "none";
+          successContent.classList.add("show");
+
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
+        }, 700);
+      });
+
+      function showInformation(title, text) {
+        showToast(title + ": " + text);
+      }
+
+      document.getElementById("termsLink").addEventListener("click", event => {
+        event.preventDefault();
+
+        showInformation(
+          "Termos de uso",
+          "esta página apresentaria os termos completos antes de qualquer aceite."
+        );
+      });
+
+      document.getElementById("privacyLink").addEventListener("click", event => {
+        event.preventDefault();
+
+        showInformation(
+          "Política de privacidade",
+          "esta página apresentaria as finalidades, bases legais, direitos e informações sobre o tratamento dos dados."
+        );
+      });
+
+      document.getElementById("footerPrivacy").addEventListener("click", event => {
+        event.preventDefault();
+
+        showInformation(
+          "Privacidade",
+          "as informações completas sobre privacidade seriam apresentadas aqui."
+        );
+      });
+
+      document.getElementById("footerTerms").addEventListener("click", event => {
+        event.preventDefault();
+
+        showInformation(
+          "Termos de uso",
+          "os termos completos seriam apresentados aqui."
+        );
+      });
+
+      document.getElementById("footerHelp").addEventListener("click", event => {
+        event.preventDefault();
+
+        showInformation(
+          "Atendimento",
+          "a central de atendimento da Vitrio seria aberta aqui."
+        );
+      });
+
+      document.getElementById("loginHeader").addEventListener("click", event => {
+        event.preventDefault();
+        showToast("A tela de login seria aberta aqui.");
+      });
+
+      document.getElementById("loginLink").addEventListener("click", event => {
+        event.preventDefault();
+        showToast("A tela de login seria aberta aqui.");
+      });
+
+      document.getElementById("homeLink").addEventListener("click", event => {
+        event.preventDefault();
+        showToast("A página inicial da Vitrio seria aberta aqui.");
+      });
+
+      document.getElementById("logo").addEventListener("click", event => {
+        event.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      });
+
+      document.getElementById("continueButton").addEventListener("click", () => {
+        showToast("A página inicial da Vitrio seria aberta aqui.");
+      });
+
+      document.getElementById("birthDate").addEventListener("change", event => {
+        const input = event.target;
+
+        if (!input.value) {
+          input.removeAttribute("aria-invalid");
+          document.getElementById("birthDateError").classList.remove("show");
+          return;
+        }
+
+        const date = new Date(input.value + "T00:00:00");
+        const valid = !Number.isNaN(date.getTime()) && date <= new Date();
+
+        showError(input, "birthDateError", !valid);
+      });
+    })();
+  </script>
+</body>
+</html>

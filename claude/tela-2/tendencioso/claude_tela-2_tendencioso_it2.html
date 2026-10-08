@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart TV 55" 4K Ultra HD - Vitrio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1e40af;
+            --secondary-color: #0f766e;
+            --accent-color: #dc2626;
+            --success-color: #16a34a;
+            --warning-color: #ea580c;
+            --light-bg: #f8fafc;
+            --border-color: #e2e8f0;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-muted: #9ca3af;
+            --white: #ffffff;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* HEADER */
+        header {
+            background-color: var(--white);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .search-bar {
+            flex: 1;
+            margin: 0 32px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 16px 10px 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+            background-color: var(--light-bg);
+            transition: border-color 0.2s;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background-color: var(--white);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: var(--text-primary);
+            position: relative;
+            transition: color 0.2s;
+            padding: 8px;
+        }
+
+        .header-btn:hover {
+            color: var(--primary-color);
+        }
+
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--accent-color);
+            color: var(--white);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* BREADCRUMB */
+        .breadcrumb {
+            padding: 16px 0;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .breadcrumb a {
+            color: var(--primary-color);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* MAIN CONTENT */
+        .product-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            margin: 32px 0;
+            background-color: var(--white);
+            padding: 32px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* PRODUCT IMAGES */
+        .product-images {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 400px;
+            background-color: #E0E0E0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 16px;
+            position: relative;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .product-badge.discount {
+            background-color: var(--accent-color);
+        }
+
+        .product-badge.new {
+            background-color: var(--success-color);
+        }
+
+        .thumbnail-gallery {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            background-color: #E0E0E0;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .thumbnail:hover,
+        .thumbnail.active {
+            border-color: var(--primary-color);
+        }
+
+        /* PRODUCT INFO */
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .product-category {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .product-title {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--text-primary);
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .stars {
+            color: #fbbf24;
+            font-size: 18px;
+        }
+
+        .rating-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .rating-link {
+            color: var(--primary-color);
+            cursor: pointer;
+            text-decoration: underline;
+            font-size: 14px;
+        }
+
+        /* PRICING */
+        .pricing-section {
+            padding: 20px;
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .price-original {
+            font-size: 16px;
+            color: var(--text-muted);
+            text-decoration: line-through;
+            margin-bottom: 8px;
+        }
+
+        .price-current {
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+        }
+
+        .price-discount {
+            font-size: 14px;
+            color: var(--success-color);
+            font-weight: 600;
+        }
+
+        .installment-info {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-color);
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* PRODUCT FEATURES */
+        .features-section {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .feature {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            background-color: var(--success-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .feature-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* ACTIONS */
+        .actions-section {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background-color: var(--light-bg);
+            border-radius: 6px;
+            width: fit-content;
+        }
+
+        .quantity-btn {
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.2s;
+        }
+
+        .quantity-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+
+        .quantity-value {
+            min-width: 40px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .btn-add-cart {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 16px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-add-cart:hover {
+            background-color: #1e3a8a;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-wishlist {
+            width: 100%;
+            background-color: var(--light-bg);
+            border: 1px solid var(--border-color);
+            padding: 16px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-wishlist:hover {
+            background-color: #fecaca;
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .btn-wishlist.active {
+            background-color: var(--accent-color);
+            color: var(--white);
+            border-color: var(--accent-color);
+        }
+
+        /* DELIVERY & SHIPPING */
+        .shipping-section {
+            padding: 16px;
+            background-color: var(--light-bg);
+            border-radius: 6px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .shipping-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .shipping-info {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .shipping-icon {
+            font-size: 20px;
+        }
+
+        .shipping-text {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .shipping-label {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .shipping-value {
+            color: var(--text-secondary);
+        }
+
+        .cep-input {
+            display: flex;
+            gap: 8px;
+        }
+
+        .cep-input input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .cep-input button {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 10px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .cep-input button:hover {
+            background-color: #1e3a8a;
+        }
+
+        /* TABS */
+        .tabs-section {
+            margin-top: 48px;
+            border-top: 2px solid var(--border-color);
+            padding-top: 32px;
+        }
+
+        .tabs-header {
+            display: flex;
+            gap: 0;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 32px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.2s;
+        }
+
+        .tab-btn:hover,
+        .tab-btn.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* DESCRIPTION */
+        .description-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 20px 0 12px;
+        }
+
+        .description-content p {
+            margin-bottom: 16px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .spec-item {
+            padding: 16px;
+            background-color: var(--light-bg);
+            border-radius: 6px;
+        }
+
+        .spec-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .spec-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* REVIEWS */
+        .reviews-container {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .review-summary {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 32px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .summary-box {
+            text-align: center;
+        }
+
+        .summary-rating {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        .summary-stars {
+            color: #fbbf24;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .summary-count {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .rating-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .rating-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+        }
+
+        .rating-bar-label {
+            min-width: 60px;
+            text-align: right;
+            color: var(--text-secondary);
+        }
+
+        .rating-bar-container {
+            flex: 1;
+            height: 8px;
+            background-color: var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .rating-bar-fill {
+            height: 100%;
+            background-color: #fbbf24;
+            border-radius: 4px;
+        }
+
+        .rating-bar-count {
+            min-width: 40px;
+            text-align: right;
+            color: var(--text-muted);
+        }
+
+        .review-item {
+            padding: 20px;
+            background-color: var(--light-bg);
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .review-author {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .review-date {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .review-stars {
+            color: #fbbf24;
+            font-size: 14px;
+        }
+
+        .review-title {
+            font-weight: 600;
+            margin: 8px 0 4px;
+            color: var(--text-primary);
+        }
+
+        .review-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .review-footer {
+            display: flex;
+            gap: 16px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .helpful-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: color 0.2s;
+        }
+
+        .helpful-btn:hover {
+            color: var(--primary-color);
+        }
+
+        /* RELATED PRODUCTS */
+        .related-products {
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 2px solid var(--border-color);
+        }
+
+        .related-products h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .product-card {
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.2s;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .product-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+            border-color: var(--primary-color);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background-color: #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .product-card-info {
+            padding: 16px;
+        }
+
+        .product-card-name {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.3;
+            color: var(--text-primary);
+        }
+
+        .product-card-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--text-primary);
+            color: var(--white);
+            padding: 40px 0;
+            margin-top: 48px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+
+        .footer-column h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 32px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .modal-header h2 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: color 0.2s;
+        }
+
+        .modal-close:hover {
+            color: var(--text-primary);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .product-container {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                padding: 20px;
+            }
+
+            .main-image {
+                height: 300px;
+            }
+
+            .product-title {
+                font-size: 24px;
+            }
+
+            .price-current {
+                font-size: 32px;
+            }
+
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .review-summary {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .tabs-header {
+                overflow-x: auto;
+            }
+
+            .tab-btn {
+                padding: 12px 16px;
+                font-size: 14px;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo" onclick="location.href='/'">Vitrio</div>
+                <div class="search-bar">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" placeholder="O que você procura?">
+                </div>
+                <div class="header-actions">
+                    <button class="header-btn" onclick="alert('Acessar conta')">👤</button>
+                    <button class="header-btn" onclick="openCart()">
+                        🛒
+                        <span class="badge" id="cartCount">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- BREADCRUMB -->
+        <div class="breadcrumb">
+            <a onclick="location.href='/'">Home</a> / 
+            <a onclick="alert('Categoria')">TVs e Áudio</a> / 
+            <span>Smart TV 55" 4K Ultra HD</span>
+        </div>
+
+        <!-- MAIN PRODUCT SECTION -->
+        <div class="product-container">
+            <!-- LEFT: IMAGES -->
+            <div class="product-images">
+                <div class="main-image">
+                    <span class="product-badge discount">-37%</span>
+                    Imagem Principal do Produto
+                </div>
+                <div class="thumbnail-gallery">
+                    <div class="thumbnail active"></div>
+                    <div class="thumbnail"></div>
+                    <div class="thumbnail"></div>
+                    <div class="thumbnail"></div>
+                    <div class="thumbnail"></div>
+                </div>
+            </div>
+
+            <!-- RIGHT: PRODUCT INFO -->
+            <div class="product-info">
+                <div>
+                    <div class="product-category">TV e Áudio</div>
+                    <h1 class="product-title">Smart TV 55" 4K Ultra HD com Bluetooth e Suporte de Parede</h1>
+                </div>
+
+                <!-- RATING -->
+                <div class="product-rating">
+                    <span class="stars">★★★★★</span>
+                    <span class="rating-text">4.8 de 5 (245 avaliações)</span>
+                    <a class="rating-link" onclick="scrollToReviews()">Ver todas</a>
+                </div>
+
+                <!-- PRICING -->
+                <div class="pricing-section">
+                    <div class="price-original">R$ 3.999,99</div>
+                    <div class="price-current">R$ 2.499,99</div>
+                    <div class="price-discount">Economize R$ 1.500,00 (37%)</div>
+                    <div class="installment-info">
+                        💳 Parcelado em até 12x de <strong>R$ 208,33</strong> (sem juros)
+                    </div>
+                </div>
+
+                <!-- FEATURES -->
+                <div class="features-section">
+                    <div class="feature">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-text">Frete grátis em compras acima de R$ 100</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-text">Garantia de 2 anos de fabricante</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-text">Devolução gratuita em 30 dias</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-text">Entrega em até 3 dias úteis</div>
+                    </div>
+                </div>
+
+                <!-- ACTIONS -->
+                <div class="actions-section">
+                    <div class="quantity-selector">
+                        <button class="quantity-btn" onclick="decreaseQty()">−</button>
+                        <div class="quantity-value" id="quantity">1</div>
+                        <button class="quantity-btn" onclick="increaseQty()">+</button>
+                    </div>
+
+                    <button class="btn-add-cart" onclick="addToCart()">🛒 Adicionar ao Carrinho</button>
+                    <button class="btn-wishlist" id="wishlistBtn" onclick="toggleWishlist()">♡ Adicionar à Lista de Desejos</button>
+                </div>
+
+                <!-- SHIPPING -->
+                <div class="shipping-section">
+                    <div class="shipping-title">Calcular Frete e Prazo</div>
+                    <div class="cep-input">
+                        <input type="text" placeholder="Digite seu CEP" id="cepInput" maxlength="9">
+                        <button onclick="calculateShipping()">Calcular</button>
+                    </div>
+                </div>
+
+                <!-- SELLER INFO -->
+                <div style="padding: 16px; background-color: #e0f2fe; border-radius: 6px; border-left: 4px solid var(--primary-color);">
+                    <div style="font-size: 14px; color: var(--text-primary); font-weight: 600;">Vendido e entregue por Vitrio</div>
+                    <div style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">Confira a política de devoluções</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TABS SECTION -->
+        <div class="tabs-section">
+            <div class="tabs-header">
+                <button class="tab-btn active" onclick="switchTab(event, 'description')">Descrição</button>
+                <button class="tab-btn" onclick="switchTab(event, 'specifications')">Especificações</button>
+                <button class="tab-btn" onclick="switchTab(event, 'reviews')">Avaliações</button>
+            </div>
+
+            <!-- DESCRIPTION TAB -->
+            <div id="description" class="tab-content active">
+                <div class="description-content">
+                    <h3>Descrição do Produto</h3>
+                    <p>A Smart TV 55" 4K Ultra HD é a escolha perfeita para quem busca qualidade de imagem e conectividade. Com resolução 4K, oferece imagens nítidas e detalhadas, trazendo a experiência de cinema para sua sala.</p>
+                    
+                    <h3>Principais Características</h3>
+                    <p>✓ Tela LED 55 polegadas com resolução 4K (3840 x 2160 pixels)
+                    ✓ Processador quad-core de alta performance
+                    ✓ Sistema operacional Android TV com acesso a apps como Netflix, YouTube e Prime Video
+                    ✓ Conexão Bluetooth integrada para fones e caixas de som
+                    ✓ 2 portas HDMI e 1 porta USB para conexão de dispositivos
+                    ✓ Entrada P2 de áudio
+                    ✓ Suporte VESA 400x400mm para parede
+                    ✓ Som envolvente com potência de 20W</p>
+
+                    <h3>Benefícios</h3>
+                    <p>Desfrute de uma experiência de entretenimento imersiva com qualidade de imagem superior. A conectividade Bluetooth permite que você conecte seus dispositivos sem fios, enquanto o Android TV oferece acesso a milhares de aplicativos.</p>
+
+                    <h3>Conteúdo da Embalagem</h3>
+                    <p>1x Smart TV 55" 4K
+                    1x Controle Remoto
+                    1x Suporte de Parede
+                    1x Manual do Usuário
+                    1x Cabos de Conexão</p>
+                </div>
+            </div>
+
+            <!-- SPECIFICATIONS TAB -->
+            <div id="specifications" class="tab-content">
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <div class="spec-label">Tamanho da Tela</div>
+                        <div class="spec-value">55 polegadas</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Resolução</div>
+                        <div class="spec-value">4K Ultra HD (3840x2160)</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Tipo de Painel</div>
+                        <div class="spec-value">LED</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Taxa de Atualização</div>
+                        <div class="spec-value">60 Hz</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Processador</div>
+                        <div class="spec-value">Quad-core 1.5 GHz</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Memória RAM</div>
+                        <div class="spec-value">2 GB</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Armazenamento Interno</div>
+                        <div class="spec-value">8 GB</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Sistema Operacional</div>
+                        <div class="spec-value">Android TV</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Conectividade</div>
+                        <div class="spec-value">WiFi, Bluetooth, HDMI, USB</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Potência de Áudio</div>
+                        <div class="spec-value">20W</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Dimensões (LxAxP)</div>
+                        <div class="spec-value">123 x 72 x 8.5 cm</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Peso</div>
+                        <div class="spec-value">15.5 kg</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Consumo de Energia</div>
+                        <div class="spec-value">95 W</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Garantia</div>
+                        <div class="spec-value">2 anos</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- REVIEWS TAB -->
+            <div id="reviews" class="tab-content">
+                <div class="reviews-container">
+                    <!-- REVIEW SUMMARY -->
+                    <div class="review-summary">
+                        <div class="summary-box">
+                            <div class="summary-rating">4.8</div>
+                            <div class="summary-stars">★★★★★</div>
+                            <div class="summary-count">Baseado em 245 avaliações</div>
+                        </div>
+
+                        <div class="rating-bars">
+                            <div class="rating-bar">
+                                <div class="rating-bar-label">5 ★</div>
+                                <div class="rating-bar-container">
+                                    <div class="rating-bar-fill" style="width: 78%;"></div>
+                                </div>
+                                <div class="rating-bar-count">191</div>
+                            </div>
+                            <div class="rating-bar">
+                                <div class="rating-bar-label">4 ★</div>
+                                <div class="rating-bar-container">
+                                    <div class="rating-bar-fill" style="width: 16%;"></div>
+                                </div>
+                                <div class="rating-bar-count">39</div>
+                            </div>
+                            <div class="rating-bar">
+                                <div class="rating-bar-label">3 ★</div>
+                                <div class="rating-bar-container">
+                                    <div class="rating-bar-fill" style="width: 4%;"></div>
+                                </div>
+                                <div class="rating-bar-count">10</div>
+                            </div>
+                            <div class="rating-bar">
+                                <div class="rating-bar-label">2 ★</div>
+                                <div class="rating-bar-container">
+                                    <div class="rating-bar-fill" style="width: 1%;"></div>
+                                </div>
+                                <div class="rating-bar-count">3</div>
+                            </div>
+                            <div class="rating-bar">
+                                <div class="rating-bar-label">1 ★</div>
+                                <div class="rating-bar-container">
+                                    <div class="rating-bar-fill" style="width: 1%;"></div>
+                                </div>
+                                <div class="rating-bar-count">2</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INDIVIDUAL REVIEWS -->
+                    <div class="review-item">
+                        <div class="review-header">
+                            <div>
+                                <div class="review-author">Carlos Silva</div>
+                                <div class="review-stars">★★★★★</div>
+                            </div>
+                            <div class="review-date">Há 15 dias</div>
+                        </div>
+                        <div class="review-title">Excelente custo-benefício!</div>
+                        <div class="review-text">Comprei essa TV há 2 semanas e estou muito satisfeito. A qualidade de imagem é excelente, som bom e a configuração foi muito fácil. Super recomendo!</div>
+                        <div class="review-footer">
+                            <button class="helpful-btn">👍 Útil (23)</button>
+                            <button class="helpful-btn">👎 Não útil (1)</button>
+                        </div>
+                    </div>
+
+                    <div class="review-item">
+                        <div class="review-header">
+                            <div>
+                                <div class="review-author">Maria Santos</div>
+                                <div class="review-stars">★★★★☆</div>
+                            </div>
+                            <div class="review-date">Há 1 mês</div>
+                        </div>
+                        <div class="review-title">Ótima, mas com alguns detalhes</div>
+                        <div class="review-text">A TV é muito boa mesmo. Imagem de qualidade, processamento rápido. Minha única reclamação é o suporte de parede que veio um pouco solto, mas nada que não se resolva facilmente.</div>
+                        <div class="review-footer">
+                            <button class="helpful-btn">👍 Útil (45)</button>
+                            <button class="helpful-btn">👎 Não útil (2)</button>
+                        </div>
+                    </div>
+
+                    <div class="review-item">
+                        <div class="review-header">
+                            <div>
+                                <div class="review-author">João Costa</div>
+                                <div class="review-stars">★★★★★</div>
+                            </div>
+                            <div class="review-date">Há 2 meses</div>
+                        </div>
+                        <div class="review-title">Melhor compra que fiz este ano!</div>
+                        <div class="review-text">Fantástico! Entrega rápida, produto bem embalado e funcionando perfeitamente. Estou usando para assistir filmes e jogar videogame. Muito bom mesmo!</div>
+                        <div class="review-footer">
+                            <button class="helpful-btn">👍 Útil (67)</button>
+                            <button class="helpful-btn">👎 Não útil (0)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RELATED PRODUCTS -->
+        <div class="related-products">
+            <h2>Produtos Relacionados</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">Imagem Produto</div>
+                    <div class="product-card-info">
+                        <div class="product-card-name">Soundbar 2.1 Canais</div>
+                        <div class="product-card-price">R$ 599,99</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">Imagem Produto</div>
+                    <div class="product-card-info">
+                        <div class="product-card-name">Suporte Articulado para TV</div>
+                        <div class="product-card-price">R$ 199,99</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">Imagem Produto</div>
+                    <div class="product-card-info">
+                        <div class="product-card-name">Conversor Smart TV 4K</div>
+                        <div class="product-card-price">R$ 299,99</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">Imagem Produto</div>
+                    <div class="product-card-info">
+                        <div class="product-card-name">Smart TV 65" 4K Ultra HD</div>
+                        <div class="product-card-price">R$ 3.499,99</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Sobre Vitrio</h3>
+                    <ul>
+                        <li><a href="#">Quem Somos</a></li>
+                        <li><a href="#">Carreiras</a></li>
+                        <li><a href="#">Sustentabilidade</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Atendimento</h3>
+                    <ul>
+                        <li><a href="#">Contato</a></li>
+                        <li><a href="#">Central de Ajuda</a></li>
+                        <li><a href="#">Rastrear Pedido</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Compre Conosco</h3>
+                    <ul>
+                        <li><a href="#">Categorias</a></li>
+                        <li><a href="#">Ofertas</a></li>
+                        <li><a href="#">Novidades</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Políticas</h3>
+                    <ul>
+                        <li><a href="#">Privacidade</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Devoluções</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© 2026 Vitrio E-commerce. Todos os direitos reservados.</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL CARRINHO -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Produto Adicionado!</h2>
+                <button class="modal-close" onclick="closeCart()">✕</button>
+            </div>
+            <div style="text-align: center; margin: 20px 0;">
+                <p style="font-size: 16px; margin-bottom: 20px;">Smart TV 55" 4K Ultra HD foi adicionada ao seu carrinho</p>
+                <p style="font-size: 18px; font-weight: 700; margin-bottom: 20px;">R$ 2.499,99 x <span id="modalQty">1</span> = R$ <span id="modalTotal">2.499,99</span></p>
+            </div>
+            <button style="width: 100%; background-color: var(--primary-color); color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: 600; margin-bottom: 12px;" onclick="goToCheckout()">Ir para o Checkout</button>
+            <button style="width: 100%; background-color: var(--light-bg); border: 1px solid var(--border-color); padding: 12px; border-radius: 6px; cursor: pointer; font-weight: 600;" onclick="closeCart()">Continuar Comprando</button>
+        </div>
+    </div>
+
+    <script>
+        let quantity = 1;
+        let isWishlisted = false;
+
+        function increaseQty() {
+            quantity++;
+            document.getElementById('quantity').textContent = quantity;
+        }
+
+        function decreaseQty() {
+            if (quantity > 1) {
+                quantity--;
+                document.getElementById('quantity').textContent = quantity;
+            }
+        }
+
+        function addToCart() {
+            const total = (2499.99 * quantity).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('cartCount').textContent = quantity;
+            document.getElementById('modalQty').textContent = quantity;
+            document.getElementById('modalTotal').textContent = total;
+            document.getElementById('cartModal').classList.add('active');
+        }
+
+        function openCart() {
+            alert('Carrinho com ' + quantity + ' item(ns)');
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').classList.remove('active');
+        }
+
+        function goToCheckout() {
+            alert('Redirecionando para checkout...');
+            closeCart();
+        }
+
+        function toggleWishlist() {
+            const btn = document.getElementById('wishlistBtn');
+            isWishlisted = !isWishlisted;
+            if (isWishlisted) {
+                btn.classList.add('active');
+                btn.textContent = '♥ Adicionado à Lista de Desejos';
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '♡ Adicionar à Lista de Desejos';
+            }
+        }
+
+        function calculateShipping() {
+            const cep = document.getElementById('cepInput').value;
+            if (cep.length === 8 || cep.length === 9) {
+                alert('Frete calculado para o CEP: ' + cep + '\nValor: R$ 29,90\nPrazo: 3-5 dias úteis');
+            } else {
+                alert('Digite um CEP válido (8 dígitos)');
+            }
+        }
+
+        function switchTab(event, tabName) {
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Add active class to selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function scrollToReviews() {
+            document.querySelector('.tab-btn:nth-child(3)').click();
+            document.querySelector('#reviews').scrollIntoView({behavior: 'smooth'});
+        }
+
+        // Format CEP input
+        document.getElementById('cepInput').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 5) {
+                value = value.slice(0, 5) + '-' + value.slice(5, 8);
+            }
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>

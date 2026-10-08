@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitrio — Smartphone Galaxy A55 5G</title>
+  <style>
+    :root {
+      --purple: #5b21b6;
+      --purple-dark: #43158b;
+      --purple-soft: #f0eafd;
+      --orange: #f97316;
+      --green: #16803c;
+      --red: #dc2626;
+      --text: #202124;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --bg: #f7f7f8;
+      --white: #fff;
+      --yellow: #f5b400;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button, input, select { font: inherit; }
+
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .topbar {
+      height: 34px;
+      background: #43158b;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .header {
+      height: 76px;
+      background: var(--purple);
+      color: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,.12);
+      position: sticky;
+      top: 0;
+      z-index: 30;
+    }
+
+    .header-inner {
+      width: 1180px;
+      max-width: calc(100% - 32px);
+      height: 100%;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .logo {
+      min-width: 110px;
+      font-size: 29px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+    }
+
+    .logo span { color: #facc15; }
+
+    .search {
+      height: 45px;
+      background: white;
+      border-radius: 7px;
+      overflow: hidden;
+      display: flex;
+      flex: 1;
+    }
+
+    .search input {
+      flex: 1;
+      border: 0;
+      outline: 0;
+      padding: 0 15px;
+      color: var(--text);
+    }
+
+    .search button {
+      width: 55px;
+      border: 0;
+      cursor: pointer;
+      background: #f1f1f3;
+      color: var(--purple);
+      font-size: 20px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .header-action {
+      color: white;
+      background: none;
+      border: 0;
+      cursor: pointer;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      position: relative;
+      white-space: nowrap;
+    }
+
+    .header-action .icon { font-size: 21px; }
+
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      left: 14px;
+      background: var(--orange);
+      color: white;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 10px;
+      font-weight: bold;
+    }
+
+    .nav {
+      height: 44px;
+      background: white;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      width: 1180px;
+      max-width: calc(100% - 32px);
+      margin: auto;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .nav a:hover { color: var(--purple); }
+    .nav .offer { color: var(--orange); }
+
+    .container {
+      width: 1180px;
+      max-width: calc(100% - 32px);
+      margin: auto;
+    }
+
+    .breadcrumb {
+      padding: 17px 0;
+      color: #777;
+      font-size: 12px;
+    }
+
+    .breadcrumb a:hover { color: var(--purple); }
+
+    .product-layout {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: grid;
+      grid-template-columns: 52% 48%;
+      min-height: 550px;
+      overflow: hidden;
+    }
+
+    .gallery {
+      padding: 25px;
+      border-right: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 18px;
+    }
+
+    .thumbnails {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .thumbnail {
+      height: 72px;
+      width: 72px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: #E0E0E0;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      color: #888;
+    }
+
+    .thumbnail.active {
+      border: 2px solid var(--purple);
+    }
+
+    .main-image {
+      min-height: 455px;
+      background: #E0E0E0;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      color: #888;
+      font-size: 115px;
+    }
+
+    .main-image-label {
+      position: absolute;
+      bottom: 16px;
+      font-size: 11px;
+      color: #777;
+    }
+
+    .favorite {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 38px;
+      height: 38px;
+      border: 0;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,.12);
+      color: #777;
+      font-size: 21px;
+      cursor: pointer;
+    }
+
+    .favorite.active {
+      color: var(--red);
+    }
+
+    .product-info {
+      padding: 29px 32px;
+    }
+
+    .brand {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      margin-bottom: 9px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 27px;
+      line-height: 1.2;
+      letter-spacing: -.5px;
+    }
+
+    .sku {
+      margin-top: 8px;
+      color: #888;
+      font-size: 11px;
+    }
+
+    .rating-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 17px 0;
+    }
+
+    .stars {
+      color: var(--yellow);
+      letter-spacing: 1px;
+      font-size: 17px;
+    }
+
+    .rating-link {
+      color: var(--purple);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .price-box {
+      background: #fafafa;
+      border-radius: 8px;
+      padding: 17px;
+      margin-top: 5px;
+    }
+
+    .old-price {
+      color: #888;
+      text-decoration: line-through;
+      font-size: 12px;
+      margin-bottom: 3px;
+    }
+
+    .price {
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: -.8px;
+    }
+
+    .pix-price {
+      color: var(--green);
+      font-size: 12px;
+      margin-top: 4px;
+      font-weight: 700;
+    }
+
+    .installment {
+      margin-top: 8px;
+      color: #4b5563;
+      font-size: 12px;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 20px 0;
+    }
+
+    .label {
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 9px;
+    }
+
+    .options {
+      display: flex;
+      gap: 9px;
+    }
+
+    .option {
+      border: 1px solid #ccc;
+      background: white;
+      border-radius: 6px;
+      min-width: 77px;
+      height: 38px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .option.active {
+      border: 2px solid var(--purple);
+      color: var(--purple);
+      font-weight: 800;
+    }
+
+    .shipping {
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 12px;
+      margin-top: 18px;
+    }
+
+    .shipping-title {
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .shipping-form {
+      display: flex;
+      gap: 7px;
+    }
+
+    .shipping-form input {
+      flex: 1;
+      border: 1px solid #d4d4d4;
+      border-radius: 5px;
+      padding: 9px;
+      outline: none;
+      font-size: 12px;
+    }
+
+    .shipping-form input:focus {
+      border-color: var(--purple);
+    }
+
+    .shipping-form button {
+      background: var(--purple-soft);
+      color: var(--purple);
+      border: 0;
+      padding: 0 13px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 11px;
+    }
+
+    .shipping-result {
+      display: none;
+      margin-top: 8px;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .purchase-row {
+      display: grid;
+      grid-template-columns: 105px 1fr;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .quantity {
+      display: flex;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      overflow: hidden;
+      height: 48px;
+    }
+
+    .quantity button {
+      width: 32px;
+      border: 0;
+      background: #f5f5f5;
+      cursor: pointer;
+    }
+
+    .quantity span {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .buy-button {
+      height: 48px;
+      border: 0;
+      background: var(--orange);
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 900;
+      transition: .2s;
+    }
+
+    .buy-button:hover {
+      background: #e9670c;
+      transform: translateY(-1px);
+    }
+
+    .secure-note {
+      margin-top: 13px;
+      text-align: center;
+      color: #777;
+      font-size: 11px;
+    }
+
+    .detail-section {
+      margin-top: 20px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .tabs {
+      height: 57px;
+      display: flex;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tab {
+      border: 0;
+      background: transparent;
+      padding: 0 24px;
+      cursor: pointer;
+      font-weight: 700;
+      color: #777;
+      font-size: 13px;
+      position: relative;
+    }
+
+    .tab.active {
+      color: var(--purple);
+    }
+
+    .tab.active::after {
+      content: "";
+      position: absolute;
+      bottom: -1px;
+      left: 20px;
+      right: 20px;
+      height: 3px;
+      background: var(--purple);
+    }
+
+    .tab-content {
+      display: none;
+      padding: 28px 31px;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .description {
+      max-width: 820px;
+    }
+
+    .description h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+    }
+
+    .description p {
+      color: #555;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+      margin-top: 18px;
+      border-radius: 7px;
+      overflow: hidden;
+    }
+
+    .feature {
+      padding: 13px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      font-size: 12px;
+    }
+
+    .feature:nth-child(odd) {
+      border-right: 1px solid var(--border);
+    }
+
+    .feature:nth-last-child(-n+2) {
+      border-bottom: 0;
+    }
+
+    .feature strong {
+      width: 150px;
+      color: #555;
+    }
+
+    .review-summary {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 35px;
+    }
+
+    .big-rating {
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+
+    .big-rating-number {
+      font-size: 43px;
+      font-weight: 900;
+    }
+
+    .big-rating .stars {
+      display: block;
+      margin: 4px 0;
+    }
+
+    .big-rating p {
+      margin: 7px 0 0;
+      color: #777;
+      font-size: 11px;
+    }
+
+    .rating-bars {
+      max-width: 500px;
+    }
+
+    .rating-row {
+      display: grid;
+      grid-template-columns: 30px 1fr 38px;
+      align-items: center;
+      gap: 8px;
+      margin: 6px 0;
+      font-size: 11px;
+    }
+
+    .bar {
+      height: 7px;
+      background: #e9e9e9;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      background: var(--yellow);
+    }
+
+    .review {
+      border-top: 1px solid var(--border);
+      margin-top: 25px;
+      padding-top: 20px;
+    }
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .review-name {
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .review-date {
+      color: #999;
+      font-size: 11px;
+    }
+
+    .review p {
+      color: #555;
+      font-size: 12px;
+      line-height: 1.5;
+      margin: 8px 0;
+    }
+
+    .verified {
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .recommendations {
+      margin: 28px 0 35px;
+    }
+
+    .recommendations h2 {
+      font-size: 20px;
+      margin: 0 0 15px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: .2s;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 18px rgba(0,0,0,.07);
+    }
+
+    .card-image {
+      height: 160px;
+      background: #E0E0E0;
+      display: grid;
+      place-items: center;
+      font-size: 52px;
+      color: #888;
+    }
+
+    .card-info { padding: 13px; }
+
+    .card-rating {
+      color: var(--yellow);
+      font-size: 11px;
+    }
+
+    .card-name {
+      min-height: 36px;
+      font-size: 12px;
+      line-height: 1.4;
+      margin: 7px 0;
+    }
+
+    .card-price {
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .card-button {
+      width: 100%;
+      height: 35px;
+      margin-top: 11px;
+      border: 0;
+      border-radius: 5px;
+      background: var(--purple);
+      color: white;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .footer {
+      background: #252329;
+      color: white;
+      padding: 34px 0 18px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 45px;
+    }
+
+    .footer h3 {
+      margin: 0 0 13px;
+      font-size: 14px;
+    }
+
+    .footer p,
+    .footer a {
+      color: #bbb8c0;
+      font-size: 12px;
+      line-height: 1.9;
+      display: block;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #414047;
+      margin-top: 26px;
+      padding-top: 15px;
+      text-align: center;
+      color: #99969f;
+      font-size: 11px;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      padding: 13px 18px;
+      background: #202124;
+      color: white;
+      border-radius: 7px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.25);
+      font-size: 12px;
+      transform: translateY(80px);
+      opacity: 0;
+      transition: .3s;
+      z-index: 100;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .modal-bg {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 90;
+    }
+
+    .modal-bg.open { display: flex; }
+
+    .modal {
+      width: 400px;
+      max-width: calc(100% - 30px);
+      background: white;
+      border-radius: 11px;
+      padding: 25px;
+      position: relative;
+    }
+
+    .modal h2 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+
+    .modal p {
+      color: #666;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .modal-close {
+      position: absolute;
+      right: 13px;
+      top: 10px;
+      background: none;
+      border: 0;
+      font-size: 24px;
+      cursor: pointer;
+      color: #666;
+    }
+
+    .modal input {
+      width: 100%;
+      margin: 7px 0;
+      padding: 11px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      outline: 0;
+    }
+
+    @media (max-width: 900px) {
+      .product-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .header-inner {
+        gap: 12px;
+      }
+
+      .nav-inner {
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    Frete grátis para compras acima de R$ 199 • Até 10x sem juros
+  </div>
+
+  <header class="header">
+    <div class="header-inner">
+      <a class="logo" href="#" id="homeLink">vit<span>r</span>io</a>
+
+      <form class="search" id="searchForm">
+        <input id="searchInput" type="search"
+               placeholder="Busque por produtos, marcas ou categorias"
+               aria-label="Buscar produtos">
+        <button type="submit" aria-label="Pesquisar">⌕</button>
+      </form>
+
+      <div class="header-actions">
+        <button class="header-action" id="accountBtn" type="button">
+          <span class="icon">♙</span>
+          <span>Olá, entre<br>ou cadastre-se</span>
+        </button>
+
+        <button class="header-action" id="cartBtn" type="button">
+          <span class="icon">🛒</span>
+          <span class="cart-count" id="cartCount">0</span>
+          <span>Carrinho</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" id="allCategories">Todas as categorias</a>
+      <a href="#description">Eletrônicos</a>
+      <a href="#description">Celulares</a>
+      <a href="#reviews">Avaliações</a>
+      <a href="#" class="offer" id="offersLink">Ofertas</a>
+      <a href="#recommendations">Mais vendidos</a>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <div class="breadcrumb">
+      <a href="#" id="breadcrumbHome">Início</a>
+      <span> › </span>
+      <a href="#description">Eletrônicos</a>
+      <span> › </span>
+      <a href="#description">Celulares</a>
+      <span> › </span>
+      <strong>Smartphone Galaxy A55 5G</strong>
+    </div>
+
+    <section class="product-layout">
+
+      <div class="gallery">
+        <div class="thumbnails">
+          <button class="thumbnail active" data-visual="📱" aria-label="Visualização frontal">📱</button>
+          <button class="thumbnail" data-visual="📲" aria-label="Visualização traseira">📲</button>
+          <button class="thumbnail" data-visual="▣" aria-label="Visualização lateral">▣</button>
+          <button class="thumbnail" data-visual="◉" aria-label="Detalhe do produto">◉</button>
+        </div>
+
+        <div class="main-image" id="mainImage" aria-label="Imagem do produto">
+          <button class="favorite" id="favoriteBtn" type="button" aria-label="Adicionar aos favoritos">♡</button>
+          <span id="productVisual">📱</span>
+          <span class="main-image-label">Imagem ilustrativa — área reservada para foto do produto</span>
+        </div>
+      </div>
+
+      <div class="product-info">
+
+        <div class="brand">Smartphone Samsung</div>
+
+        <h1>Smartphone Galaxy A55 5G 128GB 8GB RAM</h1>
+
+        <div class="sku">Código do produto: VT-A55-128-AZ</div>
+
+        <div class="rating-line">
+          <span class="stars">★★★★★</span>
+          <button class="rating-link" id="ratingLink" type="button">
+            4,8 (128 avaliações)
+          </button>
+        </div>
+
+        <div class="price-box">
+          <div class="old-price">De R$ 2.199,00</div>
+          <div class="price">R$ 1.799,00</div>
+          <div class="pix-price">R$ 1.709,05 no Pix — 5% de desconto</div>
+          <div class="installment">
+            Em até <strong>10x de R$ 179,90 sem juros</strong> no cartão de crédito
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <label class="label">Cor: <strong id="selectedColor">Azul</strong></label>
+
+        <div class="options" id="colorOptions">
+          <button class="option active" type="button" data-color="Azul">Azul</button>
+          <button class="option" type="button" data-color="Preto">Preto</button>
+          <button class="option" type="button" data-color="Lilás">Lilás</button>
+        </div>
+
+        <div class="shipping">
+          <div class="shipping-title">Consulte o prazo de entrega</div>
+          <form class="shipping-form" id="shippingForm">
+            <input
+              id="cepInput"
+              inputmode="numeric"
+              maxlength="9"
+              placeholder="Digite seu CEP"
+              aria-label="CEP"
+              required>
+            <button type="submit">Calcular</button>
+          </form>
+          <div class="shipping-result" id="shippingResult">
+            ✓ Entrega estimada em 3 a 6 dias úteis. Frete grátis para este pedido.
+          </div>
+        </div>
+
+        <div class="purchase-row">
+          <div class="quantity">
+            <button id="decreaseQty" type="button" aria-label="Diminuir quantidade">−</button>
+            <span id="quantity">1</span>
+            <button id="increaseQty" type="button" aria-label="Aumentar quantidade">+</button>
+          </div>
+
+          <button class="buy-button" id="buyButton" type="button">
+            Comprar agora
+          </button>
+        </div>
+
+        <div class="secure-note">
+          🔒 Compra segura • Seus dados são protegidos
+        </div>
+      </div>
+    </section>
+
+    <section class="detail-section" id="description">
+
+      <div class="tabs">
+        <button class="tab active" data-tab="descriptionTab" type="button">Descrição</button>
+        <button class="tab" data-tab="specsTab" type="button">Especificações</button>
+        <button class="tab" data-tab="reviewsTab" type="button">Avaliações (128)</button>
+      </div>
+
+      <div class="tab-content active" id="descriptionTab">
+        <div class="description">
+          <h2>Smartphone Galaxy A55 5G</h2>
+          <p>
+            Tenha desempenho, estilo e conectividade em um único smartphone.
+            O Galaxy A55 5G combina tela Super AMOLED de 6,6 polegadas,
+            câmera de alta resolução e bateria para acompanhar sua rotina.
+          </p>
+          <p>
+            Com 8 GB de RAM e 128 GB de armazenamento interno, você tem espaço
+            para seus aplicativos, fotos e vídeos. A conectividade 5G oferece
+            downloads mais rápidos e uma experiência fluida em conteúdos
+            compatíveis.
+          </p>
+          <p>
+            O aparelho conta ainda com resistência à água e poeira, leitor de
+            impressão digital e carregamento rápido, tornando-se uma opção
+            completa para trabalho, entretenimento e comunicação.
+          </p>
+        </div>
+      </div>
+
+      <div class="tab-content" id="specsTab">
+        <div class="description">
+          <h2>Especificações técnicas</h2>
+
+          <div class="features">
+            <div class="feature"><strong>Tela</strong><span>6,6" Super AMOLED, 120 Hz</span></div>
+            <div class="feature"><strong>Resolução</strong><span>2340 × 1080 pixels</span></div>
+            <div class="feature"><strong>Memória RAM</strong><span>8 GB</span></div>
+            <div class="feature"><strong>Armazenamento</strong><span>128 GB</span></div>
+            <div class="feature"><strong>Câmera principal</strong><span>50 MP + 12 MP + 5 MP</span></div>
+            <div class="feature"><strong>Câmera frontal</strong><span>32 MP</span></div>
+            <div class="feature"><strong>Conectividade</strong><span>5G, Wi-Fi, Bluetooth</span></div>
+            <div class="feature"><strong>Bateria</strong><span>5.000 mAh</span></div>
+            <div class="feature"><strong>Sistema</strong><span>Android</span></div>
+            <div class="feature"><strong>Garantia</strong><span>12 meses pelo fabricante</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="reviewsTab">
+        <div class="review-summary">
+          <div class="big-rating">
+            <div class="big-rating-number">4,8</div>
+            <span class="stars">★★★★★</span>
+            <p>Baseado em 128 avaliações</p>
+          </div>
+
+          <div class="rating-bars">
+            <div class="rating-row"><span>5</span><div class="bar"><span style="width:91%"></span></div><span>91%</span></div>
+            <div class="rating-row"><span>4</span><div class="bar"><span style="width:6%"></span></div><span>6%</span></div>
+            <div class="rating-row"><span>3</span><div class="bar"><span style="width:2%"></span></div><span>2%</span></div>
+            <div class="rating-row"><span>2</span><div class="bar"><span style="width:1%"></span></div><span>1%</span></div>
+            <div class="rating-row"><span>1</span><div class="bar"><span style="width:0%"></span></div><span>0%</span></div>
+          </div>
+        </div>
+
+        <div class="review">
+          <div class="review-header">
+            <span class="review-name">Mariana S.</span>
+            <span class="review-date">há 8 dias</span>
+          </div>
+          <div class="stars">★★★★★</div>
+          <p>
+            O celular chegou antes do prazo e veio muito bem embalado.
+            A tela é excelente e a bateria dura o dia inteiro com meu uso.
+          </p>
+          <span class="verified">✓ Compra verificada</span>
+        </div>
+
+        <div class="review">
+          <div class="review-header">
+            <span class="review-name">Carlos R.</span>
+            <span class="review-date">há 15 dias</span>
+          </div>
+          <div class="stars">★★★★★</div>
+          <p>
+            Excelente aparelho pelo preço. A câmera tira fotos muito boas
+            e o desempenho é bastante rápido para aplicativos e jogos.
+          </p>
+          <span class="verified">✓ Compra verificada</span>
+        </div>
+
+        <div class="review">
+          <div class="review-header">
+            <span class="review-name">Fernanda A.</span>
+            <span class="review-date">há 22 dias</span>
+          </div>
+          <div class="stars">★★★★☆</div>
+          <p>
+            Gostei bastante do produto. O único ponto é que o carregador
+            precisa ser comprado separadamente, mas o aparelho é ótimo.
+          </p>
+          <span class="verified">✓ Compra verificada</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="recommendations" id="recommendations">
+      <h2>Você também pode gostar</h2>
+
+      <div class="product-grid">
+        <article class="card">
+          <div class="card-image">🎧</div>
+          <div class="card-info">
+            <div class="card-rating">★★★★★</div>
+            <div class="card-name">Fone Bluetooth Wave ANC com cancelamento de ruído</div>
+            <div class="card-price">R$ 339,00</div>
+            <button class="card-button" data-product="Fone Bluetooth Wave ANC" type="button">Adicionar ao carrinho</button>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-image">⌚</div>
+          <div class="card-info">
+            <div class="card-rating">★★★★★</div>
+            <div class="card-name">Smartwatch Fit Pro com GPS e tela AMOLED</div>
+            <div class="card-price">R$ 549,00</div>
+            <button class="card-button" data-product="Smartwatch Fit Pro" type="button">Adicionar ao carrinho</button>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-image">🔌</div>
+          <div class="card-info">
+            <div class="card-rating">★★★★☆</div>
+            <div class="card-name">Carregador rápido USB-C 25W com cabo</div>
+            <div class="card-price">R$ 89,00</div>
+            <button class="card-button" data-product="Carregador rápido USB-C 25W" type="button">Adicionar ao carrinho</button>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-image">🛡️</div>
+          <div class="card-info">
+            <div class="card-rating">★★★★★</div>
+            <div class="card-name">Capa protetora transparente para Galaxy A55</div>
+            <div class="card-price">R$ 49,90</div>
+            <button class="card-button" data-product="Capa protetora para Galaxy A55" type="button">Adicionar ao carrinho</button>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="logo">vit<span>r</span>io</div>
+          <p>Eletrônicos, tecnologia e itens para sua casa.</p>
+          <p>Compra segura, atendimento próximo e ofertas todos os dias.</p>
+        </div>
+
+        <div>
+          <h3>Institucional</h3>
+          <a href="#" data-footer="Sobre a Vitrio">Sobre a Vitrio</a>
+          <a href="#" data-footer="Política de privacidade">Política de privacidade</a>
+          <a href="#" data-footer="Termos de uso">Termos de uso</a>
+        </div>
+
+        <div>
+          <h3>Atendimento</h3>
+          <a href="#" data-footer="Central de atendimento">Central de atendimento</a>
+          <a href="#" data-footer="Meus pedidos">Meus pedidos</a>
+          <a href="#" data-footer="Trocas e devoluções">Trocas e devoluções</a>
+        </div>
+
+        <div>
+          <h3>Pagamento</h3>
+          <p>Cartão de crédito</p>
+          <p>Pix</p>
+          <p>Até 10x sem juros</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        © 2026 Vitrio Comércio Digital. Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <div class="modal-bg" id="loginModal">
+    <div class="modal">
+      <button class="modal-close" id="modalClose" type="button">×</button>
+      <h2>Entre na sua conta</h2>
+      <p>Acesse seus pedidos, favoritos e ofertas personalizadas.</p>
+
+      <form id="loginForm">
+        <input type="email" placeholder="Seu e-mail" required>
+        <input type="password" placeholder="Sua senha" required>
+        <button class="buy-button" style="width:100%; margin-top:8px" type="submit">Entrar</button>
+      </form>
+
+      <p style="text-align:center">
+        Ainda não tem uma conta?
+        <a href="#" id="registerLink" style="color:#5b21b6;font-weight:bold">Cadastre-se</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      let quantity = 1;
+      let cartCount = 0;
+
+      const toast = document.getElementById("toast");
+      const cartCounter = document.getElementById("cartCount");
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add("show");
+
+        clearTimeout(showToast.timer);
+        showToast.timer = setTimeout(() => {
+          toast.classList.remove("show");
+        }, 2800);
+      }
+
+      function addToCart(product, amount = 1) {
+        cartCount += amount;
+        cartCounter.textContent = cartCount;
+        showToast(`${product} foi adicionado ao carrinho.`);
+      }
+
+      document.getElementById("homeLink").addEventListener("click", event => {
+        event.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        showToast("Voltando para a página inicial.");
+      });
+
+      document.getElementById("breadcrumbHome").addEventListener("click", event => {
+        event.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        showToast("Voltando para a página inicial.");
+      });
+
+      document.getElementById("searchForm").addEventListener("submit", event => {
+        event.preventDefault();
+
+        const value = document.getElementById("searchInput").value.trim();
+
+        if (!value) {
+          showToast("Digite um produto ou categoria para pesquisar.");
+          return;
+        }
+
+        showToast(`Busca realizada por "${value}".`);
+      });
+
+      document.getElementById("cartBtn").addEventListener("click", () => {
+        if (cartCount === 0) {
+          showToast("Seu carrinho está vazio.");
+        } else {
+          showToast(`Seu carrinho possui ${cartCount} ${cartCount === 1 ? "item" : "itens"}.`);
+        }
+      });
+
+      const loginModal = document.getElementById("loginModal");
+
+      document.getElementById("accountBtn").addEventListener("click", () => {
+        loginModal.classList.add("open");
+      });
+
+      document.getElementById("modalClose").addEventListener("click", () => {
+        loginModal.classList.remove("open");
+      });
+
+      loginModal.addEventListener("click", event => {
+        if (event.target === loginModal) {
+          loginModal.classList.remove("open");
+        }
+      });
+
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape") {
+          loginModal.classList.remove("open");
+        }
+      });
+
+      document.getElementById("loginForm").addEventListener("submit", event => {
+        event.preventDefault();
+        loginModal.classList.remove("open");
+        showToast("Login demonstrativo realizado com sucesso.");
+      });
+
+      document.getElementById("registerLink").addEventListener("click", event => {
+        event.preventDefault();
+        loginModal.classList.remove("open");
+        showToast("Cadastro demonstrativo iniciado.");
+      });
+
+      const thumbnails = document.querySelectorAll(".thumbnail");
+      const productVisual = document.getElementById("productVisual");
+
+      thumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener("click", () => {
+          thumbnails.forEach(item => item.classList.remove("active"));
+          thumbnail.classList.add("active");
+          productVisual.textContent = thumbnail.dataset.visual;
+        });
+      });
+
+      document.getElementById("favoriteBtn").addEventListener("click", event => {
+        const button = event.currentTarget;
+        const active = button.classList.toggle("active");
+
+        button.textContent = active ? "♥" : "♡";
+        button.setAttribute(
+          "aria-label",
+          active ? "Remover dos favoritos" : "Adicionar aos favoritos"
+        );
+
+        showToast(
+          active
+            ? "Produto adicionado aos favoritos."
+            : "Produto removido dos favoritos."
+        );
+      });
+
+      document.querySelectorAll("#colorOptions .option").forEach(option => {
+        option.addEventListener("click", () => {
+          document.querySelectorAll("#colorOptions .option")
+            .forEach(item => item.classList.remove("active"));
+
+          option.classList.add("active");
+          document.getElementById("selectedColor").textContent = option.dataset.color;
+
+          showToast(`Cor selecionada: ${option.dataset.color}.`);
+        });
+      });
+
+      document.getElementById("increaseQty").addEventListener("click", () => {
+        if (quantity < 10) {
+          quantity++;
+          document.getElementById("quantity").textContent = quantity;
+        } else {
+          showToast("Limite de 10 unidades por compra.");
+        }
+      });
+
+      document.getElementById("decreaseQty").addEventListener("click", () => {
+        if (quantity > 1) {
+          quantity--;
+          document.getElementById("quantity").textContent = quantity;
+        }
+      });
+
+      document.getElementById("buyButton").addEventListener("click", () => {
+        const color = document.getElementById("selectedColor").textContent;
+        addToCart(`Galaxy A55 5G ${color}`, quantity);
+      });
+
+      document.getElementById("shippingForm").addEventListener("submit", event => {
+        event.preventDefault();
+
+        const cepInput = document.getElementById("cepInput");
+        const cep = cepInput.value.replace(/\D/g, "");
+
+        if (cep.length !== 8) {
+          showToast("Digite um CEP válido com 8 números.");
+          cepInput.focus();
+          return;
+        }
+
+        const formatted = cep.replace(/^(\d{5})(\d{3})$/, "$1-$2");
+        cepInput.value = formatted;
+
+        document.getElementById("shippingResult").style.display = "block";
+        showToast("Prazo de entrega calculado.");
+      });
+
+      document.getElementById("cepInput").addEventListener("input", event => {
+        let value = event.target.value.replace(/\D/g, "").slice(0, 8);
+
+        if (value.length > 5) {
+          value = value.slice(0, 5) + "-" + value.slice(5);
+        }
+
+        event.target.value = value;
+      });
+
+      const tabs = document.querySelectorAll(".tab");
+
+      tabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+          tabs.forEach(item => item.classList.remove("active"));
+          document.querySelectorAll(".tab-content")
+            .forEach(content => content.classList.remove("active"));
+
+          tab.classList.add("active");
+          document.getElementById(tab.dataset.tab).classList.add("active");
+        });
+      });
+
+      document.getElementById("ratingLink").addEventListener("click", () => {
+        document.querySelector('[data-tab="reviewsTab"]').click();
+
+        document.getElementById("reviewsTab").scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
+
+      document.querySelectorAll(".card-button").forEach(button => {
+        button.addEventListener("click", () => {
+          addToCart(button.dataset.product);
+        });
+      });
+
+      document.getElementById("offersLink").addEventListener("click", event => {
+        event.preventDefault();
+        showToast("Confira as ofertas especiais disponíveis na Vitrio.");
+      });
+
+      document.getElementById("allCategories").addEventListener("click", event => {
+        event.preventDefault();
+        showToast("Categorias: Eletrônicos, Celulares, Casa, Informática e muito mais.");
+      });
+
+      document.querySelectorAll("[data-footer]").forEach(link => {
+        link.addEventListener("click", event => {
+          event.preventDefault();
+          showToast(`${link.dataset.footer}: conteúdo demonstrativo.`);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitrio — Smart TV 55" 4K UHD</title>
+  <style>
+    :root {
+      --purple:#5b2bbf;
+      --purple-dark:#421d8e;
+      --purple-soft:#efe9ff;
+      --orange:#ff6b35;
+      --green:#16834a;
+      --green-soft:#e9f8ef;
+      --red:#d94b4b;
+      --text:#25232a;
+      --muted:#6e6975;
+      --border:#e5e1e9;
+      --bg:#f6f5f8;
+      --white:#fff;
+      --placeholder:#e0e0e0;
+      --shadow:0 5px 20px rgba(39,25,60,.08);
+    }
+
+    * { box-sizing:border-box; }
+
+    body {
+      margin:0;
+      font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+    }
+
+    button,input,select { font:inherit; }
+    button,a { cursor:pointer; }
+    a { color:inherit; text-decoration:none; }
+
+    .topbar {
+      height:38px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:var(--purple-dark);
+      color:#fff;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .topbar strong { color:#ffd8c9; margin-right:4px; }
+
+    header {
+      background:#fff;
+      border-bottom:1px solid var(--border);
+    }
+
+    .header-main {
+      width:1160px;
+      height:78px;
+      margin:auto;
+      display:flex;
+      align-items:center;
+      gap:25px;
+    }
+
+    .logo {
+      width:105px;
+      color:var(--purple);
+      font-size:28px;
+      font-weight:900;
+      letter-spacing:-1.5px;
+    }
+
+    .logo span { color:var(--orange); }
+
+    .search { position:relative; flex:1; }
+
+    .search input {
+      width:100%;
+      height:44px;
+      padding:0 50px 0 15px;
+      border:1px solid #d9d5df;
+      border-radius:8px;
+      outline:none;
+      background:#faf9fb;
+      font-size:13px;
+    }
+
+    .search input:focus {
+      border-color:var(--purple);
+      box-shadow:0 0 0 3px rgba(91,43,191,.1);
+      background:#fff;
+    }
+
+    .search button {
+      position:absolute;
+      right:4px;
+      top:4px;
+      width:36px;
+      height:36px;
+      border:0;
+      border-radius:7px;
+      color:#fff;
+      background:var(--purple);
+      font-size:18px;
+    }
+
+    .header-action {
+      min-width:135px;
+      height:45px;
+      display:flex;
+      align-items:center;
+      gap:9px;
+      padding:5px;
+      border:0;
+      border-radius:8px;
+      background:transparent;
+      text-align:left;
+    }
+
+    .header-action:hover { background:#f5f2fa; }
+
+    .header-icon {
+      width:35px;
+      height:35px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      color:var(--purple);
+      background:var(--purple-soft);
+    }
+
+    .header-action small {
+      display:block;
+      color:var(--muted);
+      font-size:10px;
+    }
+
+    .header-action strong { font-size:12px; }
+
+    .cart-action {
+      min-width:45px;
+      justify-content:center;
+      position:relative;
+    }
+
+    .cart-count {
+      position:absolute;
+      top:0;
+      right:0;
+      min-width:18px;
+      height:18px;
+      padding:0 4px;
+      display:grid;
+      place-items:center;
+      border-radius:20px;
+      color:#fff;
+      background:var(--orange);
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .nav {
+      height:44px;
+      border-top:1px solid #f1eef4;
+      background:#fff;
+    }
+
+    .nav-inner {
+      width:1160px;
+      height:100%;
+      margin:auto;
+      display:flex;
+      align-items:center;
+      gap:31px;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .nav a:hover { color:var(--purple); }
+    .nav .offers { color:var(--orange); }
+
+    main {
+      width:1160px;
+      margin:auto;
+      padding-bottom:60px;
+    }
+
+    .breadcrumb {
+      height:52px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      color:var(--muted);
+      font-size:11px;
+    }
+
+    .breadcrumb a:hover { color:var(--purple); }
+    .breadcrumb strong { color:var(--text); }
+
+    /* PRODUCT */
+
+    .product-box {
+      display:grid;
+      grid-template-columns:510px 1fr;
+      gap:34px;
+      padding:24px;
+      border:1px solid var(--border);
+      border-radius:13px;
+      background:#fff;
+      box-shadow:var(--shadow);
+    }
+
+    .gallery {
+      display:grid;
+      grid-template-columns:76px 1fr;
+      gap:12px;
+    }
+
+    .thumbs {
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .thumb {
+      width:76px;
+      height:76px;
+      border:1px solid var(--border);
+      border-radius:8px;
+      background:var(--placeholder);
+      display:grid;
+      place-items:center;
+      color:#85808a;
+      font-size:9px;
+    }
+
+    .thumb.active {
+      border:2px solid var(--purple);
+    }
+
+    .main-image {
+      position:relative;
+      height:410px;
+      display:grid;
+      place-items:center;
+      border-radius:10px;
+      background:var(--placeholder);
+      color:#85808a;
+      font-size:11px;
+    }
+
+    .main-image-label {
+      width:355px;
+      height:225px;
+      display:grid;
+      place-items:center;
+      border:9px solid #28252d;
+      border-radius:11px;
+      background:#d2d2d2;
+      color:#777;
+      box-shadow:0 15px 30px rgba(0,0,0,.15);
+    }
+
+    .tv-stand {
+      position:absolute;
+      bottom:72px;
+      width:90px;
+      height:10px;
+      border-radius:0 0 8px 8px;
+      background:#29262d;
+    }
+
+    .discount-badge {
+      position:absolute;
+      top:14px;
+      left:14px;
+      padding:6px 8px;
+      border-radius:5px;
+      color:#fff;
+      background:var(--orange);
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .favorite {
+      position:absolute;
+      top:13px;
+      right:13px;
+      width:36px;
+      height:36px;
+      border:0;
+      border-radius:50%;
+      background:#fff;
+      box-shadow:0 2px 10px rgba(0,0,0,.1);
+      color:#6e6975;
+      font-size:19px;
+    }
+
+    .favorite.active { color:#e43e58; }
+
+    .product-info {
+      padding:2px 5px;
+    }
+
+    .brand {
+      color:var(--muted);
+      font-size:10px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.5px;
+    }
+
+    h1 {
+      margin:8px 0 8px;
+      max-width:570px;
+      font-size:26px;
+      line-height:1.18;
+      letter-spacing:-.6px;
+    }
+
+    .sku {
+      color:var(--muted);
+      font-size:10px;
+    }
+
+    .rating-row {
+      display:flex;
+      align-items:center;
+      gap:8px;
+      margin:14px 0;
+      padding-bottom:14px;
+      border-bottom:1px solid var(--border);
+    }
+
+    .stars {
+      color:#f4a41b;
+      font-size:15px;
+      letter-spacing:1px;
+    }
+
+    .rating-link {
+      color:var(--purple);
+      font-size:11px;
+      font-weight:700;
+    }
+
+    .rating-link:hover { text-decoration:underline; }
+
+    .price-label {
+      color:var(--muted);
+      font-size:11px;
+    }
+
+    .old-price {
+      margin-top:4px;
+      color:#99939f;
+      font-size:12px;
+      text-decoration:line-through;
+    }
+
+    .price {
+      margin-top:1px;
+      font-size:31px;
+      font-weight:900;
+      letter-spacing:-1px;
+    }
+
+    .pix {
+      margin-top:3px;
+      color:var(--green);
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .installment {
+      margin-top:5px;
+      color:var(--muted);
+      font-size:11px;
+    }
+
+    .installment strong { color:var(--text); }
+
+    .benefit-box {
+      margin:17px 0;
+      padding:12px;
+      border:1px solid #d8efdF;
+      border-radius:8px;
+      background:var(--green-soft);
+    }
+
+    .benefit-box strong {
+      display:block;
+      color:var(--green);
+      font-size:11px;
+    }
+
+    .benefit-box span {
+      display:block;
+      margin-top:4px;
+      color:#4c6859;
+      font-size:10px;
+    }
+
+    .option-label {
+      display:flex;
+      justify-content:space-between;
+      margin-bottom:7px;
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .color-options {
+      display:flex;
+      gap:8px;
+      margin-bottom:15px;
+    }
+
+    .color-option {
+      padding:7px 11px;
+      border:1px solid var(--border);
+      border-radius:6px;
+      background:#fff;
+      font-size:10px;
+    }
+
+    .color-option.selected {
+      border:2px solid var(--purple);
+      color:var(--purple);
+      font-weight:800;
+    }
+
+    .delivery {
+      padding:13px;
+      border:1px solid var(--border);
+      border-radius:8px;
+      background:#faf9fb;
+    }
+
+    .delivery-title {
+      display:flex;
+      align-items:center;
+      gap:7px;
+      margin-bottom:9px;
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .cep-row {
+      display:flex;
+      gap:7px;
+    }
+
+    .cep-row input {
+      flex:1;
+      height:36px;
+      padding:0 10px;
+      border:1px solid #d6d1db;
+      border-radius:6px;
+      outline:none;
+      font-size:11px;
+    }
+
+    .cep-row input:focus { border-color:var(--purple); }
+
+    .cep-row button {
+      height:36px;
+      padding:0 13px;
+      border:1px solid var(--purple);
+      border-radius:6px;
+      color:var(--purple);
+      background:#fff;
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .delivery-result {
+      display:none;
+      margin-top:9px;
+      padding-top:9px;
+      border-top:1px solid var(--border);
+      font-size:10px;
+    }
+
+    .delivery-result strong {
+      display:block;
+      color:var(--green);
+      margin-bottom:3px;
+    }
+
+    .purchase-row {
+      display:grid;
+      grid-template-columns:100px 1fr;
+      gap:9px;
+      margin-top:14px;
+    }
+
+    .quantity {
+      height:48px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      overflow:hidden;
+      border:1px solid var(--border);
+      border-radius:7px;
+      background:#fff;
+    }
+
+    .quantity button {
+      width:30px;
+      height:100%;
+      border:0;
+      background:#fff;
+      font-size:17px;
+    }
+
+    .quantity span {
+      font-size:12px;
+      font-weight:800;
+    }
+
+    .buy {
+      height:48px;
+      border:0;
+      border-radius:7px;
+      color:#fff;
+      background:var(--orange);
+      font-size:13px;
+      font-weight:850;
+      box-shadow:0 5px 13px rgba(255,107,53,.22);
+    }
+
+    .buy:hover { background:#e95726; }
+
+    .buy-now {
+      width:100%;
+      height:40px;
+      margin-top:8px;
+      border:1px solid var(--purple);
+      border-radius:7px;
+      color:var(--purple);
+      background:#fff;
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .buy-now:hover { background:var(--purple-soft); }
+
+    .security {
+      display:flex;
+      gap:15px;
+      margin-top:14px;
+      color:var(--muted);
+      font-size:9px;
+    }
+
+    .security span {
+      display:flex;
+      align-items:center;
+      gap:4px;
+    }
+
+    /* BENEFITS */
+
+    .benefits {
+      margin-top:14px;
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      border:1px solid var(--border);
+      border-radius:10px;
+      background:#fff;
+    }
+
+    .benefit {
+      min-height:76px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:9px;
+      border-right:1px solid var(--border);
+    }
+
+    .benefit:last-child { border-right:0; }
+
+    .benefit-icon {
+      width:31px;
+      height:31px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      color:var(--purple);
+      background:var(--purple-soft);
+    }
+
+    .benefit strong {
+      display:block;
+      font-size:10px;
+    }
+
+    .benefit span {
+      display:block;
+      margin-top:2px;
+      color:var(--muted);
+      font-size:9px;
+    }
+
+    /* DESCRIPTION */
+
+    .section {
+      margin-top:30px;
+    }
+
+    .section-card {
+      border:1px solid var(--border);
+      border-radius:10px;
+      background:#fff;
+    }
+
+    .section-tabs {
+      height:52px;
+      display:flex;
+      border-bottom:1px solid var(--border);
+    }
+
+    .tab {
+      position:relative;
+      padding:0 20px;
+      border:0;
+      background:#fff;
+      color:var(--muted);
+      font-size:11px;
+      font-weight:750;
+    }
+
+    .tab.active {
+      color:var(--purple);
+    }
+
+    .tab.active:after {
+      content:"";
+      position:absolute;
+      left:15px;
+      right:15px;
+      bottom:-1px;
+      height:2px;
+      background:var(--purple);
+    }
+
+    .tab-content {
+      display:none;
+      padding:23px;
+    }
+
+    .tab-content.active { display:block; }
+
+    .description-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:30px;
+    }
+
+    .description h3 {
+      margin:0 0 10px;
+      font-size:15px;
+    }
+
+    .description p {
+      margin:0;
+      color:#59545e;
+      font-size:11px;
+      line-height:1.65;
+    }
+
+    .specs {
+      width:100%;
+      border-collapse:collapse;
+      font-size:10px;
+    }
+
+    .specs td {
+      padding:9px;
+      border-bottom:1px solid var(--border);
+    }
+
+    .specs td:first-child {
+      width:40%;
+      color:var(--muted);
+    }
+
+    /* REVIEWS */
+
+    .review-summary {
+      display:grid;
+      grid-template-columns:210px 1fr;
+      gap:35px;
+      padding-bottom:20px;
+      border-bottom:1px solid var(--border);
+    }
+
+    .score {
+      text-align:center;
+    }
+
+    .score-number {
+      font-size:42px;
+      font-weight:900;
+    }
+
+    .score .stars { font-size:18px; }
+
+    .score p {
+      margin:5px 0 0;
+      color:var(--muted);
+      font-size:10px;
+    }
+
+    .bars {
+      padding-top:5px;
+    }
+
+    .bar-row {
+      display:grid;
+      grid-template-columns:55px 1fr 35px;
+      align-items:center;
+      gap:8px;
+      margin-bottom:7px;
+      color:var(--muted);
+      font-size:9px;
+    }
+
+    .bar {
+      height:7px;
+      overflow:hidden;
+      border-radius:5px;
+      background:#eeeaf0;
+    }
+
+    .bar-fill {
+      height:100%;
+      border-radius:5px;
+      background:#f4a41b;
+    }
+
+    .review {
+      padding:18px 0;
+      border-bottom:1px solid var(--border);
+    }
+
+    .review:last-child { border-bottom:0; }
+
+    .review-head {
+      display:flex;
+      justify-content:space-between;
+      margin-bottom:5px;
+    }
+
+    .review-author {
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .review-date {
+      color:var(--muted);
+      font-size:9px;
+    }
+
+    .verified {
+      margin-left:6px;
+      padding:3px 5px;
+      border-radius:4px;
+      color:var(--green);
+      background:var(--green-soft);
+      font-size:8px;
+      font-weight:800;
+    }
+
+    .review p {
+      margin:6px 0 0;
+      color:#59545e;
+      font-size:10px;
+      line-height:1.5;
+    }
+
+    /* CROSS SELL */
+
+    .section-title {
+      display:flex;
+      justify-content:space-between;
+      align-items:end;
+      margin-bottom:13px;
+    }
+
+    .section-title h2 {
+      margin:0;
+      font-size:19px;
+      letter-spacing:-.4px;
+    }
+
+    .section-title p {
+      margin:4px 0 0;
+      color:var(--muted);
+      font-size:11px;
+    }
+
+    .cross-grid {
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:13px;
+    }
+
+    .cross-card {
+      padding:11px;
+      border:1px solid var(--border);
+      border-radius:9px;
+      background:#fff;
+      transition:.18s;
+    }
+
+    .cross-card:hover {
+      transform:translateY(-2px);
+      box-shadow:var(--shadow);
+    }
+
+    .cross-image {
+      height:125px;
+      display:grid;
+      place-items:center;
+      border-radius:7px;
+      background:var(--placeholder);
+      color:#888;
+      font-size:9px;
+    }
+
+    .cross-card h3 {
+      height:30px;
+      margin:9px 0 4px;
+      overflow:hidden;
+      font-size:11px;
+      line-height:1.4;
+    }
+
+    .cross-price {
+      font-size:16px;
+      font-weight:850;
+    }
+
+    .cross-pix {
+      margin-top:3px;
+      color:var(--green);
+      font-size:9px;
+      font-weight:750;
+    }
+
+    .cross-button {
+      width:100%;
+      height:33px;
+      margin-top:9px;
+      border:0;
+      border-radius:6px;
+      color:#fff;
+      background:var(--purple);
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .cross-button:hover { background:var(--purple-dark); }
+
+    /* MODAL + TOAST */
+
+    .overlay {
+      position:fixed;
+      inset:0;
+      z-index:50;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:rgba(24,17,31,.52);
+    }
+
+    .overlay.open { display:flex; }
+
+    .modal {
+      position:relative;
+      width:420px;
+      padding:25px;
+      border-radius:13px;
+      background:#fff;
+      box-shadow:0 20px 60px rgba(0,0,0,.25);
+    }
+
+    .modal-close {
+      position:absolute;
+      top:12px;
+      right:13px;
+      width:30px;
+      height:30px;
+      border:0;
+      border-radius:50%;
+      background:#f1eef4;
+      font-size:17px;
+    }
+
+    .modal h2 {
+      margin:0 0 7px;
+      font-size:19px;
+    }
+
+    .modal p {
+      margin:0 0 17px;
+      color:var(--muted);
+      font-size:11px;
+      line-height:1.5;
+    }
+
+    .modal-summary {
+      padding:11px;
+      margin-bottom:13px;
+      border-radius:7px;
+      background:#f7f5f9;
+      font-size:11px;
+      font-weight:700;
+    }
+
+    .modal .primary {
+      width:100%;
+      height:42px;
+      border:0;
+      border-radius:7px;
+      color:#fff;
+      background:var(--purple);
+      font-size:12px;
+      font-weight:800;
+    }
+
+    .toast {
+      position:fixed;
+      right:24px;
+      bottom:24px;
+      z-index:100;
+      max-width:370px;
+      padding:13px 16px;
+      border-radius:8px;
+      color:#fff;
+      background:#29242f;
+      box-shadow:0 10px 30px rgba(0,0,0,.2);
+      font-size:11px;
+      font-weight:650;
+      transform:translateY(80px);
+      opacity:0;
+      pointer-events:none;
+      transition:.25s;
+    }
+
+    .toast.show {
+      transform:translateY(0);
+      opacity:1;
+    }
+
+    @media(max-width:900px) {
+      .header-main,.nav-inner,main { width:calc(100% - 30px); }
+      .header-action { display:none; }
+      .product-box { grid-template-columns:1fr; }
+      .benefits { grid-template-columns:repeat(2,1fr); }
+      .benefit:nth-child(2) { border-right:0; }
+      .description-grid { grid-template-columns:1fr; }
+      .cross-grid { grid-template-columns:repeat(2,1fr); }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <strong>OFERTAS DE OUTUBRO</strong> • Frete grátis acima de R$ 299 • Até 12x sem juros
+  </div>
+
+  <header>
+    <div class="header-main">
+      <a href="#" class="logo" id="logo">Vitr<span>io</span></a>
+
+      <form class="search" id="searchForm">
+        <input id="searchInput" type="search"
+          placeholder="Busque por produtos, marcas ou categorias"
+          aria-label="Buscar produtos">
+        <button type="submit" aria-label="Pesquisar">⌕</button>
+      </form>
+
+      <button class="header-action" id="accountButton">
+        <span class="header-icon">♙</span>
+        <span>
+          <small>Olá, cliente</small>
+          <strong>Minha conta</strong>
+        </span>
+      </button>
+
+      <button class="header-action cart-action" id="cartButton" aria-label="Abrir carrinho">
+        <span class="header-icon">🛒</span>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+
+    <nav class="nav">
+      <div class="nav-inner">
+        <a href="#">Categorias</a>
+        <a href="#">Eletrônicos</a>
+        <a href="#">Casa &amp; Cozinha</a>
+        <a href="#">Informática</a>
+        <a class="offers" href="#">Ofertas do dia</a>
+        <a href="#">Clube Vitrio</a>
+        <a href="#">Mais vendidos</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="#">Início</a>
+      <span>›</span>
+      <a href="#">Eletrônicos</a>
+      <span>›</span>
+      <a href="#">TV &amp; Áudio</a>
+      <span>›</span>
+      <strong>Smart TV 55" 4K UHD</strong>
+    </div>
+
+    <section class="product-box">
+      <div class="gallery">
+        <div class="thumbs">
+          <button class="thumb active" data-label="Imagem principal">Imagem 1</button>
+          <button class="thumb" data-label="Visão frontal">Imagem 2</button>
+          <button class="thumb" data-label="Visão lateral">Imagem 3</button>
+          <button class="thumb" data-label="Detalhes">Imagem 4</button>
+        </div>
+
+        <div class="main-image" id="mainImage">
+          <span class="discount-badge">15% OFF</span>
+          <button class="favorite" id="favorite" aria-label="Adicionar aos favoritos">♡</button>
+          <div class="main-image-label">Imagem do produto</div>
+          <div class="tv-stand"></div>
+        </div>
+      </div>
+
+      <div class="product-info">
+        <div class="brand">Vitrio Collection</div>
+
+        <h1>Smart TV 55" 4K UHD com Google TV, Wi-Fi e HDR</h1>
+
+        <div class="sku">Código do produto: VT-TV55-4K</div>
+
+        <div class="rating-row">
+          <span class="stars">★★★★★</span>
+          <a href="#avaliacoes" class="rating-link">4,8 (128 avaliações)</a>
+        </div>
+
+        <div class="price-label">De:</div>
+        <div class="old-price">R$ 2.999,90</div>
+
+        <div class="price">R$ 2.549,90</div>
+        <div class="pix">R$ 2.422,41 no Pix — 5% de desconto</div>
+        <div class="installment">
+          ou <strong>12x de R$ 212,49</strong> sem juros no cartão
+        </div>
+
+        <div class="benefit-box">
+          <strong>✓ Frete grátis para compras acima de R$ 299</strong>
+          <span>Confira o prazo de entrega informando seu CEP.</span>
+        </div>
+
+        <div class="option-label">
+          <span>Cor</span>
+          <span id="selectedColor">Preto</span>
+        </div>
+
+        <div class="color-options">
+          <button class="color-option selected">Preto</button>
+          <button class="color-option">Cinza</button>
+        </div>
+
+        <div class="delivery">
+          <div class="delivery-title">🚚 Calcule o prazo de entrega</div>
+
+          <div class="cep-row">
+            <input id="cep" inputmode="numeric" maxlength="9" placeholder="Digite seu CEP">
+            <button id="calculateCep">Calcular</button>
+          </div>
+
+          <div class="delivery-result" id="deliveryResult">
+            <strong>Entrega grátis</strong>
+            Receba entre 9 e 13 de outubro. Consulte as opções disponíveis para seu endereço.
+          </div>
+        </div>
+
+        <div class="purchase-row">
+          <div class="quantity">
+            <button id="minus" aria-label="Diminuir quantidade">−</button>
+            <span id="quantity">1</span>
+            <button id="plus" aria-label="Aumentar quantidade">+</button>
+          </div>
+
+          <button class="buy" id="addCart">
+            Adicionar ao carrinho
+          </button>
+        </div>
+
+        <button class="buy-now" id="buyNow">
+          Comprar agora
+        </button>
+
+        <div class="security">
+          <span>🔒 Compra segura</span>
+          <span>↩ Troca facilitada</span>
+          <span>✓ Produto com garantia</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="benefits">
+      <div class="benefit">
+        <div class="benefit-icon">🚚</div>
+        <div>
+          <strong>Entrega rápida</strong>
+          <span>Acompanhe seu pedido</span>
+        </div>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-icon">💳</div>
+        <div>
+          <strong>12x sem juros</strong>
+          <span>No cartão de crédito</span>
+        </div>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-icon">🔒</div>
+        <div>
+          <strong>Pagamento seguro</strong>
+          <span>Dados protegidos</span>
+        </div>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-icon">↩</div>
+        <div>
+          <strong>Troca facilitada</strong>
+          <span>Consulte as condições</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-card">
+        <div class="section-tabs">
+          <button class="tab active" data-tab="description">Descrição</button>
+          <button class="tab" data-tab="specifications">Especificações</button>
+          <button class="tab" data-tab="reviews">Avaliações</button>
+        </div>
+
+        <div class="tab-content active" id="description">
+          <div class="description-grid">
+            <div class="description">
+              <h3>Uma experiência de cinema em casa</h3>
+              <p>
+                Aproveite seus filmes, séries, esportes e jogos favoritos
+                em uma tela de 55 polegadas com resolução 4K UHD. O Google TV
+                organiza seus conteúdos favoritos em uma experiência simples
+                e personalizada.
+              </p>
+              <br>
+              <p>
+                Com HDR, Wi-Fi integrado e conectividade Bluetooth, a Smart TV
+                combina qualidade de imagem e praticidade para deixar sua sala
+                mais completa.
+              </p>
+            </div>
+
+            <table class="specs">
+              <tr><td>Tamanho da tela</td><td>55 polegadas</td></tr>
+              <tr><td>Resolução</td><td>4K Ultra HD</td></tr>
+              <tr><td>Sistema</td><td>Google TV</td></tr>
+              <tr><td>Conectividade</td><td>Wi-Fi, Bluetooth e HDMI</td></tr>
+              <tr><td>HDR</td><td>Compatível</td></tr>
+              <tr><td>Garantia</td><td>12 meses</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="tab-content" id="specifications">
+          <table class="specs">
+            <tr><td>Modelo</td><td>VT55G4K</td></tr>
+            <tr><td>Tipo de tela</td><td>LED</td></tr>
+            <tr><td>Resolução</td><td>3840 × 2160 pixels</td></tr>
+            <tr><td>Taxa de atualização</td><td>60 Hz</td></tr>
+            <tr><td>Entradas HDMI</td><td>3</td></tr>
+            <tr><td>USB</td><td>2</td></tr>
+            <tr><td>Áudio</td><td>20 W</td></tr>
+            <tr><td>Controle por voz</td><td>Sim</td></tr>
+            <tr><td>Voltagem</td><td>Bivolt</td></tr>
+          </table>
+        </div>
+
+        <div class="tab-content" id="reviews">
+          <div id="avaliacoes"></div>
+
+          <div class="review-summary">
+            <div class="score">
+              <div class="score-number">4,8</div>
+              <div class="stars">★★★★★</div>
+              <p>Baseado em 128 avaliações</p>
+            </div>
+
+            <div class="bars">
+              <div class="bar-row">
+                <span>5 estrelas</span>
+                <div class="bar"><div class="bar-fill" style="width:92%"></div></div>
+                <span>92%</span>
+              </div>
+              <div class="bar-row">
+                <span>4 estrelas</span>
+                <div class="bar"><div class="bar-fill" style="width:6%"></div></div>
+                <span>6%</span>
+              </div>
+              <div class="bar-row">
+                <span>3 estrelas</span>
+                <div class="bar"><div class="bar-fill" style="width:1%"></div></div>
+                <span>1%</span>
+              </div>
+              <div class="bar-row">
+                <span>2 estrelas</span>
+                <div class="bar"><div class="bar-fill" style="width:1%"></div></div>
+                <span>1%</span>
+              </div>
+              <div class="bar-row">
+                <span>1 estrela</span>
+                <div class="bar"><div class="bar-fill" style="width:0%"></div></div>
+                <span>0%</span>
+              </div>
+            </div>
+          </div>
+
+          <article class="review">
+            <div class="review-head">
+              <div class="review-author">
+                Mariana S.
+                <span class="verified">COMPRA VERIFICADA</span>
+              </div>
+              <div class="review-date">há 8 dias</div>
+            </div>
+            <div class="stars">★★★★★</div>
+            <p>
+              A imagem é excelente e a configuração foi bem simples.
+              O tamanho ficou perfeito na minha sala e a entrega chegou antes
+              do prazo informado.
+            </p>
+          </article>
+
+          <article class="review">
+            <div class="review-head">
+              <div class="review-author">
+                Carlos R.
+                <span class="verified">COMPRA VERIFICADA</span>
+              </div>
+              <div class="review-date">há 16 dias</div>
+            </div>
+            <div class="stars">★★★★★</div>
+            <p>
+              Ótimo custo-benefício. O Google TV facilita bastante para
+              encontrar os aplicativos e a qualidade da imagem surpreende.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <div>
+          <h2>Complete sua experiência</h2>
+          <p>Acessórios que combinam com este produto</p>
+        </div>
+        <a href="#" style="color:var(--purple);font-size:11px;font-weight:800;">Ver todos →</a>
+      </div>
+
+      <div class="cross-grid">
+        <article class="cross-card">
+          <div class="cross-image">Imagem</div>
+          <h3>Suporte de parede articulado para TV até 70"</h3>
+          <div class="cross-price">R$ 149,90</div>
+          <div class="cross-pix">R$ 142,41 no Pix</div>
+          <button class="cross-button add-cross" data-name="Suporte de parede articulado" data-price="149.90">
+            Adicionar
+          </button>
+        </article>
+
+        <article class="cross-card">
+          <div class="cross-image">Imagem</div>
+          <h3>Soundbar 2.1 canais com subwoofer sem fio</h3>
+          <div class="cross-price">R$ 599,90</div>
+          <div class="cross-pix">R$ 569,91 no Pix</div>
+          <button class="cross-button add-cross" data-name="Soundbar 2.1 canais" data-price="599.90">
+            Adicionar
+          </button>
+        </article>
+
+        <article class="cross-card">
+          <div class="cross-image">Imagem</div>
+          <h3>Cabo HDMI 2.1 Ultra HD 2 metros</h3>
+          <div class="cross-price">R$ 79,90</div>
+          <div class="cross-pix">R$ 75,91 no Pix</div>
+          <button class="cross-button add-cross" data-name="Cabo HDMI 2.1" data-price="79.90">
+            Adicionar
+          </button>
+        </article>
+
+        <article class="cross-card">
+          <div class="cross-image">Imagem</div>
+          <h3>Filtro de linha 6 tomadas com proteção</h3>
+          <div class="cross-price">R$ 89,90</div>
+          <div class="cross-pix">R$ 85,41 no Pix</div>
+          <button class="cross-button add-cross" data-name="Filtro de linha 6 tomadas" data-price="89.90">
+            Adicionar
+          </button>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <div class="overlay" id="overlay">
+    <div class="modal">
+      <button class="modal-close" id="modalClose" aria-label="Fechar">×</button>
+      <h2 id="modalTitle">Produto adicionado</h2>
+      <p id="modalText">O produto foi adicionado ao seu carrinho.</p>
+      <div class="modal-summary" id="modalSummary"></div>
+      <button class="primary" id="modalPrimary">Ir para o carrinho</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    (() => {
+      let quantity = 1;
+      let cartItems = 0;
+      let toastTimer;
+
+      const $ = selector => document.querySelector(selector);
+      const $$ = selector => [...document.querySelectorAll(selector)];
+
+      function money(value) {
+        return value.toLocaleString("pt-BR", {
+          style:"currency",
+          currency:"BRL"
+        });
+      }
+
+      function toast(message) {
+        const element = $("#toast");
+        element.textContent = message;
+        element.classList.add("show");
+
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          element.classList.remove("show");
+        }, 2600);
+      }
+
+      function updateCart() {
+        $("#cartCount").textContent = cartItems;
+      }
+
+      /* Busca */
+      $("#searchForm").addEventListener("submit", event => {
+        event.preventDefault();
+
+        const query = $("#searchInput").value.trim();
+
+        if (!query) {
+          $("#searchInput").focus();
+          return;
+        }
+
+        toast(`Buscando por "${query}"…`);
+      });
+
+      /* Quantidade */
+      $("#minus").addEventListener("click", () => {
+        if (quantity > 1) {
+          quantity--;
+          $("#quantity").textContent = quantity;
+        }
+      });
+
+      $("#plus").addEventListener("click", () => {
+        if (quantity < 10) {
+          quantity++;
+          $("#quantity").textContent = quantity;
+        } else {
+          toast("Você atingiu o limite de 10 unidades por compra.");
+        }
+      });
+
+      /* Cor */
+      $$(".color-option").forEach(button => {
+        button.addEventListener("click", () => {
+          $$(".color-option").forEach(item => item.classList.remove("selected"));
+          button.classList.add("selected");
+          $("#selectedColor").textContent = button.textContent;
+        });
+      });
+
+      /* Galeria */
+      $$(".thumb").forEach(thumb => {
+        thumb.addEventListener("click", () => {
+          $$(".thumb").forEach(item => item.classList.remove("active"));
+          thumb.classList.add("active");
+
+          const label = $("#mainImage").querySelector(".main-image-label");
+          label.textContent = thumb.dataset.label;
+        });
+      });
+
+      /* Favorito */
+      $("#favorite").addEventListener("click", () => {
+        const button = $("#favorite");
+        button.classList.toggle("active");
+        button.textContent = button.classList.contains("active") ? "♥" : "♡";
+
+        toast(
+          button.classList.contains("active")
+            ? "Produto salvo nos seus favoritos."
+            : "Produto removido dos favoritos."
+        );
+      });
+
+      /* CEP */
+      $("#cep").addEventListener("input", event => {
+        let value = event.target.value.replace(/\D/g, "").slice(0, 8);
+
+        if (value.length > 5) {
+          value = value.slice(0, 5) + "-" + value.slice(5);
+        }
+
+        event.target.value = value;
+      });
+
+      $("#calculateCep").addEventListener("click", () => {
+        const cep = $("#cep").value.replace(/\D/g, "");
+
+        if (cep.length !== 8) {
+          toast("Digite um CEP válido com 8 números.");
+          $("#cep").focus();
+          return;
+        }
+
+        $("#deliveryResult").style.display = "block";
+        toast("Prazo calculado para o CEP informado.");
+      });
+
+      /* Compra principal */
+      function addMainProduct(goToCart = false) {
+        const units = quantity;
+        const unitPrice = 2549.90;
+
+        cartItems += units;
+        updateCart();
+
+        const total = unitPrice * units;
+
+        if (goToCart) {
+          openModal(
+            "Compra iniciada",
+            "Seu produto está reservado no carrinho. Confira os dados antes de finalizar.",
+            `Smart TV 55" 4K UHD — ${units} ${units === 1 ? "unidade" : "unidades"}`,
+            total,
+            "Ir para o carrinho"
+          );
+        } else {
+          openModal(
+            "Produto adicionado",
+            "A Smart TV foi adicionada ao seu carrinho.",
+            `${units} ${units === 1 ? "unidade" : "unidades"} • ${money(total)}`,
+            total,
+            "Continuar comprando"
+          );
+        }
+      }
+
+      $("#addCart").addEventListener("click", () => addMainProduct(false));
+      $("#buyNow").addEventListener("click", () => addMainProduct(true));
+
+      /* Cross-sell */
+      $$(".add-cross").forEach(button => {
+        button.addEventListener("click", () => {
+          cartItems++;
+          updateCart();
+
+          const name = button.dataset.name;
+          const price = Number(button.dataset.price);
+
+          button.textContent = "Adicionado ✓";
+
+          toast(`${name} foi adicionado por ${money(price)}.`);
+
+          setTimeout(() => {
+            button.textContent = "Adicionar";
+          }, 1400);
+        });
+      });
+
+      /* Carrinho */
+      $("#cartButton").addEventListener("click", () => {
+        if (!cartItems) {
+          toast("Seu carrinho está vazio.");
+          return;
+        }
+
+        openModal(
+          "Seu carrinho",
+          "Confira os produtos selecionados antes de finalizar.",
+          `${cartItems} ${cartItems === 1 ? "item selecionado" : "itens selecionados"}`,
+          0,
+          "Continuar para checkout"
+        );
+      });
+
+      /* Modal */
+      function openModal(title, text, summary, total, primaryText) {
+        $("#modalTitle").textContent = title;
+        $("#modalText").textContent = text;
+        $("#modalSummary").textContent = summary;
+        $("#modalPrimary").textContent = primaryText;
+
+        $("#modalPrimary").dataset.total = total || 0;
+        $("#overlay").classList.add("open");
+      }
+
+      function closeModal() {
+        $("#overlay").classList.remove("open");
+      }
+
+      $("#modalClose").addEventListener("click", closeModal);
+
+      $("#overlay").addEventListener("click", event => {
+        if (event.target === $("#overlay")) closeModal();
+      });
+
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && $("#overlay").classList.contains("open")) {
+          closeModal();
+        }
+      });
+
+      $("#modalPrimary").addEventListener("click", () => {
+        const buttonText = $("#modalPrimary").textContent;
+
+        if (buttonText === "Continuar comprando") {
+          closeModal();
+          return;
+        }
+
+        closeModal();
+        toast("Checkout iniciado. Você será direcionado para o carrinho.");
+      });
+
+      /* Abas */
+      $$(".tab").forEach(tab => {
+        tab.addEventListener("click", () => {
+          $$(".tab").forEach(item => item.classList.remove("active"));
+          $$(".tab-content").forEach(item => item.classList.remove("active"));
+
+          tab.classList.add("active");
+          $("#" + tab.dataset.tab).classList.add("active");
+
+          if (tab.dataset.tab === "reviews") {
+            history.replaceState(null, "", "#avaliacoes");
+          }
+        });
+      });
+
+      /* Avaliações via âncora */
+      if (window.location.hash === "#avaliacoes") {
+        const reviewsTab = document.querySelector('[data-tab="reviews"]');
+        reviewsTab.click();
+
+        setTimeout(() => {
+          document.querySelector("#avaliacoes").scrollIntoView({
+            behavior:"smooth"
+          });
+        }, 100);
+      }
+
+      /* Links demonstrativos */
+      $$("a").forEach(link => {
+        link.addEventListener("click", event => {
+          const href = link.getAttribute("href");
+
+          if (href === "#" || href === null) {
+            event.preventDefault();
+
+            const text = link.textContent.trim();
+
+            if (text) toast(`Abrindo "${text}"…`);
+          }
+        });
+      });
+
+      /* Logo */
+      $("#logo").addEventListener("click", event => {
+        event.preventDefault();
+        window.scrollTo({top:0, behavior:"smooth"});
+      });
+
+      /* Conta */
+      $("#accountButton").addEventListener("click", () => {
+        openModal(
+          "Minha conta",
+          "Entre na sua conta para acompanhar pedidos, favoritos e ofertas personalizadas.",
+          "A área de login será aberta na próxima etapa.",
+          0,
+          "Continuar"
+        );
+      });
+    })();
+  </script>
+</body>
+</html>

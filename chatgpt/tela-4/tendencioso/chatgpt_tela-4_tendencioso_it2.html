@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitrio — Criar conta</title>
+
+  <style>
+    :root {
+      --purple: #5b2bbf;
+      --purple-dark: #421d8e;
+      --purple-soft: #f0ebff;
+      --orange: #ff6b35;
+      --green: #17834a;
+      --green-soft: #eaf8f0;
+      --text: #242128;
+      --muted: #716b78;
+      --border: #ddd8e4;
+      --bg: #f6f5f8;
+      --white: #fff;
+      --danger: #c83d46;
+      --shadow: 0 12px 35px rgba(43, 25, 70, .10);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background: var(--bg);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    }
+
+    button, input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .topbar {
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--purple-dark);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .topbar strong {
+      margin-right: 4px;
+      color: #ffd2c3;
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-main {
+      width: 1160px;
+      height: 78px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      color: var(--purple);
+      font-size: 29px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--orange);
+    }
+
+    .header-help {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .help-icon {
+      width: 31px;
+      height: 31px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--purple-soft);
+      color: var(--purple);
+      font-weight: 900;
+    }
+
+    main {
+      width: 1160px;
+      margin: auto;
+      padding: 38px 0 65px;
+    }
+
+    .breadcrumb {
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .breadcrumb a {
+      color: var(--purple);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .account-layout {
+      display: grid;
+      grid-template-columns: 1fr 335px;
+      gap: 25px;
+      align-items: start;
+    }
+
+    .form-card,
+    .benefits-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      box-shadow: var(--shadow);
+    }
+
+    .form-card {
+      padding: 31px 36px 34px;
+    }
+
+    .heading {
+      margin-bottom: 25px;
+    }
+
+    .heading h1 {
+      margin: 0 0 7px;
+      font-size: 26px;
+      letter-spacing: -.6px;
+    }
+
+    .heading p {
+      margin: 0;
+      max-width: 650px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .required-note {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    .form-section {
+      padding-top: 21px;
+      margin-top: 21px;
+      border-top: 1px solid #ece8ef;
+    }
+
+    .form-section:first-of-type {
+      padding-top: 0;
+      margin-top: 0;
+      border-top: 0;
+    }
+
+    .section-title {
+      margin: 0 0 15px;
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .section-title span {
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 500;
+    }
+
+    .fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px 17px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 10px;
+      font-weight: 750;
+    }
+
+    .field label .optional {
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .field input {
+      width: 100%;
+      height: 42px;
+      padding: 0 12px;
+      border: 1px solid #d5d0da;
+      border-radius: 7px;
+      outline: none;
+      color: var(--text);
+      background: #fff;
+      font-size: 11px;
+      transition: .15s;
+    }
+
+    .field input:focus {
+      border-color: var(--purple);
+      box-shadow: 0 0 0 3px rgba(91,43,191,.09);
+    }
+
+    .field input.invalid {
+      border-color: var(--danger);
+      box-shadow: 0 0 0 3px rgba(200,61,70,.07);
+    }
+
+    .field input.valid {
+      border-color: var(--green);
+    }
+
+    .field-error {
+      min-height: 14px;
+      margin-top: 4px;
+      color: var(--danger);
+      font-size: 9px;
+    }
+
+    .password-toggle {
+      position: absolute;
+      top: 1px;
+      right: 1px;
+      height: 40px;
+      padding: 0 11px;
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--purple);
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    .password-strength {
+      margin-top: 7px;
+    }
+
+    .strength-bar {
+      height: 4px;
+      display: flex;
+      gap: 3px;
+    }
+
+    .strength-segment {
+      flex: 1;
+      border-radius: 4px;
+      background: #e6e1e9;
+    }
+
+    .strength-label {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 8px;
+    }
+
+    .requirements {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px 15px;
+      margin-top: 8px;
+    }
+
+    .requirement {
+      color: var(--muted);
+      font-size: 8px;
+    }
+
+    .requirement.ok {
+      color: var(--green);
+    }
+
+    .consents {
+      padding: 14px;
+      border: 1px solid #e2dce8;
+      border-radius: 8px;
+      background: #faf9fb;
+    }
+
+    .check-row {
+      position: relative;
+      display: flex;
+      gap: 9px;
+      margin-bottom: 12px;
+      color: #514b57;
+      font-size: 9px;
+      line-height: 1.5;
+    }
+
+    .check-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .check-row input {
+      width: 16px;
+      height: 16px;
+      margin: 0;
+      flex: 0 0 auto;
+      accent-color: var(--purple);
+      cursor: pointer;
+    }
+
+    .check-row label {
+      cursor: pointer;
+    }
+
+    .check-row a {
+      color: var(--purple);
+      font-weight: 750;
+      text-decoration: underline;
+    }
+
+    .marketing-box {
+      margin-top: 13px;
+      padding: 13px;
+      border: 1px solid #ddd2f7;
+      border-radius: 8px;
+      background: var(--purple-soft);
+    }
+
+    .marketing-title {
+      margin-bottom: 8px;
+      color: var(--purple);
+      font-size: 10px;
+      font-weight: 850;
+    }
+
+    .marketing-options {
+      display: flex;
+      gap: 20px;
+    }
+
+    .marketing-option {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #5b5364;
+      font-size: 9px;
+    }
+
+    .marketing-option input {
+      accent-color: var(--purple);
+    }
+
+    .form-footer {
+      margin-top: 22px;
+    }
+
+    .submit-button {
+      width: 100%;
+      height: 49px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--orange);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 850;
+      box-shadow: 0 7px 17px rgba(255,107,53,.22);
+      transition: .15s;
+    }
+
+    .submit-button:hover {
+      background: #e95828;
+      transform: translateY(-1px);
+    }
+
+    .submit-button:disabled {
+      cursor: not-allowed;
+      opacity: .6;
+      transform: none;
+    }
+
+    .login-link {
+      margin-top: 15px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .login-link button {
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: var(--purple);
+      font-weight: 800;
+    }
+
+    .security {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 8px;
+    }
+
+    .benefits-card {
+      overflow: hidden;
+    }
+
+    .benefits-header {
+      padding: 22px;
+      background: linear-gradient(135deg, var(--purple), #7042d1);
+      color: white;
+    }
+
+    .benefits-header .eyebrow {
+      margin-bottom: 6px;
+      color: #dcd0ff;
+      font-size: 8px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+    }
+
+    .benefits-header h2 {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.25;
+    }
+
+    .benefits-header p {
+      margin: 8px 0 0;
+      color: #eee8ff;
+      font-size: 9px;
+      line-height: 1.5;
+    }
+
+    .benefits-list {
+      padding: 20px 21px;
+    }
+
+    .benefit {
+      display: flex;
+      gap: 11px;
+      margin-bottom: 18px;
+    }
+
+    .benefit:last-child {
+      margin-bottom: 0;
+    }
+
+    .benefit-icon {
+      width: 31px;
+      height: 31px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--green-soft);
+      color: var(--green);
+      font-size: 13px;
+    }
+
+    .benefit strong {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 10px;
+    }
+
+    .benefit p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 8px;
+      line-height: 1.45;
+    }
+
+    .club-promo {
+      margin: 0 21px 21px;
+      padding: 14px;
+      border: 1px solid #e3d7ff;
+      border-radius: 8px;
+      background: #f7f3ff;
+    }
+
+    .club-promo strong {
+      display: block;
+      color: var(--purple);
+      font-size: 10px;
+    }
+
+    .club-promo p {
+      margin: 5px 0 9px;
+      color: #625875;
+      font-size: 8px;
+      line-height: 1.5;
+    }
+
+    .club-promo button {
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: var(--purple);
+      font-size: 8px;
+      font-weight: 850;
+    }
+
+    .success-state {
+      display: none;
+      text-align: center;
+      padding: 35px 15px 20px;
+    }
+
+    .success-icon {
+      width: 65px;
+      height: 65px;
+      margin: 0 auto 16px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--green-soft);
+      color: var(--green);
+      font-size: 27px;
+    }
+
+    .success-state h2 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+
+    .success-state p {
+      max-width: 430px;
+      margin: 0 auto 18px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    .success-state button {
+      height: 42px;
+      padding: 0 20px;
+      border: 0;
+      border-radius: 7px;
+      background: var(--purple);
+      color: white;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(26,19,35,.52);
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal {
+      position: relative;
+      width: 430px;
+      padding: 26px;
+      border-radius: 11px;
+      background: white;
+      box-shadow: 0 20px 65px rgba(0,0,0,.25);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 11px;
+      right: 11px;
+      width: 29px;
+      height: 29px;
+      border: 0;
+      border-radius: 50%;
+      background: #f0edf2;
+      font-size: 17px;
+    }
+
+    .modal h2 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .modal p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    .modal button.primary {
+      width: 100%;
+      height: 40px;
+      border: 0;
+      border-radius: 7px;
+      background: var(--purple);
+      color: white;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .toast {
+      position: fixed;
+      right: 23px;
+      bottom: 22px;
+      z-index: 150;
+      max-width: 360px;
+      padding: 12px 15px;
+      border-radius: 8px;
+      background: #29242f;
+      color: white;
+      font-size: 10px;
+      font-weight: 650;
+      box-shadow: 0 10px 30px rgba(0,0,0,.2);
+      opacity: 0;
+      transform: translateY(60px);
+      pointer-events: none;
+      transition: .25s;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      .header-main,
+      main {
+        width: calc(100% - 30px);
+      }
+
+      .account-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .header-main {
+        height: 65px;
+      }
+
+      .header-help span {
+        display: none;
+      }
+
+      main {
+        padding-top: 20px;
+      }
+
+      .form-card {
+        padding: 24px 20px;
+      }
+
+      .fields {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .requirements {
+        grid-template-columns: 1fr;
+      }
+
+      .marketing-options {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    <strong>VITRIO</strong> • Crie sua conta e acompanhe seus pedidos com facilidade
+  </div>
+
+  <header>
+    <div class="header-main">
+      <a href="#" class="logo" id="logo">Vitr<span>io</span></a>
+
+      <div class="header-help">
+        <span class="help-icon">?</span>
+        <span>Precisa de ajuda? <strong>Fale com a Vitrio</strong></span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="#" id="homeLink">Início</a>
+      <span> › </span>
+      Criar conta
+    </div>
+
+    <div class="account-layout">
+
+      <section class="form-card">
+
+        <div id="formContent">
+
+          <div class="heading">
+            <h1>Crie sua conta Vitrio</h1>
+            <p>
+              Cadastre seus dados para finalizar compras mais rápido,
+              acompanhar pedidos e receber ofertas relevantes para você.
+            </p>
+            <div class="required-note">* Campos obrigatórios</div>
+          </div>
+
+          <form id="accountForm" novalidate>
+
+            <section class="form-section">
+              <h2 class="section-title">
+                Seus dados
+                <span>• informações básicas</span>
+              </h2>
+
+              <div class="fields">
+
+                <div class="field full">
+                  <label for="name">Nome completo *</label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    autocomplete="name"
+                    placeholder="Digite seu nome completo">
+                  <div class="field-error" id="nameError"></div>
+                </div>
+
+                <div class="field">
+                  <label for="cpf">CPF *</label>
+                  <input
+                    id="cpf"
+                    name="cpf"
+                    type="text"
+                    inputmode="numeric"
+                    maxlength="14"
+                    autocomplete="off"
+                    placeholder="000.000.000-00">
+                  <div class="field-error" id="cpfError"></div>
+                </div>
+
+                <div class="field">
+                  <label for="birth">
+                    Data de nascimento
+                    <span class="optional">(opcional)</span>
+                  </label>
+                  <input
+                    id="birth"
+                    name="birth"
+                    type="text"
+                    inputmode="numeric"
+                    maxlength="10"
+                    placeholder="DD/MM/AAAA">
+                  <div class="field-error" id="birthError"></div>
+                </div>
+
+                <div class="field">
+                  <label for="email">E-mail *</label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autocomplete="email"
+                    placeholder="voce@exemplo.com">
+                  <div class="field-error" id="emailError"></div>
+                </div>
+
+                <div class="field">
+                  <label for="phone">Celular *</label>
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    inputmode="tel"
+                    maxlength="15"
+                    autocomplete="tel"
+                    placeholder="(00) 00000-0000">
+                  <div class="field-error" id="phoneError"></div>
+                </div>
+
+              </div>
+            </section>
+
+            <section class="form-section">
+              <h2 class="section-title">
+                Crie sua senha
+                <span>• use uma senha exclusiva para sua conta</span>
+              </h2>
+
+              <div class="field">
+                <label for="password">Senha *</label>
+
+                <div class="input-wrap">
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    autocomplete="new-password"
+                    placeholder="Digite sua senha">
+
+                  <button
+                    type="button"
+                    class="password-toggle"
+                    data-target="password">
+                    Mostrar
+                  </button>
+                </div>
+
+                <div class="password-strength">
+                  <div class="strength-bar">
+                    <span class="strength-segment"></span>
+                    <span class="strength-segment"></span>
+                    <span class="strength-segment"></span>
+                    <span class="strength-segment"></span>
+                  </div>
+                  <div class="strength-label" id="strengthLabel">
+                    Digite uma senha
+                  </div>
+                </div>
+
+                <div class="requirements">
+                  <div class="requirement" data-rule="length">○ 8 caracteres ou mais</div>
+                  <div class="requirement" data-rule="upper">○ Uma letra maiúscula</div>
+                  <div class="requirement" data-rule="number">○ Um número</div>
+                  <div class="requirement" data-rule="special">○ Um caractere especial</div>
+                </div>
+
+                <div class="field-error" id="passwordError"></div>
+              </div>
+
+              <div class="field">
+                <label for="confirmPassword">Confirme sua senha *</label>
+
+                <div class="input-wrap">
+                  <input
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type="password"
+                    autocomplete="new-password"
+                    placeholder="Digite a senha novamente">
+
+                  <button
+                    type="button"
+                    class="password-toggle"
+                    data-target="confirmPassword">
+                    Mostrar
+                  </button>
+                </div>
+
+                <div class="field-error" id="confirmPasswordError"></div>
+              </div>
+            </section>
+
+            <section class="form-section">
+              <h2 class="section-title">
+                Preferências de comunicação
+                <span>• você decide como quer receber novidades</span>
+              </h2>
+
+              <div class="consents">
+
+                <div class="check-row">
+                  <input
+                    id="terms"
+                    name="terms"
+                    type="checkbox">
+                  <label for="terms">
+                    Li e concordo com os
+                    <a href="#" class="policy-link" data-policy="termos">
+                      Termos de Uso
+                    </a>
+                    e a
+                    <a href="#" class="policy-link" data-policy="privacidade">
+                      Política de Privacidade
+                    </a>
+                    da Vitrio. *
+                  </label>
+                </div>
+
+                <div class="check-row">
+                  <input
+                    id="marketing"
+                    name="marketing"
+                    type="checkbox"
+                    checked>
+                  <label for="marketing">
+                    Quero receber ofertas, novidades e benefícios personalizados da Vitrio.
+                    Posso cancelar essa preferência quando quiser.
+                  </label>
+                </div>
+
+              </div>
+
+              <div class="marketing-box">
+                <div class="marketing-title">
+                  Como podemos falar com você?
+                </div>
+
+                <div class="marketing-options">
+
+                  <label class="marketing-option">
+                    <input
+                      type="checkbox"
+                      id="emailOptIn"
+                      checked>
+                    E-mail
+                  </label>
+
+                  <label class="marketing-option">
+                    <input
+                      type="checkbox"
+                      id="whatsappOptIn"
+                      checked>
+                    WhatsApp
+                  </label>
+
+                  <label class="marketing-option">
+                    <input
+                      type="checkbox"
+                      id="smsOptIn">
+                    SMS
+                  </label>
+
+                </div>
+              </div>
+            </section>
+
+            <div class="form-footer">
+              <button
+                class="submit-button"
+                id="submitButton"
+                type="submit">
+                Criar minha conta
+              </button>
+
+              <div class="login-link">
+                Já tem uma conta?
+                <button type="button" id="loginButton">
+                  Entrar na Vitrio
+                </button>
+              </div>
+
+              <div class="security">
+                🔒 Seus dados são tratados com segurança e privacidade
+              </div>
+            </div>
+
+          </form>
+        </div>
+
+        <div class="success-state" id="successState">
+          <div class="success-icon">✓</div>
+
+          <h2>Conta criada com sucesso!</h2>
+
+          <p>
+            Seu cadastro está pronto. A partir de agora você poderá
+            acompanhar pedidos, consultar seus dados e finalizar suas
+            próximas compras com mais rapidez.
+          </p>
+
+          <button id="continueButton">
+            Continuar para a Vitrio
+          </button>
+        </div>
+
+      </section>
+
+      <aside class="benefits-card">
+
+        <div class="benefits-header">
+          <div class="eyebrow">Sua conta Vitrio</div>
+          <h2>Uma conta para deixar suas compras mais simples.</h2>
+          <p>
+            Tenha tudo o que precisa para comprar, acompanhar e aproveitar
+            melhor sua experiência na Vitrio.
+          </p>
+        </div>
+
+        <div class="benefits-list">
+
+          <div class="benefit">
+            <div class="benefit-icon">⚡</div>
+            <div>
+              <strong>Checkout mais rápido</strong>
+              <p>
+                Seus dados ficam associados à conta para facilitar suas
+                próximas compras.
+              </p>
+            </div>
+          </div>
+
+          <div class="benefit">
+            <div class="benefit-icon">📦</div>
+            <div>
+              <strong>Acompanhe seus pedidos</strong>
+              <p>
+                Consulte status, detalhes e histórico das suas compras
+                em um só lugar.
+              </p>
+            </div>
+          </div>
+
+          <div class="benefit">
+            <div class="benefit-icon">♡</div>
+            <div>
+              <strong>Seus produtos favoritos</strong>
+              <p>
+                Guarde produtos para encontrar novamente quando estiver
+                pronto para comprar.
+              </p>
+            </div>
+          </div>
+
+          <div class="benefit">
+            <div class="benefit-icon">🏷</div>
+            <div>
+              <strong>Ofertas relevantes</strong>
+              <p>
+                Receba novidades e condições especiais de acordo com
+                suas preferências.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="club-promo">
+          <strong>⭐ Conheça o Clube Vitrio</strong>
+          <p>
+            Clientes cadastrados podem conhecer benefícios exclusivos,
+            ofertas antecipadas e condições especiais.
+          </p>
+          <button id="clubButton">
+            Conhecer o Clube Vitrio →
+          </button>
+        </div>
+
+      </aside>
+
+    </div>
+  </main>
+
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <button class="modal-close" id="modalClose" aria-label="Fechar">×</button>
+      <h2 id="modalTitle">Informações</h2>
+      <p id="modalText"></p>
+      <button class="primary" id="modalPrimary">Entendi</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    (() => {
+      const $ = selector => document.querySelector(selector);
+      const $$ = selector => [...document.querySelectorAll(selector)];
+
+      let toastTimer;
+
+      function showToast(message) {
+        const toast = $("#toast");
+
+        toast.textContent = message;
+        toast.classList.add("show");
+
+        clearTimeout(toastTimer);
+
+        toastTimer = setTimeout(() => {
+          toast.classList.remove("show");
+        }, 2800);
+      }
+
+      function onlyNumbers(value) {
+        return value.replace(/\D/g, "");
+      }
+
+      function maskCPF(value) {
+        value = onlyNumbers(value).slice(0, 11);
+
+        if (value.length > 9) {
+          return value.replace(
+            /(\d{3})(\d{3})(\d{3})(\d{1,2})/,
+            "$1.$2.$3-$4"
+          );
+        }
+
+        if (value.length > 6) {
+          return value.replace(
+            /(\d{3})(\d{3})(\d{1,3})/,
+            "$1.$2.$3"
+          );
+        }
+
+        if (value.length > 3) {
+          return value.replace(
+            /(\d{3})(\d{1,3})/,
+            "$1.$2"
+          );
+        }
+
+        return value;
+      }
+
+      function maskPhone(value) {
+        value = onlyNumbers(value).slice(0, 11);
+
+        if (value.length > 10) {
+          return value.replace(
+            /(\d{2})(\d{5})(\d{4})/,
+            "($1) $2-$3"
+          );
+        }
+
+        if (value.length > 6) {
+          return value.replace(
+            /(\d{2})(\d{4})(\d{1,4})/,
+            "($1) $2-$3"
+          );
+        }
+
+        if (value.length > 2) {
+          return value.replace(
+            /(\d{2})(\d{1,5})/,
+            "($1) $2"
+          );
+        }
+
+        return value;
+      }
+
+      function maskDate(value) {
+        value = onlyNumbers(value).slice(0, 8);
+
+        if (value.length > 4) {
+          return value.replace(
+            /(\d{2})(\d{2})(\d{1,4})/,
+            "$1/$2/$3"
+          );
+        }
+
+        if (value.length > 2) {
+          return value.replace(
+            /(\d{2})(\d{1,2})/,
+            "$1/$2"
+          );
+        }
+
+        return value;
+      }
+
+      $("#cpf").addEventListener("input", event => {
+        event.target.value = maskCPF(event.target.value);
+      });
+
+      $("#phone").addEventListener("input", event => {
+        event.target.value = maskPhone(event.target.value);
+      });
+
+      $("#birth").addEventListener("input", event => {
+        event.target.value = maskDate(event.target.value);
+      });
+
+      function validateCPF(cpf) {
+        cpf = onlyNumbers(cpf);
+
+        if (cpf.length !== 11) return false;
+        if (/^(\d)\1{10}$/.test(cpf)) return false;
+
+        let sum = 0;
+
+        for (let i = 0; i < 9; i++) {
+          sum += Number(cpf[i]) * (10 - i);
+        }
+
+        let digit = (sum * 10) % 11;
+
+        if (digit === 10) digit = 0;
+
+        if (digit !== Number(cpf[9])) return false;
+
+        sum = 0;
+
+        for (let i = 0; i < 10; i++) {
+          sum += Number(cpf[i]) * (11 - i);
+        }
+
+        digit = (sum * 10) % 11;
+
+        if (digit === 10) digit = 0;
+
+        return digit === Number(cpf[10]);
+      }
+
+      function validateDate(value) {
+        const match = value.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+
+        if (!match) return false;
+
+        const day = Number(match[1]);
+        const month = Number(match[2]);
+        const year = Number(match[3]);
+
+        const date = new Date(year, month - 1, day);
+        const now = new Date();
+
+        if (
+          date.getFullYear() !== year ||
+          date.getMonth() !== month - 1 ||
+          date.getDate() !== day
+        ) {
+          return false;
+        }
+
+        if (date > now) return false;
+
+        const age =
+          now.getFullYear() -
+          year -
+          (
+            now.getMonth() < month - 1 ||
+            (
+              now.getMonth() === month - 1 &&
+              now.getDate() < day
+            )
+              ? 1
+              : 0
+          );
+
+        return age >= 13;
+      }
+
+      function passwordRules(password) {
+        return {
+          length: password.length >= 8,
+          upper: /[A-Z]/.test(password),
+          number: /\d/.test(password),
+          special: /[^A-Za-z0-9]/.test(password)
+        };
+      }
+
+      function updatePasswordStrength() {
+        const password = $("#password").value;
+        const rules = passwordRules(password);
+        const segments = $$(".strength-segment");
+        const label = $("#strengthLabel");
+
+        const score = Object.values(rules).filter(Boolean).length;
+
+        const colors = [
+          "#e6e1e9",
+          "#d9534f",
+          "#f0a52d",
+          "#69a83c",
+          "#17834a"
+        ];
+
+        segments.forEach((segment, index) => {
+          segment.style.background =
+            index < score
+              ? colors[score]
+              : "#e6e1e9";
+        });
+
+        if (!password) {
+          label.textContent = "Digite uma senha";
+        } else if (score <= 1) {
+          label.textContent = "Senha fraca";
+        } else if (score <= 3) {
+          label.textContent = "Senha média";
+        } else {
+          label.textContent = "Senha forte";
+        }
+
+        Object.entries(rules).forEach(([rule, valid]) => {
+          const element =
+            document.querySelector(`[data-rule="${rule}"]`);
+
+          element.classList.toggle("ok", valid);
+
+          const symbols = element.textContent
+            .replace(/^.[ ]/, "");
+
+          element.textContent =
+            (valid ? "✓ " : "○ ") + symbols;
+        });
+      }
+
+      $("#password").addEventListener(
+        "input",
+        updatePasswordStrength
+      );
+
+      $$(".password-toggle").forEach(button => {
+        button.addEventListener("click", () => {
+          const input =
+            document.getElementById(button.dataset.target);
+
+          const isPassword =
+            input.type === "password";
+
+          input.type =
+            isPassword ? "text" : "password";
+
+          button.textContent =
+            isPassword ? "Ocultar" : "Mostrar";
+        });
+      });
+
+      function setError(id, message) {
+        const input = $("#" + id);
+        const error = $("#" + id + "Error");
+
+        if (!input || !error) return;
+
+        input.classList.toggle("invalid", Boolean(message));
+        input.classList.toggle(
+          "valid",
+          !message && Boolean(input.value)
+        );
+
+        error.textContent = message || "";
+      }
+
+      function clearErrors() {
+        [
+          "name",
+          "cpf",
+          "birth",
+          "email",
+          "phone",
+          "password",
+          "confirmPassword"
+        ].forEach(id => setError(id, ""));
+      }
+
+      function validateForm() {
+        clearErrors();
+
+        let valid = true;
+
+        const name = $("#name").value.trim();
+        const cpf = $("#cpf").value;
+        const birth = $("#birth").value.trim();
+        const email = $("#email").value.trim();
+        const phone = $("#phone").value;
+        const password = $("#password").value;
+        const confirmPassword =
+          $("#confirmPassword").value;
+
+        if (name.length < 5 || !name.includes(" ")) {
+          setError(
+            "name",
+            "Informe seu nome e sobrenome."
+          );
+          valid = false;
+        }
+
+        if (!validateCPF(cpf)) {
+          setError(
+            "cpf",
+            "Digite um CPF válido."
+          );
+          valid = false;
+        }
+
+        if (birth && !validateDate(birth)) {
+          setError(
+            "birth",
+            "Informe uma data válida."
+          );
+          valid = false;
+        }
+
+        if (
+          !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+        ) {
+          setError(
+            "email",
+            "Digite um e-mail válido."
+          );
+          valid = false;
+        }
+
+        if (onlyNumbers(phone).length < 10) {
+          setError(
+            "phone",
+            "Digite um celular válido."
+          );
+          valid = false;
+        }
+
+        const rules = passwordRules(password);
+
+        if (!Object.values(rules).every(Boolean)) {
+          setError(
+            "password",
+            "Sua senha ainda não atende a todos os requisitos."
+          );
+          valid = false;
+        }
+
+        if (
+          !confirmPassword ||
+          confirmPassword !== password
+        ) {
+          setError(
+            "confirmPassword",
+            "As senhas não coincidem."
+          );
+          valid = false;
+        }
+
+        if (!$("#terms").checked) {
+          showToast(
+            "Para criar a conta, aceite os Termos de Uso e a Política de Privacidade."
+          );
+          valid = false;
+        }
+
+        return valid;
+      }
+
+      $("#accountForm").addEventListener(
+        "submit",
+        event => {
+          event.preventDefault();
+
+          if (!validateForm()) {
+            const firstError =
+              document.querySelector(".invalid");
+
+            if (firstError) {
+              firstError.focus();
+            }
+
+            return;
+          }
+
+          const submitButton = $("#submitButton");
+
+          submitButton.disabled = true;
+          submitButton.textContent =
+            "Criando sua conta…";
+
+          setTimeout(() => {
+            $("#formContent").style.display = "none";
+            $("#successState").style.display = "block";
+
+            showToast(
+              "Sua conta Vitrio foi criada com sucesso!"
+            );
+          }, 900);
+        }
+      );
+
+      /* Links de políticas */
+
+      $$(".policy-link").forEach(link => {
+        link.addEventListener("click", event => {
+          event.preventDefault();
+
+          const policy = link.dataset.policy;
+
+          if (policy === "termos") {
+            openModal(
+              "Termos de Uso",
+              "Os Termos de Uso definem as condições para utilização da Vitrio, compras, pagamentos, entregas e demais serviços disponibilizados pela loja."
+            );
+          } else {
+            openModal(
+              "Política de Privacidade",
+              "A Vitrio utiliza os dados necessários para criar e administrar sua conta, processar pedidos e oferecer uma experiência de compra adequada. As preferências de comunicação podem ser alteradas posteriormente."
+            );
+          }
+        });
+      });
+
+      function openModal(title, text) {
+        $("#modalTitle").textContent = title;
+        $("#modalText").textContent = text;
+        $("#modalOverlay").classList.add("open");
+      }
+
+      function closeModal() {
+        $("#modalOverlay").classList.remove("open");
+      }
+
+      $("#modalClose").addEventListener(
+        "click",
+        closeModal
+      );
+
+      $("#modalPrimary").addEventListener(
+        "click",
+        closeModal
+      );
+
+      $("#modalOverlay").addEventListener(
+        "click",
+        event => {
+          if (event.target === $("#modalOverlay")) {
+            closeModal();
+          }
+        }
+      );
+
+      document.addEventListener(
+        "keydown",
+        event => {
+          if (
+            event.key === "Escape" &&
+            $("#modalOverlay").classList.contains("open")
+          ) {
+            closeModal();
+          }
+        }
+      );
+
+      /* Login */
+
+      $("#loginButton").addEventListener(
+        "click",
+        () => {
+          openModal(
+            "Entrar na Vitrio",
+            "A área de login pode ser acessada para clientes que já possuem uma conta. Nenhum cadastro novo será criado por esta ação."
+          );
+        }
+      );
+
+      /* Clube */
+
+      $("#clubButton").addEventListener(
+        "click",
+        () => {
+          openModal(
+            "Clube Vitrio",
+            "Conheça benefícios, ofertas antecipadas e condições especiais disponíveis para clientes do Clube Vitrio."
+          );
+        }
+      );
+
+      $("#continueButton").addEventListener(
+        "click",
+        () => {
+          showToast(
+            "Bem-vindo à Vitrio! Abrindo a loja…"
+          );
+        }
+      );
+
+      $("#logo").addEventListener(
+        "click",
+        event => {
+          event.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
+        }
+      );
+
+      $("#homeLink").addEventListener(
+        "click",
+        event => {
+          event.preventDefault();
+          showToast("Voltando para a vitrine da Vitrio…");
+        }
+      );
+
+      $("#marketing").addEventListener(
+        "change",
+        event => {
+          const checked = event.target.checked;
+
+          $$(".marketing-option input").forEach(
+            input => {
+              input.checked = checked;
+            }
+          );
+
+          if (!checked) {
+            showToast(
+              "Preferências de marketing desativadas."
+            );
+          }
+        }
+      );
+
+      $$(".marketing-option input").forEach(input => {
+        input.addEventListener("change", () => {
+          const anySelected =
+            $$(".marketing-option input")
+              .some(option => option.checked);
+
+          $("#marketing").checked = anySelected;
+        });
+      });
+
+      /*
+        Feedback imediato em campos obrigatórios.
+      */
+
+      $$("#name, #cpf, #email, #phone, #password, #confirmPassword")
+        .forEach(input => {
+          input.addEventListener("blur", () => {
+            if (input.value.trim()) {
+              input.classList.remove("invalid");
+            }
+          });
+        });
+
+      updatePasswordStrength();
+    })();
+  </script>
+
+</body>
+</html>

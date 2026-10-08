@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excluir Conta - Vitrio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1e40af;
+            --primary-light: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+            --danger-color: #991b1b;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-light: #9ca3af;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --bg-tertiary: #f3f4f6;
+            --border-color: #e5e7eb;
+            --border-light: #f3f4f6;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-primary);
+            background-color: var(--bg-secondary);
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .header-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .header-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .header-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .breadcrumb {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            margin: 2rem 0 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .breadcrumb a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            color: var(--text-light);
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .form-section {
+            background: var(--bg-primary);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border-light);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Alert Banner */
+        .alert-banner {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(244, 63, 94, 0.08) 100%);
+            border: 2px solid var(--error-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .alert-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-weight: 700;
+            color: var(--danger-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .alert-message {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+
+        .alert-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .alert-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .alert-list li::before {
+            content: '✗';
+            color: var(--error-color);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* Account Summary */
+        .account-summary {
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--error-color);
+        }
+
+        .summary-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .summary-label {
+            color: var(--text-secondary);
+        }
+
+        .summary-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Confirmation Checklist */
+        .confirmation-section {
+            margin-bottom: 2rem;
+        }
+
+        .confirmation-title {
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--bg-primary);
+        }
+
+        .checkbox-item:hover {
+            border-color: var(--error-color);
+            background: rgba(239, 68, 68, 0.02);
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 0.2rem;
+            cursor: pointer;
+            accent-color: var(--error-color);
+            flex-shrink: 0;
+        }
+
+        .checkbox-item.checked {
+            border-color: var(--success-color);
+            background: rgba(16, 185, 129, 0.02);
+        }
+
+        .checkbox-content {
+            flex: 1;
+        }
+
+        .checkbox-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 0.25rem;
+            cursor: pointer;
+        }
+
+        .checkbox-description {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Password Verification */
+        .password-section {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.05) 0%, rgba(245, 158, 11, 0.05) 100%);
+            border: 1px solid var(--warning-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .password-title {
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .password-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: var(--transition);
+            background: white;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--error-color);
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        /* Data Export */
+        .export-section {
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .export-title {
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .export-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .export-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .export-button:hover {
+            background: var(--bg-secondary);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* Form Actions */
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .button {
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .button-danger {
+            background: var(--error-color);
+            color: white;
+            flex: 1;
+        }
+
+        .button-danger:hover:not(:disabled) {
+            background: var(--danger-color);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .button-danger:disabled {
+            background: var(--text-light);
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .button-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            flex: 1;
+        }
+
+        .button-secondary:hover {
+            background: var(--border-color);
+        }
+
+        .button-loading {
+            position: relative;
+        }
+
+        .button-loading::after {
+            content: '';
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar-card {
+            background: var(--bg-primary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
+        }
+
+        .sidebar-card.danger {
+            border: 2px solid var(--error-color);
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.02) 0%, rgba(244, 63, 94, 0.02) 100%);
+        }
+
+        .sidebar-title {
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .sidebar-card.danger .sidebar-title {
+            color: var(--error-color);
+        }
+
+        .sidebar-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .info-item {
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .info-label {
+            color: var(--text-secondary);
+            display: block;
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+        }
+
+        .info-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .support-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .support-link:hover {
+            text-decoration: underline;
+        }
+
+        .timeline {
+            border-left: 2px solid var(--border-color);
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .timeline-item {
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.875rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: var(--border-color);
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-description {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-primary);
+            border-radius: 16px;
+            padding: 2.5rem;
+            max-width: 550px;
+            width: 100%;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .modal-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            text-align: center;
+        }
+
+        .modal-subtitle {
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .modal-message {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        .modal-verification {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .verification-label {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .verification-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 0.1em;
+            text-align: center;
+        }
+
+        .verification-input:focus {
+            outline: none;
+            border-color: var(--error-color);
+        }
+
+        .verification-note {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+
+        .modal-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .modal-button {
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal-button.danger {
+            background: var(--error-color);
+            color: white;
+        }
+
+        .modal-button.danger:hover {
+            background: var(--danger-color);
+        }
+
+        .modal-button.danger:disabled {
+            background: var(--text-light);
+            cursor: not-allowed;
+        }
+
+        .modal-button.secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .modal-button.secondary:hover {
+            background: var(--border-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                display: grid;
+            }
+
+            .sidebar > * {
+                grid-column: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .form-section {
+                padding: 1.5rem;
+            }
+
+            .form-actions {
+                flex-direction: column-reverse;
+            }
+
+            .button {
+                width: 100%;
+            }
+
+            .alert-banner {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                grid-template-columns: 1fr;
+            }
+
+            .breadcrumb {
+                font-size: 0.8rem;
+                gap: 0.25rem;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+            }
+
+            .alert-icon {
+                font-size: 1.5rem;
+            }
+
+            .modal-icon {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="#" class="logo">
+                <div class="logo-icon">V</div>
+                Vitrio
+            </a>
+            <div class="header-links">
+                <a href="#">Catálogo</a>
+                <a href="#">Minha Conta</a>
+                <a href="#">Contato</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="#">Minha Conta</a>
+                <span>/</span>
+                <a href="#">Configurações</a>
+                <span>/</span>
+                <span>Excluir Conta</span>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <form id="deleteAccountForm" class="form-section">
+                    <!-- Header -->
+                    <div class="section-header">
+                        <h1 class="section-title">Excluir Minha Conta</h1>
+                        <p class="section-description">
+                            Esta ação é permanente e não pode ser desfeita. Todos os seus dados serão removidos.
+                        </p>
+                    </div>
+
+                    <!-- Warning Alert -->
+                    <div class="alert-banner">
+                        <div class="alert-icon">⚠️</div>
+                        <div class="alert-content">
+                            <div class="alert-title">Aviso: Esta Ação é Irreversível</div>
+                            <div class="alert-message">
+                                Ao excluir sua conta, você perderá acesso permanente a:
+                            </div>
+                            <ul class="alert-list">
+                                <li>Histórico de pedidos e compras</li>
+                                <li>Dados pessoais e endereços salvos</li>
+                                <li>Créditos, cashback e promoções ativas</li>
+                                <li>Programa de fidelidade e pontos</li>
+                                <li>Avaliações e comentários realizados</li>
+                                <li>Lista de desejos</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Account Summary -->
+                    <div class="account-summary">
+                        <div class="summary-title">Resumo da Sua Conta</div>
+                        <div class="summary-item">
+                            <span class="summary-label">Pedidos Realizados</span>
+                            <span class="summary-value">24</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Total Gasto</span>
+                            <span class="summary-value">R$ 4.520,00</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Cashback Disponível</span>
+                            <span class="summary-value">R$ 145,60</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Avaliações Criadas</span>
+                            <span class="summary-value">18</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Dados Pessoais</span>
+                            <span class="summary-value">Serão Deletados</span>
+                        </div>
+                    </div>
+
+                    <!-- Export Data Option -->
+                    <div class="export-section">
+                        <div class="export-title">
+                            📥 Fazer Download de Seus Dados
+                        </div>
+                        <div class="export-description">
+                            Antes de excluir sua conta, você pode baixar uma cópia de todos os seus dados em formato JSON.
+                            Esta é sua última oportunidade de acessar estas informações.
+                        </div>
+                        <button type="button" class="export-button" id="exportBtn">
+                            💾 Baixar Meus Dados (JSON)
+                        </button>
+                    </div>
+
+                    <!-- Confirmation Checklist -->
+                    <div class="confirmation-section">
+                        <div class="confirmation-title">Confirmação de Exclusão</div>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item" id="check1">
+                                <input type="checkbox" class="confirm-check" data-check="1" required>
+                                <div class="checkbox-content">
+                                    <span class="checkbox-label">Entendi que esta ação não pode ser desfeita</span>
+                                    <span class="checkbox-description">
+                                        Não será possível recuperar minha conta ou dados após a exclusão
+                                    </span>
+                                </div>
+                            </label>
+
+                            <label class="checkbox-item" id="check2">
+                                <input type="checkbox" class="confirm-check" data-check="2" required>
+                                <div class="checkbox-content">
+                                    <span class="checkbox-label">Meus dados serão completamente removidos</span>
+                                    <span class="checkbox-description">
+                                        Informações pessoais, endereços, histórico de pedidos e preferências serão deletados
+                                    </span>
+                                </div>
+                            </label>
+
+                            <label class="checkbox-item" id="check3">
+                                <input type="checkbox" class="confirm-check" data-check="3" required>
+                                <div class="checkbox-content">
+                                    <span class="checkbox-label">Perco acesso imediato à minha conta</span>
+                                    <span class="checkbox-description">
+                                        Não poderei mais acessar a Vitrio com este e-mail
+                                    </span>
+                                </div>
+                            </label>
+
+                            <label class="checkbox-item" id="check4">
+                                <input type="checkbox" class="confirm-check" data-check="4" required>
+                                <div class="checkbox-content">
+                                    <span class="checkbox-label">Perco benefícios e créditos em aberto</span>
+                                    <span class="checkbox-description">
+                                        Cashback (R$ 145,60), descontos e promoções ativas serão perdidos para sempre
+                                    </span>
+                                </div>
+                            </label>
+
+                            <label class="checkbox-item" id="check5">
+                                <input type="checkbox" class="confirm-check" data-check="5" required>
+                                <div class="checkbox-content">
+                                    <span class="checkbox-label">Estou ciente de requisitos legais</span>
+                                    <span class="checkbox-description">
+                                        Retenção de dados para fins legais e fiscais conforme legislação (LGPD/Receita Federal)
+                                    </span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Password Verification -->
+                    <div class="password-section">
+                        <div class="password-title">
+                            🔐 Verificação de Identidade
+                        </div>
+                        <div class="password-description">
+                            Por segurança, você deve confirmar sua senha para continuar com a exclusão da conta.
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Sua Senha</label>
+                            <div class="password-wrapper">
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    placeholder="Digite sua senha" 
+                                    required
+                                >
+                                <button type="button" class="password-toggle" id="togglePassword">👁️</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <a href="#" class="button button-secondary">
+                            Cancelar e Voltar
+                        </a>
+                        <button type="submit" class="button button-danger" id="submitBtn" disabled>
+                            Excluir Minha Conta Permanentemente
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <!-- Important Info -->
+                    <div class="sidebar-card danger">
+                        <div class="sidebar-title">
+                            ⚠️ Informações Importantes
+                        </div>
+                        <div class="sidebar-content">
+                            <div class="info-item">
+                                <div class="info-label">O que acontece com meus pedidos?</div>
+                                <div class="info-text">
+                                    Seu histórico de pedidos será removido de sua conta, mas os pedidos já entregues permanecerão em nossos registros por motivos fiscais.
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">E meu e-mail?</div>
+                                <div class="info-text">
+                                    Seu e-mail será desativado e não poderá ser reutilizado para criar uma nova conta por 30 dias.
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Como reativar?</div>
+                                <div class="info-text">
+                                    Você não pode reativar sua conta após a exclusão. Pode criar uma nova conta com um e-mail diferente.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline -->
+                    <div class="sidebar-card">
+                        <div class="sidebar-title">
+                            📅 O que Acontecerá
+                        </div>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-date">Agora</div>
+                                <div class="timeline-description">
+                                    Enviaremos e-mail de confirmação
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">24 Horas</div>
+                                <div class="timeline-description">
+                                    Período de reflexão (pode cancelar)
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">30 Dias</div>
+                                <div class="timeline-description">
+                                    Dados completamente removidos
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Support -->
+                    <div class="sidebar-card">
+                        <div class="sidebar-title">
+                            💬 Precisa de Ajuda?
+                        </div>
+                        <div class="sidebar-content">
+                            <a href="#" class="support-link">
+                                📞 Falar com Suporte
+                            </a>
+                            <a href="#" class="support-link">
+                                ✉️ Enviar E-mail
+                            </a>
+                            <a href="#" class="support-link">
+                                ❓ Ver Perguntas Frequentes
+                            </a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-icon">🚨</div>
+            <h2 class="modal-title">Última Chance para Mudar de Ideia</h2>
+            <p class="modal-subtitle">Você tem 24 horas para cancelar essa solicitação</p>
+            <div class="modal-message">
+                Você está prestes a excluir permanentemente sua conta e todos os seus dados na Vitrio. 
+                Esta ação não pode ser desfeita. Se tem alguma dúvida, <strong>contate nosso suporte agora</strong>.
+            </div>
+
+            <div class="modal-verification">
+                <label class="verification-label">Digite "CONFIRMO" para continuar:</label>
+                <input 
+                    type="text" 
+                    id="verificationInput" 
+                    class="verification-input" 
+                    placeholder="CONFIRMO"
+                    autocomplete="off"
+                >
+                <div class="verification-note">Sensível a maiúsculas</div>
+            </div>
+
+            <div class="modal-buttons">
+                <button class="modal-button danger" id="confirmDelete" disabled>
+                    Sim, Excluir Minha Conta
+                </button>
+                <button type="button" class="modal-button secondary" id="cancelDelete">
+                    Não, Manter Minha Conta
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-icon">✓</div>
+            <h2 class="modal-title">Solicitação Recebida</h2>
+            <p class="modal-subtitle">Sua conta será excluída em 24 horas</p>
+            <div class="modal-message">
+                Enviamos um e-mail para <strong>seu@email.com</strong> com um link para confirmar a exclusão. 
+                Você também pode cancelar a solicitação clicando neste link nos próximos 24 horas.
+            </div>
+
+            <div style="background: var(--bg-tertiary); border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem; text-align: center;">
+                <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.75rem;">
+                    Se não cancelar em 24 horas
+                </div>
+                <div style="font-weight: 700; color: var(--error-color); font-size: 1.1rem;">
+                    Sua conta será permanentemente excluída
+                </div>
+            </div>
+
+            <div class="modal-buttons">
+                <button class="modal-button secondary" id="goHome">
+                    Ir para Página Inicial
+                </button>
+                <a href="mailto:suporte@vitrio.com.br" class="modal-button secondary" style="text-decoration: none; text-align: center;">
+                    📧 Contatar Suporte
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('deleteAccountForm');
+        const confirmChecks = document.querySelectorAll('.confirm-check');
+        const passwordInput = document.getElementById('password');
+        const togglePasswordBtn = document.getElementById('togglePassword');
+        const submitBtn = document.getElementById('submitBtn');
+        const confirmationModal = document.getElementById('confirmationModal');
+        const successModal = document.getElementById('successModal');
+        const verificationInput = document.getElementById('verificationInput');
+        const confirmDeleteBtn = document.getElementById('confirmDelete');
+        const exportBtn = document.getElementById('exportBtn');
+
+        // Toggle password visibility
+        togglePasswordBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            togglePasswordBtn.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
+        });
+
+        // Update checkbox UI and button state
+        confirmChecks.forEach(check => {
+            check.addEventListener('change', () => {
+                const parentLabel = check.closest('.checkbox-item');
+                if (check.checked) {
+                    parentLabel.classList.add('checked');
+                } else {
+                    parentLabel.classList.remove('checked');
+                }
+                updateSubmitButton();
+            });
+        });
+
+        // Verification input
+        verificationInput.addEventListener('input', () => {
+            confirmDeleteBtn.disabled = verificationInput.value !== 'CONFIRMO';
+        });
+
+        function updateSubmitButton() {
+            const allChecked = Array.from(confirmChecks).every(check => check.checked);
+            const passwordFilled = passwordInput.value.length > 0;
+            submitBtn.disabled = !(allChecked && passwordFilled);
+        }
+
+        passwordInput.addEventListener('input', updateSubmitButton);
+
+        // Form submission
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Validate all checks
+            const allChecked = Array.from(confirmChecks).every(check => check.checked);
+            if (!allChecked) {
+                alert('Por favor, confirme todos os pontos para continuar');
+                return;
+            }
+
+            if (!passwordInput.value) {
+                alert('Por favor, digite sua senha');
+                return;
+            }
+
+            // Show confirmation modal
+            verificationInput.value = '';
+            confirmDeleteBtn.disabled = true;
+            confirmationModal.classList.add('active');
+        });
+
+        // Confirmation modal - Confirm
+        confirmDeleteBtn.addEventListener('click', () => {
+            submitBtn.disabled = true;
+            submitBtn.classList.add('button-loading');
+            submitBtn.textContent = 'Processando...';
+
+            // Simulate API call
+            setTimeout(() => {
+                confirmationModal.classList.remove('active');
+                successModal.classList.add('active');
+
+                // Collect deletion data
+                const deletionData = {
+                    email: 'seu@email.com', // In real app, get from user data
+                    timestamp: new Date().toISOString(),
+                    confirmedDeletion: true
+                };
+
+                console.log('Solicitação de exclusão realizada:', deletionData);
+            }, 2000);
+        });
+
+        // Confirmation modal - Cancel
+        document.getElementById('cancelDelete').addEventListener('click', () => {
+            confirmationModal.classList.remove('active');
+            verificationInput.value = '';
+        });
+
+        // Success modal - Go home
+        document.getElementById('goHome').addEventListener('click', () => {
+            window.location.href = '#home';
+        });
+
+        // Export data
+        exportBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Simulate data export
+            const userData = {
+                profile: {
+                    name: 'João Silva Santos',
+                    email: 'joao@example.com',
+                    phone: '(11) 98765-4321',
+                    birthDate: '1990-05-15',
+                    joinDate: '2020-03-10'
+                },
+                addresses: [
+                    {
+                        type: 'Residencial',
+                        street: 'Avenida Paulista, 1000',
+                        number: '2501',
+                        city: 'São Paulo',
+                        state: 'SP'
+                    }
+                ],
+                orders: [
+                    {
+                        id: 'ORD-001',
+                        date: '2026-10-01',
+                        total: 299.90,
+                        status: 'Entregue'
+                    }
+                ],
+                reviews: [
+                    {
+                        productId: 'PROD-123',
+                        rating: 5,
+                        comment: 'Produto excelente!'
+                    }
+                ],
+                exportedAt: new Date().toISOString()
+            };
+
+            // Create download
+            const dataStr = JSON.stringify(userData, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `vitrio-dados-pessoais-${Date.now()}.json`;
+            link.click();
+            URL.revokeObjectURL(url);
+
+            alert('Seus dados foram baixados com sucesso!');
+        });
+
+        // Close modal on background click
+        [confirmationModal, successModal].forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal && modal === successModal) {
+                    // Prevent closing success modal by clicking background
+                } else if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        });
+
+        // Prevent form submission on modal
+        confirmationModal.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') e.preventDefault();
+        });
+    </script>
+</body>
+</html>

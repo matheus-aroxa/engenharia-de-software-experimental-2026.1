@@ -1,0 +1,59 @@
+Pergunta 1 — Escolhas visuais
+
+A home foi construída com uma linguagem visual de e-commerce brasileiro moderno: branco e cinza-claro predominam para dar sensação de organização e variedade de produtos, enquanto o roxo #5B2BBF identifica a Vitrio e o laranja #FF6B35 é reservado principalmente para ofertas e ações comerciais.
+
+A hierarquia começa pelo banner principal, seguido por elementos de confiança, categorias, produtos em destaque, ofertas relâmpago, mais vendidos, Clube Vitrio e captura de e-mail. Essa ordem conduz o visitante da descoberta → exploração → prova social → oferta → conversão → fidelização.
+
+Os cards de produto são compactos, permitindo apresentar quatro produtos simultaneamente na referência desktop de 1.280 px. Preço, desconto, avaliação e preço no Pix aparecem próximos uns dos outros, reduzindo a quantidade de informação que o usuário precisa procurar. O CTA de compra é visualmente forte, mas não compete com o banner principal.
+
+Os banners e ofertas utilizam blocos de cor e placeholders #E0E0E0 no lugar de imagens externas, conforme solicitado. O layout também possui elementos destinados ao aumento do ticket médio, como produtos complementares, categorias e diferentes vitrines.
+Pergunta 2 — O que aciona a exibição da home?
+
+A home é a porta de entrada principal da Vitrio. Ela aparece quando o visitante acessa a raiz da loja, retorna à página inicial pelo logo ou chega ao e-commerce sem uma categoria ou produto específico previamente selecionado.
+
+Diferentemente do carrinho, a home é uma etapa de descoberta e consideração. O usuário ainda não necessariamente decidiu o que comprar, então a interface oferece múltiplos caminhos: buscar diretamente, navegar por categoria, aproveitar uma oferta, conhecer produtos mais vendidos ou aderir ao Clube Vitrio.
+Pergunta 3 — Interações possíveis
+
+O usuário pode:
+
+    Pesquisar produtos pelo campo de busca.
+
+    Navegar pelas categorias do menu superior.
+
+    Avançar e voltar nos três banners promocionais.
+
+    Selecionar diretamente cada banner pelo indicador inferior.
+
+    Clicar nos CTAs dos banners.
+
+    Acessar categorias como Celulares, TV & Áudio, Informática, Casa & Cozinha, Eletroportáteis e Games.
+
+    Abrir a vitrine de produtos em destaque.
+
+    Favoritar produtos individualmente.
+
+    Adicionar produtos ao carrinho.
+
+    Visualizar a quantidade de itens no carrinho.
+
+    Abrir o carrinho pelo ícone no cabeçalho.
+
+    Consultar ofertas relâmpago com contador regressivo.
+
+    Explorar a seção de mais vendidos.
+
+    Conhecer o Clube Vitrio e iniciar o fluxo de assinatura.
+
+    Abrir a área Minha conta.
+
+    Informar e-mail e senha no modal de conta.
+
+    Fechar modais pelo botão ×, clicando fora deles ou pressionando Esc.
+
+    Cadastrar o e-mail para receber ofertas.
+
+    Aceitar ou configurar a preferência de cookies.
+
+    Usar os links institucionais, de atendimento, segurança e políticas no rodapé.
+
+A estrutura prioriza conversão sem transformar a home em uma tela excessivamente agressiva: o visitante recebe ofertas e CTAs, mas também encontra categorias, benefícios, avaliações, segurança, conteúdo de descoberta e caminhos claros para continuar navegando.

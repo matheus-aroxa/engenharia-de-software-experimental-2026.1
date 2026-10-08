@@ -1,0 +1,9 @@
+Pergunta 1
+
+A home foi estruturada como uma vitrine comercial de e-commerce, com fundo cinza-claro para destacar os cards brancos e reduzir a sensação de excesso de elementos. O roxo é a cor proprietária principal da Vitrio e foi concentrado nos elementos de ação, enquanto o laranja funciona como cor de destaque para ofertas, descontos e o contador do carrinho. O banner principal ocupa a maior área visual e concentra a campanha vigente, seguido por categorias, produtos em destaque, uma faixa de ofertas e uma segunda vitrine direcionada para casa. Os produtos utilizam cards uniformes, preço em tamanho maior, preço anterior riscado, parcelamento e botão de compra, criando uma hierarquia semelhante à de lojas virtuais comerciais.
+Pergunta 2
+
+Esta é a página inicial da Vitrio, portanto ela é exibida assim que o usuário entra na loja ou retorna à página principal. Seu objetivo é apresentar rapidamente as principais campanhas, categorias e produtos, permitindo que o usuário escolha entre pesquisar diretamente, navegar por categoria, acessar uma oferta ou abrir um produto e adicioná-lo ao carrinho.
+Pergunta 3
+
+O usuário pode pesquisar produtos pelo campo de busca, clicar na logo para retornar ao topo, abrir “Minha conta”, consultar o carrinho, navegar pelos itens do menu superior, selecionar qualquer categoria, alternar os banners principais e clicar em seus respectivos botões. Também pode abrir as áreas de produtos em destaque e ofertas, favoritar ou desfavoritar produtos e adicionar qualquer produto disponível ao carrinho. O contador e o valor do carrinho são atualizados automaticamente. O acesso à conta abre um modal de login, que pode ser fechado pelo botão de fechar, pelo botão “Cancelar”, clicando fora do modal ou pressionando Esc, e o formulário de login valida os campos antes de concluir. Os links de navegação rolam suavemente para suas respectivas seções, enquanto ações sem uma página específica apresentam uma mensagem informativa.

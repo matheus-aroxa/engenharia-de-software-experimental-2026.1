@@ -1,0 +1,43 @@
+Pergunta 1 — Escolhas visuais
+
+A tela usa uma abordagem deliberadamente mais neutra do que uma página de aquisição. O fundo cinza-claro e os cards brancos criam uma experiência de gerenciamento de conta, enquanto o roxo mantém a identidade do Vitrio+. O vermelho é usado somente para ações relacionadas ao cancelamento, deixando claro que se trata de uma ação potencialmente destrutiva.
+
+A hierarquia começa com o status atual da assinatura, depois pergunta o motivo do cancelamento e, antes do CTA definitivo, apresenta uma alternativa de retenção. A oferta de 50% de desconto por três meses funciona como uma última oportunidade de retenção sem esconder ou dificultar o cancelamento.
+
+O resumo lateral reforça objetivamente quais benefícios serão perdidos, enquanto o aviso informa até quando eles continuam disponíveis. O objetivo é reduzir cancelamentos impulsivos e, ao mesmo tempo, manter um fluxo de cancelamento transparente e fácil de concluir.
+Pergunta 2 — O que aciona essa tela?
+
+A tela aparece quando um cliente já assinante acessa o gerenciamento do Vitrio+ e escolhe a opção de cancelar a assinatura.
+
+Um fluxo típico seria:
+
+Minha conta → Vitrio+ → Gerenciar assinatura → Cancelar assinatura.
+
+Ela acontece, portanto, depois que o cliente já decidiu considerar o cancelamento, e não durante a aquisição do clube. Nesse momento, a interface apresenta uma alternativa de retenção, mas não bloqueia artificialmente a saída.
+Pergunta 3 — Interações possíveis
+
+O cliente pode:
+
+    Voltar para Minha conta.
+
+    Visualizar o plano atual, valor mensal e próxima cobrança.
+
+    Selecionar um dos motivos de cancelamento.
+
+    Escolher “Outro motivo” e escrever uma explicação adicional.
+
+    Clicar em “Quero aproveitar” para aceitar a oferta de 50% de desconto por três meses e manter a assinatura.
+
+    Clicar em “Continuar com o cancelamento” para abrir a confirmação.
+
+    Fechar a confirmação pelo botão ×, por “Manter assinatura”, clicando fora do modal ou pressionando Esc.
+
+    Confirmar definitivamente em “Sim, cancelar”.
+
+    Após o cancelamento, visualizar a confirmação e a data até a qual os benefícios continuam disponíveis.
+
+    Clicar em “Continuar comprando”.
+
+    Acessar o atendimento da Vitrio pelo link de suporte.
+
+    Clicar no logotipo para retornar ao topo da página.

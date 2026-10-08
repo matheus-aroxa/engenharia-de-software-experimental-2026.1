@@ -1,0 +1,1684 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitrio — Carrinho de compras</title>
+
+  <style>
+    :root {
+      --purple: #5b21b6;
+      --purple-dark: #43158b;
+      --purple-light: #f0eafd;
+      --orange: #f97316;
+      --orange-dark: #df620d;
+      --green: #16803c;
+      --red: #dc2626;
+      --text: #202124;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --background: #f7f7f8;
+      --white: #ffffff;
+      --placeholder: #E0E0E0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--background);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topbar {
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      background: var(--purple-dark);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .header {
+      height: 76px;
+      color: #fff;
+      background: var(--purple);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .12);
+    }
+
+    .header-inner,
+    .nav-inner,
+    .container {
+      width: 1180px;
+      max-width: calc(100% - 32px);
+      margin: 0 auto;
+    }
+
+    .header-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .logo {
+      min-width: 110px;
+      color: #fff;
+      font-size: 29px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+    }
+
+    .logo span {
+      color: #facc15;
+    }
+
+    .search {
+      height: 45px;
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+      border-radius: 7px;
+      background: #fff;
+    }
+
+    .search input {
+      min-width: 0;
+      flex: 1;
+      border: 0;
+      outline: 0;
+      padding: 0 15px;
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    .search button {
+      width: 55px;
+      border: 0;
+      cursor: pointer;
+      background: #f1f1f3;
+      color: var(--purple);
+      font-size: 20px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .header-action {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      border: 0;
+      color: #fff;
+      background: transparent;
+      cursor: pointer;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .header-action .icon {
+      font-size: 21px;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      left: 14px;
+      display: grid;
+      width: 18px;
+      height: 18px;
+      place-items: center;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--orange);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .nav {
+      height: 44px;
+      border-bottom: 1px solid var(--border);
+      background: #fff;
+    }
+
+    .nav-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      overflow-x: auto;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .nav a:hover {
+      color: var(--purple);
+    }
+
+    .nav .offer {
+      color: var(--orange);
+    }
+
+    .breadcrumb {
+      padding: 17px 0;
+      color: #777;
+      font-size: 12px;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--purple);
+    }
+
+    .page-title-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: -.5px;
+    }
+
+    .item-count {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .cart-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 355px;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .cart-card,
+    .summary-card,
+    .benefits-card {
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: var(--white);
+    }
+
+    .cart-card {
+      overflow: hidden;
+    }
+
+    .cart-header {
+      display: grid;
+      grid-template-columns: 1fr 120px 145px 115px;
+      align-items: center;
+      padding: 14px 22px;
+      border-bottom: 1px solid var(--border);
+      color: #777;
+      background: #fafafa;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .cart-header span:not(:first-child) {
+      text-align: center;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 1fr 120px 145px 115px;
+      align-items: center;
+      min-height: 165px;
+      padding: 19px 22px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .product-info {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+      gap: 17px;
+    }
+
+    .product-image {
+      width: 108px;
+      height: 108px;
+      flex: 0 0 108px;
+      display: grid;
+      place-items: center;
+      border-radius: 7px;
+      background: var(--placeholder);
+      color: #888;
+      font-size: 45px;
+    }
+
+    .product-details {
+      min-width: 0;
+    }
+
+    .product-brand {
+      margin-bottom: 5px;
+      color: #888;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .product-name {
+      max-width: 350px;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .product-variant {
+      margin-top: 7px;
+      color: #777;
+      font-size: 11px;
+    }
+
+    .stock {
+      display: inline-block;
+      margin-top: 7px;
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .unit-price {
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .old-price {
+      margin-bottom: 4px;
+      color: #999;
+      text-decoration: line-through;
+      font-size: 10px;
+      font-weight: 400;
+    }
+
+    .quantity {
+      width: 104px;
+      height: 36px;
+      display: flex;
+      margin: 0 auto;
+      overflow: hidden;
+      border: 1px solid #d2d2d2;
+      border-radius: 6px;
+    }
+
+    .quantity button {
+      width: 32px;
+      border: 0;
+      background: #f6f6f6;
+      cursor: pointer;
+      color: #444;
+    }
+
+    .quantity button:hover {
+      background: #ededed;
+    }
+
+    .quantity span {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .item-total {
+      text-align: right;
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .remove-button {
+      display: block;
+      margin-top: 9px;
+      margin-left: auto;
+      border: 0;
+      padding: 0;
+      color: #777;
+      background: transparent;
+      cursor: pointer;
+      font-size: 10px;
+    }
+
+    .remove-button:hover {
+      color: var(--red);
+      text-decoration: underline;
+    }
+
+    .cart-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 17px 22px;
+    }
+
+    .continue {
+      color: var(--purple);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .continue:hover {
+      text-decoration: underline;
+    }
+
+    .clear-cart {
+      border: 0;
+      color: #777;
+      background: transparent;
+      cursor: pointer;
+      font-size: 11px;
+    }
+
+    .clear-cart:hover {
+      color: var(--red);
+    }
+
+    .summary-card {
+      padding: 22px;
+    }
+
+    .summary-card h2 {
+      margin: 0 0 19px;
+      font-size: 18px;
+    }
+
+    .summary-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 11px 0;
+      color: #555;
+      font-size: 12px;
+    }
+
+    .summary-line.discount {
+      color: var(--green);
+    }
+
+    .summary-divider {
+      height: 1px;
+      margin: 17px 0;
+      background: var(--border);
+    }
+
+    .summary-total {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .summary-total span:first-child {
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .total-value {
+      text-align: right;
+      font-size: 25px;
+      font-weight: 900;
+    }
+
+    .pix-total {
+      margin-top: 4px;
+      color: var(--green);
+      text-align: right;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .checkout-button {
+      width: 100%;
+      height: 49px;
+      margin-top: 19px;
+      border: 0;
+      border-radius: 6px;
+      color: #fff;
+      background: var(--orange);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 900;
+      transition: .2s;
+    }
+
+    .checkout-button:hover {
+      background: var(--orange-dark);
+      transform: translateY(-1px);
+    }
+
+    .security {
+      margin-top: 13px;
+      color: #777;
+      text-align: center;
+      font-size: 10px;
+    }
+
+    .coupon {
+      margin-top: 21px;
+      padding-top: 19px;
+      border-top: 1px solid var(--border);
+    }
+
+    .coupon-label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .coupon-form {
+      display: flex;
+      gap: 7px;
+    }
+
+    .coupon-form input {
+      min-width: 0;
+      flex: 1;
+      height: 38px;
+      padding: 0 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: 0;
+      font-size: 11px;
+    }
+
+    .coupon-form input:focus {
+      border-color: var(--purple);
+    }
+
+    .coupon-form button {
+      height: 38px;
+      padding: 0 12px;
+      border: 0;
+      border-radius: 5px;
+      color: var(--purple);
+      background: var(--purple-light);
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .coupon-message {
+      display: none;
+      margin-top: 7px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .coupon-message.success {
+      display: block;
+      color: var(--green);
+    }
+
+    .coupon-message.error {
+      display: block;
+      color: var(--red);
+    }
+
+    .benefits-card {
+      margin-top: 14px;
+      padding: 18px;
+    }
+
+    .benefit {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 8px 0;
+    }
+
+    .benefit + .benefit {
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .benefit-icon {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 28px;
+      border-radius: 50%;
+      color: var(--purple);
+      background: var(--purple-light);
+      font-size: 13px;
+    }
+
+    .benefit strong {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 11px;
+    }
+
+    .benefit span {
+      color: #777;
+      font-size: 10px;
+      line-height: 1.4;
+    }
+
+    .empty-cart {
+      display: none;
+      padding: 65px 30px;
+      text-align: center;
+    }
+
+    .empty-icon {
+      width: 74px;
+      height: 74px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      color: #888;
+      background: var(--placeholder);
+      font-size: 30px;
+    }
+
+    .empty-cart h2 {
+      margin: 0 0 7px;
+      font-size: 20px;
+    }
+
+    .empty-cart p {
+      margin: 0 auto 20px;
+      max-width: 400px;
+      color: #777;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .shop-button {
+      display: inline-flex;
+      height: 42px;
+      align-items: center;
+      padding: 0 23px;
+      border-radius: 6px;
+      color: #fff;
+      background: var(--purple);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .recommendations {
+      margin: 31px 0 36px;
+    }
+
+    .recommendations h2 {
+      margin: 0 0 14px;
+      font-size: 19px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .product-card {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: #fff;
+    }
+
+    .card-image {
+      height: 145px;
+      display: grid;
+      place-items: center;
+      color: #888;
+      background: var(--placeholder);
+      font-size: 45px;
+    }
+
+    .card-content {
+      padding: 13px;
+    }
+
+    .card-name {
+      min-height: 34px;
+      margin-bottom: 8px;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .card-price {
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .card-button {
+      width: 100%;
+      height: 34px;
+      margin-top: 10px;
+      border: 0;
+      border-radius: 5px;
+      color: #fff;
+      background: var(--purple);
+      cursor: pointer;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .footer {
+      padding: 34px 0 18px;
+      color: #fff;
+      background: #252329;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 45px;
+    }
+
+    .footer h3 {
+      margin: 0 0 12px;
+      font-size: 14px;
+    }
+
+    .footer p,
+    .footer a {
+      display: block;
+      color: #bbb8c0;
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    .footer a:hover {
+      color: #fff;
+    }
+
+    .footer-bottom {
+      margin-top: 25px;
+      padding-top: 15px;
+      border-top: 1px solid #414047;
+      color: #99969f;
+      text-align: center;
+      font-size: 10px;
+    }
+
+    .toast {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 100;
+      max-width: 360px;
+      padding: 13px 18px;
+      border-radius: 7px;
+      color: #fff;
+      background: #202124;
+      box-shadow: 0 8px 30px rgba(0,0,0,.25);
+      font-size: 12px;
+      opacity: 0;
+      transform: translateY(80px);
+      transition: .3s;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0,0,0,.5);
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal {
+      position: relative;
+      width: 430px;
+      max-width: 100%;
+      padding: 26px;
+      border-radius: 11px;
+      background: #fff;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 13px;
+      border: 0;
+      color: #666;
+      background: transparent;
+      cursor: pointer;
+      font-size: 24px;
+    }
+
+    .modal h2 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+
+    .modal p {
+      margin: 0 0 17px;
+      color: #666;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .modal input {
+      width: 100%;
+      height: 40px;
+      margin-bottom: 9px;
+      padding: 0 11px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+      font-size: 12px;
+    }
+
+    .modal input:focus {
+      border-color: var(--purple);
+    }
+
+    .modal-action {
+      width: 100%;
+      height: 43px;
+      border: 0;
+      border-radius: 6px;
+      color: #fff;
+      background: var(--orange);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    @media (max-width: 900px) {
+      .header-inner {
+        gap: 12px;
+      }
+
+      .header-actions {
+        gap: 10px;
+      }
+
+      .cart-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .summary-card {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .topbar {
+        font-size: 10px;
+      }
+
+      .header {
+        height: auto;
+        padding: 12px 0;
+      }
+
+      .header-inner {
+        flex-wrap: wrap;
+      }
+
+      .logo {
+        min-width: auto;
+      }
+
+      .search {
+        order: 3;
+        flex-basis: 100%;
+      }
+
+      .header-action span:last-child {
+        display: none;
+      }
+
+      .cart-header {
+        display: none;
+      }
+
+      .cart-item {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 18px;
+      }
+
+      .unit-price,
+      .item-total {
+        text-align: left;
+      }
+
+      .quantity {
+        margin: 0;
+      }
+
+      .product-info {
+        align-items: flex-start;
+      }
+
+      .product-image {
+        width: 85px;
+        height: 85px;
+        flex-basis: 85px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    Frete grátis para compras acima de R$ 199 • Até 10x sem juros
+  </div>
+
+  <header class="header">
+    <div class="header-inner">
+
+      <a class="logo" href="#" id="homeLink">vit<span>r</span>io</a>
+
+      <form class="search" id="searchForm">
+        <input
+          id="searchInput"
+          type="search"
+          placeholder="Busque por produtos, marcas ou categorias"
+          aria-label="Buscar produtos">
+        <button type="submit" aria-label="Pesquisar">⌕</button>
+      </form>
+
+      <div class="header-actions">
+        <button class="header-action" id="accountButton" type="button">
+          <span class="icon">♙</span>
+          <span>Olá, entre<br>ou cadastre-se</span>
+        </button>
+
+        <button class="header-action" id="cartButton" type="button">
+          <span class="icon">🛒</span>
+          <span class="cart-count" id="headerCartCount">3</span>
+          <span>Carrinho</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" id="categoriesLink">Todas as categorias</a>
+      <a href="#">Eletrônicos</a>
+      <a href="#">Celulares</a>
+      <a href="#">Casa</a>
+      <a href="#" class="offer">Ofertas</a>
+      <a href="#">Mais vendidos</a>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <div class="breadcrumb">
+      <a href="#" id="breadcrumbHome">Início</a>
+      <span> › </span>
+      <strong>Carrinho</strong>
+    </div>
+
+    <div class="page-title-row">
+      <h1>Meu carrinho</h1>
+      <span class="item-count" id="itemCount">3 itens</span>
+    </div>
+
+    <section class="cart-layout">
+
+      <div>
+
+        <div class="cart-card">
+
+          <div class="cart-header">
+            <span>Produto</span>
+            <span>Preço unitário</span>
+            <span>Quantidade</span>
+            <span>Total</span>
+          </div>
+
+          <div id="cartItems">
+
+            <article class="cart-item" data-id="galaxy">
+              <div class="product-info">
+                <div class="product-image" aria-label="Imagem ilustrativa do smartphone">
+                  📱
+                </div>
+
+                <div class="product-details">
+                  <div class="product-brand">Samsung</div>
+                  <div class="product-name">
+                    Smartphone Galaxy A55 5G 128GB 8GB RAM
+                  </div>
+                  <div class="product-variant">Cor: Azul</div>
+                  <span class="stock">✓ Em estoque</span>
+                </div>
+              </div>
+
+              <div class="unit-price">
+                <div class="old-price">R$ 2.199,00</div>
+                R$ 1.799,00
+              </div>
+
+              <div>
+                <div class="quantity">
+                  <button class="decrease" type="button" aria-label="Diminuir quantidade">−</button>
+                  <span class="quantity-value">1</span>
+                  <button class="increase" type="button" aria-label="Aumentar quantidade">+</button>
+                </div>
+
+                <button class="remove-button" type="button">
+                  Remover
+                </button>
+              </div>
+
+              <div class="item-total">R$ 1.799,00</div>
+            </article>
+
+            <article class="cart-item" data-id="fone">
+              <div class="product-info">
+                <div class="product-image" aria-label="Imagem ilustrativa do fone">
+                  🎧
+                </div>
+
+                <div class="product-details">
+                  <div class="product-brand">Vitrio</div>
+                  <div class="product-name">
+                    Fone Bluetooth Wave ANC com cancelamento de ruído
+                  </div>
+                  <div class="product-variant">Cor: Preto</div>
+                  <span class="stock">✓ Em estoque</span>
+                </div>
+              </div>
+
+              <div class="unit-price">
+                R$ 339,00
+              </div>
+
+              <div>
+                <div class="quantity">
+                  <button class="decrease" type="button" aria-label="Diminuir quantidade">−</button>
+                  <span class="quantity-value">1</span>
+                  <button class="increase" type="button" aria-label="Aumentar quantidade">+</button>
+                </div>
+
+                <button class="remove-button" type="button">
+                  Remover
+                </button>
+              </div>
+
+              <div class="item-total">R$ 339,00</div>
+            </article>
+
+            <article class="cart-item" data-id="capa">
+              <div class="product-info">
+                <div class="product-image" aria-label="Imagem ilustrativa da capa">
+                  🛡️
+                </div>
+
+                <div class="product-details">
+                  <div class="product-brand">Vitrio</div>
+                  <div class="product-name">
+                    Capa protetora transparente para Galaxy A55
+                  </div>
+                  <div class="product-variant">Modelo: Galaxy A55 5G</div>
+                  <span class="stock">✓ Em estoque</span>
+                </div>
+              </div>
+
+              <div class="unit-price">
+                R$ 49,90
+              </div>
+
+              <div>
+                <div class="quantity">
+                  <button class="decrease" type="button" aria-label="Diminuir quantidade">−</button>
+                  <span class="quantity-value">1</span>
+                  <button class="increase" type="button" aria-label="Aumentar quantidade">+</button>
+                </div>
+
+                <button class="remove-button" type="button">
+                  Remover
+                </button>
+              </div>
+
+              <div class="item-total">R$ 49,90</div>
+            </article>
+
+          </div>
+
+          <div class="empty-cart" id="emptyCart">
+            <div class="empty-icon">🛒</div>
+            <h2>Seu carrinho está vazio</h2>
+            <p>
+              Parece que você ainda não adicionou nenhum produto.
+              Encontre seus próximos favoritos na Vitrio.
+            </p>
+            <a href="#" class="shop-button" id="shopButton">
+              Continuar comprando
+            </a>
+          </div>
+
+          <div class="cart-footer" id="cartFooter">
+            <a href="#" class="continue" id="continueShopping">
+              ← Continuar comprando
+            </a>
+
+            <button class="clear-cart" id="clearCart" type="button">
+              Limpar carrinho
+            </button>
+          </div>
+
+        </div>
+
+        <section class="benefits-card">
+
+          <div class="benefit">
+            <div class="benefit-icon">✓</div>
+            <div>
+              <strong>Compra segura</strong>
+              <span>Seus dados pessoais e de pagamento são protegidos.</span>
+            </div>
+          </div>
+
+          <div class="benefit">
+            <div class="benefit-icon">🚚</div>
+            <div>
+              <strong>Entrega garantida</strong>
+              <span>Acompanhe seu pedido desde a saída até a entrega.</span>
+            </div>
+          </div>
+
+          <div class="benefit">
+            <div class="benefit-icon">↩</div>
+            <div>
+              <strong>Troca fácil</strong>
+              <span>Conte com nossa política de trocas e devoluções.</span>
+            </div>
+          </div>
+
+        </section>
+
+      </div>
+
+      <aside>
+
+        <div class="summary-card">
+
+          <h2>Resumo da compra</h2>
+
+          <div class="summary-line">
+            <span>Subtotal</span>
+            <strong id="subtotal">R$ 2.187,90</strong>
+          </div>
+
+          <div class="summary-line">
+            <span>Frete</span>
+            <strong id="shipping">Grátis</strong>
+          </div>
+
+          <div class="summary-line discount">
+            <span>Desconto no Pix</span>
+            <strong id="discount">− R$ 109,40</strong>
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <div class="summary-total">
+            <span>Total</span>
+            <div>
+              <div class="total-value" id="total">R$ 2.078,50</div>
+              <div class="pix-total">R$ 2.078,50 no Pix</div>
+            </div>
+          </div>
+
+          <button class="checkout-button" id="checkoutButton" type="button">
+            Finalizar compra
+          </button>
+
+          <div class="security">
+            🔒 Ambiente seguro para pagamento
+          </div>
+
+          <div class="coupon">
+            <label class="coupon-label" for="couponInput">
+              Tem um cupom de desconto?
+            </label>
+
+            <form class="coupon-form" id="couponForm">
+              <input
+                id="couponInput"
+                type="text"
+                maxlength="20"
+                placeholder="Digite seu cupom">
+              <button type="submit">Aplicar</button>
+            </form>
+
+            <div class="coupon-message" id="couponMessage"></div>
+          </div>
+
+        </div>
+
+      </aside>
+
+    </section>
+
+    <section class="recommendations">
+      <h2>Complete sua compra</h2>
+
+      <div class="product-grid">
+
+        <article class="product-card">
+          <div class="card-image">🔌</div>
+          <div class="card-content">
+            <div class="card-name">
+              Carregador rápido USB-C 25W com cabo
+            </div>
+            <div class="card-price">R$ 89,00</div>
+            <button
+              class="card-button"
+              data-product="Carregador rápido USB-C 25W"
+              type="button">
+              Adicionar ao carrinho
+            </button>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="card-image">⌚</div>
+          <div class="card-content">
+            <div class="card-name">
+              Smartwatch Fit Pro com GPS e tela AMOLED
+            </div>
+            <div class="card-price">R$ 549,00</div>
+            <button
+              class="card-button"
+              data-product="Smartwatch Fit Pro"
+              type="button">
+              Adicionar ao carrinho
+            </button>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="card-image">🔋</div>
+          <div class="card-content">
+            <div class="card-name">
+              Power bank 10.000 mAh com carregamento rápido
+            </div>
+            <div class="card-price">R$ 129,90</div>
+            <button
+              class="card-button"
+              data-product="Power bank 10.000 mAh"
+              type="button">
+              Adicionar ao carrinho
+            </button>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="card-image">🎮</div>
+          <div class="card-content">
+            <div class="card-name">
+              Controle sem fio compatível com Android e PC
+            </div>
+            <div class="card-price">R$ 179,00</div>
+            <button
+              class="card-button"
+              data-product="Controle sem fio"
+              type="button">
+              Adicionar ao carrinho
+            </button>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div>
+          <div class="logo">vit<span>r</span>io</div>
+          <p>Eletrônicos, tecnologia e itens para sua casa.</p>
+          <p>Compra segura, atendimento próximo e ofertas todos os dias.</p>
+        </div>
+
+        <div>
+          <h3>Institucional</h3>
+          <a href="#" data-footer="Sobre a Vitrio">Sobre a Vitrio</a>
+          <a href="#" data-footer="Política de privacidade">Política de privacidade</a>
+          <a href="#" data-footer="Termos de uso">Termos de uso</a>
+        </div>
+
+        <div>
+          <h3>Atendimento</h3>
+          <a href="#" data-footer="Central de atendimento">Central de atendimento</a>
+          <a href="#" data-footer="Meus pedidos">Meus pedidos</a>
+          <a href="#" data-footer="Trocas e devoluções">Trocas e devoluções</a>
+        </div>
+
+        <div>
+          <h3>Pagamento</h3>
+          <p>Cartão de crédito</p>
+          <p>Pix</p>
+          <p>Até 10x sem juros</p>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        © 2026 Vitrio Comércio Digital. Todos os direitos reservados.
+      </div>
+
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <div class="modal-overlay" id="accountModal">
+    <div class="modal">
+
+      <button class="modal-close" id="closeModal" type="button">×</button>
+
+      <h2>Entre na sua conta</h2>
+      <p>
+        Acesse seus pedidos, acompanhe entregas e aproveite ofertas
+        personalizadas da Vitrio.
+      </p>
+
+      <form id="loginForm">
+        <input type="email" placeholder="Seu e-mail" required>
+        <input type="password" placeholder="Sua senha" required>
+        <button class="modal-action" type="submit">Entrar</button>
+      </form>
+
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const cartItems = document.getElementById("cartItems");
+      const emptyCart = document.getElementById("emptyCart");
+      const cartFooter = document.getElementById("cartFooter");
+      const itemCount = document.getElementById("itemCount");
+      const subtotalElement = document.getElementById("subtotal");
+      const discountElement = document.getElementById("discount");
+      const totalElement = document.getElementById("total");
+      const headerCartCount = document.getElementById("headerCartCount");
+      const toast = document.getElementById("toast");
+
+      let couponApplied = false;
+      let toastTimer;
+
+      const currency = value =>
+        value.toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL"
+        });
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add("show");
+
+        clearTimeout(toastTimer);
+
+        toastTimer = setTimeout(() => {
+          toast.classList.remove("show");
+        }, 2800);
+      }
+
+      function getItems() {
+        return [...document.querySelectorAll(".cart-item")];
+      }
+
+      function getCartData() {
+        return getItems().map(item => {
+          const priceText = item.querySelector(".unit-price").textContent
+            .replace(/\s+/g, " ")
+            .trim();
+
+          const priceMatches = priceText.match(/R\$\s*([\d.,]+)/g);
+          const priceString = priceMatches
+            ? priceMatches[priceMatches.length - 1]
+            : "R$ 0,00";
+
+          const price = Number(
+            priceString
+              .replace("R$", "")
+              .trim()
+              .replace(/\./g, "")
+              .replace(",", ".")
+          );
+
+          const quantity = Number(
+            item.querySelector(".quantity-value").textContent
+          );
+
+          return {
+            element: item,
+            price,
+            quantity
+          };
+        });
+      }
+
+      function updateCart() {
+        const data = getCartData();
+
+        let subtotal = 0;
+        let units = 0;
+
+        data.forEach(item => {
+          subtotal += item.price * item.quantity;
+          units += item.quantity;
+
+          item.element.querySelector(".item-total").textContent =
+            currency(item.price * item.quantity);
+        });
+
+        /*
+          O desconto de Pix é de 5% sobre o subtotal.
+          Se um cupom estiver aplicado, acrescentamos mais 10% ao desconto.
+        */
+        const pixDiscount = subtotal * 0.05;
+        const couponDiscount = couponApplied ? subtotal * 0.10 : 0;
+        const totalDiscount = pixDiscount + couponDiscount;
+        const total = Math.max(0, subtotal - totalDiscount);
+
+        subtotalElement.textContent = currency(subtotal);
+        discountElement.textContent = `− ${currency(totalDiscount)}`;
+        totalElement.textContent = currency(total);
+
+        itemCount.textContent =
+          `${units} ${units === 1 ? "item" : "itens"}`;
+
+        headerCartCount.textContent = units;
+
+        if (data.length === 0) {
+          cartItems.style.display = "none";
+          cartFooter.style.display = "none";
+          emptyCart.style.display = "block";
+        } else {
+          cartItems.style.display = "block";
+          cartFooter.style.display = "flex";
+          emptyCart.style.display = "none";
+        }
+      }
+
+      function updateQuantity(item, change) {
+        const quantityElement = item.querySelector(".quantity-value");
+        let quantity = Number(quantityElement.textContent);
+
+        quantity += change;
+
+        if (quantity < 1) {
+          quantity = 1;
+        }
+
+        if (quantity > 10) {
+          quantity = 10;
+          showToast("O limite é de 10 unidades por produto.");
+        }
+
+        quantityElement.textContent = quantity;
+        updateCart();
+      }
+
+      document.addEventListener("click", event => {
+        const increase = event.target.closest(".increase");
+        const decrease = event.target.closest(".decrease");
+        const remove = event.target.closest(".remove-button");
+        const cardButton = event.target.closest(".card-button");
+
+        if (increase) {
+          const item = increase.closest(".cart-item");
+          updateQuantity(item, 1);
+          return;
+        }
+
+        if (decrease) {
+          const item = decrease.closest(".cart-item");
+          updateQuantity(item, -1);
+          return;
+        }
+
+        if (remove) {
+          const item = remove.closest(".cart-item");
+          const productName =
+            item.querySelector(".product-name").textContent.trim();
+
+          item.remove();
+          updateCart();
+          showToast(`${productName} foi removido do carrinho.`);
+          return;
+        }
+
+        if (cardButton) {
+          const product = cardButton.dataset.product;
+          showToast(`${product} foi adicionado ao carrinho.`);
+
+          const current = Number(headerCartCount.textContent);
+          headerCartCount.textContent = current + 1;
+        }
+      });
+
+      document.getElementById("clearCart").addEventListener("click", () => {
+        if (getItems().length === 0) {
+          return;
+        }
+
+        const confirmed = window.confirm(
+          "Deseja realmente remover todos os produtos do carrinho?"
+        );
+
+        if (!confirmed) {
+          return;
+        }
+
+        getItems().forEach(item => item.remove());
+        updateCart();
+        showToast("Todos os produtos foram removidos do carrinho.");
+      });
+
+      document.getElementById("couponForm").addEventListener("submit", event => {
+        event.preventDefault();
+
+        const input = document.getElementById("couponInput");
+        const message = document.getElementById("couponMessage");
+        const code = input.value.trim().toUpperCase();
+
+        if (!code) {
+          message.className = "coupon-message error";
+          message.textContent = "Digite um código de cupom.";
+          return;
+        }
+
+        if (code === "VITRIO10") {
+          couponApplied = true;
+          message.className = "coupon-message success";
+          message.textContent =
+            "Cupom VITRIO10 aplicado: 10% de desconto adicional.";
+          input.disabled = true;
+          event.target.querySelector("button").disabled = true;
+          updateCart();
+          showToast("Cupom VITRIO10 aplicado com sucesso.");
+        } else {
+          message.className = "coupon-message error";
+          message.textContent =
+            "Cupom não encontrado. Tente VITRIO10.";
+        }
+      });
+
+      document.getElementById("checkoutButton").addEventListener("click", () => {
+        if (getItems().length === 0) {
+          showToast("Adicione pelo menos um produto para continuar.");
+          return;
+        }
+
+        showToast("Tudo certo! Indo para a etapa de pagamento...");
+
+        setTimeout(() => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
+        }, 400);
+      });
+
+      document.getElementById("continueShopping").addEventListener("click", event => {
+        event.preventDefault();
+        showToast("Voltando para a vitrine de produtos.");
+
+        setTimeout(() => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
+        }, 300);
+      });
+
+      document.getElementById("shopButton").addEventListener("click", event => {
+        event.preventDefault();
+        showToast("Voltando para a vitrine de produtos.");
+
+        setTimeout(() => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
+        }, 300);
+      });
+
+      document.getElementById("searchForm").addEventListener("submit", event => {
+        event.preventDefault();
+
+        const value = document.getElementById("searchInput").value.trim();
+
+        if (!value) {
+          showToast("Digite um produto ou categoria para pesquisar.");
+          return;
+        }
+
+        showToast(`Busca realizada por "${value}".`);
+      });
+
+      document.getElementById("categoriesLink").addEventListener("click", event => {
+        event.preventDefault();
+        showToast(
+          "Categorias: Eletrônicos, Celulares, Casa, Informática e muito mais."
+        );
+      });
+
+      document.getElementById("homeLink").addEventListener("click", event => {
+        event.preventDefault();
+        showToast("Voltando para a página inicial.");
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      });
+
+      document.getElementById("breadcrumbHome").addEventListener("click", event => {
+        event.preventDefault();
+        showToast("Voltando para a página inicial.");
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      });
+
+      document.getElementById("cartButton").addEventListener("click", () => {
+        showToast("Você já está no seu carrinho.");
+      });
+
+      const accountModal = document.getElementById("accountModal");
+
+      document.getElementById("accountButton").addEventListener("click", () => {
+        accountModal.classList.add("open");
+      });
+
+      document.getElementById("closeModal").addEventListener("click", () => {
+        accountModal.classList.remove("open");
+      });
+
+      accountModal.addEventListener("click", event => {
+        if (event.target === accountModal) {
+          accountModal.classList.remove("open");
+        }
+      });
+
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape") {
+          accountModal.classList.remove("open");
+        }
+      });
+
+      document.getElementById("loginForm").addEventListener("submit", event => {
+        event.preventDefault();
+        accountModal.classList.remove("open");
+        showToast("Login demonstrativo realizado com sucesso.");
+      });
+
+      document.querySelectorAll("[data-footer]").forEach(link => {
+        link.addEventListener("click", event => {
+          event.preventDefault();
+          showToast(`${link.dataset.footer}: conteúdo demonstrativo.`);
+        });
+      });
+
+      updateCart();
+    })();
+  </script>
+</body>
+</html>

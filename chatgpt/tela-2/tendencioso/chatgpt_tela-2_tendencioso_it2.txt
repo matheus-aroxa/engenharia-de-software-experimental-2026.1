@@ -1,0 +1,59 @@
+Pergunta 1 — Escolhas visuais
+
+A tela utiliza uma estrutura típica de página de produto de e-commerce, com galeria à esquerda e área de compra à direita. O roxo identifica a marca Vitrio, enquanto o laranja é usado para destacar preço promocional e principalmente o CTA de compra.
+
+A área de compra concentra os elementos decisivos para conversão: nome do produto, avaliações, desconto, preço à vista no Pix, parcelamento, frete, seleção de variante, cálculo de CEP, quantidade e botões de compra. Informações como 12x sem juros, compra segura, garantia e troca facilitada reduzem objeções imediatamente antes da decisão.
+
+Abaixo do produto ficam descrição, especificações e avaliações. Depois aparecem acessórios complementares, criando uma oportunidade de cross-sell sem interferir na decisão principal.
+
+Os espaços de imagens utilizam exclusivamente #E0E0E0, conforme solicitado, e não há dependências externas.
+Pergunta 2 — O que aciona essa tela?
+
+A página é exibida quando o usuário seleciona um produto na vitrine, em uma categoria, nos resultados de busca, em uma oferta ou em qualquer outro ponto do catálogo.
+
+Ela corresponde à etapa de consideração e decisão de compra. O visitante já demonstrou interesse em um item específico e precisa receber informações suficientes para decidir entre comprar, adicionar ao carrinho ou continuar pesquisando.
+
+O conteúdo foi organizado para que as informações comerciais mais importantes apareçam antes da dobra ou imediatamente próximas ao CTA, enquanto informações mais detalhadas ficam nas abas inferiores.
+Pergunta 3 — Interações possíveis
+
+O usuário pode:
+
+    Pesquisar outro produto pelo campo de busca.
+
+    Navegar pelo menu superior.
+
+    Voltar para categorias através do breadcrumb.
+
+    Alternar entre imagens na galeria do produto.
+
+    Favoritar ou desfavoritar o produto.
+
+    Consultar as avaliações.
+
+    Selecionar uma cor disponível.
+
+    Informar o CEP e calcular o prazo de entrega.
+
+    Aumentar ou diminuir a quantidade.
+
+    Adicionar o produto ao carrinho.
+
+    Comprar imediatamente.
+
+    Abrir o carrinho pelo ícone do cabeçalho.
+
+    Adicionar acessórios complementares ao carrinho.
+
+    Alternar entre Descrição, Especificações e Avaliações.
+
+    Ler a distribuição das notas e avaliações individuais.
+
+    Abrir a área Minha conta.
+
+    Fechar o modal pelo botão de fechamento, clicando fora dele ou pressionando Esc.
+
+    Continuar comprando após adicionar o produto.
+
+    Prosseguir para o fluxo de checkout a partir do carrinho.
+
+A principal estratégia de conversão é manter preço, prova social, benefícios, frete e CTA no mesmo contexto visual, reduzindo a necessidade de navegação antes da compra e, ao mesmo tempo, oferecer acessórios relevantes para elevar o ticket médio.

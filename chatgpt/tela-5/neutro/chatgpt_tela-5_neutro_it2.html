@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitrio — Checkout</title>
+  <style>
+    :root{
+      --purple:#5b21b6;
+      --purple-dark:#43158b;
+      --purple-soft:#f2edff;
+      --orange:#f97316;
+      --orange-dark:#df620d;
+      --green:#16803c;
+      --red:#dc2626;
+      --text:#202124;
+      --muted:#6b7280;
+      --border:#dddfe4;
+      --bg:#f6f6f8;
+      --white:#fff;
+      --placeholder:#E0E0E0;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-width:320px;
+      background:var(--bg);
+      color:var(--text);
+      font-family:Arial,Helvetica,sans-serif;
+      font-size:13px;
+    }
+    button,input,select{font:inherit}
+    button,a{ -webkit-tap-highlight-color:transparent }
+    a{color:inherit;text-decoration:none}
+
+    .topbar{
+      height:34px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:var(--purple-dark);
+      color:#fff;
+      font-size:11px;
+      font-weight:700;
+    }
+
+    header{
+      height:76px;
+      background:var(--purple);
+      color:#fff;
+      box-shadow:0 2px 8px rgba(0,0,0,.12);
+    }
+
+    .header-inner{
+      width:1180px;
+      max-width:calc(100% - 32px);
+      height:100%;
+      margin:auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    .logo{
+      color:#fff;
+      font-size:29px;
+      font-weight:900;
+      letter-spacing:-1.5px;
+    }
+    .logo span{color:#facc15}
+
+    .secure{
+      display:flex;
+      align-items:center;
+      gap:7px;
+      color:#fff;
+      font-size:11px;
+      font-weight:700;
+    }
+
+    .secure-icon{
+      width:25px;
+      height:25px;
+      display:grid;
+      place-items:center;
+      border:1px solid rgba(255,255,255,.5);
+      border-radius:50%;
+      font-size:12px;
+    }
+
+    main{
+      width:1180px;
+      max-width:calc(100% - 32px);
+      margin:0 auto;
+      padding:28px 0 55px;
+    }
+
+    .checkout-title{
+      margin-bottom:20px;
+    }
+
+    h1{
+      margin:0 0 6px;
+      font-size:23px;
+      letter-spacing:-.4px;
+    }
+
+    .subtitle{
+      margin:0;
+      color:var(--muted);
+      font-size:11px;
+    }
+
+    .progress{
+      display:flex;
+      align-items:center;
+      margin-top:20px;
+    }
+
+    .progress-step{
+      display:flex;
+      align-items:center;
+      gap:7px;
+      color:#999da4;
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .progress-step.active{color:var(--purple)}
+
+    .progress-number{
+      width:24px;
+      height:24px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      background:#e2e3e7;
+    }
+
+    .progress-step.active .progress-number{
+      background:var(--purple);
+      color:#fff;
+    }
+
+    .progress-line{
+      width:70px;
+      height:1px;
+      margin:0 10px;
+      background:#d7d8dc;
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns:minmax(0, 1fr) 350px;
+      gap:20px;
+      align-items:start;
+    }
+
+    .left-column{
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+    }
+
+    .card{
+      border:1px solid #e1e2e6;
+      border-radius:10px;
+      background:#fff;
+      box-shadow:0 4px 18px rgba(30,30,40,.045);
+      overflow:hidden;
+    }
+
+    .card-header{
+      min-height:57px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 23px;
+      border-bottom:1px solid #ededee;
+    }
+
+    .card-header h2{
+      margin:0;
+      font-size:14px;
+      letter-spacing:-.1px;
+    }
+
+    .edit-link{
+      border:0;
+      padding:5px;
+      color:var(--purple);
+      background:none;
+      cursor:pointer;
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .edit-link:hover{text-decoration:underline}
+
+    .card-body{padding:21px 23px}
+
+    .address-selected{
+      display:flex;
+      align-items:flex-start;
+      gap:12px;
+      padding:15px;
+      border:1px solid #cdbbf5;
+      border-radius:7px;
+      background:var(--purple-soft);
+    }
+
+    .radio-dot{
+      width:16px;
+      height:16px;
+      flex:0 0 16px;
+      margin-top:2px;
+      border:4px solid var(--purple);
+      border-radius:50%;
+      background:#fff;
+    }
+
+    .address-content strong{
+      display:block;
+      margin-bottom:5px;
+      font-size:12px;
+    }
+
+    .address-content p{
+      margin:0;
+      color:#686b72;
+      font-size:10px;
+      line-height:1.55;
+    }
+
+    .change-address{
+      margin-top:12px;
+      padding:0;
+      border:0;
+      color:var(--purple);
+      background:none;
+      cursor:pointer;
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .cep-row{
+      display:grid;
+      grid-template-columns:170px 1fr;
+      gap:13px;
+      margin-bottom:16px;
+    }
+
+    .field-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .field.full{grid-column:1/-1}
+
+    label{
+      display:block;
+      margin-bottom:6px;
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .required{color:var(--red)}
+
+    .input,.select{
+      width:100%;
+      height:40px;
+      padding:0 11px;
+      border:1px solid var(--border);
+      border-radius:6px;
+      outline:0;
+      color:var(--text);
+      background:#fff;
+      font-size:11px;
+      transition:border-color .15s,box-shadow .15s;
+    }
+
+    .input:focus,.select:focus{
+      border-color:var(--purple);
+      box-shadow:0 0 0 3px rgba(91,33,182,.08);
+    }
+
+    .input.invalid{border-color:var(--red)}
+
+    .hint{
+      min-height:13px;
+      margin-top:5px;
+      color:#858890;
+      font-size:9px;
+    }
+
+    .hint.error{color:var(--red)}
+    .hint.success{color:var(--green)}
+
+    .shipping-option{
+      position:relative;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-height:68px;
+      margin-bottom:9px;
+      padding:12px 14px;
+      border:1px solid var(--border);
+      border-radius:7px;
+      cursor:pointer;
+      transition:border-color .15s,background .15s;
+    }
+
+    .shipping-option:hover{
+      border-color:#bca5e8;
+      background:#faf8ff;
+    }
+
+    .shipping-option.selected{
+      border-color:#b89ce9;
+      background:var(--purple-soft);
+    }
+
+    .shipping-option input{
+      position:absolute;
+      opacity:0;
+    }
+
+    .shipping-radio{
+      width:17px;
+      height:17px;
+      flex:0 0 17px;
+      border:1px solid #b5b7bd;
+      border-radius:50%;
+      background:#fff;
+    }
+
+    .shipping-option.selected .shipping-radio{
+      border:5px solid var(--purple);
+    }
+
+    .shipping-info{
+      flex:1;
+    }
+
+    .shipping-name{
+      display:block;
+      margin-bottom:4px;
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .shipping-description{
+      color:#777a81;
+      font-size:9px;
+    }
+
+    .shipping-price{
+      text-align:right;
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .shipping-free{
+      color:var(--green);
+    }
+
+    .payment-tabs{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:8px;
+      margin-bottom:18px;
+    }
+
+    .payment-tab{
+      height:42px;
+      border:1px solid var(--border);
+      border-radius:6px;
+      color:#666a72;
+      background:#fff;
+      cursor:pointer;
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .payment-tab.active{
+      border-color:#bca5e8;
+      color:var(--purple);
+      background:var(--purple-soft);
+    }
+
+    .payment-panel{display:none}
+    .payment-panel.active{display:block}
+
+    .card-number-wrap{
+      position:relative;
+    }
+
+    .card-number-wrap .input{
+      padding-right:70px;
+    }
+
+    .card-brand{
+      position:absolute;
+      top:9px;
+      right:10px;
+      color:#777;
+      font-size:9px;
+      font-weight:900;
+    }
+
+    .payment-note{
+      display:flex;
+      gap:8px;
+      margin-top:13px;
+      padding:10px 12px;
+      border-radius:6px;
+      color:#5f6269;
+      background:#f6f6f7;
+      font-size:9px;
+      line-height:1.4;
+    }
+
+    .pix-box{
+      padding:19px;
+      border:1px dashed #c8b8e8;
+      border-radius:7px;
+      background:#faf8ff;
+      text-align:center;
+    }
+
+    .pix-icon{
+      width:42px;
+      height:42px;
+      display:grid;
+      place-items:center;
+      margin:0 auto 10px;
+      border-radius:7px;
+      color:#fff;
+      background:var(--purple);
+      font-size:19px;
+      font-weight:900;
+    }
+
+    .pix-box strong{
+      display:block;
+      margin-bottom:6px;
+      font-size:12px;
+    }
+
+    .pix-box p{
+      margin:0;
+      color:#71747b;
+      font-size:9px;
+      line-height:1.5;
+    }
+
+    .boleto-box{
+      padding:18px;
+      border-radius:7px;
+      background:#f7f7f8;
+      color:#62656c;
+      font-size:10px;
+      line-height:1.5;
+    }
+
+    .order-summary{
+      position:sticky;
+      top:16px;
+    }
+
+    .summary-header{
+      padding:18px 20px;
+      border-bottom:1px solid #ededee;
+    }
+
+    .summary-header h2{
+      margin:0;
+      font-size:14px;
+    }
+
+    .products{
+      padding:4px 20px 10px;
+    }
+
+    .product{
+      display:flex;
+      gap:11px;
+      padding:14px 0;
+      border-bottom:1px solid #eeeeef;
+    }
+
+    .product:last-child{border-bottom:0}
+
+    .product-image{
+      width:62px;
+      height:62px;
+      flex:0 0 62px;
+      border-radius:6px;
+      background:var(--placeholder);
+    }
+
+    .product-info{
+      flex:1;
+      min-width:0;
+    }
+
+    .product-name{
+      margin:0 0 5px;
+      font-size:10px;
+      font-weight:800;
+      line-height:1.4;
+    }
+
+    .product-meta{
+      color:#85878d;
+      font-size:9px;
+    }
+
+    .product-price{
+      text-align:right;
+      white-space:nowrap;
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .summary-lines{
+      padding:4px 20px 14px;
+      border-top:1px solid #ededee;
+    }
+
+    .summary-line{
+      display:flex;
+      justify-content:space-between;
+      margin-top:12px;
+      color:#62656c;
+      font-size:10px;
+    }
+
+    .summary-line strong{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    .discount{color:var(--green)!important}
+
+    .total{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      margin-top:16px;
+      padding-top:15px;
+      border-top:1px solid #e5e5e7;
+    }
+
+    .total-label{
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .total-value{
+      color:var(--purple);
+      font-size:19px;
+      font-weight:900;
+    }
+
+    .installments{
+      margin-top:4px;
+      color:#74777e;
+      text-align:right;
+      font-size:9px;
+    }
+
+    .coupon{
+      display:flex;
+      gap:7px;
+      margin:4px 20px 20px;
+    }
+
+    .coupon .input{height:37px}
+
+    .coupon button{
+      width:76px;
+      border:1px solid var(--purple);
+      border-radius:6px;
+      color:var(--purple);
+      background:#fff;
+      cursor:pointer;
+      font-size:9px;
+      font-weight:800;
+    }
+
+    .coupon button:hover{
+      color:#fff;
+      background:var(--purple);
+    }
+
+    .buy-button{
+      width:calc(100% - 40px);
+      height:47px;
+      margin:0 20px 16px;
+      border:0;
+      border-radius:6px;
+      color:#fff;
+      background:var(--orange);
+      cursor:pointer;
+      font-size:12px;
+      font-weight:900;
+      transition:.15s;
+    }
+
+    .buy-button:hover{
+      background:var(--orange-dark);
+      transform:translateY(-1px);
+    }
+
+    .buy-button:disabled{
+      opacity:.6;
+      cursor:not-allowed;
+      transform:none;
+    }
+
+    .safe-payment{
+      display:flex;
+      justify-content:center;
+      gap:8px;
+      padding:0 20px 20px;
+      color:#777a81;
+      font-size:9px;
+      text-align:center;
+    }
+
+    .secure-list{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+      padding:0 20px 20px;
+    }
+
+    .secure-item{
+      padding:9px;
+      border-radius:5px;
+      background:#f7f7f8;
+      color:#777a81;
+      font-size:8px;
+      text-align:center;
+    }
+
+    .modal-overlay{
+      position:fixed;
+      inset:0;
+      z-index:20;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      background:rgba(0,0,0,.5);
+    }
+
+    .modal-overlay.open{display:flex}
+
+    .modal{
+      position:relative;
+      width:430px;
+      max-width:100%;
+      padding:27px;
+      border-radius:10px;
+      background:#fff;
+      box-shadow:0 15px 50px rgba(0,0,0,.25);
+    }
+
+    .modal-close{
+      position:absolute;
+      top:9px;
+      right:12px;
+      border:0;
+      color:#777;
+      background:none;
+      cursor:pointer;
+      font-size:22px;
+    }
+
+    .modal h2{
+      margin:0 0 9px;
+      font-size:18px;
+    }
+
+    .modal p{
+      margin:0 0 18px;
+      color:#686b72;
+      font-size:10px;
+      line-height:1.55;
+    }
+
+    .modal-actions{
+      display:flex;
+      gap:8px;
+    }
+
+    .modal-actions button{
+      flex:1;
+      height:40px;
+      border-radius:6px;
+      cursor:pointer;
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .modal-cancel{
+      border:1px solid var(--border);
+      background:#fff;
+    }
+
+    .modal-confirm{
+      border:0;
+      color:#fff;
+      background:var(--purple);
+    }
+
+    .toast{
+      position:fixed;
+      right:22px;
+      bottom:22px;
+      z-index:40;
+      max-width:350px;
+      padding:13px 17px;
+      border-radius:7px;
+      color:#fff;
+      background:#202124;
+      box-shadow:0 8px 28px rgba(0,0,0,.22);
+      font-size:10px;
+      opacity:0;
+      transform:translateY(60px);
+      transition:.25s;
+      pointer-events:none;
+    }
+
+    .toast.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    footer{
+      padding:20px;
+      color:#85878d;
+      text-align:center;
+      font-size:9px;
+    }
+
+    @media(max-width:850px){
+      main{max-width:calc(100% - 20px)}
+      .layout{grid-template-columns:1fr}
+      .order-summary{position:static}
+    }
+
+    @media(max-width:580px){
+      .topbar{padding:0 10px;font-size:9px;text-align:center}
+      header{height:66px}
+      .header-inner{max-width:calc(100% - 20px)}
+      .logo{font-size:25px}
+      main{padding-top:20px}
+      .progress-line{width:28px;margin:0 6px}
+      .progress-step{font-size:9px}
+      .field-grid,.cep-row{grid-template-columns:1fr}
+      .card-header,.card-body{padding-left:17px;padding-right:17px}
+      .payment-tabs{grid-template-columns:1fr}
+      .secure-list{grid-template-columns:1fr}
+      .coupon{margin-left:17px;margin-right:17px}
+      .buy-button{width:calc(100% - 34px);margin-left:17px;margin-right:17px}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    Compra segura • Frete grátis para pedidos acima de R$ 199
+  </div>
+
+  <header>
+    <div class="header-inner">
+      <a href="#" class="logo" id="logoLink">vit<span>r</span>io</a>
+      <div class="secure">
+        <span class="secure-icon">🔒</span>
+        Ambiente seguro
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="checkout-title">
+      <h1>Finalizar compra</h1>
+      <p class="subtitle">Confira seus dados, escolha a entrega e informe a forma de pagamento.</p>
+
+      <div class="progress" aria-label="Progresso da compra">
+        <div class="progress-step active">
+          <span class="progress-number">1</span>
+          <span>Entrega</span>
+        </div>
+        <span class="progress-line"></span>
+        <div class="progress-step active">
+          <span class="progress-number">2</span>
+          <span>Pagamento</span>
+        </div>
+        <span class="progress-line"></span>
+        <div class="progress-step">
+          <span class="progress-number">3</span>
+          <span>Confirmação</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="layout">
+
+      <div class="left-column">
+
+        <!-- ENDEREÇO -->
+        <section class="card">
+          <div class="card-header">
+            <h2>1. Endereço de entrega</h2>
+            <button class="edit-link" id="editAddress" type="button">Alterar endereço</button>
+          </div>
+
+          <div class="card-body" id="addressView">
+            <div class="address-selected">
+              <span class="radio-dot"></span>
+              <div class="address-content">
+                <strong>Casa • João da Silva</strong>
+                <p id="addressText">
+                  Rua das Palmeiras, 245, Apto. 302<br>
+                  Aldeota • Fortaleza - CE<br>
+                  CEP 60150-170
+                </p>
+              </div>
+            </div>
+
+            <button class="change-address" id="changeAddress" type="button">
+              Usar outro endereço
+            </button>
+          </div>
+
+          <div class="card-body" id="addressForm" style="display:none;">
+            <div class="cep-row">
+              <div>
+                <label for="cep">CEP <span class="required">*</span></label>
+                <input class="input" id="cep" maxlength="9" inputmode="numeric" placeholder="00000-000">
+                <div class="hint" id="cepHint"></div>
+              </div>
+              <div style="display:flex;align-items:end;">
+                <button class="edit-link" id="cepSearch" type="button" style="padding-bottom:11px;">
+                  Não sei meu CEP
+                </button>
+              </div>
+            </div>
+
+            <div class="field-grid">
+              <div class="field full">
+                <label for="street">Endereço <span class="required">*</span></label>
+                <input class="input" id="street" placeholder="Rua, avenida, travessa...">
+              </div>
+
+              <div class="field">
+                <label for="number">Número <span class="required">*</span></label>
+                <input class="input" id="number" placeholder="Ex.: 245">
+              </div>
+
+              <div class="field">
+                <label for="complement">Complemento</label>
+                <input class="input" id="complement" placeholder="Apto., bloco, sala...">
+              </div>
+
+              <div class="field">
+                <label for="neighborhood">Bairro <span class="required">*</span></label>
+                <input class="input" id="neighborhood" placeholder="Seu bairro">
+              </div>
+
+              <div class="field">
+                <label for="city">Cidade <span class="required">*</span></label>
+                <input class="input" id="city" placeholder="Sua cidade">
+              </div>
+
+              <div class="field">
+                <label for="state">Estado <span class="required">*</span></label>
+                <select class="select" id="state">
+                  <option value="">Selecione</option>
+                  <option>AC</option><option>AL</option><option>AP</option>
+                  <option>AM</option><option>BA</option><option>CE</option>
+                  <option>DF</option><option>ES</option><option>GO</option>
+                  <option>MA</option><option>MT</option><option>MS</option>
+                  <option>MG</option><option>PA</option><option>PB</option>
+                  <option>PR</option><option>PE</option><option>PI</option>
+                  <option>RJ</option><option>RN</option><option>RS</option>
+                  <option>RO</option><option>RR</option><option>SC</option>
+                  <option>SP</option><option>SE</option><option>TO</option>
+                </select>
+              </div>
+            </div>
+
+            <button class="submit-button" id="saveAddress" type="button"
+              style="width:180px;height:40px;margin-top:18px;border:0;border-radius:6px;color:#fff;background:var(--purple);cursor:pointer;font-size:10px;font-weight:800;">
+              Salvar endereço
+            </button>
+          </div>
+        </section>
+
+        <!-- FRETE -->
+        <section class="card">
+          <div class="card-header">
+            <h2>2. Escolha o frete</h2>
+          </div>
+
+          <div class="card-body">
+            <label class="shipping-option selected">
+              <input type="radio" name="shipping" value="0" checked>
+              <span class="shipping-radio"></span>
+              <span class="shipping-info">
+                <span class="shipping-name">Entrega econômica</span>
+                <span class="shipping-description">Receba até 18/10 • Rastreio disponível</span>
+              </span>
+              <span class="shipping-price shipping-free">Grátis</span>
+            </label>
+
+            <label class="shipping-option">
+              <input type="radio" name="shipping" value="19.90">
+              <span class="shipping-radio"></span>
+              <span class="shipping-info">
+                <span class="shipping-name">Entrega expressa</span>
+                <span class="shipping-description">Receba até 14/10 • Rastreio disponível</span>
+              </span>
+              <span class="shipping-price">R$ 19,90</span>
+            </label>
+
+            <label class="shipping-option">
+              <input type="radio" name="shipping" value="29.90">
+              <span class="shipping-radio"></span>
+              <span class="shipping-info">
+                <span class="shipping-name">Entrega prioritária</span>
+                <span class="shipping-description">Receba até 12/10 • Entrega mais rápida</span>
+              </span>
+              <span class="shipping-price">R$ 29,90</span>
+            </label>
+          </div>
+        </section>
+
+        <!-- PAGAMENTO -->
+        <section class="card">
+          <div class="card-header">
+            <h2>3. Forma de pagamento</h2>
+          </div>
+
+          <div class="card-body">
+            <div class="payment-tabs">
+              <button class="payment-tab active" data-payment="card" type="button">
+                💳 Cartão de crédito
+              </button>
+              <button class="payment-tab" data-payment="pix" type="button">
+                PIX
+              </button>
+              <button class="payment-tab" data-payment="boleto" type="button">
+                Boleto bancário
+              </button>
+            </div>
+
+            <div class="payment-panel active" id="cardPanel">
+              <div class="field-grid">
+                <div class="field full">
+                  <label for="cardNumber">Número do cartão <span class="required">*</span></label>
+                  <div class="card-number-wrap">
+                    <input class="input" id="cardNumber" inputmode="numeric" maxlength="19"
+                      placeholder="0000 0000 0000 0000">
+                    <span class="card-brand" id="cardBrand">CARTÃO</span>
+                  </div>
+                  <div class="hint" id="cardNumberHint"></div>
+                </div>
+
+                <div class="field full">
+                  <label for="cardName">Nome impresso no cartão <span class="required">*</span></label>
+                  <input class="input" id="cardName" placeholder="Digite o nome como aparece no cartão">
+                </div>
+
+                <div class="field">
+                  <label for="cardExpiry">Validade <span class="required">*</span></label>
+                  <input class="input" id="cardExpiry" inputmode="numeric" maxlength="5" placeholder="MM/AA">
+                </div>
+
+                <div class="field">
+                  <label for="cardCvv">CVV <span class="required">*</span></label>
+                  <input class="input" id="cardCvv" inputmode="numeric" maxlength="4" placeholder="000">
+                </div>
+
+                <div class="field">
+                  <label for="installments">Parcelamento <span class="required">*</span></label>
+                  <select class="select" id="installments">
+                    <option value="1">1x de R$ 899,90 sem juros</option>
+                    <option value="2">2x de R$ 449,95 sem juros</option>
+                    <option value="3">3x de R$ 299,97 sem juros</option>
+                    <option value="4">4x de R$ 224,98 sem juros</option>
+                    <option value="5">5x de R$ 179,98 sem juros</option>
+                    <option value="6">6x de R$ 149,98 sem juros</option>
+                    <option value="8">8x de R$ 112,49 sem juros</option>
+                    <option value="10">10x de R$ 89,99 sem juros</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="payment-note">
+                🔒 Seus dados de pagamento são protegidos e criptografados.
+                A Vitrio não armazena o código de segurança do seu cartão.
+              </div>
+            </div>
+
+            <div class="payment-panel" id="pixPanel">
+              <div class="pix-box">
+                <div class="pix-icon">◆</div>
+                <strong>Pagamento instantâneo via PIX</strong>
+                <p>
+                  Depois de confirmar o pedido, exibiremos o QR Code para
+                  você pagar pelo aplicativo do seu banco. O pedido será
+                  processado após a confirmação do pagamento.
+                </p>
+              </div>
+            </div>
+
+            <div class="payment-panel" id="boletoPanel">
+              <div class="boleto-box">
+                <strong>Boleto bancário</strong><br><br>
+                O boleto será gerado após a confirmação do pedido.
+                O prazo de compensação pode levar até 2 dias úteis.
+                A separação dos produtos começa somente após a confirmação
+                do pagamento.
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- RESUMO -->
+      <aside class="card order-summary">
+        <div class="summary-header">
+          <h2>Resumo do pedido</h2>
+        </div>
+
+        <div class="products">
+          <div class="product">
+            <div class="product-image"></div>
+            <div class="product-info">
+              <p class="product-name">Smart TV LED 50" 4K UHD com Wi-Fi</p>
+              <span class="product-meta">Quantidade: 1</span>
+            </div>
+            <div class="product-price">R$ 699,90</div>
+          </div>
+
+          <div class="product">
+            <div class="product-image"></div>
+            <div class="product-info">
+              <p class="product-name">Air Fryer Digital 5,5L Inox</p>
+              <span class="product-meta">Quantidade: 1</span>
+            </div>
+            <div class="product-price">R$ 200,00</div>
+          </div>
+        </div>
+
+        <div class="coupon">
+          <input class="input" id="coupon" placeholder="Cupom de desconto">
+          <button type="button" id="applyCoupon">Aplicar</button>
+        </div>
+
+        <div class="summary-lines">
+          <div class="summary-line">
+            <span>Subtotal</span>
+            <strong id="subtotal">R$ 899,90</strong>
+          </div>
+
+          <div class="summary-line">
+            <span>Frete</span>
+            <strong id="shippingCost" class="shipping-free">Grátis</strong>
+          </div>
+
+          <div class="summary-line" id="discountLine" style="display:none;">
+            <span>Desconto</span>
+            <strong class="discount" id="discountValue">- R$ 0,00</strong>
+          </div>
+
+          <div class="total">
+            <div class="total-label">Total</div>
+            <div>
+              <div class="total-value" id="total">R$ 899,90</div>
+              <div class="installments" id="totalInstallments">
+                em até 10x sem juros
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="buy-button" id="finishOrder" type="button">
+          Finalizar pedido
+        </button>
+
+        <div class="safe-payment">
+          🔒 Pagamento 100% seguro
+        </div>
+
+        <div class="secure-list">
+          <div class="secure-item">✓ Compra protegida</div>
+          <div class="secure-item">✓ Dados criptografados</div>
+          <div class="secure-item">✓ Nota fiscal</div>
+          <div class="secure-item">✓ Atendimento Vitrio</div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    © 2026 Vitrio Comércio Digital • Compra segura e protegida
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <div class="modal-overlay" id="modal">
+    <div class="modal">
+      <button class="modal-close" id="modalClose" type="button">×</button>
+      <h2 id="modalTitle">Confirmar pedido</h2>
+      <p id="modalText"></p>
+      <div class="modal-actions">
+        <button class="modal-cancel" id="modalCancel" type="button">Voltar</button>
+        <button class="modal-confirm" id="modalConfirm" type="button">Confirmar pedido</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const subtotal = 899.90;
+      let shipping = 0;
+      let discount = 0;
+      let appliedCoupon = false;
+      let toastTimer;
+
+      const $ = id => document.getElementById(id);
+
+      function money(value) {
+        return value.toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL"
+        });
+      }
+
+      function showToast(message) {
+        const toast = $("toast");
+        toast.textContent = message;
+        toast.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove("show"), 3000);
+      }
+
+      function updateTotal() {
+        const total = Math.max(0, subtotal + shipping - discount);
+
+        $("shippingCost").textContent =
+          shipping === 0 ? "Grátis" : money(shipping);
+
+        $("shippingCost").className =
+          shipping === 0 ? "shipping-free" : "";
+
+        $("total").textContent = money(total);
+
+        $("discountLine").style.display =
+          discount > 0 ? "flex" : "none";
+
+        $("discountValue").textContent =
+          discount > 0 ? "- " + money(discount) : "- R$ 0,00";
+      }
+
+      // Seleção de frete
+      document.querySelectorAll(".shipping-option").forEach(option => {
+        option.addEventListener("click", () => {
+          document.querySelectorAll(".shipping-option").forEach(item => {
+            item.classList.remove("selected");
+          });
+
+          option.classList.add("selected");
+
+          const radio = option.querySelector("input");
+          radio.checked = true;
+          shipping = Number(radio.value);
+
+          updateTotal();
+        });
+      });
+
+      // Abas de pagamento
+      document.querySelectorAll(".payment-tab").forEach(tab => {
+        tab.addEventListener("click", () => {
+          document.querySelectorAll(".payment-tab").forEach(item => {
+            item.classList.remove("active");
+          });
+
+          document.querySelectorAll(".payment-panel").forEach(panel => {
+            panel.classList.remove("active");
+          });
+
+          tab.classList.add("active");
+          $(tab.dataset.payment + "Panel").classList.add("active");
+        });
+      });
+
+      // Máscaras
+      $("cep").addEventListener("input", event => {
+        let value = event.target.value.replace(/\D/g, "").slice(0, 8);
+
+        if (value.length > 5) {
+          value = value.slice(0, 5) + "-" + value.slice(5);
+        }
+
+        event.target.value = value;
+      });
+
+      $("cardNumber").addEventListener("input", event => {
+        let value = event.target.value.replace(/\D/g, "").slice(0, 16);
+
+        value = value.replace(/(\d{4})(?=\d)/g, "$1 ");
+        event.target.value = value;
+
+        const digits = value.replace(/\D/g, "");
+
+        if (digits.startsWith("4")) {
+          $("cardBrand").textContent = "VISA";
+        } else if (/^5[1-5]/.test(digits)) {
+          $("cardBrand").textContent = "MASTERCARD";
+        } else if (/^3[47]/.test(digits)) {
+          $("cardBrand").textContent = "AMEX";
+        } else {
+          $("cardBrand").textContent = "CARTÃO";
+        }
+      });
+
+      $("cardExpiry").addEventListener("input", event => {
+        let value = event.target.value.replace(/\D/g, "").slice(0, 4);
+
+        if (value.length > 2) {
+          value = value.slice(0, 2) + "/" + value.slice(2);
+        }
+
+        event.target.value = value;
+      });
+
+      $("cardCvv").addEventListener("input", event => {
+        event.target.value =
+          event.target.value.replace(/\D/g, "").slice(0, 4);
+      });
+
+      // CEP
+      $("cepSearch").addEventListener("click", () => {
+        showToast("Consulte seu CEP no site oficial dos Correios.");
+      });
+
+      // Endereço
+      function openAddressForm() {
+        $("addressView").style.display = "none";
+        $("addressForm").style.display = "block";
+        $("cep").focus();
+      }
+
+      $("editAddress").addEventListener("click", openAddressForm);
+      $("changeAddress").addEventListener("click", openAddressForm);
+
+      $("saveAddress").addEventListener("click", () => {
+        const required = [
+          $("cep"),
+          $("street"),
+          $("number"),
+          $("neighborhood"),
+          $("city"),
+          $("state")
+        ];
+
+        let valid = true;
+
+        required.forEach(field => {
+          if (!field.value.trim()) {
+            field.classList.add("invalid");
+            valid = false;
+          } else {
+            field.classList.remove("invalid");
+          }
+        });
+
+        if ($("cep").value.replace(/\D/g, "").length !== 8) {
+          $("cep").classList.add("invalid");
+          valid = false;
+        }
+
+        if (!valid) {
+          showToast("Preencha todos os campos obrigatórios do endereço.");
+          return;
+        }
+
+        const complement = $("complement").value.trim();
+        const complementText = complement ? ", " + complement : "";
+
+        $("addressText").innerHTML =
+          `${$("street").value.trim()}, ${$("number").value.trim()}${complementText}<br>` +
+          `${$("neighborhood").value.trim()} • ${$("city").value.trim()} - ${$("state").value}<br>` +
+          `CEP ${$("cep").value}`;
+
+        $("addressView").style.display = "block";
+        $("addressForm").style.display = "none";
+
+        showToast("Endereço atualizado com sucesso.");
+      });
+
+      // Cupom
+      $("applyCoupon").addEventListener("click", () => {
+        const coupon = $("coupon").value.trim().toUpperCase();
+
+        if (appliedCoupon) {
+          showToast("O cupom já foi aplicado.");
+          return;
+        }
+
+        if (coupon === "VITRIO10") {
+          discount = 89.99;
+          appliedCoupon = true;
+          $("coupon").disabled = true;
+          $("applyCoupon").disabled = true;
+          $("applyCoupon").textContent = "Aplicado";
+          updateTotal();
+          showToast("Cupom VITRIO10 aplicado: 10% de desconto.");
+        } else if (!coupon) {
+          showToast("Digite um cupom para continuar.");
+        } else {
+          showToast("Cupom inválido ou expirado.");
+        }
+      });
+
+      // Validação de cartão
+      function getPaymentMethod() {
+        return document.querySelector(".payment-tab.active").dataset.payment;
+      }
+
+      function validateCard() {
+        const number = $("cardNumber").value.replace(/\D/g, "");
+        const name = $("cardName").value.trim();
+        const expiry = $("cardExpiry").value;
+        const cvv = $("cardCvv").value.replace(/\D/g, "");
+
+        let valid = true;
+
+        if (number.length < 16) {
+          $("cardNumber").classList.add("invalid");
+          $("cardNumberHint").textContent = "Informe os 16 dígitos do cartão.";
+          $("cardNumberHint").className = "hint error";
+          valid = false;
+        } else {
+          $("cardNumber").classList.remove("invalid");
+          $("cardNumberHint").textContent = "";
+        }
+
+        if (name.length < 5) {
+          $("cardName").classList.add("invalid");
+          valid = false;
+        } else {
+          $("cardName").classList.remove("invalid");
+        }
+
+        if (!/^\d{2}\/\d{2}$/.test(expiry)) {
+          $("cardExpiry").classList.add("invalid");
+          valid = false;
+        } else {
+          $("cardExpiry").classList.remove("invalid");
+        }
+
+        if (cvv.length < 3) {
+          $("cardCvv").classList.add("invalid");
+          valid = false;
+        } else {
+          $("cardCvv").classList.remove("invalid");
+        }
+
+        return valid;
+      }
+
+      // Finalização
+      const modal = $("modal");
+
+      function closeModal() {
+        modal.classList.remove("open");
+      }
+
+      $("finishOrder").addEventListener("click", () => {
+        const method = getPaymentMethod();
+
+        if (method === "card" && !validateCard()) {
+          showToast("Confira os dados do cartão antes de continuar.");
+          return;
+        }
+
+        const total = Math.max(0, subtotal + shipping - discount);
+
+        let paymentText = "";
+
+        if (method === "card") {
+          const installments = $("installments").value;
+          paymentText =
+            `Pagamento no cartão em ${installments}x sem juros.`;
+        } else if (method === "pix") {
+          paymentText =
+            "Pagamento via PIX. O QR Code será exibido após a confirmação.";
+        } else {
+          paymentText =
+            "Pagamento por boleto bancário. A compensação pode levar até 2 dias úteis.";
+        }
+
+        $("modalText").textContent =
+          `Seu pedido no valor de ${money(total)} será enviado para o endereço informado. ${paymentText} Deseja confirmar a compra?`;
+
+        modal.classList.add("open");
+      });
+
+      $("modalClose").addEventListener("click", closeModal);
+      $("modalCancel").addEventListener("click", closeModal);
+
+      modal.addEventListener("click", event => {
+        if (event.target === modal) closeModal();
+      });
+
+      $("modalConfirm").addEventListener("click", () => {
+        closeModal();
+
+        $("finishOrder").disabled = true;
+        $("finishOrder").textContent = "Processando pedido...";
+
+        setTimeout(() => {
+          $("finishOrder").textContent = "Pedido confirmado ✓";
+          showToast("Pedido confirmado! Obrigado por comprar na Vitrio.");
+
+          setTimeout(() => {
+            $("finishOrder").disabled = false;
+            $("finishOrder").textContent = "Finalizar pedido";
+          }, 3500);
+        }, 1200);
+      });
+
+      $("logoLink").addEventListener("click", event => {
+        event.preventDefault();
+        showToast("Voltando para a loja.");
+      });
+
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape") closeModal();
+      });
+
+      updateTotal();
+    })();
+  </script>
+</body>
+</html>

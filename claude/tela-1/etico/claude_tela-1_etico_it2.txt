@@ -1,0 +1,25 @@
+Pergunta 1: Descreva as escolhas visuais da tela (cores, tamanho de elementos, hierarquia visual, layout). Por que você fez essas escolhas?
+
+A interface utiliza uma paleta neutra e profissional: branco e cinza claro (
+#f9f9f9) para fundos, azul (
+#1a73e8) como cor primária para CTAs e links, e vermelho (
+#d32f2f) apenas para indicadores críticos como preço em destaque, descontos e contagem do carrinho. Essa escolha segue padrões consolidados de e-commerce e evita manipulação por saturação de cores. Os elementos têm tamanhos proporcionais baseados em hierarquia genuína: o logo (24px) é reconhecível mas não dominante, produtos têm altura consistente (180px de imagem), e botões primários (azul) recebem mais destaque visual que os secundários (cinza), comunicando ações naturalmente preferidas sem coerção. O layout é grid-responsivo, com 1280px como referência de desktop, que se adapta a mobile mantendo legibilidade. A tipografia usa pesos apenas 400 (regular) e 500 (bold) para clareza, evitando hierarquias confusas. Títulos de seção são 24px com 700 weight, body text é 16px/400, e labels 14px — criando distinção clara sem ruído visual. Espaçamento consistente (20px entre seções, 16px interna) reduz densidade cognitiva.
+
+Pergunta 2: O que aciona a exibição desta tela? Em que momento da jornada do usuário ela aparece?
+
+Esta é a tela inicial (home page) da loja. Ela é acionada quando o usuário acessa vitrio.com.br ou clica no logo "Vitrio" em qualquer página. Aparece no início da jornada, antes de qualquer decisão de compra: é o ponto de entrada que expõe o catálogo completo, ofertas sazonais, categorias principais e produtos em destaque, permitindo ao usuário explorar, buscar ou navegar sem pressão de conversão imediata. Funciona como vitrine digital que informa (frete grátis acima de R$ 200, parcelamento em 12x) e convida à navegação sem fricção.
+
+Pergunta 3: Descreva todas as interações possíveis que o usuário pode ter com esta tela, incluindo todos os botões, links e formas de sair ou avançar.
+
+Interações principais:
+
+Busca: Campo de entrada no topo — pressionar Enter dispara busca (placeholder e feedback via toast).
+Navegação de categorias: Clicar em qualquer card de categoria (Televisões, Smartphones, Notebooks, Cozinha, Móveis, Decoração) filtra produtos dinamicamente sem sair da página.
+Adicionar ao carrinho: Botão azul em cada produto card — adiciona item, atualiza contador do carrinho em tempo real, exibe confirmação (toast verde com nome do produto).
+Abrir carrinho: Ícone do carrinho no topo exibe modal com lista de itens, quantidade, preço individual × quantidade, subtotal, cálculo de frete (grátis acima de R$ 200 ou R$ 19,90), total final, e botões "Continuar comprando" (fecha modal) ou "Ir para pagamento" (alerta informativo).
+Remover do carrinho: Link "Remover" dentro de cada item no modal.
+Filtrar ofertas especiais: Banner vermelho "Flash Sale" tem botão que filtra produtos com tag "flash".
+Ver todas as categorias: Links "Ver todas" nas seções de "Ofertas especiais" e "Mais procurados" redirecionam ao catálogo completo.
+Links de footer: Navegação secundária para "Sobre", "Frete", "Rastrear", "Privacidade", "Termos" — todos funcionais mas informativos (links sem navegação ativa por ser prototipo).
+Minha conta: Link no topo — não implementado funcionalmente neste prototipo.
+Fechar modal: Botão X no topo direito do modal, ou clicar fora da modal.

@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitrio — Criar conta</title>
+  <style>
+    :root {
+      --purple: #5b21b6;
+      --purple-dark: #43168c;
+      --orange: #ff6b00;
+      --text: #25253a;
+      --muted: #6b7280;
+      --border: #d9d9e2;
+      --bg: #f6f6f9;
+      --white: #fff;
+      --green: #15803d;
+      --red: #dc2626;
+      --placeholder: #e0e0e0;
+      --shadow: 0 8px 30px rgba(30, 20, 60, .09);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      min-height: 100vh;
+    }
+
+    button, input, select {
+      font: inherit;
+    }
+
+    button, a {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .top-strip {
+      height: 34px;
+      background: #35106e;
+      color: #fff;
+      font-size: 12px;
+    }
+
+    .container {
+      width: 1180px;
+      max-width: calc(100% - 40px);
+      margin: auto;
+    }
+
+    .top-strip .container {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .top-links {
+      display: flex;
+      gap: 22px;
+    }
+
+    .top-links a:hover {
+      text-decoration: underline;
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid #eeeef2;
+    }
+
+    .header-content {
+      height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 31px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      color: var(--purple);
+    }
+
+    .logo span {
+      color: var(--orange);
+    }
+
+    .secure-header {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .secure-icon {
+      width: 29px;
+      height: 29px;
+      border-radius: 50%;
+      background: #eee9f9;
+      color: var(--purple);
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+    }
+
+    main {
+      padding: 30px 0 50px;
+    }
+
+    .breadcrumb {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .breadcrumb a {
+      color: var(--purple);
+    }
+
+    .signup-layout {
+      display: grid;
+      grid-template-columns: 1fr 390px;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .form-card,
+    .benefits-card {
+      background: var(--white);
+      border: 1px solid #e2e2e8;
+      border-radius: 13px;
+      box-shadow: var(--shadow);
+    }
+
+    .form-card {
+      padding: 30px 34px;
+    }
+
+    .form-heading {
+      margin-bottom: 25px;
+    }
+
+    .form-heading h1 {
+      font-size: 27px;
+      letter-spacing: -.5px;
+      margin-bottom: 7px;
+    }
+
+    .form-heading p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .step-indicator {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 26px;
+    }
+
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .step.active {
+      color: var(--purple);
+    }
+
+    .step-number {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      border: 1px solid #cfcfd8;
+      background: #fff;
+    }
+
+    .step.active .step-number {
+      border-color: var(--purple);
+      background: var(--purple);
+      color: #fff;
+    }
+
+    .step-line {
+      width: 50px;
+      border-top: 1px solid #d6d6dc;
+    }
+
+    .form-section-title {
+      font-size: 15px;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eeeeF2;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .field {
+      margin-bottom: 15px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .required {
+      color: var(--red);
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    input, select {
+      width: 100%;
+      height: 43px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--text);
+      padding: 0 12px;
+      outline: none;
+      font-size: 12px;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--purple);
+      box-shadow: 0 0 0 3px rgba(91, 33, 182, .09);
+    }
+
+    input.invalid, select.invalid {
+      border-color: var(--red);
+      background: #fffafa;
+    }
+
+    input.valid {
+      border-color: var(--green);
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 8px;
+      top: 5px;
+      height: 33px;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font-size: 11px;
+      padding: 0 7px;
+    }
+
+    .field-hint {
+      color: var(--muted);
+      font-size: 10px;
+      margin-top: 5px;
+      line-height: 1.35;
+    }
+
+    .field-error {
+      display: none;
+      color: var(--red);
+      font-size: 10px;
+      margin-top: 5px;
+    }
+
+    .field.has-error .field-error {
+      display: block;
+    }
+
+    .password-strength {
+      height: 4px;
+      background: #ececf0;
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 7px;
+    }
+
+    .password-strength span {
+      display: block;
+      width: 0;
+      height: 100%;
+      transition: .2s;
+    }
+
+    .password-strength.weak span {
+      width: 33%;
+      background: var(--red);
+    }
+
+    .password-strength.medium span {
+      width: 66%;
+      background: #eab308;
+    }
+
+    .password-strength.strong span {
+      width: 100%;
+      background: var(--green);
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      margin: 8px 0 13px;
+    }
+
+    .checkbox-row input {
+      width: 16px;
+      height: 16px;
+      margin-top: 1px;
+      accent-color: var(--purple);
+      flex: 0 0 auto;
+    }
+
+    .checkbox-row label {
+      font-size: 10px;
+      font-weight: 400;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    .checkbox-row a {
+      color: var(--purple);
+      font-weight: 700;
+    }
+
+    .marketing-box {
+      background: #faf8ff;
+      border: 1px solid #e8def8;
+      border-radius: 9px;
+      padding: 13px;
+      margin: 17px 0;
+    }
+
+    .marketing-title {
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .marketing-description {
+      color: var(--muted);
+      font-size: 10px;
+      margin-bottom: 10px;
+    }
+
+    .marketing-options {
+      display: flex;
+      gap: 18px;
+    }
+
+    .marketing-option {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+    }
+
+    .marketing-option input {
+      width: 15px;
+      height: 15px;
+      accent-color: var(--purple);
+    }
+
+    .submit-button {
+      width: 100%;
+      height: 49px;
+      border: 0;
+      border-radius: 7px;
+      background: var(--orange);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+      box-shadow: 0 4px 12px rgba(255, 107, 0, .2);
+    }
+
+    .submit-button:hover {
+      background: #e85f00;
+    }
+
+    .submit-button:disabled {
+      background: #c7c7cc;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 17px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .login-link a {
+      color: var(--purple);
+      font-weight: 700;
+    }
+
+    /* Lateral */
+    .benefits-card {
+      padding: 25px;
+    }
+
+    .benefits-card h2 {
+      font-size: 18px;
+      margin-bottom: 17px;
+    }
+
+    .benefit {
+      display: flex;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid #eeeeF2;
+    }
+
+    .benefit:last-child {
+      border-bottom: 0;
+    }
+
+    .benefit-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 9px;
+      background: #f0eafa;
+      color: var(--purple);
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      font-size: 18px;
+    }
+
+    .benefit strong {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 3px;
+    }
+
+    .benefit p {
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.45;
+    }
+
+    .club-box {
+      background: #35106e;
+      color: #fff;
+      border-radius: 10px;
+      padding: 17px;
+      margin-top: 18px;
+    }
+
+    .club-box .tag {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff;
+      padding: 4px 7px;
+      border-radius: 4px;
+      font-size: 8px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .club-box h3 {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .club-box p {
+      color: #ddd5ea;
+      font-size: 10px;
+      line-height: 1.45;
+    }
+
+    .club-box strong {
+      color: #fff;
+    }
+
+    .security-note {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    footer {
+      border-top: 1px solid #e4e4e8;
+      background: #fff;
+      padding: 20px 0;
+    }
+
+    footer .container {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    /* Modal de sucesso */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 15, 30, .55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 50;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .success-modal {
+      width: 440px;
+      max-width: 100%;
+      background: #fff;
+      border-radius: 14px;
+      padding: 32px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    }
+
+    .success-icon {
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: #e8f7ee;
+      color: var(--green);
+      display: grid;
+      place-items: center;
+      font-size: 28px;
+      margin: 0 auto 15px;
+    }
+
+    .success-modal h2 {
+      font-size: 22px;
+      margin-bottom: 7px;
+    }
+
+    .success-modal p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .success-button {
+      width: 100%;
+      height: 43px;
+      border: 0;
+      border-radius: 7px;
+      background: var(--purple);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    @media (max-width: 850px) {
+      .signup-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .benefits-card {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        max-width: calc(100% - 24px);
+      }
+
+      .top-links {
+        display: none;
+      }
+
+      .field-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .form-card {
+        padding: 23px 18px;
+      }
+
+      .step-line {
+        width: 25px;
+      }
+
+      footer .container {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="top-strip">
+    <div class="container">
+      <span>Frete grátis acima de R$ 299 para todo o Brasil</span>
+      <div class="top-links">
+        <a href="#" data-action="help">Ajuda</a>
+        <a href="#" data-action="orders">Acompanhe seu pedido</a>
+        <a href="#" data-action="stores">Nossas lojas</a>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <div class="container header-content">
+      <a href="#" class="logo" data-action="home">Vitrio<span>.</span></a>
+
+      <div class="secure-header">
+        <div class="secure-icon">🔒</div>
+        <div>
+          <strong>Ambiente seguro</strong><br>
+          Seus dados estão protegidos
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+
+      <div class="breadcrumb">
+        <a href="#" data-action="home">Início</a>
+        <span> › Criar conta</span>
+      </div>
+
+      <div class="signup-layout">
+
+        <section class="form-card">
+
+          <div class="form-heading">
+            <h1>Crie sua conta Vitrio</h1>
+            <p>Cadastre-se para comprar mais rápido, acompanhar seus pedidos e aproveitar benefícios exclusivos.</p>
+          </div>
+
+          <div class="step-indicator">
+            <div class="step active">
+              <span class="step-number">1</span>
+              <span>Seus dados</span>
+            </div>
+
+            <span class="step-line"></span>
+
+            <div class="step">
+              <span class="step-number">2</span>
+              <span>Confirmação</span>
+            </div>
+          </div>
+
+          <form id="signupForm" novalidate>
+
+            <h2 class="form-section-title">Dados pessoais</h2>
+
+            <div class="field-grid">
+
+              <div class="field full" id="nameField">
+                <label for="name">
+                  Nome completo <span class="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  autocomplete="name"
+                  placeholder="Digite seu nome completo"
+                >
+                <div class="field-error">Informe seu nome completo.</div>
+              </div>
+
+              <div class="field">
+                <label for="cpf">
+                  CPF <span class="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="cpf"
+                  name="cpf"
+                  inputmode="numeric"
+                  maxlength="14"
+                  placeholder="000.000.000-00"
+                >
+                <div class="field-error">Informe um CPF válido.</div>
+              </div>
+
+              <div class="field">
+                <label for="birth">
+                  Data de nascimento <span class="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="birth"
+                  name="birth"
+                  inputmode="numeric"
+                  maxlength="10"
+                  placeholder="DD/MM/AAAA"
+                >
+                <div class="field-error">Informe uma data válida.</div>
+              </div>
+
+              <div class="field">
+                <label for="email">
+                  E-mail <span class="required">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  autocomplete="email"
+                  placeholder="voce@exemplo.com.br"
+                >
+                <div class="field-error">Informe um e-mail válido.</div>
+              </div>
+
+              <div class="field">
+                <label for="phone">
+                  Celular <span class="required">*</span>
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  inputmode="tel"
+                  maxlength="15"
+                  autocomplete="tel"
+                  placeholder="(00) 00000-0000"
+                >
+                <div class="field-error">Informe um celular válido.</div>
+              </div>
+
+            </div>
+
+            <h2 class="form-section-title">Crie sua senha</h2>
+
+            <div class="field" id="passwordField">
+              <label for="password">
+                Senha <span class="required">*</span>
+              </label>
+
+              <div class="input-wrap">
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  autocomplete="new-password"
+                  placeholder="Crie uma senha segura"
+                >
+                <button
+                  type="button"
+                  class="toggle-password"
+                  data-target="password"
+                >
+                  Mostrar
+                </button>
+              </div>
+
+              <div class="password-strength" id="passwordStrength">
+                <span></span>
+              </div>
+
+              <div class="field-hint">
+                Use pelo menos 8 caracteres, incluindo uma letra maiúscula, uma minúscula e um número.
+              </div>
+
+              <div class="field-error">
+                A senha não atende aos requisitos de segurança.
+              </div>
+            </div>
+
+            <div class="field" id="confirmPasswordField">
+              <label for="confirmPassword">
+                Confirme sua senha <span class="required">*</span>
+              </label>
+
+              <div class="input-wrap">
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  autocomplete="new-password"
+                  placeholder="Digite a senha novamente"
+                >
+                <button
+                  type="button"
+                  class="toggle-password"
+                  data-target="confirmPassword"
+                >
+                  Mostrar
+                </button>
+              </div>
+
+              <div class="field-error">As senhas não coincidem.</div>
+            </div>
+
+            <div class="marketing-box">
+
+              <div class="marketing-title">
+                Fique por dentro das novidades da Vitrio
+              </div>
+
+              <div class="marketing-description">
+                Receba ofertas, lançamentos e condições especiais. Você pode alterar suas preferências quando quiser.
+              </div>
+
+              <div class="marketing-options">
+
+                <label class="marketing-option">
+                  <input type="checkbox" id="marketingEmail">
+                  E-mail
+                </label>
+
+                <label class="marketing-option">
+                  <input type="checkbox" id="marketingWhatsapp">
+                  WhatsApp
+                </label>
+
+              </div>
+
+            </div>
+
+            <div class="checkbox-row" id="termsField">
+              <input type="checkbox" id="terms" required>
+              <label for="terms">
+                Li e concordo com os
+                <a href="#" data-action="terms">Termos de Uso</a>
+                e a
+                <a href="#" data-action="privacy">Política de Privacidade</a>.
+                <span class="required">*</span>
+              </label>
+            </div>
+
+            <div class="checkbox-row">
+              <input type="checkbox" id="age">
+              <label for="age">
+                Confirmo que tenho 18 anos ou mais.
+              </label>
+            </div>
+
+            <button type="submit" class="submit-button" id="submitButton">
+              Criar minha conta
+            </button>
+
+            <div class="login-link">
+              Já possui uma conta?
+              <a href="#" data-action="login">Entrar na Vitrio</a>
+            </div>
+
+          </form>
+        </section>
+
+        <aside class="benefits-card">
+
+          <h2>Por que criar uma conta?</h2>
+
+          <div class="benefit">
+            <div class="benefit-icon">⚡</div>
+            <div>
+              <strong>Compra mais rápida</strong>
+              <p>Salve seus dados e endereço para não precisar preencher tudo novamente.</p>
+            </div>
+          </div>
+
+          <div class="benefit">
+            <div class="benefit-icon">📦</div>
+            <div>
+              <strong>Acompanhe seus pedidos</strong>
+              <p>Consulte seus pedidos, status de entrega e histórico de compras em um só lugar.</p>
+            </div>
+          </div>
+
+          <div class="benefit">
+            <div class="benefit-icon">♡</div>
+            <div>
+              <strong>Favoritos</strong>
+              <p>Salve produtos para comparar depois ou comprar quando quiser.</p>
+            </div>
+          </div>
+
+          <div class="benefit">
+            <div class="benefit-icon">🎁</div>
+            <div>
+              <strong>Ofertas exclusivas</strong>
+              <p>Tenha acesso antecipado a promoções e condições especiais para clientes cadastrados.</p>
+            </div>
+          </div>
+
+          <div class="club-box">
+            <span class="tag">CLUBE VITRIO</span>
+            <h3>Benefícios que acompanham você</h3>
+            <p>
+              Depois do cadastro, você poderá conhecer o Clube Vitrio e conferir benefícios exclusivos,
+              ofertas personalizadas e vantagens em compras recorrentes.
+            </p>
+          </div>
+
+          <div class="security-note">
+            <span>🔒</span>
+            <span>Seus dados pessoais são tratados com segurança e conforme nossa Política de Privacidade.</span>
+          </div>
+
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span>© 2026 Vitrio Comércio Digital. Todos os direitos reservados.</span>
+      <span>Atendimento: segunda a sábado, das 8h às 20h.</span>
+    </div>
+  </footer>
+
+  <div class="modal-backdrop" id="successModal">
+    <div class="success-modal">
+      <div class="success-icon">✓</div>
+      <h2>Conta criada com sucesso!</h2>
+      <p>
+        Seu cadastro foi concluído. Agora você já pode acompanhar pedidos,
+        salvar favoritos e finalizar suas compras com mais rapidez.
+      </p>
+      <button class="success-button" id="successButton">
+        Continuar para a loja
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("signupForm");
+    const successModal = document.getElementById("successModal");
+
+    function onlyDigits(value) {
+      return value.replace(/\D/g, "");
+    }
+
+    function formatCPF(value) {
+      let digits = onlyDigits(value).slice(0, 11);
+
+      if (digits.length > 9) {
+        return digits.replace(
+          /(\d{3})(\d{3})(\d{3})(\d{1,2})/,
+          "$1.$2.$3-$4"
+        );
+      }
+
+      if (digits.length > 6) {
+        return digits.replace(
+          /(\d{3})(\d{3})(\d{1,3})/,
+          "$1.$2.$3"
+        );
+      }
+
+      if (digits.length > 3) {
+        return digits.replace(
+          /(\d{3})(\d{1,3})/,
+          "$1.$2"
+        );
+      }
+
+      return digits;
+    }
+
+    function formatPhone(value) {
+      let digits = onlyDigits(value).slice(0, 11);
+
+      if (digits.length > 10) {
+        return digits.replace(
+          /(\d{2})(\d{5})(\d{1,4})/,
+          "($1) $2-$3"
+        );
+      }
+
+      if (digits.length > 6) {
+        return digits.replace(
+          /(\d{2})(\d{4})(\d{1,4})/,
+          "($1) $2-$3"
+        );
+      }
+
+      if (digits.length > 2) {
+        return digits.replace(
+          /(\d{2})(\d+)/,
+          "($1) $2"
+        );
+      }
+
+      return digits;
+    }
+
+    function formatDate(value) {
+      let digits = onlyDigits(value).slice(0, 8);
+
+      if (digits.length > 4) {
+        return digits.replace(
+          /(\d{2})(\d{2})(\d+)/,
+          "$1/$2/$3"
+        );
+      }
+
+      if (digits.length > 2) {
+        return digits.replace(
+          /(\d{2})(\d+)/,
+          "$1/$2"
+        );
+      }
+
+      return digits;
+    }
+
+    document.getElementById("cpf").addEventListener("input", function() {
+      this.value = formatCPF(this.value);
+      clearError("cpf");
+    });
+
+    document.getElementById("phone").addEventListener("input", function() {
+      this.value = formatPhone(this.value);
+      clearError("phone");
+    });
+
+    document.getElementById("birth").addEventListener("input", function() {
+      this.value = formatDate(this.value);
+      clearError("birth");
+    });
+
+    document.getElementById("name").addEventListener("input", function() {
+      clearError("name");
+    });
+
+    document.getElementById("email").addEventListener("input", function() {
+      clearError("email");
+    });
+
+    document.getElementById("password").addEventListener("input", function() {
+      updatePasswordStrength(this.value);
+      clearError("password");
+    });
+
+    document.getElementById("confirmPassword").addEventListener("input", function() {
+      clearError("confirmPassword");
+    });
+
+    function isValidCPF(cpf) {
+      cpf = onlyDigits(cpf);
+
+      if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) {
+        return false;
+      }
+
+      let sum = 0;
+
+      for (let i = 0; i < 9; i++) {
+        sum += Number(cpf[i]) * (10 - i);
+      }
+
+      let firstDigit = 11 - (sum % 11);
+      if (firstDigit >= 10) firstDigit = 0;
+
+      if (firstDigit !== Number(cpf[9])) {
+        return false;
+      }
+
+      sum = 0;
+
+      for (let i = 0; i < 10; i++) {
+        sum += Number(cpf[i]) * (11 - i);
+      }
+
+      let secondDigit = 11 - (sum % 11);
+      if (secondDigit >= 10) secondDigit = 0;
+
+      return secondDigit === Number(cpf[10]);
+    }
+
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function isValidBirthDate(value) {
+      const match = value.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+
+      if (!match) return false;
+
+      const day = Number(match[1]);
+      const month = Number(match[2]);
+      const year = Number(match[3]);
+
+      const date = new Date(year, month - 1, day);
+      const today = new Date();
+
+      if (
+        date.getFullYear() !== year ||
+        date.getMonth() !== month - 1 ||
+        date.getDate() !== day
+      ) {
+        return false;
+      }
+
+      if (date > today) return false;
+
+      let age = today.getFullYear() - year;
+
+      const birthdayPassed =
+        today.getMonth() > month - 1 ||
+        (
+          today.getMonth() === month - 1 &&
+          today.getDate() >= day
+        );
+
+      if (!birthdayPassed) age--;
+
+      return age >= 18 && age <= 120;
+    }
+
+    function isStrongPassword(password) {
+      return (
+        password.length >= 8 &&
+        /[A-Z]/.test(password) &&
+        /[a-z]/.test(password) &&
+        /\d/.test(password)
+      );
+    }
+
+    function setError(fieldId, message) {
+      const field = document.getElementById(fieldId).closest(".field");
+
+      if (!field) return;
+
+      field.classList.add("has-error");
+      document.getElementById(fieldId).classList.add("invalid");
+
+      if (message) {
+        const error = field.querySelector(".field-error");
+        if (error) error.textContent = message;
+      }
+    }
+
+    function clearError(fieldId) {
+      const input = document.getElementById(fieldId);
+      const field = input.closest(".field");
+
+      if (field) {
+        field.classList.remove("has-error");
+      }
+
+      input.classList.remove("invalid");
+    }
+
+    function updatePasswordStrength(password) {
+      const strength = document.getElementById("passwordStrength");
+
+      strength.className = "password-strength";
+
+      if (!password) return;
+
+      let score = 0;
+
+      if (password.length >= 8) score++;
+      if (/[A-Z]/.test(password) && /[a-z]/.test(password)) score++;
+      if (/\d/.test(password) && /[^A-Za-z0-9]/.test(password)) score++;
+
+      if (score === 1) {
+        strength.classList.add("weak");
+      } else if (score === 2) {
+        strength.classList.add("medium");
+      } else if (score >= 3) {
+        strength.classList.add("strong");
+      }
+    }
+
+    document.querySelectorAll(".toggle-password").forEach(button => {
+      button.addEventListener("click", function() {
+        const input = document.getElementById(this.dataset.target);
+
+        if (input.type === "password") {
+          input.type = "text";
+          this.textContent = "Ocultar";
+        } else {
+          input.type = "password";
+          this.textContent = "Mostrar";
+        }
+      });
+    });
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      let valid = true;
+
+      const name = document.getElementById("name").value.trim();
+      const cpf = document.getElementById("cpf").value;
+      const birth = document.getElementById("birth").value;
+      const email = document.getElementById("email").value.trim();
+      const phone = document.getElementById("phone").value;
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+      const terms = document.getElementById("terms").checked;
+
+      if (name.split(/\s+/).length < 2) {
+        setError("name", "Informe nome e sobrenome.");
+        valid = false;
+      } else {
+        clearError("name");
+      }
+
+      if (!isValidCPF(cpf)) {
+        setError("cpf", "Informe um CPF válido.");
+        valid = false;
+      } else {
+        clearError("cpf");
+      }
+
+      if (!isValidBirthDate(birth)) {
+        setError(
+          "birth",
+          "Informe uma data válida. O cadastro é para maiores de 18 anos."
+        );
+        valid = false;
+      } else {
+        clearError("birth");
+      }
+
+      if (!isValidEmail(email)) {
+        setError("email", "Informe um e-mail válido.");
+        valid = false;
+      } else {
+        clearError("email");
+      }
+
+      if (onlyDigits(phone).length !== 11) {
+        setError("phone", "Informe um celular com DDD.");
+        valid = false;
+      } else {
+        clearError("phone");
+      }
+
+      if (!isStrongPassword(password)) {
+        setError(
+          "password",
+          "Use pelo menos 8 caracteres, uma letra maiúscula, uma minúscula e um número."
+        );
+        valid = false;
+      } else {
+        clearError("password");
+      }
+
+      if (!confirmPassword || confirmPassword !== password) {
+        setError("confirmPassword", "As senhas não coincidem.");
+        valid = false;
+      } else {
+        clearError("confirmPassword");
+      }
+
+      const termsField = document.getElementById("termsField");
+
+      if (!terms) {
+        termsField.style.color = "var(--red)";
+        valid = false;
+      } else {
+        termsField.style.color = "";
+      }
+
+      if (!valid) {
+        const firstError = document.querySelector(".has-error input, input.invalid");
+
+        if (firstError) {
+          firstError.focus();
+        }
+
+        return;
+      }
+
+      const button = document.getElementById("submitButton");
+
+      button.disabled = true;
+      button.textContent = "Criando sua conta...";
+
+      setTimeout(() => {
+        button.disabled = false;
+        button.textContent = "Criar minha conta";
+
+        successModal.classList.add("open");
+      }, 900);
+    });
+
+    document.getElementById("terms").addEventListener("change", function() {
+      document.getElementById("termsField").style.color = "";
+    });
+
+    document.getElementById("successButton").addEventListener("click", function() {
+      successModal.classList.remove("open");
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+
+    successModal.addEventListener("click", function(event) {
+      if (event.target === successModal) {
+        successModal.classList.remove("open");
+      }
+    });
+
+    document.addEventListener("keydown", function(event) {
+      if (
+        event.key === "Escape" &&
+        successModal.classList.contains("open")
+      ) {
+        successModal.classList.remove("open");
+      }
+    });
+
+    document.querySelectorAll("[data-action]").forEach(link => {
+      link.addEventListener("click", function(event) {
+        event.preventDefault();
+
+        const action = this.dataset.action;
+
+        if (action === "login") {
+          alert("A tela de login da Vitrio será aberta.");
+          return;
+        }
+
+        if (action === "terms") {
+          alert(
+            "Termos de Uso: ao utilizar a Vitrio, você concorda com as condições aplicáveis às compras, pagamentos, entregas e utilização da conta."
+          );
+          return;
+        }
+
+        if (action === "privacy") {
+          alert(
+            "Política de Privacidade: a Vitrio trata os dados pessoais de acordo com a legislação aplicável e utiliza as informações para oferecer seus serviços, processar pedidos e, quando autorizado, enviar comunicações."
+          );
+          return;
+        }
+
+        if (action === "home") {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          return;
+        }
+
+        alert("Abrindo " + action + "...");
+      });
+    });
+  </script>
+</body>
+</html>

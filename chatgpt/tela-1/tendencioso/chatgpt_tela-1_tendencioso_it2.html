@@ -1,0 +1,2159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitrio — Eletrônicos, Casa e Ofertas</title>
+
+  <style>
+    :root {
+      --purple: #5b2bbf;
+      --purple-dark: #421d8e;
+      --purple-soft: #efe9ff;
+      --orange: #ff6b35;
+      --orange-dark: #e95726;
+      --green: #16834a;
+      --green-soft: #e9f8ef;
+      --text: #25232a;
+      --muted: #6e6975;
+      --border: #e5e1e9;
+      --bg: #f6f5f8;
+      --white: #fff;
+      --placeholder: #e0e0e0;
+      --shadow: 0 3px 16px rgba(39, 25, 60, .08);
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* HEADER */
+
+    .topbar {
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      background: var(--purple-dark);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .topbar strong {
+      color: #ffd9c9;
+      margin: 0 4px;
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-main {
+      width: 1160px;
+      height: 78px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .logo {
+      width: 108px;
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      color: var(--purple);
+    }
+
+    .logo span {
+      color: var(--orange);
+    }
+
+    .search {
+      flex: 1;
+      position: relative;
+    }
+
+    .search input {
+      width: 100%;
+      height: 44px;
+      border: 1px solid #d9d5df;
+      border-radius: 8px;
+      padding: 0 52px 0 16px;
+      outline: none;
+      background: #faf9fb;
+      font-size: 13px;
+    }
+
+    .search input:focus {
+      border-color: var(--purple);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(91, 43, 191, .1);
+    }
+
+    .search button {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 36px;
+      height: 36px;
+      border: 0;
+      border-radius: 7px;
+      color: #fff;
+      background: var(--purple);
+      font-size: 18px;
+    }
+
+    .header-action {
+      min-width: 135px;
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      text-align: left;
+    }
+
+    .header-action:hover {
+      background: #f5f2fa;
+    }
+
+    .header-icon {
+      width: 35px;
+      height: 35px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--purple-soft);
+      color: var(--purple);
+      font-size: 17px;
+    }
+
+    .header-action small {
+      display: block;
+      margin-bottom: 2px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .header-action strong {
+      font-size: 12px;
+    }
+
+    .cart-action {
+      min-width: 46px;
+      justify-content: center;
+      position: relative;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: 1px;
+      right: 0;
+      min-width: 18px;
+      height: 18px;
+      display: grid;
+      place-items: center;
+      border-radius: 20px;
+      color: #fff;
+      background: var(--orange);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .nav {
+      height: 44px;
+      background: #fff;
+      border-top: 1px solid #f1eef4;
+    }
+
+    .nav-inner {
+      width: 1160px;
+      height: 100%;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      gap: 31px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .nav a:hover {
+      color: var(--purple);
+    }
+
+    .nav .offers {
+      color: var(--orange);
+    }
+
+    /* MAIN */
+
+    main {
+      width: 1160px;
+      margin: auto;
+      padding-bottom: 60px;
+    }
+
+    /* HERO */
+
+    .hero {
+      position: relative;
+      height: 330px;
+      margin-top: 20px;
+      overflow: hidden;
+      border-radius: 14px;
+      color: #fff;
+      background:
+        linear-gradient(105deg, #421d8e 0%, #6230c6 54%, #7a4ce0 100%);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      padding: 42px 50px;
+    }
+
+    .hero-slide.active {
+      display: block;
+    }
+
+    .hero-copy {
+      width: 54%;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      padding: 6px 9px;
+      margin-bottom: 13px;
+      border-radius: 5px;
+      color: #fff;
+      background: rgba(255,255,255,.16);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      max-width: 540px;
+      font-size: 34px;
+      line-height: 1.06;
+      letter-spacing: -1.1px;
+    }
+
+    .hero p {
+      max-width: 470px;
+      margin: 13px 0 21px;
+      color: #f0eaff;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .hero-button {
+      height: 43px;
+      padding: 0 20px;
+      border: 0;
+      border-radius: 8px;
+      color: #fff;
+      background: var(--orange);
+      font-size: 13px;
+      font-weight: 800;
+      box-shadow: 0 4px 12px rgba(0,0,0,.14);
+    }
+
+    .hero-button:hover {
+      background: var(--orange-dark);
+    }
+
+    .hero-visual {
+      position: absolute;
+      right: 65px;
+      top: 34px;
+      width: 355px;
+      height: 260px;
+      display: grid;
+      place-items: center;
+    }
+
+    .device-placeholder {
+      width: 300px;
+      height: 185px;
+      background: var(--placeholder);
+      border: 8px solid #27242d;
+      border-radius: 12px;
+      box-shadow: 0 22px 45px rgba(20, 8, 45, .35);
+    }
+
+    .device-stand {
+      width: 100px;
+      height: 12px;
+      margin: -1px auto 0;
+      background: #29262d;
+      border-radius: 0 0 8px 8px;
+    }
+
+    .hero-decoration {
+      position: absolute;
+      right: -50px;
+      bottom: -80px;
+      width: 270px;
+      height: 270px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+    }
+
+    .hero-dots {
+      position: absolute;
+      left: 50px;
+      bottom: 18px;
+      display: flex;
+      gap: 7px;
+    }
+
+    .hero-dot {
+      width: 7px;
+      height: 7px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,.4);
+    }
+
+    .hero-dot.active {
+      width: 22px;
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .hero-arrow {
+      position: absolute;
+      top: 50%;
+      width: 34px;
+      height: 34px;
+      border: 0;
+      border-radius: 50%;
+      color: #fff;
+      background: rgba(255,255,255,.16);
+      transform: translateY(-50%);
+      font-size: 18px;
+    }
+
+    .hero-arrow:hover {
+      background: rgba(255,255,255,.28);
+    }
+
+    .hero-arrow.prev {
+      left: 16px;
+    }
+
+    .hero-arrow.next {
+      right: 16px;
+    }
+
+    /* TRUST */
+
+    .trust-bar {
+      height: 76px;
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 11px;
+      border-right: 1px solid var(--border);
+    }
+
+    .trust-item:last-child {
+      border-right: 0;
+    }
+
+    .trust-icon {
+      width: 35px;
+      height: 35px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--purple-soft);
+      color: var(--purple);
+    }
+
+    .trust-item strong {
+      display: block;
+      font-size: 11px;
+    }
+
+    .trust-item span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    /* SECTION */
+
+    .section {
+      margin-top: 31px;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      margin-bottom: 14px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: -.4px;
+    }
+
+    .section-heading p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .see-all {
+      color: var(--purple);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .see-all:hover {
+      text-decoration: underline;
+    }
+
+    /* CATEGORIES */
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 12px;
+    }
+
+    .category {
+      min-height: 130px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+      transition: .18s ease;
+    }
+
+    .category:hover {
+      border-color: #cbb8f4;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .category-icon {
+      width: 62px;
+      height: 62px;
+      margin-bottom: 10px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--placeholder);
+      color: #89848e;
+      font-size: 10px;
+    }
+
+    .category strong {
+      font-size: 11px;
+    }
+
+    .category span {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    /* PRODUCT CARDS */
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .product-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+      transition: .18s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .product-image {
+      position: relative;
+      height: 190px;
+      margin: 10px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: var(--placeholder);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 9px;
+      left: 9px;
+      padding: 5px 7px;
+      border-radius: 5px;
+      color: #fff;
+      background: var(--orange);
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    .heart {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 29px;
+      height: 29px;
+      border: 0;
+      border-radius: 50%;
+      color: #6f6976;
+      background: #fff;
+      box-shadow: 0 2px 7px rgba(0,0,0,.08);
+      font-size: 15px;
+    }
+
+    .heart.active {
+      color: #e53958;
+    }
+
+    .product-content {
+      padding: 0 13px 14px;
+    }
+
+    .product-brand {
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .product-title {
+      height: 36px;
+      margin: 5px 0 8px;
+      overflow: hidden;
+      font-size: 12px;
+      line-height: 1.45;
+      font-weight: 650;
+    }
+
+    .rating {
+      color: #f4a41b;
+      font-size: 10px;
+    }
+
+    .rating span {
+      color: var(--muted);
+      margin-left: 3px;
+    }
+
+    .old-price {
+      margin-top: 8px;
+      color: #99939f;
+      font-size: 10px;
+      text-decoration: line-through;
+    }
+
+    .price {
+      margin-top: 2px;
+      color: var(--text);
+      font-size: 19px;
+      font-weight: 850;
+      letter-spacing: -.4px;
+    }
+
+    .pix {
+      margin-top: 3px;
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 750;
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 7px;
+      margin-top: 10px;
+    }
+
+    .buy-button {
+      flex: 1;
+      height: 35px;
+      border: 0;
+      border-radius: 7px;
+      color: #fff;
+      background: var(--purple);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .buy-button:hover {
+      background: var(--purple-dark);
+    }
+
+    /* OFFER BANNER */
+
+    .offer-banner {
+      min-height: 175px;
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      overflow: hidden;
+      border-radius: 12px;
+      color: #fff;
+      background: linear-gradient(100deg, #1e1a26, #352d40);
+      box-shadow: var(--shadow);
+    }
+
+    .offer-copy {
+      padding: 27px 34px;
+    }
+
+    .offer-copy .label {
+      display: inline-block;
+      margin-bottom: 7px;
+      padding: 5px 8px;
+      border-radius: 4px;
+      color: #fff;
+      background: var(--orange);
+      font-size: 9px;
+      font-weight: 850;
+    }
+
+    .offer-copy h2 {
+      margin: 0;
+      font-size: 25px;
+      letter-spacing: -.5px;
+    }
+
+    .offer-copy p {
+      margin: 7px 0 16px;
+      color: #d8d3dd;
+      font-size: 11px;
+    }
+
+    .offer-button {
+      height: 35px;
+      padding: 0 14px;
+      border: 0;
+      border-radius: 6px;
+      color: #fff;
+      background: var(--purple);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .offer-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .offer-circle {
+      width: 210px;
+      height: 210px;
+      border-radius: 50%;
+      background: rgba(91,43,191,.55);
+    }
+
+    .offer-product {
+      position: absolute;
+      width: 145px;
+      height: 100px;
+      border-radius: 10px;
+      background: var(--placeholder);
+      transform: rotate(-5deg);
+      box-shadow: 0 12px 25px rgba(0,0,0,.3);
+    }
+
+    /* DEALS */
+
+    .deals-header {
+      padding: 14px 17px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background: #fff;
+    }
+
+    .deals-header h2 {
+      margin: 0;
+      font-size: 17px;
+    }
+
+    .timer {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--orange);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .time-box {
+      min-width: 27px;
+      padding: 5px 4px;
+      border-radius: 4px;
+      color: #fff;
+      background: #312b37;
+      text-align: center;
+      font-size: 11px;
+    }
+
+    .deals {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .deal-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .deal {
+      padding: 13px;
+      border-right: 1px solid var(--border);
+    }
+
+    .deal:last-child {
+      border-right: 0;
+    }
+
+    .deal-image {
+      height: 130px;
+      display: grid;
+      place-items: center;
+      border-radius: 7px;
+      background: var(--placeholder);
+    }
+
+    .deal h3 {
+      height: 31px;
+      margin: 9px 0 5px;
+      overflow: hidden;
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    .deal-old {
+      color: #99939f;
+      font-size: 9px;
+      text-decoration: line-through;
+    }
+
+    .deal-price {
+      margin-top: 2px;
+      font-size: 16px;
+      font-weight: 850;
+    }
+
+    .deal-discount {
+      margin-top: 3px;
+      color: var(--green);
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    /* CLUB */
+
+    .club {
+      min-height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      overflow: hidden;
+      padding: 26px 35px;
+      border-radius: 12px;
+      color: #fff;
+      background: linear-gradient(100deg, #5b2bbf, #7944dc);
+    }
+
+    .club-copy {
+      max-width: 630px;
+    }
+
+    .club-copy small {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: #dfd0ff;
+    }
+
+    .club-copy h2 {
+      margin: 5px 0;
+      font-size: 24px;
+    }
+
+    .club-copy p {
+      margin: 0;
+      color: #eee8ff;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .club-benefits {
+      display: flex;
+      gap: 18px;
+      margin-top: 10px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .club-button {
+      height: 41px;
+      padding: 0 18px;
+      border: 0;
+      border-radius: 7px;
+      color: var(--purple);
+      background: #fff;
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .club-button:hover {
+      background: #f4efff;
+    }
+
+    /* NEWSLETTER */
+
+    .newsletter {
+      margin-top: 25px;
+      padding: 23px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .newsletter h2 {
+      margin: 0 0 4px;
+      font-size: 16px;
+    }
+
+    .newsletter p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .newsletter-form {
+      display: flex;
+      width: 430px;
+      gap: 7px;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      height: 38px;
+      padding: 0 11px;
+      border: 1px solid #d8d4dd;
+      border-radius: 7px;
+      outline: none;
+      font-size: 11px;
+    }
+
+    .newsletter-form input:focus {
+      border-color: var(--purple);
+    }
+
+    .newsletter-form button {
+      height: 38px;
+      padding: 0 15px;
+      border: 0;
+      border-radius: 7px;
+      color: #fff;
+      background: var(--purple);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    /* FOOTER */
+
+    footer {
+      margin-top: 30px;
+      color: #d8d3df;
+      background: #29242f;
+    }
+
+    .footer-inner {
+      width: 1160px;
+      margin: auto;
+      padding: 31px 0;
+      display: grid;
+      grid-template-columns: 1.4fr repeat(3, 1fr);
+      gap: 35px;
+    }
+
+    .footer-logo {
+      margin-bottom: 8px;
+      color: #fff;
+      font-size: 23px;
+      font-weight: 900;
+    }
+
+    .footer-logo span {
+      color: var(--orange);
+    }
+
+    footer p {
+      margin: 0;
+      color: #aaa3b2;
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    footer h3 {
+      margin: 0 0 10px;
+      color: #fff;
+      font-size: 11px;
+    }
+
+    footer a {
+      display: block;
+      margin: 7px 0;
+      color: #bdb6c5;
+      font-size: 10px;
+    }
+
+    footer a:hover {
+      color: #fff;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #3e3847;
+      padding: 13px 0;
+      text-align: center;
+      color: #918a99;
+      font-size: 9px;
+    }
+
+    /* MODAL */
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(23, 17, 30, .5);
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal {
+      width: 430px;
+      padding: 25px;
+      position: relative;
+      border-radius: 13px;
+      background: #fff;
+      box-shadow: 0 20px 70px rgba(0,0,0,.22);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 13px;
+      right: 14px;
+      width: 30px;
+      height: 30px;
+      border: 0;
+      border-radius: 50%;
+      background: #f2eff4;
+      font-size: 16px;
+    }
+
+    .modal h2 {
+      margin: 0 0 7px;
+      font-size: 19px;
+    }
+
+    .modal p {
+      margin: 0 0 17px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .modal input {
+      width: 100%;
+      height: 41px;
+      margin-bottom: 10px;
+      padding: 0 11px;
+      border: 1px solid #d9d5df;
+      border-radius: 7px;
+      outline: none;
+      font-size: 12px;
+    }
+
+    .modal input:focus {
+      border-color: var(--purple);
+    }
+
+    .modal button.primary {
+      width: 100%;
+      height: 42px;
+      border: 0;
+      border-radius: 7px;
+      color: #fff;
+      background: var(--purple);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .modal-message {
+      display: none;
+      margin-top: 10px;
+      padding: 9px;
+      border-radius: 6px;
+      color: var(--green);
+      background: var(--green-soft);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* TOAST */
+
+    .toast {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 80;
+      max-width: 350px;
+      padding: 13px 16px;
+      border-radius: 8px;
+      color: #fff;
+      background: #29242f;
+      box-shadow: 0 8px 30px rgba(0,0,0,.2);
+      font-size: 12px;
+      font-weight: 650;
+      transform: translateY(90px);
+      opacity: 0;
+      pointer-events: none;
+      transition: .25s ease;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* COOKIE */
+
+    .cookie {
+      position: fixed;
+      left: 24px;
+      bottom: 24px;
+      z-index: 40;
+      width: 380px;
+      padding: 17px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 10px 35px rgba(0,0,0,.16);
+    }
+
+    .cookie h3 {
+      margin: 0 0 5px;
+      font-size: 13px;
+    }
+
+    .cookie p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .cookie-actions {
+      display: flex;
+      gap: 7px;
+    }
+
+    .cookie button {
+      height: 32px;
+      padding: 0 11px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 750;
+    }
+
+    .cookie-accept {
+      border: 0;
+      color: #fff;
+      background: var(--purple);
+    }
+
+    .cookie-settings {
+      border: 1px solid #d5d0da;
+      color: var(--text);
+      background: #fff;
+    }
+
+    @media (max-width: 900px) {
+      .header-main,
+      .nav-inner,
+      main,
+      .footer-inner {
+        width: calc(100% - 30px);
+      }
+
+      .header-action {
+        display: none;
+      }
+
+      .categories {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .product-grid,
+      .deal-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero-visual {
+        opacity: .25;
+        right: 10px;
+      }
+
+      .hero-copy {
+        width: 75%;
+      }
+
+      .newsletter {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .newsletter-form {
+        width: 100%;
+      }
+
+      .trust-bar {
+        grid-template-columns: repeat(2, 1fr);
+        height: auto;
+      }
+
+      .trust-item {
+        min-height: 65px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    <strong>OFERTAS DE OUTUBRO</strong> • Frete grátis acima de R$ 299 • Até 12x sem juros
+  </div>
+
+  <header>
+    <div class="header-main">
+
+      <a href="#" class="logo" id="logo">Vitr<span>io</span></a>
+
+      <form class="search" id="searchForm">
+        <input
+          id="searchInput"
+          type="search"
+          autocomplete="off"
+          placeholder="Busque por produtos, marcas ou categorias"
+          aria-label="Buscar produtos"
+        >
+        <button type="submit" aria-label="Pesquisar">⌕</button>
+      </form>
+
+      <button class="header-action" id="accountButton" type="button">
+        <span class="header-icon">♙</span>
+        <span>
+          <small>Olá, cliente</small>
+          <strong>Minha conta</strong>
+        </span>
+      </button>
+
+      <button class="header-action cart-action" id="cartButton" type="button" aria-label="Abrir carrinho">
+        <span class="header-icon">🛒</span>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+
+    <nav class="nav">
+      <div class="nav-inner">
+        <a href="#categorias">Categorias</a>
+        <a href="#destaques">Eletrônicos</a>
+        <a href="#destaques">Casa &amp; Cozinha</a>
+        <a href="#destaques">Informática</a>
+        <a href="#ofertas" class="offers">Ofertas do dia</a>
+        <a href="#clube">Clube Vitrio</a>
+        <a href="#mais-vendidos">Mais vendidos</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+
+      <article class="hero-slide active">
+        <div class="hero-copy">
+          <div class="hero-eyebrow">Semana do consumidor</div>
+          <h1>Seu próximo upgrade começa aqui.</h1>
+          <p>
+            TVs, notebooks, celulares e acessórios com condições especiais
+            por tempo limitado.
+          </p>
+          <button class="hero-button" data-scroll="#ofertas">
+            Aproveitar ofertas
+          </button>
+        </div>
+
+        <div class="hero-visual">
+          <div>
+            <div class="device-placeholder"></div>
+            <div class="device-stand"></div>
+          </div>
+        </div>
+
+        <div class="hero-decoration"></div>
+      </article>
+
+      <article class="hero-slide">
+        <div class="hero-copy">
+          <div class="hero-eyebrow">Casa inteligente</div>
+          <h1>Mais tecnologia para deixar sua casa do seu jeito.</h1>
+          <p>
+            Produtos selecionados para transformar sua rotina com mais
+            praticidade, conforto e conectividade.
+          </p>
+          <button class="hero-button" data-scroll="#destaques">
+            Explorar produtos
+          </button>
+        </div>
+
+        <div class="hero-visual">
+          <div class="device-placeholder"
+               style="width:250px;height:210px;border-radius:50%;border-width:0;"></div>
+        </div>
+      </article>
+
+      <article class="hero-slide">
+        <div class="hero-copy">
+          <div class="hero-eyebrow">Clube Vitrio</div>
+          <h1>Frete grátis e vantagens todos os meses.</h1>
+          <p>
+            Assine o Clube Vitrio por R$ 14,90/mês e tenha benefícios
+            exclusivos nas suas compras.
+          </p>
+          <button class="hero-button" id="heroClubButton">
+            Conhecer o clube
+          </button>
+        </div>
+
+        <div class="hero-visual">
+          <div class="device-placeholder"
+               style="width:190px;height:190px;border-radius:50%;border:0;"></div>
+        </div>
+      </article>
+
+      <button class="hero-arrow prev" id="heroPrev" aria-label="Banner anterior">‹</button>
+      <button class="hero-arrow next" id="heroNext" aria-label="Próximo banner">›</button>
+
+      <div class="hero-dots">
+        <button class="hero-dot active" data-slide="0" aria-label="Banner 1"></button>
+        <button class="hero-dot" data-slide="1" aria-label="Banner 2"></button>
+        <button class="hero-dot" data-slide="2" aria-label="Banner 3"></button>
+      </div>
+    </section>
+
+    <!-- TRUST -->
+    <section class="trust-bar">
+      <div class="trust-item">
+        <div class="trust-icon">🚚</div>
+        <div>
+          <strong>Frete grátis</strong>
+          <span>Acima de R$ 299</span>
+        </div>
+      </div>
+
+      <div class="trust-item">
+        <div class="trust-icon">💳</div>
+        <div>
+          <strong>Até 12x sem juros</strong>
+          <span>Consulte condições</span>
+        </div>
+      </div>
+
+      <div class="trust-item">
+        <div class="trust-icon">🔒</div>
+        <div>
+          <strong>Compra segura</strong>
+          <span>Seus dados protegidos</span>
+        </div>
+      </div>
+
+      <div class="trust-item">
+        <div class="trust-icon">↩</div>
+        <div>
+          <strong>Compra tranquila</strong>
+          <span>Troca facilitada</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORIAS -->
+    <section class="section" id="categorias">
+      <div class="section-heading">
+        <div>
+          <h2>Encontre o que você precisa</h2>
+          <p>Explore nossas categorias mais procuradas</p>
+        </div>
+        <a href="#categorias" class="see-all">Ver todas →</a>
+      </div>
+
+      <div class="categories">
+        <a href="#destaques" class="category">
+          <div class="category-icon">Imagem</div>
+          <strong>Celulares</strong>
+          <span>+120 produtos</span>
+        </a>
+
+        <a href="#destaques" class="category">
+          <div class="category-icon">Imagem</div>
+          <strong>TV &amp; Áudio</strong>
+          <span>+90 produtos</span>
+        </a>
+
+        <a href="#destaques" class="category">
+          <div class="category-icon">Imagem</div>
+          <strong>Informática</strong>
+          <span>+160 produtos</span>
+        </a>
+
+        <a href="#destaques" class="category">
+          <div class="category-icon">Imagem</div>
+          <strong>Casa &amp; Cozinha</strong>
+          <span>+240 produtos</span>
+        </a>
+
+        <a href="#destaques" class="category">
+          <div class="category-icon">Imagem</div>
+          <strong>Eletroportáteis</strong>
+          <span>+110 produtos</span>
+        </a>
+
+        <a href="#destaques" class="category">
+          <div class="category-icon">Imagem</div>
+          <strong>Games</strong>
+          <span>+80 produtos</span>
+        </a>
+
+        <a href="#ofertas" class="category">
+          <div class="category-icon">Imagem</div>
+          <strong>Ofertas</strong>
+          <span>Até 50% OFF</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- DESTAQUES -->
+    <section class="section" id="destaques">
+      <div class="section-heading">
+        <div>
+          <h2>Produtos em destaque</h2>
+          <p>Os favoritos de quem compra na Vitrio</p>
+        </div>
+        <a href="#destaques" class="see-all">Ver todos →</a>
+      </div>
+
+      <div class="product-grid">
+
+        <article class="product-card">
+          <div class="product-image">
+            <span class="product-badge">15% OFF</span>
+            <button class="heart" aria-label="Favoritar produto">♡</button>
+          </div>
+
+          <div class="product-content">
+            <div class="product-brand">Vitrio</div>
+            <div class="product-title">Smart TV 55" 4K UHD com Google TV e Wi-Fi</div>
+            <div class="rating">★★★★★ <span>(128)</span></div>
+            <div class="old-price">R$ 2.999,90</div>
+            <div class="price">R$ 2.549,90</div>
+            <div class="pix">R$ 2.422,41 no Pix</div>
+
+            <div class="product-actions">
+              <button
+                class="buy-button add-product"
+                data-name='Smart TV 55" 4K UHD'
+                data-price="2549.90">
+                Adicionar ao carrinho
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image">
+            <span class="product-badge">OFERTA</span>
+            <button class="heart" aria-label="Favoritar produto">♡</button>
+          </div>
+
+          <div class="product-content">
+            <div class="product-brand">Vitrio</div>
+            <div class="product-title">Notebook 15,6" Full HD Intel Core i5 8GB 512GB SSD</div>
+            <div class="rating">★★★★★ <span>(94)</span></div>
+            <div class="old-price">R$ 3.799,90</div>
+            <div class="price">R$ 3.199,90</div>
+            <div class="pix">R$ 3.039,91 no Pix</div>
+
+            <div class="product-actions">
+              <button
+                class="buy-button add-product"
+                data-name="Notebook 15,6 Intel Core i5"
+                data-price="3199.90">
+                Adicionar ao carrinho
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image">
+            <span class="product-badge">20% OFF</span>
+            <button class="heart" aria-label="Favoritar produto">♡</button>
+          </div>
+
+          <div class="product-content">
+            <div class="product-brand">Vitrio</div>
+            <div class="product-title">Smartphone 5G 256GB com câmera de 50MP</div>
+            <div class="rating">★★★★★ <span>(216)</span></div>
+            <div class="old-price">R$ 2.399,90</div>
+            <div class="price">R$ 1.919,90</div>
+            <div class="pix">R$ 1.823,91 no Pix</div>
+
+            <div class="product-actions">
+              <button
+                class="buy-button add-product"
+                data-name="Smartphone 5G 256GB"
+                data-price="1919.90">
+                Adicionar ao carrinho
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image">
+            <span class="product-badge">22% OFF</span>
+            <button class="heart" aria-label="Favoritar produto">♡</button>
+          </div>
+
+          <div class="product-content">
+            <div class="product-brand">Vitrio</div>
+            <div class="product-title">Air Fryer 5,5L Digital com painel touch</div>
+            <div class="rating">★★★★★ <span>(341)</span></div>
+            <div class="old-price">R$ 649,90</div>
+            <div class="price">R$ 499,90</div>
+            <div class="pix">R$ 474,91 no Pix</div>
+
+            <div class="product-actions">
+              <button
+                class="buy-button add-product"
+                data-name="Air Fryer 5,5L Digital"
+                data-price="499.90">
+                Adicionar ao carrinho
+              </button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- BANNER PROMOCIONAL -->
+    <section class="section">
+      <div class="offer-banner">
+        <div class="offer-copy">
+          <span class="label">OFERTA RELÂMPAGO</span>
+          <h2>Até 40% OFF em itens para sua casa</h2>
+          <p>Seleção especial com preços reduzidos por tempo limitado.</p>
+          <button class="offer-button" data-scroll="#ofertas">
+            Ver ofertas
+          </button>
+        </div>
+
+        <div class="offer-visual">
+          <div class="offer-circle"></div>
+          <div class="offer-product"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OFERTAS -->
+    <section class="section" id="ofertas">
+      <div class="deals">
+        <div class="deals-header">
+          <h2>Ofertas que valem a pena</h2>
+
+          <div class="timer">
+            Termina em
+            <span class="time-box" id="hours">06</span>:
+            <span class="time-box" id="minutes">42</span>:
+            <span class="time-box" id="seconds">18</span>
+          </div>
+        </div>
+
+        <div class="deal-grid">
+
+          <article class="deal">
+            <div class="deal-image">Imagem</div>
+            <h3>Fone Bluetooth com cancelamento de ruído</h3>
+            <div class="deal-old">R$ 399,90</div>
+            <div class="deal-price">R$ 279,90</div>
+            <div class="deal-discount">30% OFF • Pix</div>
+          </article>
+
+          <article class="deal">
+            <div class="deal-image">Imagem</div>
+            <h3>Monitor 24" Full HD 100Hz</h3>
+            <div class="deal-old">R$ 899,90</div>
+            <div class="deal-price">R$ 699,90</div>
+            <div class="deal-discount">22% OFF • Pix</div>
+          </article>
+
+          <article class="deal">
+            <div class="deal-image">Imagem</div>
+            <h3>Liquidificador 1000W 12 velocidades</h3>
+            <div class="deal-old">R$ 299,90</div>
+            <div class="deal-price">R$ 219,90</div>
+            <div class="deal-discount">27% OFF • Pix</div>
+          </article>
+
+          <article class="deal">
+            <div class="deal-image">Imagem</div>
+            <h3>Teclado mecânico RGB ABNT2</h3>
+            <div class="deal-old">R$ 349,90</div>
+            <div class="deal-price">R$ 249,90</div>
+            <div class="deal-discount">28% OFF • Pix</div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIS VENDIDOS -->
+    <section class="section" id="mais-vendidos">
+      <div class="section-heading">
+        <div>
+          <h2>Mais vendidos</h2>
+          <p>O que está fazendo sucesso entre nossos clientes</p>
+        </div>
+        <a href="#mais-vendidos" class="see-all">Ver ranking →</a>
+      </div>
+
+      <div class="product-grid">
+
+        <article class="product-card">
+          <div class="product-image">
+            <button class="heart" aria-label="Favoritar produto">♡</button>
+          </div>
+          <div class="product-content">
+            <div class="product-brand">Vitrio</div>
+            <div class="product-title">Caixa de som Bluetooth portátil 30W</div>
+            <div class="rating">★★★★★ <span>(512)</span></div>
+            <div class="price">R$ 349,90</div>
+            <div class="pix">R$ 332,41 no Pix</div>
+            <div class="product-actions">
+              <button class="buy-button add-product"
+                      data-name="Caixa de som Bluetooth 30W"
+                      data-price="349.90">
+                Adicionar ao carrinho
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image">
+            <button class="heart" aria-label="Favoritar produto">♡</button>
+          </div>
+          <div class="product-content">
+            <div class="product-brand">Vitrio</div>
+            <div class="product-title">Robô aspirador inteligente com mapeamento</div>
+            <div class="rating">★★★★★ <span>(388)</span></div>
+            <div class="price">R$ 1.099,90</div>
+            <div class="pix">R$ 1.044,91 no Pix</div>
+            <div class="product-actions">
+              <button class="buy-button add-product"
+                      data-name="Robô aspirador inteligente"
+                      data-price="1099.90">
+                Adicionar ao carrinho
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image">
+            <button class="heart" aria-label="Favoritar produto">♡</button>
+          </div>
+          <div class="product-content">
+            <div class="product-brand">Vitrio</div>
+            <div class="product-title">Smartwatch com GPS e monitoramento de atividades</div>
+            <div class="rating">★★★★★ <span>(275)</span></div>
+            <div class="price">R$ 599,90</div>
+            <div class="pix">R$ 569,91 no Pix</div>
+            <div class="product-actions">
+              <button class="buy-button add-product"
+                      data-name="Smartwatch com GPS"
+                      data-price="599.90">
+                Adicionar ao carrinho
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image">
+            <button class="heart" aria-label="Favoritar produto">♡</button>
+          </div>
+          <div class="product-content">
+            <div class="product-brand">Vitrio</div>
+            <div class="product-title">Cafeteira automática 15 bar com vaporizador</div>
+            <div class="rating">★★★★★ <span>(193)</span></div>
+            <div class="price">R$ 899,90</div>
+            <div class="pix">R$ 854,91 no Pix</div>
+            <div class="product-actions">
+              <button class="buy-button add-product"
+                      data-name="Cafeteira automática 15 bar"
+                      data-price="899.90">
+                Adicionar ao carrinho
+              </button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- CLUBE -->
+    <section class="section" id="clube">
+      <div class="club">
+        <div class="club-copy">
+          <small>Clube Vitrio</small>
+          <h2>Compre mais, aproveite mais.</h2>
+          <p>
+            Tenha benefícios exclusivos por apenas R$ 14,90/mês.
+            Ideal para quem compra com frequência.
+          </p>
+
+          <div class="club-benefits">
+            <span>✓ Frete grátis</span>
+            <span>✓ Ofertas exclusivas</span>
+            <span>✓ Acesso antecipado</span>
+          </div>
+        </div>
+
+        <button class="club-button" id="clubButton">
+          Conhecer o Clube
+        </button>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="newsletter">
+      <div>
+        <h2>Receba ofertas que realmente interessam</h2>
+        <p>Cadastre seu e-mail e receba novidades, descontos e lançamentos da Vitrio.</p>
+      </div>
+
+      <form class="newsletter-form" id="newsletterForm">
+        <input
+          id="newsletterEmail"
+          type="email"
+          placeholder="Digite seu melhor e-mail"
+          aria-label="Seu e-mail"
+        >
+        <button type="submit">Quero receber</button>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">Vitr<span>io</span></div>
+        <p>
+          Tecnologia, casa e praticidade em um só lugar.
+          Encontre produtos selecionados e ofertas para sua rotina.
+        </p>
+      </div>
+
+      <div>
+        <h3>Institucional</h3>
+        <a href="#">Sobre a Vitrio</a>
+        <a href="#">Trabalhe conosco</a>
+        <a href="#">Nossas lojas</a>
+        <a href="#">Programa de parceiros</a>
+      </div>
+
+      <div>
+        <h3>Atendimento</h3>
+        <a href="#">Central de ajuda</a>
+        <a href="#">Meus pedidos</a>
+        <a href="#">Trocas e devoluções</a>
+        <a href="#">Fale conosco</a>
+      </div>
+
+      <div>
+        <h3>Segurança</h3>
+        <a href="#">Política de privacidade</a>
+        <a href="#">Termos de uso</a>
+        <a href="#">Cookies</a>
+        <a href="#">Segurança da compra</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © 2026 Vitrio. Todos os direitos reservados.
+    </div>
+  </footer>
+
+  <!-- ACCOUNT / CLUB MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" id="modalClose" aria-label="Fechar">×</button>
+
+      <h2 id="modalTitle">Minha conta</h2>
+      <p id="modalDescription">
+        Entre para acompanhar pedidos, salvar produtos e receber condições especiais.
+      </p>
+
+      <input id="modalEmail" type="email" placeholder="Seu melhor e-mail">
+      <input id="modalPassword" type="password" placeholder="Sua senha">
+
+      <button class="primary" id="modalPrimary">Entrar na minha conta</button>
+
+      <div class="modal-message" id="modalMessage"></div>
+    </div>
+  </div>
+
+  <!-- COOKIE -->
+  <aside class="cookie" id="cookieBanner">
+    <h3>Sua privacidade importa</h3>
+    <p>
+      Usamos cookies para melhorar sua experiência, entender como a loja é
+      utilizada e apresentar ofertas mais relevantes.
+    </p>
+
+    <div class="cookie-actions">
+      <button class="cookie-accept" id="cookieAccept">Aceitar</button>
+      <button class="cookie-settings" id="cookieSettings">Configurar</button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    (() => {
+      const toast = document.getElementById("toast");
+      const cartCount = document.getElementById("cartCount");
+
+      let cartItems = 0;
+      let toastTimer;
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add("show");
+
+        clearTimeout(toastTimer);
+
+        toastTimer = setTimeout(() => {
+          toast.classList.remove("show");
+        }, 2600);
+      }
+
+      function formatMoney(value) {
+        return value.toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL"
+        });
+      }
+
+      /* Busca */
+
+      document.getElementById("searchForm").addEventListener("submit", event => {
+        event.preventDefault();
+
+        const input = document.getElementById("searchInput");
+        const query = input.value.trim();
+
+        if (!query) {
+          input.focus();
+          return;
+        }
+
+        showToast(`Buscando por "${query}"…`);
+      });
+
+      /* Carrinho */
+
+      document.getElementById("cartButton").addEventListener("click", () => {
+        if (cartItems === 0) {
+          showToast("Seu carrinho está vazio. Que tal conferir nossas ofertas?");
+        } else {
+          showToast(`Você tem ${cartItems} ${cartItems === 1 ? "item" : "itens"} no carrinho.`);
+        }
+      });
+
+      document.querySelectorAll(".add-product").forEach(button => {
+        button.addEventListener("click", () => {
+          const name = button.dataset.name;
+          const price = Number(button.dataset.price);
+
+          cartItems++;
+          cartCount.textContent = cartItems;
+
+          button.textContent = "Adicionado ✓";
+
+          showToast(`${name} foi adicionado ao carrinho por ${formatMoney(price)}.`);
+
+          setTimeout(() => {
+            button.textContent = "Adicionar ao carrinho";
+          }, 1400);
+        });
+      });
+
+      /* Favoritos */
+
+      document.querySelectorAll(".heart").forEach(button => {
+        button.addEventListener("click", event => {
+          event.preventDefault();
+          event.stopPropagation();
+
+          button.classList.toggle("active");
+          button.textContent = button.classList.contains("active") ? "♥" : "♡";
+
+          showToast(
+            button.classList.contains("active")
+              ? "Produto salvo nos seus favoritos."
+              : "Produto removido dos favoritos."
+          );
+        });
+      });
+
+      /* Navegação suave */
+
+      document.querySelectorAll("[data-scroll]").forEach(button => {
+        button.addEventListener("click", () => {
+          const selector = button.dataset.scroll;
+          const target = document.querySelector(selector);
+
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start"
+            });
+          }
+        });
+      });
+
+      /* Hero carousel */
+
+      const slides = [...document.querySelectorAll(".hero-slide")];
+      const dots = [...document.querySelectorAll(".hero-dot")];
+      let currentSlide = 0;
+
+      function showSlide(index) {
+        currentSlide = (index + slides.length) % slides.length;
+
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("active", i === currentSlide);
+        });
+
+        dots.forEach((dot, i) => {
+          dot.classList.toggle("active", i === currentSlide);
+        });
+      }
+
+      document.getElementById("heroNext").addEventListener("click", () => {
+        showSlide(currentSlide + 1);
+      });
+
+      document.getElementById("heroPrev").addEventListener("click", () => {
+        showSlide(currentSlide - 1);
+      });
+
+      dots.forEach(dot => {
+        dot.addEventListener("click", () => {
+          showSlide(Number(dot.dataset.slide));
+        });
+      });
+
+      let carouselTimer = setInterval(() => {
+        showSlide(currentSlide + 1);
+      }, 6000);
+
+      document.getElementById("hero").addEventListener("mouseenter", () => {
+        clearInterval(carouselTimer);
+      });
+
+      document.getElementById("hero").addEventListener("mouseleave", () => {
+        carouselTimer = setInterval(() => {
+          showSlide(currentSlide + 1);
+        }, 6000);
+      });
+
+      /* Conta / clube / modal */
+
+      const modalOverlay = document.getElementById("modalOverlay");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalDescription = document.getElementById("modalDescription");
+      const modalPrimary = document.getElementById("modalPrimary");
+      const modalEmail = document.getElementById("modalEmail");
+      const modalPassword = document.getElementById("modalPassword");
+      const modalMessage = document.getElementById("modalMessage");
+
+      function openModal(title, description, buttonText) {
+        modalTitle.textContent = title;
+        modalDescription.textContent = description;
+        modalPrimary.textContent = buttonText;
+        modalEmail.value = "";
+        modalPassword.value = "";
+        modalMessage.style.display = "none";
+
+        modalOverlay.classList.add("open");
+
+        setTimeout(() => {
+          modalEmail.focus();
+        }, 50);
+      }
+
+      function closeModal() {
+        modalOverlay.classList.remove("open");
+      }
+
+      document.getElementById("accountButton").addEventListener("click", () => {
+        openModal(
+          "Minha conta",
+          "Entre para acompanhar pedidos, salvar produtos e receber condições especiais.",
+          "Entrar na minha conta"
+        );
+      });
+
+      function openClub() {
+        openModal(
+          "Clube Vitrio",
+          "Assine por R$ 14,90/mês e tenha frete grátis, ofertas exclusivas e acesso antecipado às promoções.",
+          "Quero conhecer o Clube"
+        );
+      }
+
+      document.getElementById("clubButton").addEventListener("click", openClub);
+      document.getElementById("heroClubButton").addEventListener("click", openClub);
+
+      document.getElementById("modalClose").addEventListener("click", closeModal);
+
+      modalOverlay.addEventListener("click", event => {
+        if (event.target === modalOverlay) {
+          closeModal();
+        }
+      });
+
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && modalOverlay.classList.contains("open")) {
+          closeModal();
+        }
+      });
+
+      modalPrimary.addEventListener("click", () => {
+        const email = modalEmail.value.trim();
+
+        if (!email || !email.includes("@")) {
+          modalMessage.textContent = "Digite um e-mail válido para continuar.";
+          modalMessage.style.color = "#b13c3c";
+          modalMessage.style.background = "#fff0f0";
+          modalMessage.style.display = "block";
+          modalEmail.focus();
+          return;
+        }
+
+        modalMessage.textContent =
+          modalTitle.textContent === "Clube Vitrio"
+            ? "Cadastro iniciado. Você verá as condições da assinatura na próxima etapa."
+            : "Acesso validado. Bem-vindo à Vitrio!";
+
+        modalMessage.style.color = "var(--green)";
+        modalMessage.style.background = "var(--green-soft)";
+        modalMessage.style.display = "block";
+
+        setTimeout(closeModal, 1000);
+      });
+
+      /* Newsletter */
+
+      document.getElementById("newsletterForm").addEventListener("submit", event => {
+        event.preventDefault();
+
+        const input = document.getElementById("newsletterEmail");
+        const email = input.value.trim();
+
+        if (!email || !email.includes("@")) {
+          input.focus();
+          showToast("Digite um e-mail válido para receber as ofertas.");
+          return;
+        }
+
+        showToast("Cadastro realizado! As melhores ofertas chegarão no seu e-mail.");
+        input.value = "";
+      });
+
+      /* Cookie */
+
+      const cookieBanner = document.getElementById("cookieBanner");
+
+      document.getElementById("cookieAccept").addEventListener("click", () => {
+        cookieBanner.style.display = "none";
+        showToast("Preferências de cookies salvas.");
+      });
+
+      document.getElementById("cookieSettings").addEventListener("click", () => {
+        showToast("Preferências de cookies: você pode aceitar ou recusar cookies não essenciais.");
+      });
+
+      /* Links sem destino real */
+
+      document.querySelectorAll("footer a, .see-all, .nav a, .category").forEach(link => {
+        link.addEventListener("click", event => {
+          const href = link.getAttribute("href");
+
+          if (href && href.startsWith("#") && document.querySelector(href)) {
+            return;
+          }
+
+          event.preventDefault();
+
+          const text = link.textContent.trim();
+
+          if (text) {
+            showToast(`Abrindo "${text}"…`);
+          }
+        });
+      });
+
+      /* Countdown */
+
+      let remainingSeconds = (6 * 60 * 60) + (42 * 60) + 18;
+
+      function updateTimer() {
+        if (remainingSeconds <= 0) {
+          remainingSeconds = 6 * 60 * 60;
+        }
+
+        const hours = Math.floor(remainingSeconds / 3600);
+        const minutes = Math.floor((remainingSeconds % 3600) / 60);
+        const seconds = remainingSeconds % 60;
+
+        document.getElementById("hours").textContent =
+          String(hours).padStart(2, "0");
+
+        document.getElementById("minutes").textContent =
+          String(minutes).padStart(2, "0");
+
+        document.getElementById("seconds").textContent =
+          String(seconds).padStart(2, "0");
+
+        remainingSeconds--;
+      }
+
+      updateTimer();
+      setInterval(updateTimer, 1000);
+
+      /* Logo */
+
+      document.getElementById("logo").addEventListener("click", event => {
+        event.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

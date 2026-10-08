@@ -1,0 +1,1899 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitrio — Carrinho de compras</title>
+
+  <style>
+    :root {
+      --purple: #5b2bbf;
+      --purple-dark: #421d8e;
+      --purple-soft: #efe9ff;
+      --orange: #ff6b35;
+      --green: #16834a;
+      --green-soft: #e9f8ef;
+      --text: #25232a;
+      --muted: #706b76;
+      --border: #e4e0e8;
+      --bg: #f6f5f8;
+      --white: #fff;
+      --placeholder: #e0e0e0;
+      --danger: #c94040;
+      --shadow: 0 5px 22px rgba(39, 25, 60, .07);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    }
+
+    button, input {
+      font: inherit;
+    }
+
+    button, a {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topbar {
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--purple-dark);
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .topbar strong {
+      margin-right: 4px;
+      color: #ffd6c8;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-main {
+      width: 1160px;
+      height: 78px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .logo {
+      width: 105px;
+      color: var(--purple);
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+    }
+
+    .logo span {
+      color: var(--orange);
+    }
+
+    .search {
+      position: relative;
+      flex: 1;
+    }
+
+    .search input {
+      width: 100%;
+      height: 44px;
+      padding: 0 48px 0 15px;
+      border: 1px solid #d9d5df;
+      border-radius: 8px;
+      outline: none;
+      background: #faf9fb;
+      font-size: 13px;
+    }
+
+    .search input:focus {
+      border-color: var(--purple);
+      background: white;
+      box-shadow: 0 0 0 3px rgba(91,43,191,.1);
+    }
+
+    .search button {
+      position: absolute;
+      right: 4px;
+      top: 4px;
+      width: 36px;
+      height: 36px;
+      border: 0;
+      border-radius: 7px;
+      color: white;
+      background: var(--purple);
+      font-size: 18px;
+    }
+
+    .header-action {
+      min-width: 135px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 5px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      text-align: left;
+    }
+
+    .header-action:hover {
+      background: #f5f2fa;
+    }
+
+    .header-icon {
+      width: 35px;
+      height: 35px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--purple);
+      background: var(--purple-soft);
+    }
+
+    .header-action small {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .header-action strong {
+      font-size: 12px;
+    }
+
+    .cart-action {
+      min-width: 45px;
+      justify-content: center;
+      position: relative;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: 0;
+      right: 0;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 4px;
+      display: grid;
+      place-items: center;
+      border-radius: 20px;
+      background: var(--orange);
+      color: white;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .nav {
+      height: 44px;
+      border-top: 1px solid #f1eef4;
+    }
+
+    .nav-inner {
+      width: 1160px;
+      height: 100%;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      gap: 31px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .nav a:hover {
+      color: var(--purple);
+    }
+
+    .nav .offers {
+      color: var(--orange);
+    }
+
+    main {
+      width: 1160px;
+      margin: auto;
+      padding-bottom: 70px;
+    }
+
+    .breadcrumb {
+      height: 55px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .breadcrumb strong {
+      color: var(--text);
+    }
+
+    .page-heading {
+      margin-bottom: 22px;
+    }
+
+    .page-heading h1 {
+      margin: 0;
+      font-size: 27px;
+      letter-spacing: -.7px;
+    }
+
+    .page-heading p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .checkout-progress {
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+      padding: 16px 22px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: white;
+    }
+
+    .progress-step {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .progress-step.active {
+      color: var(--purple);
+    }
+
+    .progress-number {
+      width: 25px;
+      height: 25px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #eeeaf2;
+      font-size: 10px;
+    }
+
+    .progress-step.active .progress-number {
+      background: var(--purple);
+      color: white;
+    }
+
+    .progress-line {
+      flex: 1;
+      height: 1px;
+      margin: 0 14px;
+      background: var(--border);
+    }
+
+    .cart-layout {
+      display: grid;
+      grid-template-columns: 1fr 365px;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .cart-card,
+    .summary-card,
+    .benefit-card,
+    .recommendations {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: white;
+      box-shadow: var(--shadow);
+    }
+
+    .cart-header {
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cart-header strong {
+      font-size: 13px;
+    }
+
+    .clear-cart {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .clear-cart:hover {
+      color: var(--danger);
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 100px 1fr 125px 120px;
+      gap: 15px;
+      align-items: center;
+      min-height: 145px;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .product-image {
+      width: 100px;
+      height: 105px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: var(--placeholder);
+      color: #85808a;
+      font-size: 9px;
+    }
+
+    .item-info h2 {
+      margin: 0 0 6px;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .item-info p {
+      margin: 3px 0;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .item-info .stock {
+      margin-top: 9px;
+      color: var(--green);
+      font-weight: 750;
+    }
+
+    .item-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 11px;
+    }
+
+    .item-actions button {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--purple);
+      font-size: 9px;
+      font-weight: 750;
+    }
+
+    .item-actions .remove {
+      color: var(--muted);
+    }
+
+    .quantity {
+      width: 100px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+
+    .quantity button {
+      width: 30px;
+      height: 100%;
+      border: 0;
+      background: white;
+      font-size: 16px;
+    }
+
+    .quantity span {
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .item-price {
+      text-align: right;
+    }
+
+    .item-price .old {
+      color: #99939f;
+      font-size: 10px;
+      text-decoration: line-through;
+    }
+
+    .item-price strong {
+      display: block;
+      margin-top: 2px;
+      font-size: 16px;
+    }
+
+    .item-price .pix {
+      margin-top: 4px;
+      color: var(--green);
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    .freight-box {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .freight-title {
+      margin-bottom: 9px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .freight-form {
+      display: flex;
+      gap: 8px;
+    }
+
+    .freight-form input {
+      width: 150px;
+      height: 37px;
+      padding: 0 10px;
+      border: 1px solid #d6d1db;
+      border-radius: 6px;
+      outline: none;
+      font-size: 11px;
+    }
+
+    .freight-form input:focus {
+      border-color: var(--purple);
+    }
+
+    .freight-form button {
+      height: 37px;
+      padding: 0 14px;
+      border: 1px solid var(--purple);
+      border-radius: 6px;
+      background: white;
+      color: var(--purple);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .freight-result {
+      display: none;
+      margin-top: 10px;
+      padding: 9px 10px;
+      border-radius: 6px;
+      background: var(--green-soft);
+      color: var(--green);
+      font-size: 10px;
+    }
+
+    .freight-result strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .summary-card {
+      position: sticky;
+      top: 15px;
+      overflow: hidden;
+    }
+
+    .summary-header {
+      padding: 19px 20px 15px;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      font-weight: 850;
+    }
+
+    .summary-body {
+      padding: 17px 20px 20px;
+    }
+
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      color: #5f5965;
+      font-size: 11px;
+    }
+
+    .summary-line.discount {
+      color: var(--green);
+    }
+
+    .summary-line.total {
+      margin: 18px 0 5px;
+      padding-top: 15px;
+      border-top: 1px solid var(--border);
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .summary-line.total strong {
+      font-size: 21px;
+    }
+
+    .pix-total {
+      margin-bottom: 16px;
+      text-align: right;
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .coupon-title {
+      margin: 19px 0 8px;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .coupon-form {
+      display: flex;
+      gap: 7px;
+    }
+
+    .coupon-form input {
+      flex: 1;
+      min-width: 0;
+      height: 36px;
+      padding: 0 10px;
+      border: 1px solid #d6d1db;
+      border-radius: 6px;
+      outline: none;
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+
+    .coupon-form button {
+      height: 36px;
+      padding: 0 12px;
+      border: 1px solid var(--purple);
+      border-radius: 6px;
+      background: white;
+      color: var(--purple);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .coupon-message {
+      min-height: 15px;
+      margin-top: 6px;
+      color: var(--green);
+      font-size: 9px;
+    }
+
+    .checkout-button {
+      width: 100%;
+      height: 48px;
+      margin-top: 10px;
+      border: 0;
+      border-radius: 7px;
+      background: var(--orange);
+      color: white;
+      font-size: 13px;
+      font-weight: 850;
+      box-shadow: 0 6px 15px rgba(255,107,53,.2);
+    }
+
+    .checkout-button:hover {
+      background: #e95726;
+    }
+
+    .continue-shopping {
+      width: 100%;
+      height: 38px;
+      margin-top: 8px;
+      border: 1px solid var(--purple);
+      border-radius: 7px;
+      background: white;
+      color: var(--purple);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .security-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 15px;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    .club-card {
+      margin-top: 13px;
+      padding: 15px;
+      border: 1px solid #dcd1f7;
+      border-radius: 8px;
+      background: var(--purple-soft);
+    }
+
+    .club-card strong {
+      display: block;
+      color: var(--purple);
+      font-size: 11px;
+    }
+
+    .club-card p {
+      margin: 5px 0 10px;
+      color: #635879;
+      font-size: 9px;
+      line-height: 1.45;
+    }
+
+    .club-card button {
+      border: 0;
+      background: transparent;
+      padding: 0;
+      color: var(--purple);
+      font-size: 9px;
+      font-weight: 850;
+    }
+
+    .benefit-card {
+      margin-top: 13px;
+      padding: 17px;
+    }
+
+    .benefit-card strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 11px;
+    }
+
+    .benefit-row {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 9px;
+      color: #5f5965;
+      font-size: 9px;
+    }
+
+    .benefit-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .benefit-icon {
+      width: 27px;
+      height: 27px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .recommendations {
+      margin-top: 25px;
+      padding: 20px;
+    }
+
+    .recommendation-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      margin-bottom: 14px;
+    }
+
+    .recommendation-heading h2 {
+      margin: 0;
+      font-size: 17px;
+    }
+
+    .recommendation-heading p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .recommendation-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .recommendation {
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .recommendation-image {
+      height: 115px;
+      display: grid;
+      place-items: center;
+      border-radius: 6px;
+      background: var(--placeholder);
+      color: #85808a;
+      font-size: 9px;
+    }
+
+    .recommendation h3 {
+      height: 30px;
+      margin: 9px 0 5px;
+      overflow: hidden;
+      font-size: 10px;
+      line-height: 1.45;
+    }
+
+    .recommendation-price {
+      font-size: 14px;
+      font-weight: 850;
+    }
+
+    .recommendation-pix {
+      margin-top: 3px;
+      color: var(--green);
+      font-size: 8px;
+      font-weight: 800;
+    }
+
+    .add-recommendation {
+      width: 100%;
+      height: 31px;
+      margin-top: 8px;
+      border: 0;
+      border-radius: 6px;
+      background: var(--purple);
+      color: white;
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    .empty-cart {
+      display: none;
+      padding: 55px 25px;
+      text-align: center;
+    }
+
+    .empty-icon {
+      width: 70px;
+      height: 70px;
+      margin: auto;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--purple-soft);
+      color: var(--purple);
+      font-size: 28px;
+    }
+
+    .empty-cart h2 {
+      margin: 17px 0 6px;
+      font-size: 18px;
+    }
+
+    .empty-cart p {
+      margin: 0 auto 18px;
+      max-width: 390px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .empty-cart button {
+      height: 40px;
+      padding: 0 20px;
+      border: 0;
+      border-radius: 7px;
+      background: var(--purple);
+      color: white;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(24,17,31,.52);
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal {
+      position: relative;
+      width: 420px;
+      padding: 25px;
+      border-radius: 12px;
+      background: white;
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    }
+
+    .modal-close {
+      position: absolute;
+      right: 13px;
+      top: 12px;
+      width: 30px;
+      height: 30px;
+      border: 0;
+      border-radius: 50%;
+      background: #f1eef4;
+      font-size: 17px;
+    }
+
+    .modal h2 {
+      margin: 0 0 7px;
+      font-size: 19px;
+    }
+
+    .modal p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .modal button.primary {
+      width: 100%;
+      height: 42px;
+      border: 0;
+      border-radius: 7px;
+      background: var(--purple);
+      color: white;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .toast {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 150;
+      max-width: 370px;
+      padding: 13px 16px;
+      border-radius: 8px;
+      background: #29242f;
+      color: white;
+      font-size: 11px;
+      font-weight: 650;
+      box-shadow: 0 10px 30px rgba(0,0,0,.2);
+      transform: translateY(80px);
+      opacity: 0;
+      pointer-events: none;
+      transition: .25s;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 950px) {
+      .header-main,
+      .nav-inner,
+      main {
+        width: calc(100% - 30px);
+      }
+
+      .header-action {
+        display: none;
+      }
+
+      .cart-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .summary-card {
+        position: static;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .nav {
+        display: none;
+      }
+
+      .cart-item {
+        grid-template-columns: 80px 1fr;
+      }
+
+      .product-image {
+        width: 80px;
+        height: 85px;
+      }
+
+      .quantity,
+      .item-price {
+        grid-column: 2;
+      }
+
+      .item-price {
+        text-align: left;
+      }
+
+      .recommendation-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .checkout-progress {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    <strong>OFERTAS DE OUTUBRO</strong> • Frete grátis acima de R$ 299 • Até 12x sem juros
+  </div>
+
+  <header>
+    <div class="header-main">
+      <a href="#" class="logo" id="logo">Vitr<span>io</span></a>
+
+      <form class="search" id="searchForm">
+        <input
+          id="searchInput"
+          type="search"
+          placeholder="Busque por produtos, marcas ou categorias"
+          aria-label="Buscar produtos">
+        <button type="submit" aria-label="Pesquisar">⌕</button>
+      </form>
+
+      <button class="header-action" id="accountButton">
+        <span class="header-icon">♙</span>
+        <span>
+          <small>Olá, cliente</small>
+          <strong>Minha conta</strong>
+        </span>
+      </button>
+
+      <button class="header-action cart-action" id="cartButton" aria-label="Carrinho">
+        <span class="header-icon">🛒</span>
+        <span class="cart-count" id="headerCartCount">3</span>
+      </button>
+    </div>
+
+    <nav class="nav">
+      <div class="nav-inner">
+        <a href="#">Categorias</a>
+        <a href="#">Eletrônicos</a>
+        <a href="#">Casa &amp; Cozinha</a>
+        <a href="#">Informática</a>
+        <a class="offers" href="#">Ofertas do dia</a>
+        <a href="#">Clube Vitrio</a>
+        <a href="#">Mais vendidos</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <div class="breadcrumb">
+      <a href="#">Início</a>
+      <span>›</span>
+      <strong>Carrinho</strong>
+    </div>
+
+    <div class="page-heading">
+      <h1>Seu carrinho</h1>
+      <p id="itemDescription">3 produtos selecionados para sua compra</p>
+    </div>
+
+    <div class="checkout-progress">
+      <div class="progress-step active">
+        <span class="progress-number">1</span>
+        <span>Carrinho</span>
+      </div>
+
+      <div class="progress-line"></div>
+
+      <div class="progress-step">
+        <span class="progress-number">2</span>
+        <span>Identificação</span>
+      </div>
+
+      <div class="progress-line"></div>
+
+      <div class="progress-step">
+        <span class="progress-number">3</span>
+        <span>Pagamento</span>
+      </div>
+    </div>
+
+    <div class="cart-layout">
+
+      <section>
+        <div class="cart-card" id="cartCard">
+
+          <div class="cart-header">
+            <strong>Itens do pedido</strong>
+            <button class="clear-cart" id="clearCart">Remover todos</button>
+          </div>
+
+          <!-- ITEM 1 -->
+          <article
+            class="cart-item"
+            data-id="tv"
+            data-price="2549.90">
+
+            <div class="product-image">
+              Imagem do produto
+            </div>
+
+            <div class="item-info">
+              <h2>Smart TV 55" 4K UHD com Google TV, Wi-Fi e HDR</h2>
+              <p>Cor: Preto</p>
+              <p>Vendido e entregue por Vitrio</p>
+              <p class="stock">✓ Em estoque</p>
+
+              <div class="item-actions">
+                <button class="save-item">♡ Salvar para depois</button>
+                <button class="remove-item remove">Remover</button>
+              </div>
+            </div>
+
+            <div class="quantity">
+              <button class="minus" aria-label="Diminuir quantidade">−</button>
+              <span class="quantity-value">1</span>
+              <button class="plus" aria-label="Aumentar quantidade">+</button>
+            </div>
+
+            <div class="item-price">
+              <span class="old">R$ 2.999,90</span>
+              <strong class="line-total">R$ 2.549,90</strong>
+              <div class="pix">R$ 2.422,41 no Pix</div>
+            </div>
+          </article>
+
+          <!-- ITEM 2 -->
+          <article
+            class="cart-item"
+            data-id="soundbar"
+            data-price="599.90">
+
+            <div class="product-image">
+              Imagem do produto
+            </div>
+
+            <div class="item-info">
+              <h2>Soundbar 2.1 canais com subwoofer sem fio</h2>
+              <p>Cor: Preto</p>
+              <p>Vendido e entregue por Vitrio</p>
+              <p class="stock">✓ Em estoque</p>
+
+              <div class="item-actions">
+                <button class="save-item">♡ Salvar para depois</button>
+                <button class="remove-item remove">Remover</button>
+              </div>
+            </div>
+
+            <div class="quantity">
+              <button class="minus" aria-label="Diminuir quantidade">−</button>
+              <span class="quantity-value">1</span>
+              <button class="plus" aria-label="Aumentar quantidade">+</button>
+            </div>
+
+            <div class="item-price">
+              <strong class="line-total">R$ 599,90</strong>
+              <div class="pix">R$ 569,91 no Pix</div>
+            </div>
+          </article>
+
+          <!-- ITEM 3 -->
+          <article
+            class="cart-item"
+            data-id="hdmi"
+            data-price="79.90">
+
+            <div class="product-image">
+              Imagem do produto
+            </div>
+
+            <div class="item-info">
+              <h2>Cabo HDMI 2.1 Ultra HD 2 metros</h2>
+              <p>Versão: HDMI 2.1</p>
+              <p>Vendido e entregue por Vitrio</p>
+              <p class="stock">✓ Em estoque</p>
+
+              <div class="item-actions">
+                <button class="save-item">♡ Salvar para depois</button>
+                <button class="remove-item remove">Remover</button>
+              </div>
+            </div>
+
+            <div class="quantity">
+              <button class="minus" aria-label="Diminuir quantidade">−</button>
+              <span class="quantity-value">1</span>
+              <button class="plus" aria-label="Aumentar quantidade">+</button>
+            </div>
+
+            <div class="item-price">
+              <strong class="line-total">R$ 79,90</strong>
+              <div class="pix">R$ 75,91 no Pix</div>
+            </div>
+          </article>
+
+          <div class="freight-box">
+            <div class="freight-title">🚚 Calcule o prazo e o frete para seu endereço</div>
+
+            <div class="freight-form">
+              <input
+                id="cep"
+                inputmode="numeric"
+                maxlength="9"
+                placeholder="Digite seu CEP"
+                aria-label="CEP">
+
+              <button id="calculateFreight">Calcular</button>
+            </div>
+
+            <div class="freight-result" id="freightResult">
+              <strong>Frete grátis</strong>
+              Para este pedido, a entrega é gratuita. Prazo estimado: 3 a 6 dias úteis.
+            </div>
+          </div>
+
+          <div class="empty-cart" id="emptyCart">
+            <div class="empty-icon">🛒</div>
+            <h2>Seu carrinho está vazio</h2>
+            <p>
+              Encontre eletrônicos, produtos para sua casa e ofertas especiais
+              na Vitrio.
+            </p>
+            <button id="goShopping">Continuar comprando</button>
+          </div>
+
+        </div>
+      </section>
+
+      <aside>
+
+        <div class="summary-card">
+          <div class="summary-header">
+            Resumo da compra
+          </div>
+
+          <div class="summary-body">
+
+            <div class="summary-line">
+              <span>Subtotal</span>
+              <strong id="subtotal">R$ 3.229,70</strong>
+            </div>
+
+            <div class="summary-line discount">
+              <span>Desconto no Pix</span>
+              <strong id="pixDiscount">- R$ 161,49</strong>
+            </div>
+
+            <div class="summary-line">
+              <span>Frete</span>
+              <strong id="shipping">A calcular</strong>
+            </div>
+
+            <div class="summary-line total">
+              <span>Total</span>
+              <strong id="total">R$ 3.229,70</strong>
+            </div>
+
+            <div class="pix-total" id="pixTotal">
+              R$ 3.068,22 no Pix
+            </div>
+
+            <div class="coupon-title">
+              Tem um cupom de desconto?
+            </div>
+
+            <form class="coupon-form" id="couponForm">
+              <input
+                id="coupon"
+                placeholder="CÓDIGO DO CUPOM"
+                maxlength="20"
+                autocomplete="off">
+              <button type="submit">Aplicar</button>
+            </form>
+
+            <div class="coupon-message" id="couponMessage"></div>
+
+            <button class="checkout-button" id="checkoutButton">
+              Finalizar compra →
+            </button>
+
+            <button class="continue-shopping" id="continueShopping">
+              Continuar comprando
+            </button>
+
+            <div class="security-note">
+              🔒 Ambiente seguro • Seus dados estão protegidos
+            </div>
+
+            <div class="club-card">
+              <strong>⭐ Economize com o Clube Vitrio</strong>
+              <p>
+                Ative benefícios exclusivos, ofertas antecipadas e condições
+                especiais em suas próximas compras.
+              </p>
+              <button id="clubButton">Conhecer o Clube Vitrio →</button>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="benefit-card">
+          <strong>Por que comprar na Vitrio?</strong>
+
+          <div class="benefit-row">
+            <span class="benefit-icon">✓</span>
+            <span>Compra protegida e pagamento seguro</span>
+          </div>
+
+          <div class="benefit-row">
+            <span class="benefit-icon">🚚</span>
+            <span>Entrega acompanhada do início ao fim</span>
+          </div>
+
+          <div class="benefit-row">
+            <span class="benefit-icon">↩</span>
+            <span>Troca facilitada conforme as condições da loja</span>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+
+    <section class="recommendations">
+      <div class="recommendation-heading">
+        <div>
+          <h2>Complete seu pedido</h2>
+          <p>Produtos que combinam com os itens do seu carrinho</p>
+        </div>
+      </div>
+
+      <div class="recommendation-grid">
+
+        <article class="recommendation">
+          <div class="recommendation-image">Imagem do produto</div>
+          <h3>Suporte de parede articulado para TV até 70"</h3>
+          <div class="recommendation-price">R$ 149,90</div>
+          <div class="recommendation-pix">R$ 142,41 no Pix</div>
+          <button
+            class="add-recommendation"
+            data-name="Suporte de parede articulado"
+            data-price="149.90">
+            Adicionar
+          </button>
+        </article>
+
+        <article class="recommendation">
+          <div class="recommendation-image">Imagem do produto</div>
+          <h3>Filtro de linha 6 tomadas com proteção</h3>
+          <div class="recommendation-price">R$ 89,90</div>
+          <div class="recommendation-pix">R$ 85,41 no Pix</div>
+          <button
+            class="add-recommendation"
+            data-name="Filtro de linha 6 tomadas"
+            data-price="89.90">
+            Adicionar
+          </button>
+        </article>
+
+        <article class="recommendation">
+          <div class="recommendation-image">Imagem do produto</div>
+          <h3>Controle remoto universal para Smart TV</h3>
+          <div class="recommendation-price">R$ 69,90</div>
+          <div class="recommendation-pix">R$ 66,41 no Pix</div>
+          <button
+            class="add-recommendation"
+            data-name="Controle remoto universal"
+            data-price="69.90">
+            Adicionar
+          </button>
+        </article>
+
+        <article class="recommendation">
+          <div class="recommendation-image">Imagem do produto</div>
+          <h3>Organizador de cabos com 10 peças</h3>
+          <div class="recommendation-price">R$ 39,90</div>
+          <div class="recommendation-pix">R$ 37,91 no Pix</div>
+          <button
+            class="add-recommendation"
+            data-name="Organizador de cabos"
+            data-price="39.90">
+            Adicionar
+          </button>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <button class="modal-close" id="modalClose" aria-label="Fechar">×</button>
+      <h2 id="modalTitle">Finalizar compra</h2>
+      <p id="modalText">
+        Você está pronto para avançar para a etapa de identificação.
+      </p>
+      <button class="primary" id="modalPrimary">Continuar</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    (() => {
+      const formatBRL = value =>
+        value.toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL"
+        });
+
+      let couponDiscount = 0;
+      let shipping = 0;
+      let toastTimer;
+
+      const $ = selector => document.querySelector(selector);
+      const $$ = selector => [...document.querySelectorAll(selector)];
+
+      function showToast(message) {
+        const toast = $("#toast");
+
+        toast.textContent = message;
+        toast.classList.add("show");
+
+        clearTimeout(toastTimer);
+
+        toastTimer = setTimeout(() => {
+          toast.classList.remove("show");
+        }, 2700);
+      }
+
+      function getItems() {
+        return $$(".cart-item");
+      }
+
+      function getSubtotal() {
+        return getItems().reduce((total, item) => {
+          const price = Number(item.dataset.price);
+          const quantity = Number(
+            item.querySelector(".quantity-value").textContent
+          );
+
+          return total + price * quantity;
+        }, 0);
+      }
+
+      function getItemCount() {
+        return getItems().reduce((total, item) => {
+          return total + Number(
+            item.querySelector(".quantity-value").textContent
+          );
+        }, 0);
+      }
+
+      function updateSummary() {
+        const subtotal = getSubtotal();
+
+        /*
+          O desconto do Pix é calculado sobre o subtotal.
+          Cupom e frete também entram no resumo.
+        */
+        const pixDiscount = subtotal * 0.05;
+        const total = Math.max(
+          0,
+          subtotal - couponDiscount + shipping
+        );
+
+        $("#subtotal").textContent = formatBRL(subtotal);
+        $("#pixDiscount").textContent =
+          "- " + formatBRL(pixDiscount);
+
+        $("#shipping").textContent =
+          shipping === 0 ? "Grátis" : formatBRL(shipping);
+
+        $("#total").textContent = formatBRL(total);
+
+        const pixTotal = Math.max(
+          0,
+          subtotal - couponDiscount - pixDiscount + shipping
+        );
+
+        $("#pixTotal").textContent =
+          formatBRL(pixTotal) + " no Pix";
+
+        const count = getItemCount();
+
+        $("#headerCartCount").textContent = count;
+
+        $("#itemDescription").textContent =
+          count === 0
+            ? "Nenhum produto selecionado"
+            : `${count} ${count === 1 ? "produto selecionado" : "produtos selecionados"} para sua compra`;
+
+        if (count === 0) {
+          $("#cartCard").classList.add("is-empty");
+          $(".cart-header").style.display = "none";
+          $(".freight-box").style.display = "none";
+          $("#emptyCart").style.display = "block";
+        } else {
+          $("#cartCard").classList.remove("is-empty");
+          $(".cart-header").style.display = "flex";
+          $(".freight-box").style.display = "block";
+          $("#emptyCart").style.display = "none";
+        }
+      }
+
+      function updateLineTotal(item) {
+        const price = Number(item.dataset.price);
+        const quantity = Number(
+          item.querySelector(".quantity-value").textContent
+        );
+
+        item.querySelector(".line-total").textContent =
+          formatBRL(price * quantity);
+      }
+
+      /* Quantidade dos produtos */
+
+      $$(".cart-item").forEach(item => {
+        const minus = item.querySelector(".minus");
+        const plus = item.querySelector(".plus");
+        const quantityValue = item.querySelector(".quantity-value");
+
+        minus.addEventListener("click", () => {
+          let quantity = Number(quantityValue.textContent);
+
+          if (quantity > 1) {
+            quantity--;
+            quantityValue.textContent = quantity;
+
+            updateLineTotal(item);
+            updateSummary();
+          }
+        });
+
+        plus.addEventListener("click", () => {
+          let quantity = Number(quantityValue.textContent);
+
+          if (quantity >= 10) {
+            showToast("O limite é de 10 unidades por produto.");
+            return;
+          }
+
+          quantity++;
+          quantityValue.textContent = quantity;
+
+          updateLineTotal(item);
+          updateSummary();
+        });
+      });
+
+      /* Remover produto */
+
+      $$(".remove-item").forEach(button => {
+        button.addEventListener("click", () => {
+          const item = button.closest(".cart-item");
+          const productName = item.querySelector("h2").textContent;
+
+          item.remove();
+
+          updateSummary();
+
+          showToast(`${productName} foi removido do carrinho.`);
+        });
+      });
+
+      /* Salvar para depois */
+
+      $$(".save-item").forEach(button => {
+        button.addEventListener("click", () => {
+          const item = button.closest(".cart-item");
+          const productName = item.querySelector("h2").textContent;
+
+          button.textContent =
+            button.textContent.includes("Salvo")
+              ? "♡ Salvar para depois"
+              : "♥ Salvo para depois";
+
+          showToast(
+            button.textContent.includes("Salvo")
+              ? `${productName} foi salvo para depois.`
+              : `${productName} voltou para o carrinho.`
+          );
+        });
+      });
+
+      /* Remover todos */
+
+      $("#clearCart").addEventListener("click", () => {
+        if (!getItems().length) return;
+
+        if (
+          confirm(
+            "Deseja remover todos os produtos do carrinho?"
+          )
+        ) {
+          getItems().forEach(item => item.remove());
+
+          couponDiscount = 0;
+          shipping = 0;
+
+          $("#couponMessage").textContent = "";
+
+          updateSummary();
+
+          showToast("Todos os produtos foram removidos.");
+        }
+      });
+
+      /* CEP */
+
+      $("#cep").addEventListener("input", event => {
+        let value = event.target.value
+          .replace(/\D/g, "")
+          .slice(0, 8);
+
+        if (value.length > 5) {
+          value =
+            value.slice(0, 5) +
+            "-" +
+            value.slice(5);
+        }
+
+        event.target.value = value;
+      });
+
+      $("#calculateFreight").addEventListener("click", () => {
+        const cep = $("#cep").value.replace(/\D/g, "");
+
+        if (cep.length !== 8) {
+          showToast("Digite um CEP válido com 8 números.");
+          $("#cep").focus();
+          return;
+        }
+
+        shipping = 0;
+
+        $("#freightResult").style.display = "block";
+
+        updateSummary();
+
+        showToast("Frete grátis aplicado ao seu pedido.");
+      });
+
+      /* Cupom */
+
+      $("#couponForm").addEventListener("submit", event => {
+        event.preventDefault();
+
+        const coupon = $("#coupon").value
+          .trim()
+          .toUpperCase();
+
+        const message = $("#couponMessage");
+
+        if (!coupon) {
+          message.style.color = "var(--danger)";
+          message.textContent = "Digite um código de cupom.";
+          return;
+        }
+
+        /*
+          Cupom promocional funcional para a demonstração.
+        */
+        if (coupon === "VITRIO10") {
+          const subtotal = getSubtotal();
+
+          couponDiscount = Math.min(
+            subtotal * 0.10,
+            300
+          );
+
+          message.style.color = "var(--green)";
+          message.textContent =
+            `Cupom aplicado: ${formatBRL(couponDiscount)} de desconto.`;
+
+          updateSummary();
+          showToast("Cupom VITRIO10 aplicado com sucesso.");
+        } else {
+          couponDiscount = 0;
+          message.style.color = "var(--danger)";
+          message.textContent =
+            "Cupom não encontrado ou expirado.";
+
+          updateSummary();
+        }
+      });
+
+      /* Recomendações / cross-sell */
+
+      $$(".add-recommendation").forEach(button => {
+        button.addEventListener("click", () => {
+          const name = button.dataset.name;
+          const price = Number(button.dataset.price);
+
+          /*
+            O item recomendado é inserido como novo item
+            funcional do carrinho.
+          */
+
+          const item = document.createElement("article");
+
+          item.className = "cart-item";
+          item.dataset.id =
+            "recommendation-" +
+            Date.now();
+
+          item.dataset.price = price;
+
+          item.innerHTML = `
+            <div class="product-image">
+              Imagem do produto
+            </div>
+
+            <div class="item-info">
+              <h2>${name}</h2>
+              <p>Vendido e entregue por Vitrio</p>
+              <p class="stock">✓ Em estoque</p>
+
+              <div class="item-actions">
+                <button class="save-item">♡ Salvar para depois</button>
+                <button class="remove-item remove">Remover</button>
+              </div>
+            </div>
+
+            <div class="quantity">
+              <button class="minus" aria-label="Diminuir quantidade">−</button>
+              <span class="quantity-value">1</span>
+              <button class="plus" aria-label="Aumentar quantidade">+</button>
+            </div>
+
+            <div class="item-price">
+              <strong class="line-total">${formatBRL(price)}</strong>
+              <div class="pix">${formatBRL(price * .95)} no Pix</div>
+            </div>
+          `;
+
+          const cartHeader = $(".cart-header");
+          cartHeader.after(item);
+
+          activateItem(item);
+
+          button.textContent = "Adicionado ✓";
+
+          setTimeout(() => {
+            button.textContent = "Adicionar";
+          }, 1400);
+
+          updateSummary();
+
+          showToast(`${name} foi adicionado ao carrinho.`);
+        });
+      });
+
+      function activateItem(item) {
+        const minus = item.querySelector(".minus");
+        const plus = item.querySelector(".plus");
+        const quantityValue =
+          item.querySelector(".quantity-value");
+
+        minus.addEventListener("click", () => {
+          let quantity =
+            Number(quantityValue.textContent);
+
+          if (quantity > 1) {
+            quantity--;
+            quantityValue.textContent = quantity;
+            updateLineTotal(item);
+            updateSummary();
+          }
+        });
+
+        plus.addEventListener("click", () => {
+          let quantity =
+            Number(quantityValue.textContent);
+
+          if (quantity < 10) {
+            quantity++;
+            quantityValue.textContent = quantity;
+            updateLineTotal(item);
+            updateSummary();
+          } else {
+            showToast("O limite é de 10 unidades por produto.");
+          }
+        });
+
+        item.querySelector(".remove-item")
+          .addEventListener("click", () => {
+            const name =
+              item.querySelector("h2").textContent;
+
+            item.remove();
+
+            updateSummary();
+
+            showToast(`${name} foi removido do carrinho.`);
+          });
+
+        item.querySelector(".save-item")
+          .addEventListener("click", event => {
+            const button = event.currentTarget;
+
+            button.textContent =
+              button.textContent.includes("Salvo")
+                ? "♡ Salvar para depois"
+                : "♥ Salvo para depois";
+
+            showToast(
+              button.textContent.includes("Salvo")
+                ? "Produto salvo para depois."
+                : "Produto voltou para o carrinho."
+            );
+          });
+      }
+
+      /* Checkout */
+
+      $("#checkoutButton").addEventListener("click", () => {
+        if (getItemCount() === 0) {
+          showToast("Adicione um produto antes de finalizar a compra.");
+          return;
+        }
+
+        openModal(
+          "Tudo pronto para continuar",
+          "Na próxima etapa você poderá informar seus dados de entrega e escolher a forma de pagamento.",
+          "Carrinho → Identificação → Pagamento",
+          "Continuar para identificação"
+        );
+      });
+
+      function openModal(title, text, summary, buttonText) {
+        $("#modalTitle").textContent = title;
+        $("#modalText").textContent = text;
+        $("#modalPrimary").textContent = buttonText;
+
+        $("#modalText").insertAdjacentHTML(
+          "afterend",
+          `<div id="modalSummary" style="
+            padding:11px;
+            margin-bottom:15px;
+            border-radius:7px;
+            background:#f7f5f9;
+            color:#59545e;
+            font-size:10px;
+            font-weight:700;
+          ">${summary}</div>`
+        );
+
+        $("#modalOverlay").classList.add("open");
+      }
+
+      function closeModal() {
+        $("#modalOverlay").classList.remove("open");
+
+        const summary = $("#modalSummary");
+
+        if (summary) {
+          summary.remove();
+        }
+      }
+
+      $("#modalClose").addEventListener("click", closeModal);
+
+      $("#modalOverlay").addEventListener("click", event => {
+        if (event.target === $("#modalOverlay")) {
+          closeModal();
+        }
+      });
+
+      document.addEventListener("keydown", event => {
+        if (
+          event.key === "Escape" &&
+          $("#modalOverlay").classList.contains("open")
+        ) {
+          closeModal();
+        }
+      });
+
+      $("#modalPrimary").addEventListener("click", () => {
+        closeModal();
+
+        showToast(
+          "Avançando para a identificação do cliente."
+        );
+      });
+
+      /* Navegação */
+
+      $("#continueShopping").addEventListener("click", () => {
+        showToast("Voltando para a vitrine de produtos.");
+      });
+
+      $("#goShopping").addEventListener("click", () => {
+        showToast("Abrindo a vitrine de produtos.");
+      });
+
+      $("#clubButton").addEventListener("click", () => {
+        openModal(
+          "Clube Vitrio",
+          "Tenha acesso a ofertas exclusivas, benefícios e condições especiais.",
+          "Conheça as vantagens do clube antes de escolher seu plano.",
+          "Conhecer o Clube"
+        );
+      });
+
+      $("#accountButton").addEventListener("click", () => {
+        openModal(
+          "Minha conta",
+          "Entre ou cadastre-se para acompanhar pedidos, favoritos e ofertas personalizadas.",
+          "Seus dados ficam protegidos durante todo o processo.",
+          "Continuar"
+        );
+      });
+
+      $("#cartButton").addEventListener("click", () => {
+        showToast("Você já está no seu carrinho.");
+      });
+
+      $("#searchForm").addEventListener("submit", event => {
+        event.preventDefault();
+
+        const value = $("#searchInput").value.trim();
+
+        if (!value) {
+          $("#searchInput").focus();
+          return;
+        }
+
+        showToast(`Buscando por "${value}"…`);
+      });
+
+      $("#logo").addEventListener("click", event => {
+        event.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      });
+
+      $$("a").forEach(link => {
+        link.addEventListener("click", event => {
+          const href = link.getAttribute("href");
+
+          if (href === "#") {
+            event.preventDefault();
+
+            if (link.textContent.trim()) {
+              showToast(
+                `Abrindo "${link.textContent.trim()}"…`
+              );
+            }
+          }
+        });
+      });
+
+      /* Estado inicial */
+      updateSummary();
+    })();
+  </script>
+
+</body>
+</html>

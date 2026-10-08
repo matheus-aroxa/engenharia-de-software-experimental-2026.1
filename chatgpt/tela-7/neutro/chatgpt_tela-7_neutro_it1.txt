@@ -1,0 +1,9 @@
+Pergunta 1
+
+A tela usa uma abordagem deliberadamente mais sóbria do que a página de adesão, porque o objetivo é uma ação potencialmente negativa para o negócio. O roxo continua identificando o Clube Vitrio, enquanto o vermelho aparece apenas nos elementos relacionados ao cancelamento, evitando uma comunicação excessivamente alarmista. O plano atual fica destacado em um card, os benefícios perdidos são apresentados de forma objetiva e a lateral explica o processo em três etapas. O botão de cancelamento é visualmente importante, mas a alternativa de manter a assinatura permanece igualmente acessível. A confirmação final acontece em um modal para evitar cancelamentos acidentais.
+Pergunta 2
+
+Essa tela aparece quando um cliente que já possui uma assinatura ativa acessa o gerenciamento do Clube Vitrio e escolhe a opção de cancelar. Ela fica depois da área de conta/gerenciamento da assinatura e antes da efetivação do cancelamento. O objetivo é explicar as consequências, coletar opcionalmente o motivo e pedir uma confirmação explícita antes de alterar o estado da assinatura.
+Pergunta 3
+
+O cliente pode voltar para “Minha conta”, acessar novamente os detalhes do Clube Vitrio ou clicar no logotipo para retornar à loja. Na tela principal, pode consultar seu plano, preço, próxima cobrança, benefícios e regras do cancelamento. Pode selecionar um dos motivos disponíveis para o cancelamento e preencher um campo opcional de até 300 caracteres. Pode escolher “Manter minha assinatura” ou “Continuar com o cancelamento”. A primeira opção apenas mantém a assinatura e apresenta uma confirmação visual. A segunda abre um modal de confirmação. No modal, o cliente pode voltar sem alterar nada ou confirmar definitivamente o cancelamento. Depois da confirmação, a interface exibe uma tela de sucesso informando a data final dos benefícios e que novas cobranças não serão realizadas. A partir dessa tela, o cliente pode retornar para sua conta.
